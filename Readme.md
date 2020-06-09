@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Комаров](https://up.htmlacademy.ru/react/4/user/29334).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Цапко](https://htmlacademy.ru/profile/id1350525).
 
 ---
 

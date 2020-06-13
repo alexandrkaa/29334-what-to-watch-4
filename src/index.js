@@ -2,15 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-const titleFilm = {
+const titleMovie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   releaseDate: `2014`
 };
 
+const moviesList = [
+  `Fantastic Beasts`,
+  `Bohemian Rhapsody`,
+  `Macbeth`
+];
+
 const init = () => {
   ReactDOM.render(
-      <App title={titleFilm.title} genre={titleFilm.genre} releaseDate={titleFilm.releaseDate} />,
+      <App titleMovie={titleMovie} moviesList={moviesList} />,
       document.querySelector(`#root`)
   );
 };

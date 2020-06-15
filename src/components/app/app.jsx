@@ -4,9 +4,12 @@ import Main from "../main/main.jsx";
 
 const App = (props) => {
   const {titleMovie, moviesList} = props;
+  const onTitleClick = (evt) => {
+    evt.preventDefault();
+  };
 
   return (
-    <Main titleMovie={titleMovie} moviesList={moviesList} />
+    <Main titleMovie={titleMovie} moviesList={moviesList} onTitleClick={onTitleClick} />
   );
 };
 

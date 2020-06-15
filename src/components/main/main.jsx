@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {titleMovie, moviesList} = props;
+  const {titleMovie, moviesList, onTitleClick} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -111,7 +111,11 @@ const Main = (props) => {
                         alt={movie} width="280" height="175"/>
                     </div>
                     <h3 className="small-movie-card__title">
-                      <a className="small-movie-card__link" href="movie-page.html">{movie}</a>
+                      <a
+                        onClick={onTitleClick}
+                        className="small-movie-card__link"
+                        href="movie-page.html"
+                      >{movie}</a>
                     </h3>
                   </article>
                 );
@@ -151,6 +155,7 @@ Main.propTypes = {
   moviesList: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;

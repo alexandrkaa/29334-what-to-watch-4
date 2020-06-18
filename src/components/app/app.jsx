@@ -1,15 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import Main from "../main/main.jsx";
 
 const App = (props) => {
   const {titleMovie, moviesList} = props;
-  const onTitleClick = (evt) => {
+  const _handleMovieTitleClick = (evt) => {
+    evt.preventDefault();
+  };
+
+  const _handleMovieCardMouseEnter = (evt) => {
     evt.preventDefault();
   };
 
   return (
-    <Main titleMovie={titleMovie} moviesList={moviesList} onTitleClick={onTitleClick} />
+    <Main titleMovie={titleMovie} moviesList={moviesList} onMovieCardMouseEnter={_handleMovieCardMouseEnter} onMovieTitleClick={_handleMovieTitleClick} />
   );
 };
 
@@ -20,7 +24,11 @@ App.propTypes = {
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(
-      PropTypes.string.isRequired
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+      })
   ).isRequired,
 };
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1592659932991" clover="3.2.0">
+  <project timestamp="1592659932991" name="All files">
+    <metrics statements="22" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="5" elements="29" coveredelements="25" complexity="0" loc="22" ncloc="22" packages="4" files="4" classes="4"/>
+    <package name="app">
+      <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+      <file name="app.jsx" path="/Users/AlexanderKaa/apps/Sites/what-to-watch/src/components/app/app.jsx">
+        <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="main">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="main.jsx" path="/Users/AlexanderKaa/apps/Sites/what-to-watch/src/components/main/main.jsx">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="129" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="movie-card">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="movie-card.jsx" path="/Users/AlexanderKaa/apps/Sites/what-to-watch/src/components/movie-card/movie-card.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="14" type="stmt"/>
+        <line num="6" count="14" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="movie-list">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="movie-list.jsx" path="/Users/AlexanderKaa/apps/Sites/what-to-watch/src/components/movie-list/movie-list.jsx">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="12" count="12" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

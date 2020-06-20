@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
+import MoviesList from '../movie-list/movie-list.jsx';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onTitleClick} = props;
+  const {titleMovie, moviesList, onMovieTitleClick, onMovieCardMouseEnter} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -100,28 +101,7 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {
-              // eslint-disable-next-line react/prop-types
-              moviesList.map((movie, idx) => {
-                return (
-                  <article className="small-movie-card catalog__movies-card" key={`${movie}_${idx}`}>
-                    <div className="small-movie-card__image">
-                      <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                        alt={movie} width="280" height="175"/>
-                    </div>
-                    <h3 className="small-movie-card__title">
-                      <a
-                        onClick={onTitleClick}
-                        className="small-movie-card__link"
-                        href="movie-page.html"
-                      >{movie}</a>
-                    </h3>
-                  </article>
-                );
-              })
-            }
-          </div>
+          <MoviesList moviesList={moviesList} onMovieTitleClick={onMovieTitleClick} onMovieCardMouseEnter={onMovieCardMouseEnter} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -153,9 +133,14 @@ Main.propTypes = {
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(
-      PropTypes.string.isRequired
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+      })
   ).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieCardMouseEnter: PropTypes.func.isRequired,
 };
 
 export default Main;

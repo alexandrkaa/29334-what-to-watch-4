@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Main /> should render <App /> should render The Grand Budapest Hotel title film and 3 films from movieList 1`] = `
+exports[`<App /> should render <App /> should render The Grand Budapest Hotel title film and 3 films from movieList 1`] = `
 Array [
   <section
     className="movie-card"
@@ -259,76 +259,79 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts"
+              alt="Теория большого взрыва: Откровение ринита"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="https://avatars.mds.yandex.net/get-ott/223007/2a000001693961696d02f2e3d4cb33a98658/672x438"
               width="280"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Fantastic Beasts
+              Теория большого взрыва: Откровение ринита
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Bohemian Rhapsody"
+              alt="Звездный путь"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="https://avatars.mds.yandex.net/get-ott/224348/2a000001612712a3848cc18d4a955a72054a/672x438"
               width="280"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Bohemian Rhapsody
+              Звездный путь
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Macbeth"
+              alt="Рик и Морти: Риконечная Мортистория"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="https://avatars.mds.yandex.net/get-ott/1531675/2a00000171ded04a30a4b8fdeb0097d8a54f/672x438"
               width="280"
             />
           </div>
           <h3
             className="small-movie-card__title"
+            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Macbeth
+              Рик и Морти: Риконечная Мортистория
             </a>
           </h3>
         </article>

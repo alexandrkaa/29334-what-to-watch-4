@@ -1,4 +1,3 @@
-// npm run test.jest -- -u
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Main from './main';
@@ -11,50 +10,40 @@ const mockData = {
   },
 
   moviesList: [
-    `Fantastic Beasts`,
-    `Bohemian Rhapsody`,
-    `Macbeth`
+    {
+      id: 1,
+      title: `Теория большого взрыва: Откровение ринита`,
+      image: `https://avatars.mds.yandex.net/get-ott/223007/2a000001693961696d02f2e3d4cb33a98658/672x438`,
+    },
+    {
+      id: 2,
+      title: `Звездный путь`,
+      image: `https://avatars.mds.yandex.net/get-ott/224348/2a000001612712a3848cc18d4a955a72054a/672x438`,
+    },
+    {
+      id: 3,
+      title: `Рик и Морти: Риконечная Мортистория`,
+      image: `https://avatars.mds.yandex.net/get-ott/1531675/2a00000171ded04a30a4b8fdeb0097d8a54f/672x438`,
+    },
   ],
-
-  moviesListSecond: [
-    `Fantastic Beasts: The Crimes of Grindelwald`,
-    `Bohemian Rhapsody`,
-    `Macbeth`,
-    `Aviator`,
-    `We need to talk about Kevin`
-  ],
-
-  onTitleClick: (evt) => {
-    evt.preventDefault();
-  },
 };
 
-// Вы можете запустить все тесты или только определённый
-// npm run test.jest -- -t '<WelcomeScreen /> should render 5 erros'
-describe(`<Main /> should render`, () => {
+describe(`<Main /> should render main movie and movies list`, () => {
 
   it(`<Main /> should render The Grand Budapest Hotel title film and 3 films from movieList`, () => {
-    const {titleMovie, moviesList, onTitleClick} = mockData;
+    const {titleMovie, moviesList} = mockData;
+    const _handleMovieCardMouseEnter = jest.fn();
+    const _handleMovieTitleClick = jest.fn();
     const tree = renderer
       .create(
           <Main
             titleMovie={titleMovie}
             moviesList={moviesList}
-            onTitleClick={onTitleClick}
+            onMovieCardMouseEnter={_handleMovieCardMouseEnter}
+            onMovieTitleClick={_handleMovieTitleClick}
           />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-
-  it(`<Main /> should render The Grand Budapest Hotel title film and 5 films from movieListSecond`, () => {
-    const {titleMovie, moviesListSecond} = mockData;
-    const tree = renderer
-      .create(
-          <Main titleMovie={titleMovie} moviesList={moviesListSecond} />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
 });

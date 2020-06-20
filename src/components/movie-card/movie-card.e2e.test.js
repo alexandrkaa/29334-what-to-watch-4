@@ -8,7 +8,7 @@ Enzyme.configure({
 });
 
 const movie = {
-  id: 0,
+  id: 1,
   title: `Теория большого взрыва: Откровение ринита`,
   image: `https://avatars.mds.yandex.net/get-ott/223007/2a000001693961696d02f2e3d4cb33a98658/672x438`,
 };
@@ -27,18 +27,11 @@ it(`Should title be pressed at all cards`, () => {
   );
 
   const movieCard = main.find(`.small-movie-card`).first();
-
-  // проверяем что movieCard найдена
   expect(movieCard).toHaveLength(1);
-
   movieCard.props().onMouseEnter();
   expect(onMovieCardMouseEnter.mock.calls.length).toBe(1);
-
   const movieCardTitle = main.find(`.small-movie-card__title`);
-
-  // проверяем что movieCardTitle найдена
   expect(movieCardTitle).toHaveLength(1);
-
   movieCardTitle.simulate(`click`);
   expect(onMovieTitleClick).toHaveBeenCalledTimes(1);
 });

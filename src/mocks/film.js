@@ -1,10 +1,5 @@
 export default [
   {
-    id: 0,
-    title: `Bohemian Rhapsody`,
-    image: `img/bohemian-rhapsody.jpg`,
-  },
-  {
     id: 1,
     title: `Macbeth`,
     image: `img/macbeth.jpg`,
@@ -93,5 +88,10 @@ export default [
     id: 18,
     title: `Midnight Special`,
     image: `img/midnight-special.jpg`,
+  },
+  {
+    id: 19,
+    title: `Bohemian Rhapsody`,
+    image: `img/bohemian-rhapsody.jpg`,
   }
 ];

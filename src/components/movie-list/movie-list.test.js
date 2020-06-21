@@ -1,4 +1,3 @@
-// npm run test.jest -- -u
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MoviesList from './movie-list.jsx';

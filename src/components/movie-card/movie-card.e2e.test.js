@@ -8,9 +8,19 @@ Enzyme.configure({
 });
 
 const movie = {
-  id: 1,
-  title: `Теория большого взрыва: Откровение ринита`,
-  image: `https://avatars.mds.yandex.net/get-ott/223007/2a000001693961696d02f2e3d4cb33a98658/672x438`,
+  id: 4,
+  image: `img/we-need-to-talk-about-kevin.jpg`,
+  movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
+  movieDate: `2000`,
+  movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
+  movieDirector: `Wes Anderson`,
+  movieGenre: `Thriller`,
+  movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
+  movieRatingCount: `349 ratings`,
+  movieRatingLevel: `Bad`,
+  movieRatingScore: `3`,
+  movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
+  title: `Dardjeeling Limited`
 };
 
 it(`Should title be pressed at all cards`, () => {
@@ -19,8 +29,7 @@ it(`Should title be pressed at all cards`, () => {
   const main = shallow(
       <MovieCard
         key={movie.id}
-        title={movie.title}
-        image={movie.image}
+        movie={movie}
         onMovieCardMouseEnter={onMovieCardMouseEnter}
         onMovieTitleClick={onMovieTitleClick}
       />
@@ -32,6 +41,13 @@ it(`Should title be pressed at all cards`, () => {
   expect(onMovieCardMouseEnter.mock.calls.length).toBe(1);
   const movieCardTitle = main.find(`.small-movie-card__title`);
   expect(movieCardTitle).toHaveLength(1);
-  movieCardTitle.simulate(`click`);
+  movieCardTitle.simulate(`click`, movie);
   expect(onMovieTitleClick).toHaveBeenCalledTimes(1);
+  expect(onMovieTitleClick.mock.calls[0][0]).toMatchObject(movie);
+
+  const movieCardImage = main.find(`.small-movie-card__image`);
+  expect(movieCardImage).toHaveLength(1);
+  movieCardImage.simulate(`click`, movie);
+  expect(onMovieTitleClick).toHaveBeenCalledTimes(2);
+  expect(onMovieTitleClick.mock.calls[1][0]).toMatchObject(movie);
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from "./movie-card.jsx";
+import MovieDetails from './movie-details.jsx';
 
 const movie = {
   id: 4,
@@ -18,16 +18,11 @@ const movie = {
   title: `Dardjeeling Limited`
 };
 
-it(`<MovieCard /> should render Big Bang Theory movie`, () => {
-  const onMovieCardMouseEnter = jest.fn();
-  const onMovieTitleClick = jest.fn();
+it(`<MovieDetails /> should render movie details page from mock data`, () => {
   const tree = renderer
     .create(
-        <MovieCard
-          key={movie.id}
+        <MovieDetails
           movie={movie}
-          onMovieCardMouseEnter={onMovieCardMouseEnter}
-          onMovieTitleClick={onMovieTitleClick}
         />
     )
     .toJSON();

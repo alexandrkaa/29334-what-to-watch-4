@@ -1,21 +1,67 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from "../main/main.jsx";
+import MovieDetails from '../movie-details/movie-details.jsx';
 
-const App = (props) => {
-  const {titleMovie, moviesList} = props;
-  const _handleMovieTitleClick = (evt) => {
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      movieId: null,
+    };
+  }
+
+  _handleMovieTitleClick(movie, evt) {
     evt.preventDefault();
-  };
+    this.setState({
+      movieId: movie.id
+    });
+  }
 
-  const _handleMovieCardMouseEnter = (evt) => {
+  _handleMovieCardMouseEnter(movie, evt) {
     evt.preventDefault();
-  };
+  }
 
-  return (
-    <Main titleMovie={titleMovie} moviesList={moviesList} onMovieCardMouseEnter={_handleMovieCardMouseEnter} onMovieTitleClick={_handleMovieTitleClick} />
-  );
-};
+  _renderApp() {
+    const {titleMovie, moviesList} = this.props;
+    if (this.state.movieId) {
+      const movie = moviesList.filter((it) => it.id === +this.state.movieId)[0];
+      return (
+        <MovieDetails
+          movie={movie}
+        />
+      );
+    }
+    return (
+      <Main
+        titleMovie={titleMovie}
+        moviesList={moviesList}
+        onMovieCardMouseEnter={this._handleMovieCardMouseEnter.bind(this)}
+        onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
+      />
+    );
+  }
+
+  render() {
+    const {moviesList} = this.props;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/movie-details">
+            <MovieDetails
+              movie={moviesList[0]}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
   titleMovie: PropTypes.shape({
@@ -26,10 +72,20 @@ App.propTypes = {
   moviesList: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired,
+        image: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieDescription: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ),
+      })).isRequired,
 };
 
 export default App;

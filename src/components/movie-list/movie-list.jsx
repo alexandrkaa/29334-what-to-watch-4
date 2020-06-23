@@ -12,8 +12,7 @@ const MoviesList = (props) => {
           return (
             <MovieCard
               key={movie.id}
-              title={movie.title}
-              image={movie.image}
+              movie={movie}
               onMovieCardMouseEnter={onMovieCardMouseEnter}
               onMovieTitleClick={onMovieTitleClick}
             />
@@ -29,6 +28,18 @@ MoviesList.propTypes = {
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieDescription: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ),
       })
   ),
   onMovieTitleClick: PropTypes.func.isRequired,

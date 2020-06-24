@@ -3,8 +3,19 @@ import PropTypes from 'prop-types';
 
 const MovieDetails = (props) => {
   const {movie} = props;
-  const {movieDescription, movieDirector, movieStarring, movieImage, title,
-    movieGenre, movieDate, movieBackground, movieRatingScore, movieRatingLevel, movieRatingCount} = movie;
+  const {
+    movieDescription,
+    movieDirector,
+    movieStarring,
+    movieImage,
+    title,
+    movieGenre,
+    movieDate,
+    movieBackground,
+    movieRatingScore,
+    movieRatingLevel,
+    movieRatingCount
+  } = movie;
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">

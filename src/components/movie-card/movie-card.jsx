@@ -8,24 +8,37 @@ class MovieCard extends PureComponent {
 
     this.state = {
       isPlaying: false,
-      timeoutId: null,
+      isInitialPlay: true,
     };
 
     const {movie, onMovieTitleClick} = this.props;
     this._onMovieTitleClick = onMovieTitleClick.bind(null, movie);
-    this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this, movie);
-    this._onMovieCardMouseLeave = this._onMovieCardMouseLeave.bind(this, movie);
+    this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this);
+    this._onMovieCardMouseLeave = this._onMovieCardMouseLeave.bind(this);
+    this._timerId = null;
   }
 
-  _onMovieCardMouseEnter(movie, evt) {
+  _onMovieCardMouseEnter(evt) {
     evt.preventDefault();
-    this.setState({
-      isPlaying: true,
-    });
+    if (this.state.isInitialPlay) {
+      this._timerId = setTimeout(() => {
+        this.setState({
+          isPlaying: true,
+          isInitialPlay: false,
+        });
+      }, 1000);
+    } else {
+      this.setState({
+        isPlaying: true,
+      });
+    }
   }
 
-  _onMovieCardMouseLeave(movie, evt) {
+  _onMovieCardMouseLeave(evt) {
     evt.preventDefault();
+    if (this._timerId) {
+      clearTimeout(this._timerId);
+    }
     this.setState({
       isPlaying: false,
     });
@@ -37,7 +50,6 @@ class MovieCard extends PureComponent {
     return (
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMovieCardMouseEnter} onMouseLeave={this._onMovieCardMouseLeave} >
         <div className="small-movie-card__image" onClick={this._onMovieTitleClick}>
-          {/* <img src={image} alt={title} width="280" height="175" /> */}
           <VideoPlayer isMuted={true} isPlaying={this.state.isPlaying} src={moviePreview} poster={image} />
         </div>
         <h3 className="small-movie-card__title" onClick={this._onMovieTitleClick}>
@@ -50,31 +62,6 @@ class MovieCard extends PureComponent {
     );
   }
 }
-
-// const MovieCard = (props) => {
-//   const {movie, onMovieCardMouseEnter, onMovieTitleClick} = props;
-//   const {title, image, moviePreview} = movie;
-
-//   // const _onMovieCardMouseEnter = onMovieCardMouseEnter.bind(null, movie);
-//   _onMovieCardMouseEnter = () => {
-
-//   }
-//   const _onMovieTitleClick = onMovieTitleClick.bind(null, movie);
-//   return (
-//     <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter}>
-//       <div className="small-movie-card__image" onClick={_onMovieTitleClick}>
-//         {/* <img src={image} alt={title} width="280" height="175" /> */}
-//         <VideoPlayer isMuted={true} isPlaying={false} src={moviePreview} poster={image} />
-//       </div>
-//       <h3 className="small-movie-card__title" onClick={_onMovieTitleClick}>
-//         <a
-//           className="small-movie-card__link"
-//           href="movie-page.html"
-//         >{title}</a>
-//       </h3>
-//     </article>
-//   );
-// };
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
@@ -94,7 +81,6 @@ MovieCard.propTypes = {
     ),
     moviePreview: PropTypes.string.isRequired
   }),
-  onMovieCardMouseEnter: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired
 };
 

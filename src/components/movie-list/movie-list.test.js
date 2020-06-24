@@ -16,7 +16,8 @@ const moviesList = [
     movieRatingLevel: `Bad`,
     movieRatingScore: `3`,
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-    title: `Dardjeeling Limited`
+    title: `Dardjeeling Limited`,
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 3,
@@ -32,6 +33,7 @@ const moviesList = [
     movieRatingScore: `2`,
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
     title: `Johnny English`,
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   }
 ];
 
@@ -44,7 +46,12 @@ it(`<MovieCard /> should render 2 movie cards`, () => {
           moviesList={moviesList}
           onMovieTitleClick={onMovieTitleClick}
           onMovieCardMouseEnter={onMovieCardMouseEnter}
-        />
+        />,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

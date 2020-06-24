@@ -20,12 +20,16 @@ const movie = {
   movieRatingLevel: `Bad`,
   movieRatingScore: `3`,
   movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-  title: `Dardjeeling Limited`
+  title: `Dardjeeling Limited`,
+  moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
 it(`Should title be pressed at all cards`, () => {
   const onMovieCardMouseEnter = jest.fn();
   const onMovieTitleClick = jest.fn();
+  const clickMockedEvent = {
+    target: {}
+  };
   const main = shallow(
       <MovieCard
         key={movie.id}
@@ -37,8 +41,8 @@ it(`Should title be pressed at all cards`, () => {
 
   const movieCard = main.find(`.small-movie-card`).first();
   expect(movieCard).toHaveLength(1);
-  movieCard.props().onMouseEnter();
-  expect(onMovieCardMouseEnter.mock.calls.length).toBe(1);
+  // movieCard.props().onMouseEnter();
+  // expect(onMovieCardMouseEnter.mock.calls.length).toBe(1);
   const movieCardTitle = main.find(`.small-movie-card__title`);
   expect(movieCardTitle).toHaveLength(1);
   movieCardTitle.simulate(`click`, movie);
@@ -47,7 +51,7 @@ it(`Should title be pressed at all cards`, () => {
 
   const movieCardImage = main.find(`.small-movie-card__image`);
   expect(movieCardImage).toHaveLength(1);
-  movieCardImage.simulate(`click`, movie);
+  movieCardImage.simulate(`click`, movie, clickMockedEvent);
   expect(onMovieTitleClick).toHaveBeenCalledTimes(2);
   expect(onMovieTitleClick.mock.calls[1][0]).toMatchObject(movie);
 });

@@ -108,7 +108,8 @@ const IMAGES = [
 
 const MOVIE_PREVIEWS = [
   `https://cdn.videvo.net/videvo_files/converted/2013_08/preview/hd0903.mov36970.webm`,
-  `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+  `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  `https://cdn.videvo.net/videvo_files/converted/2013_08/preview/hd0983.mov28884.webm`
 ];
 
 const generateRandomMovie = (id) => {

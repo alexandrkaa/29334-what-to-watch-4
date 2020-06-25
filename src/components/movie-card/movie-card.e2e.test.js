@@ -41,8 +41,7 @@ it(`Should title be pressed at all cards`, () => {
 
   const movieCard = main.find(`.small-movie-card`).first();
   expect(movieCard).toHaveLength(1);
-  // movieCard.props().onMouseEnter();
-  // expect(onMovieCardMouseEnter.mock.calls.length).toBe(1);
+
   const movieCardTitle = main.find(`.small-movie-card__title`);
   expect(movieCardTitle).toHaveLength(1);
   movieCardTitle.simulate(`click`, movie);

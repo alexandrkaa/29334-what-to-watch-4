@@ -43,7 +43,7 @@ export const withVideoPlayer = (Component) => {
     }
 
     _handleVideoPause() {
-      if (this._timerId) {
+      if (this.state.isInitialPlay) {
         clearTimeout(this._timerId);
       }
       this.setState({

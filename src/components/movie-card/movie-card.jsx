@@ -1,51 +1,33 @@
-import React, {PureComponent, createRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// import VideoPlayer from '../video-player/video-player.jsx';
 import withVideoPlayer from '../../hocs/with-video-player.js';
 
-class MovieCard extends PureComponent {
-  constructor(props) {
-    super(props);
+const MovieCard = (props) => {
+  const {movie, onMovieTitleClick} = props;
+  const {title} = movie;
+  const _onMovieCardMouseEnter = () => {
+    props.onPlay();
+  };
 
-    this.state = {
-      isPlaying: false,
-      isInitialPlay: true,
-    };
+  const _onMovieCardMouseLeave = () => {
+    props.onPause();
+  };
 
-    this._videoRef = createRef();
-
-    const {movie, onMovieTitleClick} = this.props;
-    this._onMovieTitleClick = onMovieTitleClick.bind(null, movie);
-    this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this);
-    this._onMovieCardMouseLeave = this._onMovieCardMouseLeave.bind(this);
-    this._timerId = null;
-  }
-
-  _onMovieCardMouseEnter() {
-    this.props.onPlay();
-  }
-
-  _onMovieCardMouseLeave() {
-    this.props.onPause();
-  }
-
-  render() {
-    const {movie: {title}} = this.props;
-    return (
-      <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMovieCardMouseEnter} onMouseLeave={this._onMovieCardMouseLeave} >
-        <div className="small-movie-card__image" onClick={this._onMovieTitleClick}>
-          {this.props.children}
-        </div>
-        <h3 className="small-movie-card__title" onClick={this._onMovieTitleClick}>
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >{title}</a>
-        </h3>
-      </article>
-    );
-  }
-}
+  const _onMovieTitleClick = onMovieTitleClick.bind(null, movie);
+  return (
+    <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter} onMouseLeave={_onMovieCardMouseLeave} >
+      <div className="small-movie-card__image" onClick={_onMovieTitleClick}>
+        {props.children}
+      </div>
+      <h3 className="small-movie-card__title" onClick={_onMovieTitleClick}>
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >{title}</a>
+      </h3>
+    </article>
+  );
+};
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({

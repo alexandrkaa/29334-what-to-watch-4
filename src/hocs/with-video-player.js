@@ -23,18 +23,6 @@ export const withVideoPlayer = (Component) => {
       video.src = moviePreview;
       video.muted = isMuted;
       video.poster = image;
-
-      video.onplay = () => {
-        this.setState({
-          isPlaying: true,
-        });
-      };
-
-      video.onpause = () => {
-        this.setState({
-          isPlaying: false,
-        });
-      };
     }
 
     _handleVideoPlay() {

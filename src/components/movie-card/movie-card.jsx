@@ -70,5 +70,5 @@ MovieCard.propTypes = {
   onPause: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired
 };
-
+export {MovieCard};
 export default withVideoPlayer(MovieCard);

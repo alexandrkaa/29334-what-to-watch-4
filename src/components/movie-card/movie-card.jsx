@@ -1,6 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import VideoPlayer from '../video-player/video-player.jsx';
+// import VideoPlayer from '../video-player/video-player.jsx';
+import withVideoPlayer from '../../hocs/with-video-player.js';
 
 class MovieCard extends PureComponent {
   constructor(props) {
@@ -11,6 +12,8 @@ class MovieCard extends PureComponent {
       isInitialPlay: true,
     };
 
+    this._videoRef = createRef();
+
     const {movie, onMovieTitleClick} = this.props;
     this._onMovieTitleClick = onMovieTitleClick.bind(null, movie);
     this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this);
@@ -18,39 +21,20 @@ class MovieCard extends PureComponent {
     this._timerId = null;
   }
 
-  _onMovieCardMouseEnter(evt) {
-    evt.preventDefault();
-    if (this.state.isInitialPlay) {
-      this._timerId = setTimeout(() => {
-        this.setState({
-          isPlaying: true,
-          isInitialPlay: false,
-        });
-      }, 1000);
-    } else {
-      this.setState({
-        isPlaying: true,
-      });
-    }
+  _onMovieCardMouseEnter() {
+    this.props.onPlay();
   }
 
-  _onMovieCardMouseLeave(evt) {
-    evt.preventDefault();
-    if (this._timerId) {
-      clearTimeout(this._timerId);
-    }
-    this.setState({
-      isPlaying: false,
-    });
+  _onMovieCardMouseLeave() {
+    this.props.onPause();
   }
 
   render() {
-    const {movie} = this.props;
-    const {title, image, moviePreview} = movie;
+    const {movie: {title}} = this.props;
     return (
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onMovieCardMouseEnter} onMouseLeave={this._onMovieCardMouseLeave} >
         <div className="small-movie-card__image" onClick={this._onMovieTitleClick}>
-          <VideoPlayer isMuted={true} isPlaying={this.state.isPlaying} src={moviePreview} poster={image} />
+          {this.props.children}
         </div>
         <h3 className="small-movie-card__title" onClick={this._onMovieTitleClick}>
           <a
@@ -81,7 +65,10 @@ MovieCard.propTypes = {
     ),
     moviePreview: PropTypes.string.isRequired
   }),
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieTitleClick: PropTypes.func.isRequired,
+  onPlay: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
 };
 
-export default MovieCard;
+export default withVideoPlayer(MovieCard);

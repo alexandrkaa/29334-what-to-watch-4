@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayer = React.forwardRef((ref) => {
+const VideoPlayer = React.forwardRef((props, ref) => {
+  const {controls, autoplay} = props;
   return (
     <video
       ref={ref}
-      controls={false}
-      autoPlay={false}
+      controls={controls}
+      autoPlay={autoplay}
       width="280"
       height="175"
     />
@@ -16,11 +17,8 @@ const VideoPlayer = React.forwardRef((ref) => {
 VideoPlayer.displayName = `VideoPlayer`;
 
 VideoPlayer.propTypes = {
-  src: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  isMuted: PropTypes.bool.isRequired,
-  videoRef: PropTypes.object,
+  controls: PropTypes.bool.isRequired,
+  autoplay: PropTypes.bool.isRequired,
 };
 
 export default VideoPlayer;

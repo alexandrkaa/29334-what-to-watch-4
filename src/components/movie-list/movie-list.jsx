@@ -13,6 +13,7 @@ const MoviesList = (props) => {
             <MovieCard
               key={movie.id}
               movie={movie}
+              isMuted={true}
               onMovieTitleClick={onMovieTitleClick}
             />
           );

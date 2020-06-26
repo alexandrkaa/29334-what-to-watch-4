@@ -9,19 +9,7 @@ exports[`<MovieCard /> should render Big Bang Theory movie 1`] = `
   <div
     className="small-movie-card__image"
     onClick={[Function]}
-  >
-    <video
-      autoPlay={false}
-      controls={false}
-      height="175"
-      poster="img/we-need-to-talk-about-kevin.jpg"
-      width="280"
-    >
-      <source
-        src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-      />
-    </video>
-  </div>
+  />
   <h3
     className="small-movie-card__title"
     onClick={[Function]}

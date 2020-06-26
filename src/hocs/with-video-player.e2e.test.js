@@ -1,11 +1,30 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {MovieCard} from "./movie-card.jsx";
+import PropTypes from 'prop-types';
+import withVideoPlayer from './with-video-player.js';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
+
+const MockComponent = (props) => {
+  const {children} = props;
+
+  return (
+    <React.Fragment>
+      {children}
+    </React.Fragment>
+  );
+};
+
+MockComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+};
+
 
 const movie = {
   id: 4,
@@ -24,38 +43,31 @@ const movie = {
   moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
+const MockComponentWrapped = withVideoPlayer(MockComponent);
+
 it(`Should title be pressed`, () => {
-  const onPlay = jest.fn();
-  const onPause = jest.fn();
-  const onMovieTitleClick = jest.fn();
-  const children = <></>;
-  const main = shallow(
-      <MovieCard
+  const isMuted = true;
+
+  const main = mount(
+      <MockComponentWrapped
         key={movie.id}
         movie={movie}
-        onPlay={onPlay}
-        onPause={onPause}
-        onMovieTitleClick={onMovieTitleClick}
-      >
-        {children}
-      </MovieCard>
+        isMuted={isMuted}
+      />
   );
 
-  const movieCard = main.find(`.small-movie-card`).first();
-  expect(movieCard).toHaveLength(1);
-  movieCard.simulate(`mouseenter`);
-  expect(onPlay).toHaveBeenCalledTimes(1);
-  main.update();
-  movieCard.simulate(`mouseleave`);
-  expect(onPause).toHaveBeenCalledTimes(1);
-  main.update();
+  const pause = jest.spyOn(window.HTMLMediaElement.prototype, `pause`).mockImplementation(() => {});
+  const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {});
 
-  const movieCardTitle = main.find(`.small-movie-card__title`);
-  expect(movieCardTitle).toHaveLength(1);
-  movieCardTitle.simulate(`click`, movie);
-  expect(onMovieTitleClick).toHaveBeenCalledTimes(1);
-  expect(onMovieTitleClick.mock.calls[0][0]).toMatchObject(movie);
+  main.setState({
+    isPlaying: true,
+    isInitialPlay: false,
+  });
+  main.instance()._handleVideoPause();
+  expect(main.state(`isPlaying`)).toBe(false);
+  main.instance()._handleVideoPlay();
+  expect(main.state(`isPlaying`)).toBe(true);
 
-  const movieCardImage = main.find(`.small-movie-card__image`);
-  expect(movieCardImage).toHaveLength(1);
+  pause.mockRestore();
+  play.mockRestore();
 });

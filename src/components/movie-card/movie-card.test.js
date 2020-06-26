@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from "./movie-card.jsx";
+import {MovieCard} from "./movie-card.jsx";
 
 const movie = {
   id: 4,
@@ -20,16 +20,21 @@ const movie = {
 };
 
 it(`<MovieCard /> should render Big Bang Theory movie`, () => {
-  const onMovieCardMouseEnter = jest.fn();
+  const onPlay = jest.fn();
+  const onPause = jest.fn();
   const onMovieTitleClick = jest.fn();
+  const children = <></>;
   const tree = renderer
     .create(
         <MovieCard
           key={movie.id}
           movie={movie}
-          onMovieCardMouseEnter={onMovieCardMouseEnter}
+          onPlay={onPlay}
+          onPause={onPause}
           onMovieTitleClick={onMovieTitleClick}
-        />,
+        >
+          {children}
+        </MovieCard>,
         {
           createNodeMock: () => {
             return {};

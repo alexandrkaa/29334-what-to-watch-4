@@ -8,7 +8,7 @@ const VideoPlayer = React.forwardRef((props, ref) => {
     <video ref={ref} poster={poster} controls={false} autoPlay={false} width="280" height="175">
       <source src={src} />
     </video>
-  )ж
+  );
 });
 
 VideoPlayer.displayName = `VideoPlayer`;

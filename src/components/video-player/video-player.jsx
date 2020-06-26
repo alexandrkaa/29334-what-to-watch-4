@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 const VideoPlayer = React.forwardRef((ref) => {
   return (
-    <video ref={ref} controls={false} autoPlay={false} width="280" height="175" />
+    <video
+      ref={ref}
+      controls={false}
+      autoPlay={false}
+      width="280"
+      height="175"
+    />
   );
 });
 

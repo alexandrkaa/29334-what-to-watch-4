@@ -11,10 +11,12 @@ export const withVideoPlayer = (Component) => {
 
       this.state = {
         isPlaying: false,
+        isInitialPlay: true,
       };
 
       this._handleVideoPlay = this._handleVideoPlay.bind(this);
       this._handleVideoPause = this._handleVideoPause.bind(this);
+      this._timerId = null;
     }
 
     componentDidMount() {
@@ -26,21 +28,31 @@ export const withVideoPlayer = (Component) => {
     }
 
     _handleVideoPlay() {
-      this.setState({
-        isPlaying: true
-      });
+      if (this.state.isInitialPlay) {
+        this._timerId = setTimeout(() => {
+          this.setState({
+            isPlaying: true,
+            isInitialPlay: false,
+          });
+        }, 1000);
+      } else {
+        this.setState({
+          isPlaying: true,
+        });
+      }
     }
 
     _handleVideoPause() {
+      if (this._timerId) {
+        clearTimeout(this._timerId);
+      }
       this.setState({
-        isPlaying: false
+        isPlaying: false,
       });
     }
 
     componentWillUnmount() {
       const video = this._videoRef.current;
-      video.onplay = null;
-      video.onpause = null;
       video.muted = null;
       video.poster = null;
       video.src = ``;

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieDetails from './movie-details.jsx';
+import MovieCardFullDetails from './movie-card-full-details.jsx';
 
 const movie = {
   id: 4,
@@ -16,17 +16,17 @@ const movie = {
   movieRatingScore: `3`,
   movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
   title: `Dardjeeling Limited`,
-  moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+  moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  movieRunTime: 9900
 };
 
-it(`<MovieDetails /> should render movie details page from mock data`, () => {
+it(`<MovieCardFullDetails /> should match snapshot`, () => {
   const tree = renderer
     .create(
-        <MovieDetails
+        <MovieCardFullDetails
           movie={movie}
         />
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
-

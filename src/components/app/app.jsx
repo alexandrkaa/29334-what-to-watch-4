@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from "../main/main.jsx";
-import MovieDetails from '../movie-details/movie-details.jsx';
+import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
 
 class App extends PureComponent {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends PureComponent {
     if (this.state.movieId) {
       const movie = moviesList.filter((it) => it.id === +this.state.movieId)[0];
       return (
-        <MovieDetails
+        <MovieCardFull
           movie={movie}
         />
       );
@@ -47,8 +47,8 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/movie-details">
-            <MovieDetails
+          <Route exact path="/movie-card-full">
+            <MovieCardFull
               movie={moviesList[0]}
             />
           </Route>

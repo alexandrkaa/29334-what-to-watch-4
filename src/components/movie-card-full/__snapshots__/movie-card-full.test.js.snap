@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieDetails /> should render movie details page from mock data 1`] = `
+exports[`<MovieCardFull /> should movie full card page to match snapshot 1`] = `
 <section
   className="movie-card movie-card--full"
 >
@@ -165,26 +165,29 @@ exports[`<MovieDetails /> should render movie details page from mock data 1`] = 
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Overview
               </a>
             </li>
             <li
-              className="movie-nav__item"
+              className="movie-nav__item "
             >
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Details
               </a>
             </li>
             <li
-              className="movie-nav__item"
+              className="movie-nav__item "
             >
               <a
                 className="movie-nav__link"
                 href="#"
+                onClick={[Function]}
               >
                 Reviews
               </a>

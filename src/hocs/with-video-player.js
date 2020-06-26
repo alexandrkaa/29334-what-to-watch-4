@@ -57,7 +57,8 @@ export const withVideoPlayer = (Component) => {
     }
 
     render() {
-      return <Component ref={this._videoRef} {...this.props} />;
+      const props = this.props;
+      return (<Component ref={this._videoRef} {...props} />);
     }
 
     componentDidUpdate() {
@@ -77,6 +78,8 @@ export const withVideoPlayer = (Component) => {
     isPlaying: PropTypes.bool.isRequired,
     isMuted: PropTypes.bool.isRequired,
   };
+
+  return VideoPlayerHoc;
 };
 
 export default withVideoPlayer;

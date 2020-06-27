@@ -1,6 +1,11 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import withActiveTab from './with-active-tab.js';
+
+Enzyme.configure({
+  adapter: new Adapter(),
+});
 
 const MockComponent = (props) => {
 
@@ -83,20 +88,23 @@ const moviesLikeThis = [
 
 const MockComponentWrapped = withActiveTab(MockComponent);
 
-it(`withActiveTab is rendered correctly`, () => {
+
+it(`Should withActiveTab state will be changed`, () => {
   const onMovieTitleClick = jest.fn();
-  const tree = renderer.create((
+
+  const main = mount(
     <MockComponentWrapped
       movie={movie}
       moviesLikeThis={moviesLikeThis}
       activeTab={`OVERVIEW`}
       onMovieTitleClick={onMovieTitleClick}
     />
-  ), {
-    createNodeMock() {
-      return {};
-    }
-  }).toJSON();
+  );
 
-  expect(tree).toMatchSnapshot();
+  const _handleActiveTabChange = jest.fn();
+
+  expect(main.state(`activeTab`)).toBe(`OVERVIEW`);
+  main.instance()._handleActiveTabChange(`DETAILS`);
+  expect(main.state(`activeTab`)).toBe(`DETAILS`);
+
 });

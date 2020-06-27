@@ -7,42 +7,38 @@ import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-o
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullReviews from '../movie-card-full-reviews/movie-card-full-reviews.jsx';
 import {randomComments} from '../../mocks/film.js';
+import withActiveTab from '../../hocs/with-active-tab/with-active-tab.js';
+import MoviesList from '../movie-list/movie-list.jsx';
 
-class MovieCardFull extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeTab: MovieCardFullTabsIds.OVERVIEW,
-    };
-
-    this.MovieCardFullTabs = MovieCardFullTabs.map((tab) => {
-      if (tab.id === MovieCardFullTabsIds.OVERVIEW) {
+const MovieCardFull = (props) => {
+  const {movie, moviesLikeThis, activeTab, onActiveTabChange, onMovieTitleClick} = props;
+  const {
+    movieImage,
+    title,
+    movieGenre,
+    movieDate,
+    movieBackground,
+  } = movie;
+  let movieCardFullTabs = MovieCardFullTabs.map((tab) => {
+    if (tab.id === activeTab) {
+      return Object.assign({}, tab, {isActive: true});
+    }
+    return Object.assign({}, tab, {isActive: false});
+  });
+  
+  const _handleMenuTabChange = (tabId, evt) => {
+    evt.preventDefault();
+    movieCardFullTabs = MovieCardFullTabs.map((tab) => {
+      if (tab.id === tabId) {
         return Object.assign({}, tab, {isActive: true});
       }
       return Object.assign({}, tab, {isActive: false});
     });
-
-    this._handleMenuTabClick = this._handleMenuTabClick.bind(this);
+    onActiveTabChange(tabId);
   }
 
-  _handleMenuTabClick(tabId, evt) {
-    evt.preventDefault();
-    this.setState(() => {
-      this.MovieCardFullTabs = this.MovieCardFullTabs.map((tab) => {
-        if (tab.id === tabId) {
-          return Object.assign({}, tab, {isActive: true});
-        }
-        return Object.assign({}, tab, {isActive: false});
-      });
-      return {
-        activeTab: tabId
-      };
-    });
-  }
-
-  _renderTabsContent() {
-    const {activeTab} = this.state;
-    const {movie} = this.props;
+  const _renderTabsContent = () => {
+    const {activeTab, movie} = props;
     switch (activeTab) {
       case MovieCardFullTabsIds.OVERVIEW:
         return (<MovieCardFullOverView movie={movie} />);
@@ -58,16 +54,8 @@ class MovieCardFull extends PureComponent {
     }
   }
 
-  render() {
-    const {movie} = this.props;
-    const {
-      movieImage,
-      title,
-      movieGenre,
-      movieDate,
-      movieBackground,
-    } = movie;
-    return (
+  return (
+    <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
@@ -126,14 +114,41 @@ class MovieCardFull extends PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              <MovieCardFullMenu tabs={this.MovieCardFullTabs} onClickMovieCardFullMenuTab={this._handleMenuTabClick} />
-              {this._renderTabsContent()}
+              <MovieCardFullMenu tabs={movieCardFullTabs} onClickMovieCardFullMenuTab={_handleMenuTabChange} />
+              {_renderTabsContent()}
             </div>
           </div>
         </div>
       </section>
-    );
-  }
+
+      <div className="page-content">
+      <section className="catalog catalog--like-this">
+        <h2 className="catalog__title">More like this</h2>
+
+        <div className="catalog__movies-list">
+          <MoviesList
+            moviesList={moviesLikeThis}
+            onMovieTitleClick={onMovieTitleClick}
+          />
+        </div>
+      </section>
+
+      <footer className="page-footer">
+        <div className="logo">
+          <a href="main.html" className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </a>
+        </div>
+
+        <div className="copyright">
+          <p>© 2019 What to watch Ltd.</p>
+        </div>
+      </footer>
+    </div>
+  </React.Fragment>
+  );
 }
 
 MovieCardFull.propTypes = {
@@ -156,4 +171,5 @@ MovieCardFull.propTypes = {
   })
 };
 
-export default MovieCardFull;
+export {MovieCardFull};
+export default withActiveTab(MovieCardFull);

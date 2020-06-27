@@ -6,7 +6,7 @@ const MoviesList = (props) => {
   const {moviesList, onMovieTitleClick} = props;
 
   return (
-    <div className="catalog__movies-list">
+    <React.Fragment>
       {
         moviesList.map((movie) => {
           return (
@@ -19,7 +19,7 @@ const MoviesList = (props) => {
           );
         })
       }
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withVideoPlayer from '../../hocs/with-video-player.js';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 
 const MovieCard = (props) => {
   const {movie, onMovieTitleClick} = props;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from "../main/main.jsx";
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
+import {MOVIES_LIKE_THIS_NUM, MovieCardFullTabsIds} from '../../consts/consts.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,9 +25,13 @@ class App extends PureComponent {
     const {titleMovie, moviesList} = this.props;
     if (this.state.movieId) {
       const movie = moviesList.filter((it) => it.id === +this.state.movieId)[0];
+      const moviesLikeThis = moviesList.filter((it) => it.genre === movie.genre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
       return (
         <MovieCardFull
           movie={movie}
+          moviesLikeThis={moviesLikeThis}
+          activeTab={MovieCardFullTabsIds.OVERVIEW}
+          onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
         />
       );
     }
@@ -41,6 +46,10 @@ class App extends PureComponent {
 
   render() {
     const {moviesList} = this.props;
+    // для тестирования
+    const movie = moviesList[0];
+    const moviesLikeThis = moviesList.filter((it) => it.genre === movie.genre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
+
     return (
       <BrowserRouter>
         <Switch>
@@ -49,7 +58,10 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/movie-card-full">
             <MovieCardFull
-              movie={moviesList[0]}
+              movie={movie}
+              moviesLikeThis={moviesLikeThis}
+              activeTab={MovieCardFullTabsIds.OVERVIEW}
+              onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
             />
           </Route>
         </Switch>

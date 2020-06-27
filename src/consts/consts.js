@@ -3,8 +3,11 @@ const MovieCardFullTabsIds = {
   DETAILS: `DETAILS`,
   REVIEWS: `REVIEWS`,
 };
-
-export {MovieCardFullTabsIds};
-
 const SECS_PER_HOUR = 3600;
-export {SECS_PER_HOUR};
+const MOVIES_LIKE_THIS_NUM = 4;
+
+export {
+  MovieCardFullTabsIds,
+  SECS_PER_HOUR,
+  MOVIES_LIKE_THIS_NUM
+};

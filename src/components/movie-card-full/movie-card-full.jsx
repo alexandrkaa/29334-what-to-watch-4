@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
 import MovieCardFullTabs from '../../mocks/movie-full-card-menu.js';
@@ -25,7 +25,7 @@ const MovieCardFull = (props) => {
     }
     return Object.assign({}, tab, {isActive: false});
   });
-  
+
   const _handleMenuTabChange = (tabId, evt) => {
     evt.preventDefault();
     movieCardFullTabs = MovieCardFullTabs.map((tab) => {
@@ -35,10 +35,9 @@ const MovieCardFull = (props) => {
       return Object.assign({}, tab, {isActive: false});
     });
     onActiveTabChange(tabId);
-  }
+  };
 
   const _renderTabsContent = () => {
-    const {activeTab, movie} = props;
     switch (activeTab) {
       case MovieCardFullTabsIds.OVERVIEW:
         return (<MovieCardFullOverView movie={movie} />);
@@ -52,7 +51,7 @@ const MovieCardFull = (props) => {
       default:
         return (<MovieCardFullOverView movie={movie} />);
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -122,34 +121,34 @@ const MovieCardFull = (props) => {
       </section>
 
       <div className="page-content">
-      <section className="catalog catalog--like-this">
-        <h2 className="catalog__title">More like this</h2>
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
 
-        <div className="catalog__movies-list">
-          <MoviesList
-            moviesList={moviesLikeThis}
-            onMovieTitleClick={onMovieTitleClick}
-          />
-        </div>
-      </section>
+          <div className="catalog__movies-list">
+            <MoviesList
+              moviesList={moviesLikeThis}
+              onMovieTitleClick={onMovieTitleClick}
+            />
+          </div>
+        </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
+        <footer className="page-footer">
+          <div className="logo">
+            <a href="main.html" className="logo__link logo__link--light">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
+          </div>
 
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
-  </React.Fragment>
+          <div className="copyright">
+            <p>© 2019 What to watch Ltd.</p>
+          </div>
+        </footer>
+      </div>
+    </React.Fragment>
   );
-}
+};
 
 MovieCardFull.propTypes = {
   movie: PropTypes.shape({
@@ -168,7 +167,29 @@ MovieCardFull.propTypes = {
     movieRatingLevel: PropTypes.string.isRequired,
     movieRatingCount: PropTypes.string.isRequired,
     movieRunTime: PropTypes.number,
-  })
+  }),
+  moviesLikeThis: PropTypes.arrayOf(
+      PropTypes.shape({
+        movieDescription: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ),
+        id: PropTypes.number.isRequired,
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieRunTime: PropTypes.number,
+      })
+  ),
+  activeTab: PropTypes.string.isRequired,
+  onActiveTabChange: PropTypes.func.isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export {MovieCardFull};

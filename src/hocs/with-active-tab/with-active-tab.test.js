@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import withActiveTab from './with-active-tab.js';
 
-const MockComponent = (props) => {
+const MockComponent = () => {
 
   return (
     <div></div>

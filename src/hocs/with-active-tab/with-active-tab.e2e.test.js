@@ -7,7 +7,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const MockComponent = (props) => {
+const MockComponent = () => {
 
   return (
     <div></div>
@@ -93,15 +93,13 @@ it(`Should withActiveTab state will be changed`, () => {
   const onMovieTitleClick = jest.fn();
 
   const main = mount(
-    <MockComponentWrapped
-      movie={movie}
-      moviesLikeThis={moviesLikeThis}
-      activeTab={`OVERVIEW`}
-      onMovieTitleClick={onMovieTitleClick}
-    />
+      <MockComponentWrapped
+        movie={movie}
+        moviesLikeThis={moviesLikeThis}
+        activeTab={`OVERVIEW`}
+        onMovieTitleClick={onMovieTitleClick}
+      />
   );
-
-  const _handleActiveTabChange = jest.fn();
 
   expect(main.state(`activeTab`)).toBe(`OVERVIEW`);
   main.instance()._handleActiveTabChange(`DETAILS`);

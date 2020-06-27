@@ -105,7 +105,7 @@ const Main = (props) => {
               moviesList={moviesList}
               onMovieTitleClick={onMovieTitleClick}
             />
-         </div>
+          </div>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

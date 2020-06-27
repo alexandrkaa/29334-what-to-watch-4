@@ -1,6 +1,24 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import MovieDetails from './movie-details.jsx';
+import React from "react";
+import renderer from "react-test-renderer";
+import PropTypes from "prop-types";
+import withVideoPlayer from './with-video-player.js';
+
+const MockComponent = (props) => {
+  const {children} = props;
+
+  return (
+    <React.Fragment>
+      {children}
+    </React.Fragment>
+  );
+};
+
+MockComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+};
 
 const movie = {
   id: 4,
@@ -19,14 +37,21 @@ const movie = {
   moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
-it(`<MovieDetails /> should render movie details page from mock data`, () => {
-  const tree = renderer
-    .create(
-        <MovieDetails
-          movie={movie}
-        />
-    )
-    .toJSON();
+const MockComponentWrapped = withVideoPlayer(MockComponent);
+
+it(`withVideoPlayer is rendered correctly`, () => {
+  const isMuted = true;
+  const tree = renderer.create((
+    <MockComponentWrapped
+      key={movie.id}
+      movie={movie}
+      isMuted={isMuted}
+    />
+  ), {
+    createNodeMock() {
+      return {};
+    }
+  }).toJSON();
+
   expect(tree).toMatchSnapshot();
 });
-

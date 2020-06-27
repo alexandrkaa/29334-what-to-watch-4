@@ -20,10 +20,6 @@ class App extends PureComponent {
     });
   }
 
-  _handleMovieCardMouseEnter(movie, evt) {
-    evt.preventDefault();
-  }
-
   _renderApp() {
     const {titleMovie, moviesList} = this.props;
     if (this.state.movieId) {
@@ -38,7 +34,6 @@ class App extends PureComponent {
       <Main
         titleMovie={titleMovie}
         moviesList={moviesList}
-        onMovieCardMouseEnter={this._handleMovieCardMouseEnter.bind(this)}
         onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
       />
     );

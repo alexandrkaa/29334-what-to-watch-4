@@ -7,15 +7,16 @@ exports[`<MovieCard /> should render 2 movie cards 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="Dardjeeling Limited"
+      <video
+        autoPlay={false}
+        controls={false}
         height="175"
-        src="img/we-need-to-talk-about-kevin.jpg"
         width="280"
       />
     </div>
@@ -34,15 +35,16 @@ exports[`<MovieCard /> should render 2 movie cards 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
       onClick={[Function]}
     >
-      <img
-        alt="Johnny English"
+      <video
+        autoPlay={false}
+        controls={false}
         height="175"
-        src="img/aviator.jpg"
         width="280"
       />
     </div>

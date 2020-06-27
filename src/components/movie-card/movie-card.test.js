@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from "./movie-card.jsx";
+import {MovieCard} from "./movie-card.jsx";
 
 const movie = {
   id: 4,
@@ -15,22 +15,32 @@ const movie = {
   movieRatingLevel: `Bad`,
   movieRatingScore: `3`,
   movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-  title: `Dardjeeling Limited`
+  title: `Dardjeeling Limited`,
+  moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 };
 
 it(`<MovieCard /> should render Big Bang Theory movie`, () => {
-  const onMovieCardMouseEnter = jest.fn();
+  const onPlay = jest.fn();
+  const onPause = jest.fn();
   const onMovieTitleClick = jest.fn();
+  const children = <></>;
   const tree = renderer
     .create(
         <MovieCard
           key={movie.id}
           movie={movie}
-          onMovieCardMouseEnter={onMovieCardMouseEnter}
+          onPlay={onPlay}
+          onPause={onPause}
           onMovieTitleClick={onMovieTitleClick}
-        />
+        >
+          {children}
+        </MovieCard>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
-

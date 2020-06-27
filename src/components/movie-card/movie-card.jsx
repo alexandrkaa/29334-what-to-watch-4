@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withVideoPlayer from '../../hocs/with-video-player.js';
 
 const MovieCard = (props) => {
-  const {movie, onMovieCardMouseEnter, onMovieTitleClick} = props;
-  const {title, image} = movie;
+  const {movie, onMovieTitleClick} = props;
+  const {title} = movie;
+  const _onMovieCardMouseEnter = () => {
+    props.onPlay();
+  };
 
-  const _onMovieCardMouseEnter = onMovieCardMouseEnter.bind(null, movie);
+  const _onMovieCardMouseLeave = () => {
+    props.onPause();
+  };
+
   const _onMovieTitleClick = onMovieTitleClick.bind(null, movie);
   return (
-    <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter}>
+    <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter} onMouseLeave={_onMovieCardMouseLeave} >
       <div className="small-movie-card__image" onClick={_onMovieTitleClick}>
-        <img src={image} alt={title} width="280" height="175" />
+        {props.children}
       </div>
       <h3 className="small-movie-card__title" onClick={_onMovieTitleClick}>
         <a
@@ -38,9 +45,12 @@ MovieCard.propTypes = {
     movieDescription: PropTypes.arrayOf(
         PropTypes.string.isRequired
     ),
+    moviePreview: PropTypes.string.isRequired
   }),
-  onMovieCardMouseEnter: PropTypes.func.isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieTitleClick: PropTypes.func.isRequired,
+  onPlay: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
 };
-
-export default MovieCard;
+export {MovieCard};
+export default withVideoPlayer(MovieCard);

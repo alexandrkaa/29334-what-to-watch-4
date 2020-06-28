@@ -12,7 +12,7 @@ const MovieCardFullMenuTab = (props) => {
 };
 
 MovieCardFullMenuTab.propTypes = {
-  tab: PropTypes.shape({
+  tab: PropTypes.exact({
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     isActive: PropTypes.bool.isRequired,

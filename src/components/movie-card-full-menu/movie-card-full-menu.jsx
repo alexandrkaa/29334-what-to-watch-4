@@ -23,9 +23,10 @@ const MovieCardFullMenu = (props) => {
 
 MovieCardFullMenu.propTypes = {
   tabs: PropTypes.arrayOf(
-      PropTypes.shape({
+      PropTypes.exact({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
+        isActive: PropTypes.bool.isRequired,
       })
   ),
   onClickMovieCardFullMenuTab: PropTypes.func.isRequired,

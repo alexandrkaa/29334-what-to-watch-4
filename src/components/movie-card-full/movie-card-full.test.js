@@ -74,6 +74,24 @@ const moviesLikeThis = [
   }
 ];
 
+const mockTabs = [
+  {
+    id: `TAB1`,
+    name: `Tab1`,
+    isActive: true,
+  },
+  {
+    id: `TAB2`,
+    name: `Tab2`,
+    isActive: false,
+  },
+  {
+    id: `TAB3`,
+    name: `Tab3`,
+    isActive: false,
+  },
+];
+
 it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
   const onMovieTitleClick = jest.fn();
   const tree = renderer
@@ -81,8 +99,9 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
         <MovieCardFull
           movie={movie}
           moviesLikeThis={moviesLikeThis}
-          activeTab={`OVERVIEW`}
+          activeTab={`TAB1`}
           onMovieTitleClick={onMovieTitleClick}
+          tabs={mockTabs}
         />,
         {
           createNodeMock: () => {

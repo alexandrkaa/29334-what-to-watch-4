@@ -1,58 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MovieCardFullReviewList from '../movie-card-full-reviews-list/movie-card-full-reviews-list.jsx';
 
 
 const MovieCardFullReviews = (props) => {
   const {comments} = props;
+  const commentsOdd = comments.filter((comment) => {
+    return comment.id % 2 === 1;
+  });
+  const commentsEven = comments.filter((comment) => {
+    return comment.id % 2 === 0;
+  });
+
   return (
     <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {comments.filter((comment) => {
-          return comment.id % 2 === 1;
-        }).map((comment) => {
-          return (
-            <div key={comment.id} className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">{comment.text}</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">{comment.author}</cite>
-                  <time className="review__date" dateTime={comment.date}>{comment.date}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{comment.rating}</div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="movie-card__reviews-col">
-        {comments.filter((comment) => {
-          return comment.id % 2 === 0;
-        }).map((comment) => {
-          return (
-            <div key={comment.id} className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">{comment.text}</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">{comment.author}</cite>
-                  <time className="review__date" dateTime={comment.date}>{comment.date}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{comment.rating}</div>
-            </div>
-          );
-        })}
-      </div>
+      <MovieCardFullReviewList comments={commentsOdd} />
+      <MovieCardFullReviewList comments={commentsEven} />
     </div>
   );
 };
 
 MovieCardFullReviews.propTypes = {
   comments: PropTypes.arrayOf(
-      PropTypes.shape({
+      PropTypes.exact({
         movieId: PropTypes.number.isRequired,
         id: PropTypes.number.isRequired,
         author: PropTypes.string.isRequired,

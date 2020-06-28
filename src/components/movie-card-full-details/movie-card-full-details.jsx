@@ -4,14 +4,12 @@ import {convertSecondsToHoursMins} from '../../utils/common.js';
 
 const MovieCardFullDetails = (props) => {
   const {
-    movie: {
-      movieDirector,
-      movieStarring,
-      movieRunTime,
-      movieGenre,
-      movieDate
-    }
-  } = props;
+    movieDirector,
+    movieStarring,
+    movieRunTime,
+    movieGenre,
+    movieDate
+  } = props.movie;
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -52,10 +50,12 @@ const MovieCardFullDetails = (props) => {
 };
 
 MovieCardFullDetails.propTypes = {
-  movie: PropTypes.shape({
+  movie: PropTypes.exact({
     movieDescription: PropTypes.arrayOf(
         PropTypes.string.isRequired
     ),
+    image: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     movieDirector: PropTypes.string.isRequired,
     movieStarring: PropTypes.string.isRequired,
     movieImage: PropTypes.string.isRequired,
@@ -66,8 +66,9 @@ MovieCardFullDetails.propTypes = {
     movieRatingScore: PropTypes.string.isRequired,
     movieRatingLevel: PropTypes.string.isRequired,
     movieRatingCount: PropTypes.string.isRequired,
-    movieRunTime: PropTypes.number.isRequired,
-  })
+    movieRunTime: PropTypes.number,
+    moviePreview: PropTypes.string.isRequired,
+  }),
 };
 
 export default MovieCardFullDetails;

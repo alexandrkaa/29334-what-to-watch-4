@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 
 const MovieCardFullOverView = (props) => {
   const {
-    movie: {
-      movieRatingScore,
-      movieRatingLevel,
-      movieRatingCount,
-      movieDescription,
-      movieDirector,
-      movieStarring
-    }
-  } = props;
+    movieRatingScore,
+    movieRatingLevel,
+    movieRatingCount,
+    movieDescription,
+    movieDirector,
+    movieStarring
+  } = props.movie;
   return (
     <React.Fragment>
       <div className="movie-rating">
@@ -38,10 +36,12 @@ const MovieCardFullOverView = (props) => {
 };
 
 MovieCardFullOverView.propTypes = {
-  movie: PropTypes.shape({
+  movie: PropTypes.exact({
     movieDescription: PropTypes.arrayOf(
         PropTypes.string.isRequired
     ),
+    image: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     movieDirector: PropTypes.string.isRequired,
     movieStarring: PropTypes.string.isRequired,
     movieImage: PropTypes.string.isRequired,
@@ -52,7 +52,9 @@ MovieCardFullOverView.propTypes = {
     movieRatingScore: PropTypes.string.isRequired,
     movieRatingLevel: PropTypes.string.isRequired,
     movieRatingCount: PropTypes.string.isRequired,
-  })
+    movieRunTime: PropTypes.number,
+    moviePreview: PropTypes.string.isRequired,
+  }),
 };
 
 export default MovieCardFullOverView;

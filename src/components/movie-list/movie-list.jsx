@@ -25,21 +25,24 @@ const MoviesList = (props) => {
 
 MoviesList.propTypes = {
   moviesList: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
+      PropTypes.exact({
         movieDescription: PropTypes.arrayOf(
             PropTypes.string.isRequired
         ),
+        image: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieRunTime: PropTypes.number,
+        moviePreview: PropTypes.string.isRequired,
       })
   ),
   onMovieTitleClick: PropTypes.func.isRequired,

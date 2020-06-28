@@ -19,20 +19,17 @@ const MovieCardFull = (props) => {
     movieDate,
     movieBackground,
   } = movie;
+
+  const filtredComments = randomComments.filter((comment) => comment.movieId === movie.id);
+
   let movieCardFullTabs = MovieCardFullTabs.map((tab) => {
-    if (tab.id === activeTab) {
-      return Object.assign({}, tab, {isActive: true});
-    }
-    return Object.assign({}, tab, {isActive: false});
+    return Object.assign({}, tab, {isActive: tab.id === activeTab});
   });
 
   const _handleMenuTabChange = (tabId, evt) => {
     evt.preventDefault();
     movieCardFullTabs = MovieCardFullTabs.map((tab) => {
-      if (tab.id === tabId) {
-        return Object.assign({}, tab, {isActive: true});
-      }
-      return Object.assign({}, tab, {isActive: false});
+      return Object.assign({}, tab, {isActive: tab.id === activeTab});
     });
     onActiveTabChange(tabId);
   };
@@ -46,7 +43,7 @@ const MovieCardFull = (props) => {
         return (<MovieCardFullDetails movie={movie} />);
 
       case MovieCardFullTabsIds.REVIEWS:
-        return (<MovieCardFullReviews movie={movie} comments={randomComments.filter((comment) => comment.movieId === movie.id)} />);
+        return (<MovieCardFullReviews movie={movie} comments={filtredComments} />);
 
       default:
         return (<MovieCardFullOverView movie={movie} />);
@@ -151,10 +148,11 @@ const MovieCardFull = (props) => {
 };
 
 MovieCardFull.propTypes = {
-  movie: PropTypes.shape({
+  movie: PropTypes.exact({
     movieDescription: PropTypes.arrayOf(
         PropTypes.string.isRequired
     ),
+    image: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     movieDirector: PropTypes.string.isRequired,
     movieStarring: PropTypes.string.isRequired,
@@ -167,12 +165,14 @@ MovieCardFull.propTypes = {
     movieRatingLevel: PropTypes.string.isRequired,
     movieRatingCount: PropTypes.string.isRequired,
     movieRunTime: PropTypes.number,
+    moviePreview: PropTypes.string.isRequired,
   }),
   moviesLikeThis: PropTypes.arrayOf(
-      PropTypes.shape({
+      PropTypes.exact({
         movieDescription: PropTypes.arrayOf(
             PropTypes.string.isRequired
         ),
+        image: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
         movieDirector: PropTypes.string.isRequired,
         movieStarring: PropTypes.string.isRequired,
@@ -185,6 +185,7 @@ MovieCardFull.propTypes = {
         movieRatingLevel: PropTypes.string.isRequired,
         movieRatingCount: PropTypes.string.isRequired,
         movieRunTime: PropTypes.number,
+        moviePreview: PropTypes.string.isRequired,
       })
   ),
   activeTab: PropTypes.string.isRequired,

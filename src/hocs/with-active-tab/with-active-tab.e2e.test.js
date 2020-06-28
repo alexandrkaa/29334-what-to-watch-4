@@ -2,107 +2,57 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withActiveTab from './with-active-tab.js';
+import PropTypes from 'prop-types';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const MockComponent = () => {
-
+const MockComponent = (props) => {
+  const {onActiveTabChange} = props;
   return (
-    <div></div>
+    <nav className="movie-nav movie-card__nav">
+      <ul className="movie-nav__list">
+        <li className={`movie-nav__item movie-nav__item--active`}>
+          <a href="#" onClick={onActiveTabChange.bind(null, `OVERVIEW`)} className="movie-nav__link">Overview</a>
+        </li>
+        <li className={`movie-nav__item`}>
+          <a href="#" onClick={onActiveTabChange.bind(null, `DETAILS`)} className="movie-nav__link">Overview</a>
+        </li>
+        <li className={`movie-nav__item`}>
+          <a href="#" onClick={onActiveTabChange.bind(null, `REVIEWS`)} className="movie-nav__link">Overview</a>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
-const movie = {
-  id: 4,
-  image: `img/we-need-to-talk-about-kevin.jpg`,
-  movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-  movieDate: `2000`,
-  movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
-  movieDirector: `Wes Anderson`,
-  movieGenre: `Thriller`,
-  movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-  movieRatingCount: `349 ratings`,
-  movieRatingLevel: `Bad`,
-  movieRatingScore: `3`,
-  movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-  title: `Dardjeeling Limited`,
-  moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  movieRunTime: 9900
+MockComponent.propTypes = {
+  onActiveTabChange: PropTypes.func.isRequired,
 };
-
-const moviesLikeThis = [
-  {
-    id: 5,
-    image: `img/we-need-to-talk-about-kevin.jpg`,
-    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2300`,
-    movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
-    movieDirector: `Wes Anderson`,
-    movieGenre: `Thriller`,
-    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    movieRatingCount: `349 ratings`,
-    movieRatingLevel: `Bad`,
-    movieRatingScore: `3`,
-    movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-    title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
-  },
-  {
-    id: 6,
-    image: `img/we-need-to-talk-about-kevin.jpg`,
-    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2200`,
-    movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
-    movieDirector: `Wes Anderson`,
-    movieGenre: `Thriller`,
-    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    movieRatingCount: `349 ratings`,
-    movieRatingLevel: `Bad`,
-    movieRatingScore: `3`,
-    movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-    title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
-  },
-  {
-    id: 7,
-    image: `img/we-need-to-talk-about-kevin.jpg`,
-    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2100`,
-    movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
-    movieDirector: `Wes Anderson`,
-    movieGenre: `Thriller`,
-    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    movieRatingCount: `349 ratings`,
-    movieRatingLevel: `Bad`,
-    movieRatingScore: `3`,
-    movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
-    title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
-  }
-];
 
 const MockComponentWrapped = withActiveTab(MockComponent);
 
 
 it(`Should withActiveTab state will be changed`, () => {
-  const onMovieTitleClick = jest.fn();
+  const onClickMovieCardFullMenuTab = jest.fn();
 
   const main = mount(
       <MockComponentWrapped
-        movie={movie}
-        moviesLikeThis={moviesLikeThis}
+        onClickMovieCardFullMenuTab={onClickMovieCardFullMenuTab}
         activeTab={`OVERVIEW`}
-        onMovieTitleClick={onMovieTitleClick}
       />
   );
 
   expect(main.state(`activeTab`)).toBe(`OVERVIEW`);
-  main.instance()._handleActiveTabChange(`DETAILS`);
+  const secondTab = main.find(`.movie-nav__link`).at(1);
+  expect(secondTab.length).toBe(1);
+  secondTab.simulate(`click`);
   expect(main.state(`activeTab`)).toBe(`DETAILS`);
+
+  const thirdTab = main.find(`.movie-nav__link`).at(2);
+  expect(thirdTab.length).toBe(1);
+  thirdTab.simulate(`click`);
+  expect(main.state(`activeTab`)).toBe(`REVIEWS`);
 
 });

@@ -21,3 +21,11 @@ export const convertSecondsToHoursMins = (sec) => {
   const hours = (sec - secToMin) / 3600;
   return `${hours}h ${mins}m`;
 };
+
+export const extendObject = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const removeSpaces = (str) => {
+  return str.replace(/\s+/g, ``);
+};

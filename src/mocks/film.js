@@ -2,6 +2,11 @@ import {generateRandomInteger, getRandomPartOfArray} from '../utils/common.js';
 
 const MOVIES_NUM = 15;
 
+const MovieRunTimeLimits = {
+  min: 3600,
+  max: 10800
+};
+
 const YearLimits = {
   min: 1980,
   max: 2020
@@ -112,6 +117,44 @@ const MOVIE_PREVIEWS = [
   `https://cdn.videvo.net/videvo_files/converted/2013_08/preview/hd0983.mov28884.webm`
 ];
 
+const COMMENTORS = [
+  `Roberto Sweeney`,
+  `Brendon Henderson`,
+  `Mikey Cantrell`,
+  `Cathy Flower`,
+  `Mylah O'Ryan`,
+  `Pixie Brookes`,
+  `Kris Milne`,
+  `Yazmin Austin`,
+  `Alessio Parkes`,
+  `Jordi Joseph`,
+];
+
+const COMMENT_DATES = [
+  `26.04.1996`,
+  `21.02.1998`,
+  `29.12.1998`,
+  `02.11.2004`,
+  `20.04.2007`,
+  `13.10.2007`,
+  `11.03.2009`,
+  `16.06.2011`,
+  `01.10.2011`,
+  `14.07.2012`,
+];
+
+const COMMENT_TEXTS = [
+  `Now is the winter of our discontent. Made glorious summer by this sun of York`,
+  `And all the clouds that lour'd upon our house. In the deep bosom of the ocean buried. Now are our brows bound with victorious wreaths`,
+  `Our bruised arms hung up for monuments`,
+  `Our stern alarums changed to merry meetings. Our dreadful marches to delightful measures`,
+  `Grim-visaged war hath smooth'd his wrinkled front`,
+  `And now, instead of mounting barded steeds. To fright the souls of fearful adversaries`,
+  `He capers nimbly in a lady's chamber. To the lascivious pleasing of a lute`,
+  `But I, that am not shaped for sportive tricks, Nor made to court an amorous looking-glass`,
+  `I, that am rudely stamp'd, and want love's majesty. To strut before a wanton ambling nymph`,
+];
+
 const generateRandomMovie = (id) => {
   const randomActors = getRandomPartOfArray(ACTORS).join(`, `);
   return {
@@ -132,6 +175,18 @@ const generateRandomMovie = (id) => {
       `Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
     ],
     moviePreview: MOVIE_PREVIEWS[generateRandomInteger(0, MOVIE_PREVIEWS.length - 1)],
+    movieRunTime: generateRandomInteger(MovieRunTimeLimits.min, MovieRunTimeLimits.max),
+  };
+};
+
+const generateRandomComments = (movieId) => {
+  return {
+    movieId,
+    id: generateRandomInteger(1, 99999),
+    author: COMMENTORS[generateRandomInteger(0, COMMENTORS.length - 1)],
+    text: getRandomPartOfArray(COMMENT_TEXTS).join(` `),
+    date: COMMENT_DATES[generateRandomInteger(0, COMMENT_DATES.length - 1)],
+    rating: generateRandomInteger(1, 10),
   };
 };
 
@@ -139,4 +194,33 @@ const randomMovies = Array(MOVIES_NUM).fill(``).map((it, key) => {
   return generateRandomMovie((key + 1));
 });
 
+const preRandomComments = Array(MOVIES_NUM).fill(``).map((it, key) => {
+  return generateRandomComments(key);
+}).concat(Array(MOVIES_NUM).fill(``).map((it, key) => {
+  return generateRandomComments(key);
+})).concat(Array(MOVIES_NUM).fill(``).map((it, key) => {
+  return generateRandomComments(key);
+})).concat(Array(MOVIES_NUM).fill(``).map((it, key) => {
+  return generateRandomComments(key);
+}));
+
+const randomComments = preRandomComments.map((it, key) => {
+  const {
+    movieId,
+    author,
+    text,
+    date,
+    rating,
+  } = it;
+  return {
+    movieId,
+    id: key + 1000,
+    author,
+    text,
+    date,
+    rating,
+  };
+});
+
+export {randomComments};
 export default randomMovies;

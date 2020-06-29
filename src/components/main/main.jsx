@@ -100,8 +100,12 @@ const Main = (props) => {
               <a href="#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-
-          <MoviesList moviesList={moviesList} onMovieTitleClick={onMovieTitleClick} />
+          <div className="catalog__movies-list">
+            <MoviesList
+              moviesList={moviesList}
+              onMovieTitleClick={onMovieTitleClick}
+            />
+          </div>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -127,16 +131,30 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  titleMovie: PropTypes.shape({
+  titleMovie: PropTypes.exact({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
+      PropTypes.exact({
+        movieDescription: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ),
+        image: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieRunTime: PropTypes.number,
+        moviePreview: PropTypes.string.isRequired,
       })
   ).isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,

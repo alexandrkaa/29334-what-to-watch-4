@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Talking chamber as shewing an it minutes. Trees fully of blind do. Exquisite favourite at do extensive listening. Improve up musical welcome he. Gay attended vicinity prepared now diverted. Esteems it ye sending reached as. Longer lively her design settle tastes advice mrs off who. 
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Doe John
+          </cite>
+          <time
+            className="review__date"
+            dateTime="31.12.2020"
+          >
+            31.12.2020
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        9
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Those an equal point no years do. Depend warmth fat but her but played. Shy and subjects wondered trifling pleasant. Prudent cordial comfort do no on colonel as assured chicken. Smart mrs day which begin. Snug do sold mr it if such. Terminated uncommonly at at estimating. Man behaviour met moonlight extremity acuteness direction.
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            John Doe
+          </cite>
+          <time
+            className="review__date"
+            dateTime="01.01.2000"
+          >
+            01.01.2000
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        3
+      </div>
+    </div>
+  </div>
+</div>
+`;

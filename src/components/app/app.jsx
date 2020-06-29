@@ -2,7 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from "../main/main.jsx";
-import MovieDetails from '../movie-details/movie-details.jsx';
+import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
+import {MOVIES_LIKE_THIS_NUM, MovieCardFullTabsIds} from '../../consts/consts.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,9 +25,13 @@ class App extends PureComponent {
     const {titleMovie, moviesList} = this.props;
     if (this.state.movieId) {
       const movie = moviesList.filter((it) => it.id === +this.state.movieId)[0];
+      const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
       return (
-        <MovieDetails
+        <MovieCardFull
           movie={movie}
+          moviesLikeThis={moviesLikeThis}
+          activeTab={MovieCardFullTabsIds.OVERVIEW}
+          onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
         />
       );
     }
@@ -41,15 +46,22 @@ class App extends PureComponent {
 
   render() {
     const {moviesList} = this.props;
+    // для тестирования
+    const movie = moviesList[0];
+    const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
+
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/movie-details">
-            <MovieDetails
-              movie={moviesList[0]}
+          <Route exact path="/movie-card-full">
+            <MovieCardFull
+              movie={movie}
+              moviesLikeThis={moviesLikeThis}
+              activeTab={MovieCardFullTabsIds.OVERVIEW}
+              onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
             />
           </Route>
         </Switch>
@@ -59,27 +71,30 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  titleMovie: PropTypes.shape({
+  titleMovie: PropTypes.exact({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
+      PropTypes.exact({
         movieDescription: PropTypes.arrayOf(
             PropTypes.string.isRequired
         ),
+        image: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        movieDirector: PropTypes.string.isRequired,
+        movieStarring: PropTypes.string.isRequired,
+        movieImage: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        movieGenre: PropTypes.string.isRequired,
+        movieDate: PropTypes.string.isRequired,
+        movieBackground: PropTypes.string.isRequired,
+        movieRatingScore: PropTypes.string.isRequired,
+        movieRatingLevel: PropTypes.string.isRequired,
+        movieRatingCount: PropTypes.string.isRequired,
+        movieRunTime: PropTypes.number,
+        moviePreview: PropTypes.string.isRequired,
       })).isRequired,
 };
 

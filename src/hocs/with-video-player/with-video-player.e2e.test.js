@@ -45,7 +45,7 @@ const movie = {
 
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
-it(`Should title be pressed`, () => {
+it(`Should withVideoPlayer state will be changed`, () => {
   const isMuted = true;
 
   const main = mount(

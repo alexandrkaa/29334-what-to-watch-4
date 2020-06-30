@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movie-list/movie-list.jsx';
+import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onMovieTitleClick} = props;
+  const {titleMovie, filteredMovies, onMovieTitleClick} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -67,42 +68,10 @@ const Main = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenreFilterList />
           <div className="catalog__movies-list">
             <MoviesList
-              moviesList={moviesList}
+              moviesList={filteredMovies}
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
@@ -136,7 +105,7 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
-  moviesList: PropTypes.arrayOf(
+  filteredMovies: PropTypes.arrayOf(
       PropTypes.exact({
         movieDescription: PropTypes.arrayOf(
             PropTypes.string.isRequired
@@ -155,8 +124,7 @@ Main.propTypes = {
         movieRatingCount: PropTypes.string.isRequired,
         movieRunTime: PropTypes.number,
         moviePreview: PropTypes.string.isRequired,
-      })
-  ).isRequired,
+      })).isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
 };
 

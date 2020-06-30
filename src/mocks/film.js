@@ -1,4 +1,6 @@
 import {generateRandomInteger, getRandomPartOfArray} from '../utils/common.js';
+import {getGenresFromMovies} from '../utils/filters.js';
+import {DEFAULT_GENRE} from '../consts/consts.js';
 
 const MOVIES_NUM = 15;
 
@@ -222,5 +224,8 @@ const randomComments = preRandomComments.map((it, key) => {
   };
 });
 
-export {randomComments};
+const movieGenres = Array.from(getGenresFromMovies(randomMovies));
+movieGenres.unshift(DEFAULT_GENRE);
+
+export {randomComments, movieGenres};
 export default randomMovies;

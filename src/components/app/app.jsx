@@ -24,7 +24,7 @@ class App extends PureComponent {
   _renderApp() {
     const {titleMovie, filteredMovies, moviesList} = this.props;
     if (this.state.movieId) {
-      const movie = filteredMovies.filter((it) => it.id === +this.state.movieId)[0];
+      const [movie] = filteredMovies.filter((it) => it.id === +this.state.movieId);
       const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
       return (
         <MovieCardFull

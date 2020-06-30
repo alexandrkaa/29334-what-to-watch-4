@@ -2,7 +2,6 @@ import {reducer, ActionCreator, ActionTypes} from "./reducer.js";
 import {titleMovie} from '../mocks/title-movie.js';
 import moviesList, {movieGenres} from '../mocks/film.js';
 import {DEFAULT_GENRE} from '../consts/consts.js';
-import {getMoviesByGenre} from '../utils/filters.js';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {

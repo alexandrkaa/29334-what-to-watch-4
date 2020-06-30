@@ -22,9 +22,9 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {titleMovie, filteredMovies, moviesList} = this.props;
+    const {titleMovie, moviesList, activeGenre} = this.props;
     if (this.state.movieId) {
-      const [movie] = filteredMovies.filter((it) => it.id === +this.state.movieId);
+      const [movie] = moviesList.filter((it) => it.id === +this.state.movieId);
       const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
       return (
         <MovieCardFull
@@ -38,8 +38,8 @@ class App extends PureComponent {
     return (
       <Main
         titleMovie={titleMovie}
-        filteredMovies={filteredMovies}
         moviesList={moviesList}
+        activeGenre={activeGenre}
         onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
       />
     );
@@ -97,26 +97,6 @@ App.propTypes = {
         movieRunTime: PropTypes.number,
         moviePreview: PropTypes.string.isRequired,
       })).isRequired,
-  filteredMovies: PropTypes.arrayOf(
-      PropTypes.exact({
-        movieDescription: PropTypes.arrayOf(
-            PropTypes.string.isRequired
-        ),
-        image: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieRunTime: PropTypes.number,
-        moviePreview: PropTypes.string.isRequired,
-      })).isRequired,
   activeGenre: PropTypes.string.isRequired,
 };
 
@@ -125,7 +105,6 @@ const mapStateToProps = (state) => {
     activeGenre: state.activeGenre,
     moviesList: state.moviesList,
     titleMovie: state.titleMovie,
-    filteredMovies: state.filteredMovies,
   };
 };
 

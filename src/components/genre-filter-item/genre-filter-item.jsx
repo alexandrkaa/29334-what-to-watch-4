@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {isEqual} from '../../utils/filters.js';
 
 const GenreFilterItem = (props) => {
-  const {movieGenre, activeGenre, onChangeActiveGenre } = props;
+  const {movieGenre, activeGenre, onChangeActiveGenre} = props;
   const _onChangeActiveGenre = onChangeActiveGenre.bind(null, movieGenre);
   return (
     <li className={`catalog__genres-item ${isEqual(movieGenre, activeGenre) ? `catalog__genres-item--active` : ``}`}>

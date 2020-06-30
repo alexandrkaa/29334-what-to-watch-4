@@ -8,12 +8,10 @@ const initialState = {
   moviesList,
   titleMovie,
   movieGenres,
-  filteredMovies: moviesList
 };
 
 const ActionTypes = {
   CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
-  GET_MOVIES_DATA_BY_GENRE: `GET_MOVIES_DATA_BY_GENRE`,
 };
 
 const ActionCreator = {
@@ -21,10 +19,6 @@ const ActionCreator = {
     type: ActionTypes.CHANGE_ACTIVE_GENRE,
     payload: movieGenre,
   }),
-  getMoviesDataByGenre: (movies) => ({
-    type: ActionTypes.GET_MOVIES_DATA_BY_GENRE,
-    payload: movies,
-  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,10 +26,6 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.CHANGE_ACTIVE_GENRE:
       return extendObject(state, {
         activeGenre: action.payload
-      });
-    case ActionTypes.GET_MOVIES_DATA_BY_GENRE:
-      return extendObject(state, {
-        filteredMovies: action.payload
       });
     default:
       return state;

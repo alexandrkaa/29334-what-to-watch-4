@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movie-list/movie-list.jsx';
 import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
+import {getMoviesByGenre} from '../../utils/filters.js';
 
 const Main = (props) => {
-  const {titleMovie, filteredMovies, onMovieTitleClick} = props;
+  const {titleMovie, moviesList, onMovieTitleClick, activeGenre} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -71,7 +72,7 @@ const Main = (props) => {
           <GenreFilterList />
           <div className="catalog__movies-list">
             <MoviesList
-              moviesList={filteredMovies}
+              moviesList={getMoviesByGenre(moviesList, activeGenre)}
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
@@ -105,7 +106,7 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseDate: PropTypes.string.isRequired,
   }).isRequired,
-  filteredMovies: PropTypes.arrayOf(
+  moviesList: PropTypes.arrayOf(
       PropTypes.exact({
         movieDescription: PropTypes.arrayOf(
             PropTypes.string.isRequired
@@ -126,6 +127,7 @@ Main.propTypes = {
         moviePreview: PropTypes.string.isRequired,
       })).isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string.isRequired,
 };
 
 export default Main;

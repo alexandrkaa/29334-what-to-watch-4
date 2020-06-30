@@ -56,6 +56,8 @@ export const withVideoPlayer = (Component) => {
       video.muted = null;
       video.poster = null;
       video.src = ``;
+      clearTimeout(this._timerId);
+      this._timerId = null;
     }
 
     componentDidUpdate() {

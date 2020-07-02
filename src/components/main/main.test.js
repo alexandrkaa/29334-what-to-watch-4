@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main';
+import Main from './main.jsx';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+
+const mockStore = configureStore([]);
 
 const mockData = {
   titleMovie: {
@@ -40,25 +44,38 @@ const mockData = {
       movieRatingScore: `2`,
       movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
       title: `Johnny English`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     }
   ],
+  movieGenres: [
+    `Thriller`,
+    `Kids & Family`
+  ]
 };
 
 describe(`<Main /> should render main movie and movies list`, () => {
 
-  it(`<Main /> should render The Grand Budapest Hotel title film and 3 films from movieList`, () => {
-    const {titleMovie, moviesList} = mockData;
-    const _handleMovieCardMouseEnter = jest.fn();
-    const _handleMovieTitleClick = jest.fn();
+  it(`<Main /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
+    const onMovieTitleClick = jest.fn();
+    const {titleMovie, moviesList, movieGenres} = mockData;
+    const store = mockStore(
+        {
+          titleMovie,
+          moviesList,
+          activeGenre: `All genres`,
+          movieGenres
+        }
+    );
     const tree = renderer
       .create(
-          <Main
-            titleMovie={titleMovie}
-            moviesList={moviesList}
-            onMovieCardMouseEnter={_handleMovieCardMouseEnter}
-            onMovieTitleClick={_handleMovieTitleClick}
-          />,
+          <Provider store={store}>
+            <Main
+              titleMovie={titleMovie}
+              moviesList={moviesList}
+              onMovieTitleClick={onMovieTitleClick}
+              activeGenre={`All genres`}
+            />
+          </Provider>,
           {
             createNodeMock: () => {
               return {};

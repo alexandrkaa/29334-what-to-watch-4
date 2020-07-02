@@ -1,6 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import App from './app';
+
+const mockStore = configureStore([]);
 
 const mockData = {
   titleMovie: {
@@ -43,15 +47,28 @@ const mockData = {
       moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     }
   ],
+  movieGenres: [
+    `Thriller`,
+    `Kids & Family`
+  ]
 };
 
 describe(`<App /> should render`, () => {
-
   it(`<App /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
-    const {titleMovie, moviesList} = mockData;
+    const {titleMovie, moviesList, movieGenres} = mockData;
+    const store = mockStore(
+        {
+          titleMovie,
+          moviesList,
+          activeGenre: `All genres`,
+          movieGenres
+        }
+    );
     const tree = renderer
       .create(
-          <App titleMovie={titleMovie} moviesList={moviesList} />,
+          <Provider store={store}>
+            <App />
+          </Provider>,
           {
             createNodeMock: () => {
               return {};

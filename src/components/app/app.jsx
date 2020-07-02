@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Main from "../main/main.jsx";
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
 import {MOVIES_LIKE_THIS_NUM, MovieCardFullTabsIds} from '../../consts/consts.js';
@@ -13,7 +14,6 @@ class App extends PureComponent {
       movieId: null,
     };
   }
-
   _handleMovieTitleClick(movie, evt) {
     evt.preventDefault();
     this.setState({
@@ -22,9 +22,9 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {titleMovie, moviesList} = this.props;
+    const {titleMovie, moviesList, activeGenre} = this.props;
     if (this.state.movieId) {
-      const movie = moviesList.filter((it) => it.id === +this.state.movieId)[0];
+      const [movie] = moviesList.filter((it) => it.id === +this.state.movieId);
       const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
       return (
         <MovieCardFull
@@ -39,6 +39,7 @@ class App extends PureComponent {
       <Main
         titleMovie={titleMovie}
         moviesList={moviesList}
+        activeGenre={activeGenre}
         onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
       />
     );
@@ -46,7 +47,6 @@ class App extends PureComponent {
 
   render() {
     const {moviesList} = this.props;
-    // для тестирования
     const movie = moviesList[0];
     const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
 
@@ -96,6 +96,16 @@ App.propTypes = {
         movieRunTime: PropTypes.number,
         moviePreview: PropTypes.string.isRequired,
       })).isRequired,
+  activeGenre: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    activeGenre: state.activeGenre,
+    moviesList: state.moviesList,
+    titleMovie: state.titleMovie,
+  };
+};
+
+export {App};
+export default connect(mapStateToProps)(App);

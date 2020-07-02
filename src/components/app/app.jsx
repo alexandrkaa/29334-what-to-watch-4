@@ -47,7 +47,6 @@ class App extends PureComponent {
 
   render() {
     const {moviesList} = this.props;
-    // для тестирования
     const movie = moviesList[0];
     const moviesLikeThis = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
 

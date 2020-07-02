@@ -1,7 +1,7 @@
 import {DEFAULT_GENRE} from '../consts/consts.js';
 
 const getFilteredMovies = (movies, movieGenre) => {
-  return movies.filter((movie) => movie.movieGenre.toLowerCase() === movieGenre.toLowerCase());
+  return movies.filter((movie) => isEqual(movie.movieGenre, movieGenre));
 };
 
 export const getMoviesByGenre = (movies, movieGenre) => {
@@ -12,6 +12,6 @@ export const getGenresFromMovies = (movies) => {
   return Array.from(new Set(movies.map((movie) => movie.movieGenre)));
 };
 
-export const isEqual = (movieGenre, activeGenre) => {
-  return movieGenre.toLowerCase() === activeGenre.toLowerCase();
+export const isEqual = (firstString, secondString) => {
+  return firstString.toLowerCase() === secondString.toLowerCase();
 };

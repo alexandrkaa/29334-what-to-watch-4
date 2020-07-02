@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import moviesList from './mocks/film.js';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';

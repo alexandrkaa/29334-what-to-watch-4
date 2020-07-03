@@ -2,7 +2,7 @@ import {generateRandomInteger, getRandomPartOfArray} from '../utils/common.js';
 import {getGenresFromMovies} from '../utils/filters.js';
 import {DEFAULT_GENRE} from '../consts/consts.js';
 
-const MOVIES_NUM = 15;
+const MOVIES_NUM = 21;
 
 const MovieRunTimeLimits = {
   min: 3600,

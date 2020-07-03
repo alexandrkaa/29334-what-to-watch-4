@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movie-list/movie-list.jsx';
 import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
-import {getMoviesByGenre} from '../../utils/filters.js';
+import ShowMore from '../show-more/show-more.jsx';
+import {moviesListType, titleMovieType} from '../../types/types.js';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onMovieTitleClick, activeGenre} = props;
+  const {titleMovie, moviesList, onMovieTitleClick} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -72,14 +73,15 @@ const Main = (props) => {
           <GenreFilterList />
           <div className="catalog__movies-list">
             <MoviesList
-              moviesList={getMoviesByGenre(moviesList, activeGenre)}
+              moviesList={moviesList}
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
 
-          <div className="catalog__more">
+          {/* <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
-          </div>
+          </div> */}
+          <ShowMore />
         </section>
 
         <footer className="page-footer">
@@ -101,31 +103,8 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  titleMovie: PropTypes.exact({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.string.isRequired,
-  }).isRequired,
-  moviesList: PropTypes.arrayOf(
-      PropTypes.exact({
-        movieDescription: PropTypes.arrayOf(
-            PropTypes.string.isRequired
-        ),
-        image: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieRunTime: PropTypes.number,
-        moviePreview: PropTypes.string.isRequired,
-      })).isRequired,
+  titleMovie: titleMovieType.isRequired,
+  moviesList: moviesListType.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
 };

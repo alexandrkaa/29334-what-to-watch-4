@@ -1,16 +1,18 @@
 import {reducer, ActionCreator, ActionTypes} from "./reducer.js";
 import {titleMovie} from '../mocks/title-movie.js';
 import moviesListServer, {movieGenres} from '../mocks/film.js';
-import {DEFAULT_GENRE} from '../consts/consts.js';
-import {getMoviesByGenre} from '../utils/filters.js';
+import {DEFAULT_GENRE, MOVIES_LIMIT} from '../consts/consts.js';
+import {getMoviesByGenre, getMoviesWithLimit} from '../utils/filters.js';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       activeGenre: DEFAULT_GENRE,
-      moviesList: moviesListServer,
+      moviesList: getMoviesWithLimit(getMoviesByGenre(moviesListServer, DEFAULT_GENRE), 0, MOVIES_LIMIT),
       titleMovie,
       movieGenres,
+      moviesLimit: MOVIES_LIMIT,
+      showMore: moviesListServer.length > MOVIES_LIMIT
     });
   });
 
@@ -18,16 +20,18 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       activeGenre: DEFAULT_GENRE,
       moviesList: moviesListServer,
-      titleMovie,
       movieGenres,
+      moviesLimit: MOVIES_LIMIT,
+      showMore: moviesListServer.length > MOVIES_LIMIT
     }, {
       type: `CHANGE_ACTIVE_GENRE`,
       payload: `Horror`
     })).toEqual({
       activeGenre: `Horror`,
       moviesList: moviesListServer,
-      titleMovie,
       movieGenres,
+      moviesLimit: MOVIES_LIMIT,
+      showMore: getMoviesByGenre(moviesListServer, `Horror`).length > (MOVIES_LIMIT)
     });
   });
 
@@ -36,15 +40,31 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       activeGenre: `Horror`,
       moviesList: horrorMovies,
-      titleMovie,
       movieGenres,
     }, {
       type: `GET_MOVIES_DATA_BY_GENRE`,
     })).toEqual({
       activeGenre: `Horror`,
       moviesList: horrorMovies,
-      titleMovie,
       movieGenres,
+    });
+  });
+
+  it(`Should reducer update limit`, () => {
+    expect(reducer({
+      activeGenre: DEFAULT_GENRE,
+      moviesList: moviesListServer,
+      movieGenres,
+      moviesLimit: MOVIES_LIMIT,
+      showMore: moviesListServer.length > MOVIES_LIMIT
+    }, {
+      type: `UPDATE_LIMIT`,
+    })).toEqual({
+      activeGenre: DEFAULT_GENRE,
+      moviesList: moviesListServer,
+      movieGenres,
+      moviesLimit: MOVIES_LIMIT + MOVIES_LIMIT,
+      showMore: moviesListServer.length > (MOVIES_LIMIT + MOVIES_LIMIT)
     });
   });
 });

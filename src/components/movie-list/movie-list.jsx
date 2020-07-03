@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
+import {moviesListType} from '../../types/types.js';
 
 const MoviesList = (props) => {
   const {moviesList, onMovieTitleClick} = props;
@@ -24,27 +25,7 @@ const MoviesList = (props) => {
 };
 
 MoviesList.propTypes = {
-  moviesList: PropTypes.arrayOf(
-      PropTypes.exact({
-        movieDescription: PropTypes.arrayOf(
-            PropTypes.string.isRequired
-        ),
-        image: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieRunTime: PropTypes.number,
-        moviePreview: PropTypes.string.isRequired,
-      })
-  ),
+  moviesList: moviesListType.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
 };
 

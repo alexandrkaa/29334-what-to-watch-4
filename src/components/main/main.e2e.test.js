@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Main from './main.jsx';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {MOVIES_LIMIT} from '../../consts/consts.js';
 
 const mockStore = configureStore([]);
 
@@ -67,7 +68,9 @@ describe(`<Main /> title click test`, () => {
           titleMovie,
           moviesList,
           activeGenre: `All genres`,
-          movieGenres
+          movieGenres,
+          moviesLimit: MOVIES_LIMIT,
+          showMore: moviesList.length > MOVIES_LIMIT
         }
     );
     const main = mount(

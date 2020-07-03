@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import Main from './main.jsx';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {MOVIES_LIMIT} from '../../consts/consts.js';
 
 const mockStore = configureStore([]);
 
@@ -63,7 +64,9 @@ describe(`<Main /> should render main movie and movies list`, () => {
           titleMovie,
           moviesList,
           activeGenre: `All genres`,
-          movieGenres
+          movieGenres,
+          moviesLimit: MOVIES_LIMIT,
+          showMore: moviesList.length > MOVIES_LIMIT
         }
     );
     const tree = renderer

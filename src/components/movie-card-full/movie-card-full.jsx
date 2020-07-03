@@ -9,6 +9,7 @@ import MovieCardFullReviews from '../movie-card-full-reviews/movie-card-full-rev
 import {randomComments} from '../../mocks/film.js';
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.js';
 import MoviesList from '../movie-list/movie-list.jsx';
+import {moviesListType, movieType} from '../../types/types.js';
 
 const MovieCardFull = (props) => {
   const {movie, moviesLikeThis, activeTab, onActiveTabChange, onMovieTitleClick} = props;
@@ -148,46 +149,8 @@ const MovieCardFull = (props) => {
 };
 
 MovieCardFull.propTypes = {
-  movie: PropTypes.exact({
-    movieDescription: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ),
-    image: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    movieDirector: PropTypes.string.isRequired,
-    movieStarring: PropTypes.string.isRequired,
-    movieImage: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    movieGenre: PropTypes.string.isRequired,
-    movieDate: PropTypes.string.isRequired,
-    movieBackground: PropTypes.string.isRequired,
-    movieRatingScore: PropTypes.string.isRequired,
-    movieRatingLevel: PropTypes.string.isRequired,
-    movieRatingCount: PropTypes.string.isRequired,
-    movieRunTime: PropTypes.number,
-    moviePreview: PropTypes.string.isRequired,
-  }),
-  moviesLikeThis: PropTypes.arrayOf(
-      PropTypes.exact({
-        movieDescription: PropTypes.arrayOf(
-            PropTypes.string.isRequired
-        ),
-        image: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        movieDirector: PropTypes.string.isRequired,
-        movieStarring: PropTypes.string.isRequired,
-        movieImage: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        movieGenre: PropTypes.string.isRequired,
-        movieDate: PropTypes.string.isRequired,
-        movieBackground: PropTypes.string.isRequired,
-        movieRatingScore: PropTypes.string.isRequired,
-        movieRatingLevel: PropTypes.string.isRequired,
-        movieRatingCount: PropTypes.string.isRequired,
-        movieRunTime: PropTypes.number,
-        moviePreview: PropTypes.string.isRequired,
-      })
-  ),
+  movie: movieType.isRequired,
+  moviesLikeThis: moviesListType.isRequired,
   activeTab: PropTypes.string.isRequired,
   onActiveTabChange: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,

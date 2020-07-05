@@ -6,7 +6,7 @@ import ShowMore from '../show-more/show-more.jsx';
 import {moviesListType, titleMovieType} from '../../types/types.js';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onMovieTitleClick} = props;
+  const {titleMovie, moviesList, onMovieTitleClick, activeGenre} = props;
   const {title, genre, releaseDate} = titleMovie;
 
   return (
@@ -70,17 +70,13 @@ const Main = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreFilterList />
+          <GenreFilterList activeItem={activeGenre} />
           <div className="catalog__movies-list">
             <MoviesList
               moviesList={moviesList}
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
-
-          {/* <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div> */}
           <ShowMore />
         </section>
 

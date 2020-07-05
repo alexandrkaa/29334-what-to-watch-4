@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import {moviesListType} from '../../types/types.js';
+import {START_PRVIEW_DELAY} from '../../consts/consts.js';
 
 const MoviesList = (props) => {
   const {moviesList, onMovieTitleClick} = props;
@@ -16,6 +17,7 @@ const MoviesList = (props) => {
               movie={movie}
               isMuted={true}
               onMovieTitleClick={onMovieTitleClick}
+              timeOutDelay={START_PRVIEW_DELAY}
             />
           );
         })

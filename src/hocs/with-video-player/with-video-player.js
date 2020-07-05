@@ -1,6 +1,7 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../../components/video-player/video-player.jsx';
+import {movieType} from '../../types/types.js';
 
 export const withVideoPlayer = (Component) => {
   class VideoPlayerHoc extends PureComponent {
@@ -11,11 +12,12 @@ export const withVideoPlayer = (Component) => {
 
       this.state = {
         isPlaying: false,
-        isInitialPlay: true,
       };
 
       this._handleVideoPlay = this._handleVideoPlay.bind(this);
       this._handleVideoPause = this._handleVideoPause.bind(this);
+      this._startPlay = this._startPlay.bind(this);
+      this._stopPlay = this._stopPlay.bind(this);
       this._timerId = null;
     }
 
@@ -27,28 +29,33 @@ export const withVideoPlayer = (Component) => {
       video.poster = image;
     }
 
+    _startPlay() {
+      this.setState({
+        isPlaying: true,
+      });
+    }
+
+    _stopPlay() {
+      this.setState({
+        isPlaying: false,
+      });
+    }
+
     _handleVideoPlay() {
-      if (this.state.isInitialPlay) {
-        this._timerId = setTimeout(() => {
-          this.setState({
-            isPlaying: true,
-            isInitialPlay: false,
-          });
-        }, 1000);
+      const {isCanStart, onStart} = this.props;
+      if (isCanStart) {
+        this._startPlay();
       } else {
-        this.setState({
-          isPlaying: true,
-        });
+        onStart(this._startPlay);
       }
     }
 
     _handleVideoPause() {
-      if (this.state.isInitialPlay) {
-        clearTimeout(this._timerId);
+      const {isCanStart, onStop} = this.props;
+      if (!isCanStart) {
+        onStop();
       }
-      this.setState({
-        isPlaying: false,
-      });
+      this._stopPlay();
     }
 
     componentWillUnmount() {
@@ -80,27 +87,18 @@ export const withVideoPlayer = (Component) => {
     }
   }
 
+  VideoPlayerHoc.defaultProps = {
+    onStart: () => {},
+    onStop: () => {},
+    isCanStart: true,
+  };
+
   VideoPlayerHoc.propTypes = {
     isMuted: PropTypes.bool.isRequired,
-    movie: PropTypes.exact({
-      movieDescription: PropTypes.arrayOf(
-          PropTypes.string.isRequired
-      ),
-      image: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      movieDirector: PropTypes.string.isRequired,
-      movieStarring: PropTypes.string.isRequired,
-      movieImage: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      movieGenre: PropTypes.string.isRequired,
-      movieDate: PropTypes.string.isRequired,
-      movieBackground: PropTypes.string.isRequired,
-      movieRatingScore: PropTypes.string.isRequired,
-      movieRatingLevel: PropTypes.string.isRequired,
-      movieRatingCount: PropTypes.string.isRequired,
-      movieRunTime: PropTypes.number,
-      moviePreview: PropTypes.string.isRequired,
-    }),
+    movie: movieType.isRequired,
+    onStart: PropTypes.func.isRequired,
+    onStop: PropTypes.func.isRequired,
+    isCanStart: PropTypes.bool.isRequired,
   };
 
   return VideoPlayerHoc;

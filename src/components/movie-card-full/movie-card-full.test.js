@@ -99,7 +99,7 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
         <MovieCardFull
           movie={movie}
           moviesLikeThis={moviesLikeThis}
-          activeTab={`TAB1`}
+          activeItem={`TAB1`}
           onMovieTitleClick={onMovieTitleClick}
           tabs={mockTabs}
         />,

@@ -7,12 +7,12 @@ import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-o
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullReviews from '../movie-card-full-reviews/movie-card-full-reviews.jsx';
 import {randomComments} from '../../mocks/film.js';
-import withActiveTab from '../../hocs/with-active-tab/with-active-tab.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 
 const MovieCardFull = (props) => {
-  const {movie, moviesLikeThis, activeTab, onActiveTabChange, onMovieTitleClick} = props;
+  const {movie, moviesLikeThis, activeItem, onActiveItemChange, onMovieTitleClick} = props;
   const {
     movieImage,
     title,
@@ -24,19 +24,19 @@ const MovieCardFull = (props) => {
   const filtredComments = randomComments.filter((comment) => comment.movieId === movie.id);
 
   let movieCardFullTabs = MovieCardFullTabs.map((tab) => {
-    return Object.assign({}, tab, {isActive: tab.id === activeTab});
+    return Object.assign({}, tab, {isActive: tab.id === activeItem});
   });
 
   const _handleMenuTabChange = (tabId, evt) => {
     evt.preventDefault();
     movieCardFullTabs = MovieCardFullTabs.map((tab) => {
-      return Object.assign({}, tab, {isActive: tab.id === activeTab});
+      return Object.assign({}, tab, {isActive: tab.id === activeItem});
     });
-    onActiveTabChange(tabId);
+    onActiveItemChange(tabId);
   };
 
   const _renderTabsContent = () => {
-    switch (activeTab) {
+    switch (activeItem) {
       case MovieCardFullTabsIds.OVERVIEW:
         return (<MovieCardFullOverView movie={movie} />);
 
@@ -151,10 +151,10 @@ const MovieCardFull = (props) => {
 MovieCardFull.propTypes = {
   movie: movieType.isRequired,
   moviesLikeThis: moviesListType.isRequired,
-  activeTab: PropTypes.string.isRequired,
-  onActiveTabChange: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export {MovieCardFull};
-export default withActiveTab(MovieCardFull);
+export default withActiveItem(MovieCardFull);

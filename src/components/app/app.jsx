@@ -31,7 +31,7 @@ class App extends PureComponent {
         <MovieCardFull
           movie={movie}
           moviesLikeThis={moviesLikeThis}
-          activeTab={MovieCardFullTabsIds.OVERVIEW}
+          activeItem={MovieCardFullTabsIds.OVERVIEW}
           onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
         />
       );
@@ -61,7 +61,7 @@ class App extends PureComponent {
             <MovieCardFull
               movie={movie}
               moviesLikeThis={moviesLikeThis}
-              activeTab={MovieCardFullTabsIds.OVERVIEW}
+              activeItem={MovieCardFullTabsIds.OVERVIEW}
               onMovieTitleClick={this._handleMovieTitleClick.bind(this)}
             />
           </Route>

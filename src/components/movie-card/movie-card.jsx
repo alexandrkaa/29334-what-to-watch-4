@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
+import withTimeOut from '../../hocs/with-timeout/with-timeout.js';
 import {movieType} from '../../types/types.js';
 
 const MovieCard = (props) => {
@@ -38,4 +39,4 @@ MovieCard.propTypes = {
   children: PropTypes.element.isRequired
 };
 export {MovieCard};
-export default withVideoPlayer(MovieCard);
+export default withTimeOut(withVideoPlayer(MovieCard));

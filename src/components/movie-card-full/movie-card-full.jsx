@@ -27,8 +27,7 @@ const MovieCardFull = (props) => {
     return Object.assign({}, tab, {isActive: tab.id === activeItem});
   });
 
-  const _handleMenuTabChange = (tabId, evt) => {
-    evt.preventDefault();
+  const _handleMenuTabChange = (tabId) => {
     movieCardFullTabs = MovieCardFullTabs.map((tab) => {
       return Object.assign({}, tab, {isActive: tab.id === activeItem});
     });

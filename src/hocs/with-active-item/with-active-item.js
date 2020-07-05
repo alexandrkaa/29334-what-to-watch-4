@@ -10,7 +10,7 @@ const withActiveItem = (Component) => {
         activeItem: this.props.activeItem,
       };
 
-      this._handleActiveItemChange = this._handleActiveItemChange.bind(this);
+      this._handleActiveItemChange = props.onChangeActiveItem || this._handleActiveItemChange.bind(this);
     }
 
     _handleActiveItemChange(newItem) {
@@ -34,10 +34,11 @@ const withActiveItem = (Component) => {
 
   WithActiveItemHoc.defaultProps = {
     activeItem: null,
-  }
+  };
 
   WithActiveItemHoc.propTypes = {
-    activeItem: PropTypes.string.isRequired,
+    activeItem: PropTypes.string,
+    onChangeActiveItem: PropTypes.func,
   };
 
   return WithActiveItemHoc;

@@ -77,10 +77,6 @@ const Main = (props) => {
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
-
-          {/* <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div> */}
           <ShowMore />
         </section>
 

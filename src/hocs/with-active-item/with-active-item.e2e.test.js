@@ -34,25 +34,22 @@ MockComponent.propTypes = {
 const MockComponentWrapped = withActiveItem(MockComponent);
 
 
-it(`Should withActiveTab state will be changed`, () => {
-  const onClickMovieCardFullMenuTab = jest.fn();
-
+it(`Should withActiveItem state will be changed`, () => {
   const main = mount(
       <MockComponentWrapped
-        onClickMovieCardFullMenuTab={onClickMovieCardFullMenuTab}
-        activeTab={`OVERVIEW`}
+        activeItem={`OVERVIEW`}
       />
   );
 
-  expect(main.state(`activeTab`)).toBe(`OVERVIEW`);
+  expect(main.state(`activeItem`)).toBe(`OVERVIEW`);
   const secondTab = main.find(`.movie-nav__link`).at(1);
   expect(secondTab.length).toBe(1);
   secondTab.simulate(`click`);
-  expect(main.state(`activeTab`)).toBe(`DETAILS`);
+  expect(main.state(`activeItem`)).toBe(`DETAILS`);
 
   const thirdTab = main.find(`.movie-nav__link`).at(2);
   expect(thirdTab.length).toBe(1);
   thirdTab.simulate(`click`);
-  expect(main.state(`activeTab`)).toBe(`REVIEWS`);
+  expect(main.state(`activeItem`)).toBe(`REVIEWS`);
 
 });

@@ -4,11 +4,12 @@ import {removeSpaces} from '../../utils/common.js';
 import GenreFilterItem from '../genre-filter-item/genre-filter-item.jsx';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/reducer.js';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 
 const GenreFilterList = (props) => {
-  const {movieGenres, onChangeActiveGenre, activeGenre} = props;
-  const _onChangeActiveGenre = (movieGenre) => {
-    onChangeActiveGenre(movieGenre);
+  const {movieGenres, onActiveItemChange, activeItem} = props;
+  const _onActiveItemChange = (movieGenre) => {
+    onActiveItemChange(movieGenre);
   };
 
   return (
@@ -18,8 +19,8 @@ const GenreFilterList = (props) => {
           <GenreFilterItem
             key={removeSpaces(genre).toLowerCase()}
             movieGenre={genre}
-            activeGenre={activeGenre}
-            onChangeActiveGenre={_onChangeActiveGenre}
+            activeItem={activeItem}
+            onActiveItemChange={_onActiveItemChange}
           />
         );
       })}
@@ -31,21 +32,22 @@ GenreFilterList.propTypes = {
   movieGenres: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onChangeActiveGenre: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
+  activeItem: state.activeGenre,
   movieGenres: state.movieGenres
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeActiveGenre(movieGenre) {
+  onActiveItemChange(movieGenre) {
     dispatch(ActionCreator.changeActiveGenre(movieGenre));
     dispatch(ActionCreator.getMoviesDataByGenre());
   },
 });
 
 export {GenreFilterList};
-export default connect(mapStateToProps, mapDispatchToProps)(GenreFilterList);
+const WrappedGenreFilterList = withActiveItem(GenreFilterList);
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedGenreFilterList);

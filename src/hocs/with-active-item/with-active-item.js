@@ -9,8 +9,7 @@ const withActiveItem = (Component) => {
       this.state = {
         activeItem: this.props.activeItem,
       };
-
-      this._handleActiveItemChange = props.onChangeActiveItem || this._handleActiveItemChange.bind(this);
+      this._handleActiveItemChange = props.onActiveItemChange || this._handleActiveItemChange.bind(this);
     }
 
     _handleActiveItemChange(newItem) {
@@ -20,7 +19,8 @@ const withActiveItem = (Component) => {
     }
 
     render() {
-      const {activeItem} = this.state;
+
+      const activeItem = this.props.activeItem || this.state.activeItem;
 
       return (
         <Component
@@ -38,7 +38,7 @@ const withActiveItem = (Component) => {
 
   WithActiveItemHoc.propTypes = {
     activeItem: PropTypes.string,
-    onChangeActiveItem: PropTypes.func,
+    onActiveItemChange: PropTypes.func,
   };
 
   return WithActiveItemHoc;

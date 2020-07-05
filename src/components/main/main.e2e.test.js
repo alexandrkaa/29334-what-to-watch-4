@@ -85,7 +85,7 @@ describe(`<Main /> title click test`, () => {
     );
     const titleLink = main.find(`h3.small-movie-card__title`).at(0);
     expect(titleLink).toHaveLength(1);
-    titleLink.simulate(`click`);
+    titleLink.simulate(`click`, {preventDefault: jest.fn()});
     expect(onMovieTitleClick).toHaveBeenCalledTimes(1);
   });
 });

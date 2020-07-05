@@ -32,7 +32,7 @@ const App = (props) => {
         onMovieTitleClick={onActiveItemChange}
       />
     );
-  }
+  };
 
   return (
     <BrowserRouter>

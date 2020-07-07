@@ -53,6 +53,8 @@ it(`Should withVideoPlayer state will be changed`, () => {
         key={movie.id}
         movie={movie}
         isMuted={isMuted}
+        videoWidth={280}
+        videoHeight={175}
       />
   );
 

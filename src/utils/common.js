@@ -29,3 +29,15 @@ export const extendObject = (a, b) => {
 export const removeSpaces = (str) => {
   return str.replace(/\s+/g, ``);
 };
+
+export const secondsToTime = (initialSeconds) => {
+  if (!initialSeconds) {
+    return `00:00:00`;
+  }
+  const _initialSeconds = Math.round(initialSeconds);
+  const hours = Math.floor(_initialSeconds / (60 * 60));
+  const _toMinutesSec = _initialSeconds % (60 * 60);
+  const minutes = Math.floor(_toMinutesSec / 60);
+  const seconds = Math.ceil(_toMinutesSec % 60);
+  return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+};

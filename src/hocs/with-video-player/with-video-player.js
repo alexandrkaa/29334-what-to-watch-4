@@ -1,7 +1,7 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../../components/video-player/video-player.jsx';
-import {movieType} from '../../types/types.js';
+import {movieType, videoDementionType} from '../../types/types.js';
 
 export const withVideoPlayer = (Component) => {
   class VideoPlayerHoc extends PureComponent {
@@ -12,6 +12,9 @@ export const withVideoPlayer = (Component) => {
 
       this.state = {
         isPlaying: false,
+        isEnded: false,
+        isFullScreen: false,
+        currentTime: 0,
       };
 
       this._handleVideoPlay = this._handleVideoPlay.bind(this);
@@ -19,6 +22,8 @@ export const withVideoPlayer = (Component) => {
       this._startPlay = this._startPlay.bind(this);
       this._stopPlay = this._stopPlay.bind(this);
       this._timerId = null;
+      this._duration = 0;
+      this._handleFullscreenToggle = this._handleFullscreenToggle.bind(this);
     }
 
     componentDidMount() {
@@ -27,11 +32,41 @@ export const withVideoPlayer = (Component) => {
       video.src = moviePreview;
       video.muted = isMuted;
       video.poster = image;
+      video.ontimeupdate = () => this.setState({
+        currentTime: Math.floor(video.currentTime),
+      });
+      video.onended = () => this.setState({
+        isPlaying: false,
+        isEnded: true,
+      });
+      video.onloadedmetadata = () => {
+        this._duration = video.duration;
+      };
+    }
+
+    _handleFullscreenToggle() {
+      const video = this._videoRef.current;
+      if (!document.fullscreenElement) {
+        video.requestFullscreen()
+        .then(() => {
+          this.setState({
+            isFullScreen: true,
+          });
+        });
+      } else {
+        document.exitFullscreen()
+        .then(() => {
+          this.setState({
+            isFullScreen: false,
+          });
+        });
+      }
     }
 
     _startPlay() {
       this.setState({
         isPlaying: true,
+        isEnded: false,
       });
     }
 
@@ -65,6 +100,29 @@ export const withVideoPlayer = (Component) => {
       video.src = ``;
       clearTimeout(this._timerId);
       this._timerId = null;
+      video.ontimeupdate = null;
+      this._duration = 0;
+      video.onended = null;
+      video.onloadedmetadata = null;
+    }
+
+    render() {
+      const props = this.props;
+      return (
+        <Component
+          onPlay={this._handleVideoPlay}
+          onPause={this._handleVideoPause}
+          isPlaying={this.state.isPlaying}
+          isEnded={this.state.isEnded}
+          isFullScreen={this.state.isFullScreen}
+          onFullscreenToggle={this._handleFullscreenToggle}
+          duration={this._duration}
+          currentTime = {this.state.currentTime}
+          {...props}
+        >
+          <VideoPlayer controls={false} autoplay={false} videoWidth={props.videoWidth} videoHeight={props.videoHeight} ref={this._videoRef} />
+        </Component>
+      );
     }
 
     componentDidUpdate() {
@@ -75,15 +133,6 @@ export const withVideoPlayer = (Component) => {
       } else {
         video.pause();
       }
-    }
-
-    render() {
-      const props = this.props;
-      return (
-        <Component onPlay={this._handleVideoPlay} onPause={this._handleVideoPause} {...props}>
-          <VideoPlayer controls={false} autoplay={false} ref={this._videoRef} />
-        </Component>
-      );
     }
   }
 
@@ -99,6 +148,8 @@ export const withVideoPlayer = (Component) => {
     onStart: PropTypes.func.isRequired,
     onStop: PropTypes.func.isRequired,
     isCanStart: PropTypes.bool.isRequired,
+    videoHeight: videoDementionType.isRequired,
+    videoWidth: videoDementionType.isRequired,
   };
 
   return VideoPlayerHoc;

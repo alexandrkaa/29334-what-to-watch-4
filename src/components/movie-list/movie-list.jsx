@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import {moviesListType} from '../../types/types.js';
-import {START_PRVIEW_DELAY} from '../../consts/consts.js';
+import {START_PREVIEW_DELAY, PreviewVideoSize} from '../../consts/consts.js';
 
 const MoviesList = (props) => {
   const {moviesList, onMovieTitleClick} = props;
@@ -16,8 +16,10 @@ const MoviesList = (props) => {
               key={movie.id}
               movie={movie}
               isMuted={true}
+              videoHeight={PreviewVideoSize.height}
+              videoWidth={PreviewVideoSize.width}
               onMovieTitleClick={onMovieTitleClick}
-              timeOutDelay={START_PRVIEW_DELAY}
+              timeOutDelay={START_PREVIEW_DELAY}
             />
           );
         })

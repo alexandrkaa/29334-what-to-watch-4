@@ -22,8 +22,7 @@ export const movieType = PropTypes.exact({
 
 export const moviesListType = PropTypes.arrayOf(movieType);
 
-export const titleMovieType = PropTypes.exact({
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.string.isRequired,
-});
+export const videoDementionType = PropTypes.oneOfType([
+  PropTypes.number.isRequired,
+  PropTypes.string.isRequired,
+]);

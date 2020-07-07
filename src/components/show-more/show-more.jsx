@@ -5,9 +5,10 @@ import {ActionCreator} from '../../reducer/reducer.js';
 
 const ShowMore = (props) => {
   const {onIncreaseMoviesLimit, showMore} = props;
+  if (!showMore) {
+    return null;
+  }
   return (
-    showMore
-      &&
     <div className="catalog__more">
       <button
         className="catalog__button"

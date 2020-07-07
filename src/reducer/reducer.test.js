@@ -1,5 +1,5 @@
 import {reducer, ActionCreator, ActionTypes} from "./reducer.js";
-import {titleMovie} from '../mocks/title-movie.js';
+import {titleMovie} from '../mocks/film.js';
 import moviesListServer, {movieGenres} from '../mocks/film.js';
 import {DEFAULT_GENRE, MOVIES_LIMIT} from '../consts/consts.js';
 import {getMoviesByGenre, getMoviesWithLimit} from '../utils/filters.js';

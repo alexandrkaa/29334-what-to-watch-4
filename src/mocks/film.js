@@ -227,5 +227,7 @@ const randomComments = preRandomComments.map((it, key) => {
 const movieGenres = Array.from(getGenresFromMovies(randomMovies));
 movieGenres.unshift(DEFAULT_GENRE);
 
-export {randomComments, movieGenres};
+const titleMovie = randomMovies[0];
+
+export {randomComments, movieGenres, titleMovie};
 export default randomMovies;

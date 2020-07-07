@@ -274,8 +274,8 @@ Array [
             <video
               autoPlay={false}
               controls={false}
-              height="175"
-              width="280"
+              height={175}
+              width={280}
             />
           </div>
           <h3
@@ -302,8 +302,8 @@ Array [
             <video
               autoPlay={false}
               controls={false}
-              height="175"
-              width="280"
+              height={175}
+              width={280}
             />
           </div>
           <h3
@@ -330,8 +330,8 @@ Array [
             <video
               autoPlay={false}
               controls={false}
-              height="175"
-              width="280"
+              height={175}
+              width={280}
             />
           </div>
           <h3

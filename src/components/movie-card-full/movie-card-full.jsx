@@ -12,7 +12,7 @@ import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 
 const MovieCardFull = (props) => {
-  const {movie, moviesLikeThis, activeItem, onActiveItemChange, onMovieTitleClick} = props;
+  const {movie, similarMovies, activeItem, onActiveItemChange, onMovieTitleClick} = props;
   const {
     movieImage,
     title,
@@ -123,7 +123,7 @@ const MovieCardFull = (props) => {
 
           <div className="catalog__movies-list">
             <MoviesList
-              moviesList={moviesLikeThis}
+              moviesList={similarMovies}
               onMovieTitleClick={onMovieTitleClick}
             />
           </div>
@@ -149,7 +149,7 @@ const MovieCardFull = (props) => {
 
 MovieCardFull.propTypes = {
   movie: movieType.isRequired,
-  moviesLikeThis: moviesListType.isRequired,
+  similarMovies: moviesListType.isRequired,
   activeItem: PropTypes.string.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,

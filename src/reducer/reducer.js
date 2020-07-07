@@ -1,7 +1,7 @@
 import {DEFAULT_GENRE, MOVIES_LIMIT} from '../consts/consts.js';
 import {extendObject} from '../utils/common.js';
-import {titleMovie} from '../mocks/title-movie.js';
-import moviesListServer, {movieGenres} from '../mocks/film.js';
+// import {titleMovie} from '../mocks/title-movie.js';
+import moviesListServer, {movieGenres, titleMovie} from '../mocks/film.js';
 import {getMoviesByGenre, getMoviesWithLimit} from '../utils/filters.js';
 
 const initialState = {

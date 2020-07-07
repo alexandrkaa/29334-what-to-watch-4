@@ -20,7 +20,7 @@ const movie = {
   movieRunTime: 9900
 };
 
-const moviesLikeThis = [
+const similarMovies = [
   {
     id: 5,
     image: `img/we-need-to-talk-about-kevin.jpg`,
@@ -98,7 +98,7 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
     .create(
         <MovieCardFull
           movie={movie}
-          moviesLikeThis={moviesLikeThis}
+          similarMovies={similarMovies}
           activeItem={`TAB1`}
           onMovieTitleClick={onMovieTitleClick}
           tabs={mockTabs}

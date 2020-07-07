@@ -1,7 +1,7 @@
-import {isEqual} from './filters.js';
+import {isSameText} from './filters.js';
 
 describe(`Filter utils works correctly`, () => {
-  it(`isEqual func works correctly`, () => {
-    expect(isEqual(`One Two`, `one two`)).toBe(true);
+  it(`isSameText func works correctly`, () => {
+    expect(isSameText(`One Two`, `one two`)).toBe(true);
   });
 });

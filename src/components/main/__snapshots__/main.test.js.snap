@@ -81,7 +81,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Dardjeeling Limited
           </h2>
           <p
             className="movie-card__meta"
@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Thriller
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2000
             </span>
           </p>
           <div
@@ -191,8 +191,8 @@ Array [
             <video
               autoPlay={false}
               controls={false}
-              height="175"
-              width="280"
+              height={175}
+              width={280}
             />
           </div>
           <h3
@@ -219,8 +219,8 @@ Array [
             <video
               autoPlay={false}
               controls={false}
-              height="175"
-              width="280"
+              height={175}
+              width={280}
             />
           </div>
           <h3

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import MoviesList from '../movie-list/movie-list.jsx';
 import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
-import {moviesListType, titleMovieType} from '../../types/types.js';
+import {moviesListType, movieType} from '../../types/types.js';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onMovieTitleClick, activeGenre} = props;
-  const {title, genre, releaseDate} = titleMovie;
+  const {titleMovie, moviesList, onMovieTitleClick, activeGenre, onPlayButton} = props;
+  const {title, movieGenre, movieDate} = titleMovie;
 
   return (
     <React.Fragment>
@@ -44,8 +44,8 @@ const Main = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{releaseDate}</span>
+                <span className="movie-card__genre">{movieGenre}</span>
+                <span className="movie-card__year">{movieDate}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -99,7 +99,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  titleMovie: titleMovieType.isRequired,
+  titleMovie: movieType.isRequired,
   moviesList: moviesListType.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,

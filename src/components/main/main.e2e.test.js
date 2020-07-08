@@ -80,7 +80,7 @@ describe(`<Main /> title click test`, () => {
           moviesList,
           activeGenre: `All genres`,
           movieGenres,
-          moviesLimit: MOVIES_LIMIT,
+          moviesRenderLimit: MOVIES_LIMIT,
           showMore: moviesList.length > MOVIES_LIMIT
         }
     );

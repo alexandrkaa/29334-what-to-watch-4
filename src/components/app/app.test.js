@@ -74,7 +74,7 @@ describe(`<App /> should render`, () => {
           moviesList,
           activeGenre: `All genres`,
           movieGenres,
-          moviesLimit: MOVIES_LIMIT,
+          moviesRenderLimit: MOVIES_LIMIT,
           showMore: moviesList.length > MOVIES_LIMIT
         }
     );

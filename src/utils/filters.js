@@ -8,7 +8,7 @@ export const getMoviesByGenre = (movies, movieGenre) => {
   return movieGenre === DEFAULT_GENRE ? movies : getFilteredMovies(movies, movieGenre);
 };
 
-export const getMoviesWithLimit = (movies, start, stop) => {
+export const getWithLimit = (movies, start, stop) => {
   return movies.slice(start, stop);
 };
 

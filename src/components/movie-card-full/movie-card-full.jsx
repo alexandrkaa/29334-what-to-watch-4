@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
-import MovieCardFullTabs from '../../mocks/movie-full-card-menu.js';
-import {MovieCardFullTabsIds} from '../../consts/consts.js';
+import {MovieCardFullTabsIds, MovieCardFullTabs} from '../../consts/consts.js';
 import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-overview.jsx';
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullReviews from '../movie-card-full-reviews/movie-card-full-reviews.jsx';

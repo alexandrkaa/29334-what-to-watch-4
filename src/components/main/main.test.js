@@ -76,7 +76,7 @@ describe(`<Main /> should render main movie and movies list`, () => {
           moviesList,
           activeGenre: `All genres`,
           movieGenres,
-          moviesLimit: MOVIES_LIMIT,
+          moviesRenderLimit: MOVIES_LIMIT,
           showMore: moviesList.length > MOVIES_LIMIT
         }
     );

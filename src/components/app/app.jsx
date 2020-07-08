@@ -12,30 +12,34 @@ import {getMovies, getFilteredMovies, getTitleMovie, getMoviesComments, getMovie
 import {DEFAULT_GENRE} from '../../consts/consts.js';
 
 const App = (props) => {
-  const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit} = props;
+  const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit, loadingMovies} = props;
 
   const _renderApp = () => {
-
-    if (movieId) {
-      const [movie] = moviesList.filter((it) => it.id === +movieId);
-      const similarMovies = moviesList.filter((it) => it.movieGenre === movie.movieGenre).slice(0, MOVIES_LIKE_THIS_NUM - 1);
+    if (!loadingMovies) {
+      if (movieId) {
+        const [movie] = moviesList.filter((it) => it.id === +movieId);
+        const similarMovies = moviesList.filter((it) => it.movieGenre === movie.movieGenre && it.id !== movie.id).slice(0, MOVIES_LIKE_THIS_NUM - 1);
+        return (
+          <MovieCardFull
+            movie={movie}
+            similarMovies={similarMovies}
+            activeItem={MovieCardFullTabsIds.OVERVIEW}
+            onMovieTitleClick={onActiveItemChange}
+          />
+        );
+      }
       return (
-        <MovieCardFull
-          movie={movie}
-          similarMovies={similarMovies}
-          activeItem={MovieCardFullTabsIds.OVERVIEW}
+        <Main
+          titleMovie={titleMovie}
+          moviesList={moviesList}
+          activeGenre={activeGenre}
           onMovieTitleClick={onActiveItemChange}
+          moviesRenderLimit={moviesRenderLimit}
         />
       );
     }
     return (
-      <Main
-        titleMovie={titleMovie}
-        moviesList={moviesList}
-        activeGenre={activeGenre}
-        onMovieTitleClick={onActiveItemChange}
-        moviesRenderLimit={moviesRenderLimit}
-      />
+      <h1>Loading...</h1>
     );
   };
 
@@ -46,12 +50,14 @@ const App = (props) => {
           {_renderApp()}
         </Route>
         <Route exact path={`/player`}>
-          <FullScreenVideoPlayer
-            movie={moviesList[0]}
-            isMuted={true}
-            videoWidth="100%"
-            videoHeight="100%"
-          />
+          {!loadingMovies &&
+            <FullScreenVideoPlayer
+              movie={moviesList[0]}
+              isMuted={true}
+              videoWidth="100%"
+              videoHeight="100%"
+            />
+          }
         </Route>
       </Switch>
     </BrowserRouter>
@@ -77,6 +83,7 @@ const mapStateToProps = (state) => {
     moviesList: getFilteredMovies(state),
     titleMovie: getTitleMovie(state),
     moviesRenderLimit: getMoviesRenderLimit(state),
+    loadingMovies: getMoviesLoadingStatus(state),
   };
 };
 

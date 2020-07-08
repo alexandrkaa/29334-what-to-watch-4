@@ -178,6 +178,7 @@ const generateRandomMovie = (id) => {
     ],
     moviePreview: MOVIE_PREVIEWS[generateRandomInteger(0, MOVIE_PREVIEWS.length - 1)],
     movieRunTime: generateRandomInteger(MovieRunTimeLimits.min, MovieRunTimeLimits.max),
+    backgroundColor: `#000000`,
   };
 };
 

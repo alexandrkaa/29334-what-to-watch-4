@@ -117,17 +117,15 @@ const MovieCardFull = (props) => {
       </section>
 
       <div className="page-content">
+        {similarMovies.length > 0 &&
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            <MoviesList
-              moviesList={similarMovies}
-              onMovieTitleClick={onMovieTitleClick}
-            />
+            <MoviesList moviesList={similarMovies} onMovieTitleClick={onMovieTitleClick} />
           </div>
         </section>
-
+        }
         <footer className="page-footer">
           <div className="logo">
             <a href="main.html" className="logo__link logo__link--light">

@@ -1,4 +1,5 @@
 import {extendObject} from '../../utils/common.js';
+import movieAdapter from '../../adapters/movie/movie-adapter.js';
 
 const ActionTypes = {
   FETCH_MOVIES_DATA: `FETCH_MOVIES_DATA`,
@@ -24,7 +25,7 @@ const ActionCreator = {
   }),
   fetchMoviesDataSuccess: (moviesList) => ({
     type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
-    payload: moviesList,
+    payload: moviesList.map((movie) => movieAdapter(movie)),
   }),
   fetchMoviesCommentsData: () => ({
     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
@@ -40,6 +41,16 @@ const ActionCreator = {
     type: ActionTypes.FETCH_TITLE_MOVIE_SUCCESS,
     payload: titleMovie,
   }),
+};
+
+const Operation = {
+  // loadQuestions: (payload) => (dispatch, getState, api) => {
+  fetchMoviesData: () => (dispatch, getState, api) => {
+    return api.get(`/films`)
+      .then((response) => {
+        dispatch(ActionCreator.fetchMoviesDataSuccess(response.data));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -76,4 +87,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export {ActionTypes, ActionCreator, reducer};
+export {ActionTypes, Operation, ActionCreator, reducer};

@@ -20,13 +20,7 @@ const MovieCardFullDetails = (props) => {
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
           <span className="movie-card__details-value">
-            {movieStarring.split(`, `).map((actor, idx) => {
-              return (
-                <React.Fragment key={`${actor}_${idx}`}>
-                  {actor} <br />
-                </React.Fragment>
-              );
-            })}
+            {movieStarring}
           </span>
         </p>
       </div>

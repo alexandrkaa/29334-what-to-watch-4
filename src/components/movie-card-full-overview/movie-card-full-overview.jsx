@@ -21,13 +21,7 @@ const MovieCardFullOverView = (props) => {
       </div>
 
       <div className="movie-card__text">
-        {
-          movieDescription.map((it, id) => {
-            return (
-              <p key={id}>{it}</p>
-            );
-          })
-        }
+        {movieDescription}
         <p className="movie-card__director"><strong>Director: {movieDirector}</strong></p>
         <p className="movie-card__starring"><strong>Starring: {movieStarring}</strong></p>
       </div>

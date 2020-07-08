@@ -27,7 +27,8 @@ const mockData = {
     movieRatingScore: `3`,
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
     title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    backgroundColor: `#000000`,
   },
 
   moviesList: [
@@ -45,7 +46,8 @@ const mockData = {
       movieRatingScore: `3`,
       movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
       title: `Dardjeeling Limited`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
     },
     {
       id: 3,
@@ -62,6 +64,7 @@ const mockData = {
       movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
       title: `Johnny English`,
       moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
     }
   ],
   movieGenres: [
@@ -74,16 +77,17 @@ describe(`<Main /> title click test`, () => {
   it(`Should title be clicked at all cards`, () => {
     const onMovieTitleClick = jest.fn();
     const {titleMovie, moviesList, movieGenres} = mockData;
-    const store = mockStore(
-        {
-          titleMovie,
-          moviesList,
-          activeGenre: `All genres`,
-          movieGenres,
-          moviesRenderLimit: MOVIES_LIMIT,
-          showMore: moviesList.length > MOVIES_LIMIT
-        }
-    );
+    const store = mockStore({
+      DATA: {
+        titleMovie,
+        moviesList,
+        movieGenres,
+      },
+      MOVIE: {
+        activeGenre: `All genres`,
+        moviesRenderLimit: MOVIES_LIMIT,
+      }
+    });
     const main = mount(
         <Provider store={store}>
           <Main
@@ -91,6 +95,7 @@ describe(`<Main /> title click test`, () => {
             moviesList={moviesList}
             onMovieTitleClick={onMovieTitleClick}
             activeGenre={`Thriller`}
+            moviesRenderLimit={MOVIES_LIMIT}
           />
         </Provider>
     );

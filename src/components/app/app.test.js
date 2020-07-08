@@ -22,7 +22,8 @@ const mockData = {
     movieRatingScore: `3`,
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
     title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    backgroundColor: `#000000`,
   },
 
   moviesList: [
@@ -40,7 +41,8 @@ const mockData = {
       movieRatingScore: `3`,
       movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
       title: `Dardjeeling Limited`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
     },
     {
       id: 3,
@@ -57,6 +59,7 @@ const mockData = {
       movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
       title: `Johnny English`,
       moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
     }
   ],
   movieGenres: [
@@ -68,16 +71,18 @@ const mockData = {
 describe(`<App /> should render`, () => {
   it(`<App /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
     const {titleMovie, moviesList, movieGenres} = mockData;
-    const store = mockStore(
-        {
-          titleMovie,
-          moviesList,
-          activeGenre: `All genres`,
-          movieGenres,
-          moviesRenderLimit: MOVIES_LIMIT,
-          showMore: moviesList.length > MOVIES_LIMIT
-        }
-    );
+    const store = mockStore({
+      DATA: {
+        titleMovie,
+        moviesList,
+        movieGenres,
+        loadingMovies: false,
+      },
+      MOVIE: {
+        activeGenre: `All genres`,
+        moviesRenderLimit: MOVIES_LIMIT,
+      }
+    });
     const tree = renderer
       .create(
           <Provider store={store}>

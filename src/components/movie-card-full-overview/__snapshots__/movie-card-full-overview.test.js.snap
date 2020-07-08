@@ -28,12 +28,8 @@ Array [
   <div
     className="movie-card__text"
   >
-    <p>
-      In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.
-    </p>
-    <p>
-      Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.
-    </p>
+    In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.
+    Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.
     <p
       className="movie-card__director"
     >

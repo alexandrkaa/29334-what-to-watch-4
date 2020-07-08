@@ -17,7 +17,8 @@ const movie = {
   movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
   title: `Dardjeeling Limited`,
   moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-  movieRunTime: 9900
+  movieRunTime: 9900,
+  backgroundColor: `#000000`,
 };
 
 const similarMovies = [
@@ -36,7 +37,8 @@ const similarMovies = [
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
     title: `Dardjeeling Limited`,
     moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
+    movieRunTime: 9900,
+    backgroundColor: `#000000`,
   },
   {
     id: 6,
@@ -53,7 +55,8 @@ const similarMovies = [
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
     title: `Dardjeeling Limited`,
     moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
+    movieRunTime: 9900,
+    backgroundColor: `#000000`,
   },
   {
     id: 7,
@@ -70,7 +73,8 @@ const similarMovies = [
     movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
     title: `Dardjeeling Limited`,
     moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    movieRunTime: 9900
+    movieRunTime: 9900,
+    backgroundColor: `#000000`,
   }
 ];
 

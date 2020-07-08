@@ -23,7 +23,7 @@ const MovieCardFullOverView = (props) => {
       <div className="movie-card__text">
         {movieDescription}
         <p className="movie-card__director"><strong>Director: {movieDirector}</strong></p>
-        <p className="movie-card__starring"><strong>Starring: {movieStarring}</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {movieStarring.join(`, `)}</strong></p>
       </div>
     </React.Fragment>
   );

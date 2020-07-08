@@ -25,7 +25,7 @@ const ActionCreator = {
   }),
   fetchMoviesDataSuccess: (moviesList) => ({
     type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
-    payload: moviesList.map((movie) => movieAdapter(movie)),
+    payload: moviesList,
   }),
   fetchMoviesCommentsData: () => ({
     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
@@ -48,7 +48,7 @@ const Operation = {
   fetchMoviesData: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.fetchMoviesDataSuccess(response.data));
+        dispatch(ActionCreator.fetchMoviesDataSuccess(response.data.map((movie) => movieAdapter(movie))));
       });
   },
 };

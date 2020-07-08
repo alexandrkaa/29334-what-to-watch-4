@@ -222,7 +222,6 @@ Array [
             className="movie-card__text"
           >
             In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.
-            Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.
             <p
               className="movie-card__director"
             >
@@ -236,7 +235,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto
+                Jude Law, Willem Dafoe
               </strong>
             </p>
           </div>

@@ -36,7 +36,6 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         moviesRenderLimit: (state.moviesRenderLimit + action.payload),
       });
-    // TODO: добавить при переходе в др фильтр
     case ActionTypes.RESET_MOVIES_LIMIT:
       return extendObject(state, {
         moviesRenderLimit: MOVIES_LIMIT,

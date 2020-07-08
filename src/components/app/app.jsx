@@ -7,7 +7,6 @@ import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
 import {MOVIES_LIKE_THIS_NUM, MovieCardFullTabsIds} from '../../consts/consts.js';
 import {moviesListType, movieType} from '../../types/types.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
-import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video-player.jsx';
 import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre} from '../../reducer/selectors.js';
 import {DEFAULT_GENRE} from '../../consts/consts.js';
 
@@ -48,16 +47,6 @@ const App = (props) => {
       <Switch>
         <Route exact path="/">
           {_renderApp()}
-        </Route>
-        <Route exact path={`/player`}>
-          {!loadingMovies &&
-            <FullScreenVideoPlayer
-              movie={moviesList[0]}
-              isMuted={true}
-              videoWidth="100%"
-              videoHeight="100%"
-            />
-          }
         </Route>
       </Switch>
     </BrowserRouter>

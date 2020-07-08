@@ -172,13 +172,12 @@ const generateRandomMovie = (id) => {
     movieRatingCount: `${generateRandomInteger(RatingCountLimits.min, RatingCountLimits.max)} ratings`,
     movieDirector: DIRECTORS[generateRandomInteger(0, DIRECTORS.length - 1)],
     movieStarring: randomActors.substring(0, randomActors.length - 1),
-    movieDescription: [
-      `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.`,
-      `Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
-    ],
+    movieDescription: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege. Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
     moviePreview: MOVIE_PREVIEWS[generateRandomInteger(0, MOVIE_PREVIEWS.length - 1)],
     movieRunTime: generateRandomInteger(MovieRunTimeLimits.min, MovieRunTimeLimits.max),
     backgroundColor: `#000000`,
+    movieVideo: `https://cdn.videvo.net/videvo_files/converted/2013_08/preview/hd0983.mov28884.webm`,
+    isFavorite: false,
   };
 };
 

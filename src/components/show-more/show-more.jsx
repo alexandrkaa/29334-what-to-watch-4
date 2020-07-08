@@ -19,14 +19,9 @@ const ShowMore = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   showMore: state.showMore
-// });
-
 const mapDispatchToProps = (dispatch) => ({
   onIncreaseMoviesLimit() {
     dispatch(ActionCreator.updateMoviesLimit(MOVIES_LIMIT));
-    // dispatch(ActionCreator.getMoviesDataByGenre());
   },
 });
 

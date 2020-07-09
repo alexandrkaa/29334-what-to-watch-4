@@ -44,7 +44,6 @@ const ActionCreator = {
 };
 
 const Operation = {
-  // loadQuestions: (payload) => (dispatch, getState, api) => {
   fetchMoviesData: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {

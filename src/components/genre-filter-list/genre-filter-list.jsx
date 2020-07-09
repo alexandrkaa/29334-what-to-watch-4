@@ -4,7 +4,6 @@ import {removeSpaces} from '../../utils/common.js';
 import GenreFilterItem from '../genre-filter-item/genre-filter-item.jsx';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/movie/movie.js';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import {getGenres, getActiveGenre} from '../../reducer/selectors.js';
 
 const GenreFilterList = (props) => {
@@ -50,5 +49,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {GenreFilterList};
-const WrappedGenreFilterList = withActiveItem(GenreFilterList);
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedGenreFilterList);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreFilterList);

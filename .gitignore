@@ -16,3 +16,4 @@ public/bundle.js.map
 
 coverage
 .snipsnapigmore.json
+jest.config.json

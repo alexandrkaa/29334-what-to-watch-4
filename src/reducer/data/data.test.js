@@ -1,4 +1,9 @@
-import {reducer, ActionCreator, ActionTypes} from './data.js';
+import {reducer, ActionCreator, ActionTypes, Operation} from './data.js';
+import MockAdapter from 'axios-mock-adapter';
+import createAPI from '../../api/api.js';
+import movieAdapter from '../../adapters/movie/movie-adapter.js';
+
+const api = createAPI(() => {});
 
 const comments = [{
   author: `Alessio Parkes`,
@@ -249,3 +254,43 @@ describe(`Action creators work correctly`, () => {
     });
   });
 });
+
+describe(`Operation works correctly`, () => {
+  it(`Operation fetch movies data works correctly`, () => {
+    const movies = [{
+      [`id`]: 1,
+      [`name`]: `The Grand Budapest Hotel`,
+      [`poster_image`]: `img/the-grand-budapest-hotel-poster.jpg`,
+      [`preview_image`]: `img/the-grand-budapest-hotel.jpg`,
+      [`background_image`]: `img/the-grand-budapest-hotel-bg.jpg`,
+      [`background_color`]: `#ffffff`,
+      [`video_link`]: `https://some-link`,
+      [`preview_video_link`]: `https://some-link`,
+      [`description`]: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+      [`rating`]: 8.9,
+      [`scores_count`]: 240,
+      [`director`]: `Wes Andreson`,
+      [`starring`]: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+      [`run_time`]: 99,
+      [`genre`]: `Comedy`,
+      [`released`]: 2014,
+      [`is_favorite`]: false
+    }];
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.fetchMoviesData();
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, movies);
+
+    return moviesLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
+        payload: [movieAdapter(movies[0])],
+      });
+    });
+  });
+});
+

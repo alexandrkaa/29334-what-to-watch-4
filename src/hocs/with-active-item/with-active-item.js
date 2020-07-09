@@ -19,8 +19,7 @@ const withActiveItem = (Component) => {
     }
 
     render() {
-
-      const activeItem = this.props.activeItem || this.state.activeItem;
+      const {activeItem} = this.state;
 
       return (
         <Component
@@ -30,6 +29,14 @@ const withActiveItem = (Component) => {
         />
       );
     }
+
+    // componentDidUpdate(prevProps) {
+    //   if (prevProps.activeItem !== this.props.activeItem) {
+    //     this.setState({
+    //       activeItem: this.props.activeItem,
+    //     });
+    //   }
+    // }
   }
 
   WithActiveItemHoc.defaultProps = {

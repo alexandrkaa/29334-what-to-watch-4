@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/reducer.js';
+import {ActionCreator} from '../../reducer/movie/movie.js';
+import {MOVIES_LIMIT} from '../../consts/consts.js';
 
 const ShowMore = (props) => {
-  const {onIncreaseMoviesLimit, showMore} = props;
+  const {onIncreaseMoviesLimit} = props;
   return (
-    showMore
-      &&
     <div className="catalog__more">
       <button
         className="catalog__button"
@@ -20,21 +19,15 @@ const ShowMore = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  showMore: state.showMore
-});
-
 const mapDispatchToProps = (dispatch) => ({
   onIncreaseMoviesLimit() {
-    dispatch(ActionCreator.increaseMoviesLimit());
-    dispatch(ActionCreator.getMoviesDataByGenre());
+    dispatch(ActionCreator.updateMoviesLimit(MOVIES_LIMIT));
   },
 });
 
 ShowMore.propTypes = {
   onIncreaseMoviesLimit: PropTypes.func.isRequired,
-  showMore: PropTypes.bool.isRequired,
 };
 
 export {ShowMore};
-export default connect(mapStateToProps, mapDispatchToProps)(ShowMore);
+export default connect(null, mapDispatchToProps)(ShowMore);

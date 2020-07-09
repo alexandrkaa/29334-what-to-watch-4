@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
-import MovieCardFullTabs from '../../mocks/movie-full-card-menu.js';
-import {MovieCardFullTabsIds} from '../../consts/consts.js';
+import {MovieCardFullTabsIds, MovieCardFullTabs} from '../../consts/consts.js';
 import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-overview.jsx';
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullReviews from '../movie-card-full-reviews/movie-card-full-reviews.jsx';
@@ -12,7 +11,7 @@ import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 
 const MovieCardFull = (props) => {
-  const {movie, moviesLikeThis, activeItem, onActiveItemChange, onMovieTitleClick} = props;
+  const {movie, similarMovies, activeItem, onActiveItemChange, onMovieTitleClick} = props;
   const {
     movieImage,
     title,
@@ -118,17 +117,15 @@ const MovieCardFull = (props) => {
       </section>
 
       <div className="page-content">
+        {similarMovies.length > 0 &&
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            <MoviesList
-              moviesList={moviesLikeThis}
-              onMovieTitleClick={onMovieTitleClick}
-            />
+            <MoviesList moviesList={similarMovies} onMovieTitleClick={onMovieTitleClick} />
           </div>
         </section>
-
+        }
         <footer className="page-footer">
           <div className="logo">
             <a href="main.html" className="logo__link logo__link--light">
@@ -149,7 +146,7 @@ const MovieCardFull = (props) => {
 
 MovieCardFull.propTypes = {
   movie: movieType.isRequired,
-  moviesLikeThis: moviesListType.isRequired,
+  similarMovies: moviesListType.isRequired,
   activeItem: PropTypes.string.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,

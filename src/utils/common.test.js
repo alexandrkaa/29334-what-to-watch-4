@@ -1,4 +1,4 @@
-import {convertSecondsToHoursMins, extendObject, removeSpaces} from './common.js';
+import {convertSecondsToHoursMins, extendObject, removeSpaces, secondsToTime} from './common.js';
 describe(`Common utils works correctly`, () => {
   it(`convertSecondsToHoursMins func  works correctly`, () => {
     expect(convertSecondsToHoursMins(4200)).toMatch(`1h 10m`);
@@ -10,5 +10,13 @@ describe(`Common utils works correctly`, () => {
 
   it(`removeSpaces func  works correctly`, () => {
     expect(removeSpaces(`One Two Three`)).toMatch(`OneTwoThree`);
+  });
+
+  it(`secondsToTime func  works correctly`, () => {
+    expect(secondsToTime(605)).toMatch(`00:10:05`);
+  });
+
+  it(`secondsToTime func  works correctly`, () => {
+    expect(secondsToTime()).toMatch(`00:00:00`);
   });
 });

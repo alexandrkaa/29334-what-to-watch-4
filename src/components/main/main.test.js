@@ -9,9 +9,23 @@ const mockStore = configureStore([]);
 
 const mockData = {
   titleMovie: {
-    title: `The Grand Budapest Hotel`,
-    genre: `Drama`,
-    releaseDate: `2014`
+    id: 4,
+    image: `img/we-need-to-talk-about-kevin.jpg`,
+    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
+    movieDate: `2000`,
+    movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
+    movieDirector: `Wes Anderson`,
+    movieGenre: `Thriller`,
+    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
+    movieRatingCount: `349 ratings`,
+    movieRatingLevel: `Bad`,
+    movieRatingScore: `3`,
+    movieStarring: [`Jude Law`, `Willem Dafoe`],
+    title: `Dardjeeling Limited`,
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    backgroundColor: `#000000`,
+    movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    isFavorite: false,
   },
 
   moviesList: [
@@ -20,32 +34,38 @@ const mockData = {
       image: `img/we-need-to-talk-about-kevin.jpg`,
       movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
       movieDate: `2000`,
-      movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
+      movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
       movieDirector: `Wes Anderson`,
       movieGenre: `Thriller`,
       movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
       movieRatingCount: `349 ratings`,
       movieRatingLevel: `Bad`,
       movieRatingScore: `3`,
-      movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinto`,
+      movieStarring: [`Jude Law`, `Willem Dafoe`],
       title: `Dardjeeling Limited`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
+      movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      isFavorite: false,
     },
     {
       id: 3,
       image: `img/aviator.jpg`,
       movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
       movieDate: `2008`,
-      movieDescription: [`In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`, `Gustave prides himself on providing first-classNam…ess painting and the chief suspect in her murder.`],
+      movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
       movieDirector: `Christopher Nolan`,
       movieGenre: `Kids & Family`,
       movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
       movieRatingCount: `272 ratings`,
       movieRatingLevel: `Normal`,
       movieRatingScore: `2`,
-      movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
+      movieStarring: [`Jude Law`, `Willem Dafoe`],
       title: `Johnny English`,
       moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      backgroundColor: `#000000`,
+      movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+      isFavorite: false,
     }
   ],
   movieGenres: [
@@ -59,16 +79,17 @@ describe(`<Main /> should render main movie and movies list`, () => {
   it(`<Main /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
     const onMovieTitleClick = jest.fn();
     const {titleMovie, moviesList, movieGenres} = mockData;
-    const store = mockStore(
-        {
-          titleMovie,
-          moviesList,
-          activeGenre: `All genres`,
-          movieGenres,
-          moviesLimit: MOVIES_LIMIT,
-          showMore: moviesList.length > MOVIES_LIMIT
-        }
-    );
+    const store = mockStore({
+      DATA: {
+        titleMovie,
+        moviesList,
+        movieGenres,
+      },
+      MOVIE: {
+        activeGenre: `All genres`,
+        moviesRenderLimit: MOVIES_LIMIT,
+      }
+    });
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -77,6 +98,7 @@ describe(`<Main /> should render main movie and movies list`, () => {
               moviesList={moviesList}
               onMovieTitleClick={onMovieTitleClick}
               activeGenre={`All genres`}
+              moviesRenderLimit={MOVIES_LIMIT}
             />
           </Provider>,
           {

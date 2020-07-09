@@ -33,29 +33,7 @@ exports[`<MovieCardFullDetails /> should match snapshot 1`] = `
         className="movie-card__details-value"
       >
         Jude Law
-         
-        <br />
         Willem Dafoe
-         
-        <br />
-        James Franco
-         
-        <br />
-        Jason Statham
-         
-        <br />
-        Tom Hardy
-         
-        <br />
-        Saoirse Ronan
-         
-        <br />
-        Tony Revoloru
-         
-        <br />
-        Tilda Swinto
-         
-        <br />
       </span>
     </p>
   </div>

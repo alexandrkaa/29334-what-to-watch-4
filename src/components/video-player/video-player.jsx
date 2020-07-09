@@ -1,24 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {videoDementionType} from '../../types/types.js';
 
 const VideoPlayer = React.forwardRef((props, ref) => {
-  const {controls, autoplay} = props;
+  const {controls, autoplay, videoWidth, videoHeight} = props;
   return (
     <video
       ref={ref}
       controls={controls}
       autoPlay={autoplay}
-      width="280"
-      height="175"
+      width={videoWidth}
+      height={videoHeight}
     />
   );
 });
 
 VideoPlayer.displayName = `VideoPlayer`;
 
+VideoPlayer.defaultProps = {
+  videoWidth: 280,
+  videoHeight: 175,
+};
+
 VideoPlayer.propTypes = {
   controls: PropTypes.bool.isRequired,
   autoplay: PropTypes.bool.isRequired,
+  videoHeight: videoDementionType.isRequired,
+  videoWidth: videoDementionType.isRequired,
 };
 
 export default VideoPlayer;

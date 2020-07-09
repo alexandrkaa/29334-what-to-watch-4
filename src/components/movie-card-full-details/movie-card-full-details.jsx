@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {convertSecondsToHoursMins} from '../../utils/common.js';
+import {movieType} from '../../types/types.js';
 
 const MovieCardFullDetails = (props) => {
   const {
@@ -20,13 +20,7 @@ const MovieCardFullDetails = (props) => {
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
           <span className="movie-card__details-value">
-            {movieStarring.split(`, `).map((actor, idx) => {
-              return (
-                <React.Fragment key={`${actor}_${idx}`}>
-                  {actor} <br />
-                </React.Fragment>
-              );
-            })}
+            {movieStarring}
           </span>
         </p>
       </div>
@@ -50,25 +44,7 @@ const MovieCardFullDetails = (props) => {
 };
 
 MovieCardFullDetails.propTypes = {
-  movie: PropTypes.exact({
-    movieDescription: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ),
-    image: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    movieDirector: PropTypes.string.isRequired,
-    movieStarring: PropTypes.string.isRequired,
-    movieImage: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    movieGenre: PropTypes.string.isRequired,
-    movieDate: PropTypes.string.isRequired,
-    movieBackground: PropTypes.string.isRequired,
-    movieRatingScore: PropTypes.string.isRequired,
-    movieRatingLevel: PropTypes.string.isRequired,
-    movieRatingCount: PropTypes.string.isRequired,
-    movieRunTime: PropTypes.number,
-    moviePreview: PropTypes.string.isRequired,
-  }),
+  movie: movieType.isRequired,
 };
 
 export default MovieCardFullDetails;

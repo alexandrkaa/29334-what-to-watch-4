@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {removeSpaces} from '../../utils/common.js';
 import GenreFilterItem from '../genre-filter-item/genre-filter-item.jsx';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/reducer.js';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
+import {ActionCreator} from '../../reducer/movie/movie.js';
+import {getGenres, getActiveGenre} from '../../reducer/selectors.js';
 
 const GenreFilterList = (props) => {
   const {movieGenres, onActiveItemChange, activeItem} = props;
@@ -37,17 +37,16 @@ GenreFilterList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeItem: state.activeGenre,
-  movieGenres: state.movieGenres
+  activeItem: getActiveGenre(state),
+  movieGenres: getGenres(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onActiveItemChange(movieGenre) {
     dispatch(ActionCreator.changeActiveGenre(movieGenre));
-    dispatch(ActionCreator.getMoviesDataByGenre());
+    dispatch(ActionCreator.resetMoviesLimit());
   },
 });
 
 export {GenreFilterList};
-const WrappedGenreFilterList = withActiveItem(GenreFilterList);
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedGenreFilterList);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreFilterList);

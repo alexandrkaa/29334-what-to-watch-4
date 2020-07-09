@@ -39,7 +39,7 @@ export const withTimeOut = (Component) => {
     render() {
       const props = this.props;
       return (
-        <Component onStart={this._handleStart} isCanStart={this.state.isCanStart} onStop={this._handleStop} {...props}></Component>
+        <Component onStart={this._handleStart} isCanStart={this.state.isCanStart} onStop={this._handleStop} {...props} />
       );
     }
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {movieType} from '../../types/types.js';
 
 const MovieCardFullOverView = (props) => {
   const {
@@ -21,40 +21,16 @@ const MovieCardFullOverView = (props) => {
       </div>
 
       <div className="movie-card__text">
-        {
-          movieDescription.map((it, id) => {
-            return (
-              <p key={id}>{it}</p>
-            );
-          })
-        }
+        {movieDescription}
         <p className="movie-card__director"><strong>Director: {movieDirector}</strong></p>
-        <p className="movie-card__starring"><strong>Starring: {movieStarring}</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {movieStarring.join(`, `)}</strong></p>
       </div>
     </React.Fragment>
   );
 };
 
 MovieCardFullOverView.propTypes = {
-  movie: PropTypes.exact({
-    movieDescription: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ),
-    image: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    movieDirector: PropTypes.string.isRequired,
-    movieStarring: PropTypes.string.isRequired,
-    movieImage: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    movieGenre: PropTypes.string.isRequired,
-    movieDate: PropTypes.string.isRequired,
-    movieBackground: PropTypes.string.isRequired,
-    movieRatingScore: PropTypes.string.isRequired,
-    movieRatingLevel: PropTypes.string.isRequired,
-    movieRatingCount: PropTypes.string.isRequired,
-    movieRunTime: PropTypes.number,
-    moviePreview: PropTypes.string.isRequired,
-  }),
+  movie: movieType.isRequired
 };
 
 export default MovieCardFullOverView;

@@ -58,6 +58,7 @@ it(`Should withVideoPlayer state will be changed`, () => {
         isMuted={isMuted}
         videoWidth={280}
         videoHeight={175}
+        videoSrc={movie.moviePreview}
       />
   );
 

@@ -28,7 +28,6 @@ export const withVideoPlayer = (Component) => {
 
     componentDidMount() {
       const {movie: {image}, isMuted, videoSrc} = this.props;
-      // console.log(`src: ${src}`, `moviePreview: ${moviePreview}`);
       const video = this._videoRef.current;
       video.src = videoSrc;
       video.muted = isMuted;

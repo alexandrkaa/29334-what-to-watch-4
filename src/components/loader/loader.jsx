@@ -5,7 +5,7 @@ const Loader = () => {
     <div style={{width: `100vw`, height: `100vh`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        style={{ margin: `auto` }}
+        style={{margin: `auto`}}
         width="200"
         height="200"
         display="block"

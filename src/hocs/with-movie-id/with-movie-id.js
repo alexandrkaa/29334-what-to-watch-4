@@ -45,9 +45,6 @@ const withMovieId = (Component) => {
     };
   };
 
-  // export {withMovieId};
-  // export default connect(mapStateToProps)(withMovieId);
-
   return connect(mapStateToProps)(withMovieIdHOC);
 };
 

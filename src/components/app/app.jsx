@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Main from "../main/main.jsx";
+import Main from '../main/main.jsx';
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
 import {MOVIES_LIKE_THIS_NUM, MovieCardFullTabsIds} from '../../consts/consts.js';
 import {moviesListType, movieType} from '../../types/types.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre} from '../../reducer/selectors.js';
 import {DEFAULT_GENRE} from '../../consts/consts.js';
+import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video-player.jsx';
+import withMovieId from '../../hocs/with-movie-id/with-movie-id.js';
+import Loader from '../loader/loader.jsx';
+
+const WrappedFullScreenVideoPlayer = withMovieId(FullScreenVideoPlayer);
 
 const App = (props) => {
   const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit, loadingMovies} = props;
@@ -38,7 +43,7 @@ const App = (props) => {
       );
     }
     return (
-      <h1>Loading...</h1>
+      <Loader />
     );
   };
 
@@ -48,6 +53,13 @@ const App = (props) => {
         <Route exact path="/">
           {_renderApp()}
         </Route>
+        <Route exact path="/player/:id" render={
+          (withIdProps) => {
+            return (
+              <WrappedFullScreenVideoPlayer loadingMovies={loadingMovies} {...withIdProps} />
+            );
+          }
+        } />
       </Switch>
     </BrowserRouter>
   );

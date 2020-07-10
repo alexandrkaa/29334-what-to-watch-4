@@ -1,5 +1,6 @@
 import React from 'react';
 import {movieType} from '../../types/types.js';
+import {Link} from 'react-router-dom';
 
 const TitleMovie = (props) => {
   const {
@@ -7,7 +8,8 @@ const TitleMovie = (props) => {
     movieGenre,
     movieDate,
     movieImage,
-    movieBackground
+    movieBackground,
+    id: movieId,
   } = props.movie;
   return (
     <section className="movie-card">
@@ -48,12 +50,14 @@ const TitleMovie = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
+              <Link to={`/player/${movieId}`}>
+                <button className="btn btn--play movie-card__button" type="button">
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"></use>
+                  </svg>
+                  <span>Play</span>
+                </button>
+              </Link>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>

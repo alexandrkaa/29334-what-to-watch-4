@@ -25,3 +25,8 @@ export const getCommentsLoadingStatus = (state) => {
 export const getTitleMovieLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingTitleMovie;
 };
+
+export const getMovieById = (state, id) => {
+  const [movie] = state[NAME_SPACE].filter((it) => it.id === id);
+  return movie;
+};

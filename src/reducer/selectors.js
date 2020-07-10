@@ -1,10 +1,10 @@
 import {createSelector} from 'reselect';
 import {getGenresFromMovies, getWithLimit, getMoviesByGenre} from '../utils/filters.js';
 import {DEFAULT_GENRE, GENRES_LIMIT} from '../consts/consts.js';
-import {getMovies, getTitleMovie, getMoviesComments, getMoviesLoadingStatus, getCommentsLoadingStatus, getTitleMovieLoadingStatus} from './data/selectors.js';
+import {getMovies, getTitleMovie, getMoviesComments, getMoviesLoadingStatus, getCommentsLoadingStatus, getTitleMovieLoadingStatus, getMovieById} from './data/selectors.js';
 import {getActiveGenre, getMoviesRenderLimit} from './movie/selectors.js';
 
-export {getMovies, getTitleMovie, getMoviesComments, getMoviesLoadingStatus, getCommentsLoadingStatus, getTitleMovieLoadingStatus};
+export {getMovies, getTitleMovie, getMoviesComments, getMoviesLoadingStatus, getCommentsLoadingStatus, getTitleMovieLoadingStatus, getMovieById};
 export {getActiveGenre, getMoviesRenderLimit};
 
 export const getGenres = createSelector(getMovies, (moviesList) => {

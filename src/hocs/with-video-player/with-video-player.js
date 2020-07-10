@@ -27,9 +27,10 @@ export const withVideoPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const {movie: {moviePreview, image}, isMuted} = this.props;
+      const {movie: {image}, isMuted, videoSrc} = this.props;
+      // console.log(`src: ${src}`, `moviePreview: ${moviePreview}`);
       const video = this._videoRef.current;
-      video.src = moviePreview;
+      video.src = videoSrc;
       video.muted = isMuted;
       video.poster = image;
       video.ontimeupdate = () => this.setState({
@@ -150,6 +151,7 @@ export const withVideoPlayer = (Component) => {
     isCanStart: PropTypes.bool.isRequired,
     videoHeight: videoDementionType.isRequired,
     videoWidth: videoDementionType.isRequired,
+    videoSrc: PropTypes.string.isRequired
   };
 
   return VideoPlayerHoc;

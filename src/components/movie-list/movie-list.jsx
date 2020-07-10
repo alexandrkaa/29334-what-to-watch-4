@@ -20,6 +20,7 @@ const MoviesList = (props) => {
               videoWidth={PreviewVideoSize.width}
               onMovieTitleClick={onMovieTitleClick}
               timeOutDelay={START_PREVIEW_DELAY}
+              videoSrc={movie.moviePreview}
             />
           );
         })

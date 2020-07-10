@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import {movieType} from '../../types/types.js';
 import {secondsToTime} from '../../utils/common.js';
+import {Link} from 'react-router-dom';
 
 const FullScreenVideoPlayer = (props) => {
   const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = props;
@@ -45,9 +46,11 @@ const FullScreenVideoPlayer = (props) => {
   }
 
   return (
-    <div className="player">
+    <div className="player" style={{backgroundColor: `#000000`}}>
       {props.children}
-      <button type="button" className="player__exit">Exit</button>
+      <Link to="/">
+        <button type="button" className="player__exit">Exit</button>
+      </Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -88,3 +91,4 @@ FullScreenVideoPlayer.propTypes = {
 
 export {FullScreenVideoPlayer};
 export default withVideoPlayer(FullScreenVideoPlayer);
+

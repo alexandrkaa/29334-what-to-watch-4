@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Router, Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
@@ -12,8 +12,10 @@ import {DEFAULT_GENRE} from '../../consts/consts.js';
 import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video-player.jsx';
 import withMovieId from '../../hocs/with-movie-id/with-movie-id.js';
 import Loader from '../loader/loader.jsx';
+import history from '../../history.js';
 
 const WrappedFullScreenVideoPlayer = withMovieId(FullScreenVideoPlayer);
+// const WrappedFullScreenVideoPlayer = withRouter(FullScreenVideoPlayer);
 
 const App = (props) => {
   const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit, loadingMovies} = props;
@@ -48,11 +50,13 @@ const App = (props) => {
   };
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
-        <Route exact path="/">
-          {_renderApp()}
-        </Route>
+        <Route exact path="/" render={
+          () => {
+            return _renderApp();
+          }
+        } />
         <Route exact path="/player/:id" render={
           (withIdProps) => {
             return (
@@ -61,7 +65,7 @@ const App = (props) => {
           }
         } />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 

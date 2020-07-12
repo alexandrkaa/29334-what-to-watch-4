@@ -4,26 +4,26 @@ import {connect} from 'react-redux';
 import {getMovieById} from '../../utils/filters.js';
 import {moviesListType} from '../../types/types.js';
 import Loader from '../../components/loader/loader.jsx';
-import {getMovies} from '../../reducer/selectors.js';
+import {getMovies, getMoviesLoadingStatus} from '../../reducer/selectors.js';
+import {getSimilarMovies} from '../../utils/filters.js';
 
-const withMovieId = (Component) => {
-  class withMovieIdHOC extends PureComponent {
+const withMovie = (Component) => {
+  class WithMovieHOC extends PureComponent {
     constructor(props) {
       super(props);
     }
     render() {
-      const {loadingMovies} = this.props;
+      const {loadingMovies, loadSimilarMovies} = this.props;
       if (!loadingMovies) {
-        const {moviesList, match: {params: {id: movieId}}} = this.props;
+        const {moviesList, movieId} = this.props;
         const movie = getMovieById(moviesList, movieId);
+        const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
         return (
           <Component
             movie={movie}
-            isMuted={true}
-            videoWidth="100%"
-            videoHeight="100%"
             videoSrc={movie.movieVideo}
             {...this.props}
+            similarMovies={similarMovies}
           />
         );
       }
@@ -31,21 +31,25 @@ const withMovieId = (Component) => {
     }
   }
 
-  withMovieIdHOC.propTypes = {
-    history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
+  WithMovieHOC.propTypes = {
+    movieId: PropTypes.number.isRequired,
     moviesList: moviesListType.isRequired,
     loadingMovies: PropTypes.bool.isRequired,
+    loadSimilarMovies: PropTypes.bool.isRequired,
+  };
+
+  WithMovieHOC.defaultProps = {
+    loadSimilarMovies: false,
   };
 
   const mapStateToProps = (state) => {
     return {
       moviesList: getMovies(state),
+      loadingMovies: getMoviesLoadingStatus(state),
     };
   };
 
-  return connect(mapStateToProps)(withMovieIdHOC);
+  return connect(mapStateToProps)(WithMovieHOC);
 };
 
-export default withMovieId;
+export default withMovie;

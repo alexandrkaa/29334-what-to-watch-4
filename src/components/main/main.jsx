@@ -6,14 +6,18 @@ import ShowMore from '../show-more/show-more.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 import TitleMovie from '../title-movie/title-movie.jsx';
 import Footer from '../footer/footer.jsx';
-import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre} from '../../reducer/selectors.js';
+import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre, getMoviesLoadingErrorStatus} from '../../reducer/selectors.js';
 import {connect} from 'react-redux';
 import Loader from '../loader/loader.jsx';
+import Error from '../error/error.jsx';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies} = props;
+  const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError} = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
   const _handleMovieTitleClick = () => {};
+  if (loadingMoviesError) {
+    return <Error />;
+  }
   if (!loadingMovies) {
     return (
       <React.Fragment>
@@ -45,6 +49,7 @@ const mapStateToProps = (state) => {
     titleMovie: getTitleMovie(state),
     moviesRenderLimit: getMoviesRenderLimit(state),
     loadingMovies: getMoviesLoadingStatus(state),
+    loadingMoviesError: getMoviesLoadingErrorStatus(state),
   };
 };
 
@@ -54,6 +59,7 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   moviesRenderLimit: PropTypes.number.isRequired,
   loadingMovies: PropTypes.bool.isRequired,
+  loadingMoviesError: PropTypes.bool.isRequired,
 };
 
 export {Main};

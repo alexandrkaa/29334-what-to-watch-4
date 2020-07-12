@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import {movieType} from '../../types/types.js';
 import {secondsToTime} from '../../utils/common.js';
-import history from '../../history.js';
 
 const FullScreenVideoPlayer = (props) => {
-  console.count(`App`);
   const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = props;
   let currentTogglerPosition;
   let elapsedTime;
@@ -28,7 +26,7 @@ const FullScreenVideoPlayer = (props) => {
 
   const _handleExit = (evt) => {
     evt.preventDefault();
-    history.push(`/`);
+    props.history.goBack();
   };
 
   let playPauseButton;
@@ -91,6 +89,7 @@ FullScreenVideoPlayer.propTypes = {
   duration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
   isEnded: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export {FullScreenVideoPlayer};

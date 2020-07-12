@@ -9,9 +9,11 @@ import {randomComments} from '../../mocks/film.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
+import Header from '../header/header.jsx';
+import Footer from '../footer/footer.jsx';
 
 const MovieCardFull = (props) => {
-  const {movie, similarMovies, activeItem, onActiveItemChange, onMovieTitleClick} = props;
+  const {movie, similarMovies, activeItem, onActiveItemChange} = props;
   const {
     movieImage,
     title,
@@ -19,6 +21,11 @@ const MovieCardFull = (props) => {
     movieDate,
     movieBackground,
   } = movie;
+
+  const _handlePlayButton = (evt) => {
+    evt.preventDefault();
+    props.history.push(`/player/${movie.id}`);
+  };
 
   const filtredComments = randomComments.filter((comment) => comment.movieId === movie.id);
 
@@ -57,23 +64,7 @@ const MovieCardFull = (props) => {
             <img src={movieBackground} alt={title} />
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
-          </header>
+          <Header />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -84,7 +75,7 @@ const MovieCardFull = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={_handlePlayButton} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -122,26 +113,18 @@ const MovieCardFull = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__movies-list">
-            <MoviesList moviesList={similarMovies} onMovieTitleClick={onMovieTitleClick} />
+            <MoviesList moviesList={similarMovies} />
           </div>
         </section>
         }
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </React.Fragment>
   );
+};
+
+MovieCardFull.defaultProps = {
+  activeItem: MovieCardFullTabsIds.OVERVIEW,
 };
 
 MovieCardFull.propTypes = {
@@ -149,7 +132,7 @@ MovieCardFull.propTypes = {
   similarMovies: moviesListType.isRequired,
   activeItem: PropTypes.string.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export {MovieCardFull};

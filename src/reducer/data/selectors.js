@@ -18,6 +18,10 @@ export const getMoviesLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingMovies;
 };
 
+export const getMoviesLoadingErrorStatus = (state) => {
+  return state[NAME_SPACE].loadingMoviesError;
+};
+
 export const getCommentsLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingComments;
 };

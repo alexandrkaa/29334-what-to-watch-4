@@ -1,26 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import User from '../user-profile/user-profile.jsx';
+import {getAuthorizationStatus} from '../../reducer/selectors.js';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
+import {NavLink} from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
+  const _isAuthorized = (AuthorizationStatus.AUTH === props.authorizationStatus);
   return (
     <React.Fragment>
-      <h1 className="visually-hidden">WTW</h1>
-      <header className="page-header movie-card__head">
+      {_isAuthorized && <h1 className="visually-hidden">WTW</h1>}
+      <header className={`page-header ${props.headerClassName}`}>
         <div className="logo">
-          <a className="logo__link">
+          <NavLink className="logo__link" to="/">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </NavLink>
         </div>
 
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
-        </div>
+        {_isAuthorized && <User />}
+        {props.children}
       </header>
     </React.Fragment>
   );
 };
 
-export default Header;
+Header.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  headerClassName: PropTypes.string,
+  children: PropTypes.element,
+};
+
+Header.defaultProps = {
+  headerClassName: `movie-card__head`,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    authorizationStatus: getAuthorizationStatus(state),
+  };
+};
+
+export {Header};
+export default connect(mapStateToProps)(Header);

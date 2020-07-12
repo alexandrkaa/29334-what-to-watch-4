@@ -5,6 +5,7 @@ exports[`<VideoPlayer /> should render correctly 1`] = `
   autoPlay={false}
   controls={false}
   height={175}
+  preload="metadata"
   width={280}
 />
 `;

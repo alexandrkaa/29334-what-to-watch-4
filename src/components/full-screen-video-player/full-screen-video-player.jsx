@@ -89,7 +89,6 @@ FullScreenVideoPlayer.propTypes = {
   duration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
   isEnded: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
 };
 
 export {FullScreenVideoPlayer};

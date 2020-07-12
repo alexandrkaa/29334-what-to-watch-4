@@ -83,10 +83,14 @@ describe(`<App /> should render`, () => {
         moviesList,
         movieGenres,
         loadingMovies: false,
+        loadingMoviesError: false,
       },
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
+      },
+      USER: {
+        authorizationStatus: `AUTH`,
       }
     });
     const tree = renderer

@@ -30,10 +30,11 @@ it(`<FullScreenVideoPlayer /> should match snapshot`, () => {
           isMuted={true}
           videoWidth="100%"
           videoHeight="100%"
+          videoSrc={movie.movieVideo}
         />,
         {
           createNodeMock: () => {
-            return {};
+            return {movie};
           }
         }
     )

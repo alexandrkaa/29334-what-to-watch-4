@@ -8,7 +8,7 @@ import {
   getMoviesLoadingStatus,
   getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
-  getMovieById,
+  getMovieByIdFromState,
   getMoviesLoadingErrorStatus
 } from './data/selectors.js';
 import {getActiveGenre, getMoviesRenderLimit} from './movie/selectors.js';
@@ -36,7 +36,7 @@ export {
   getTitleMovieLoadingStatus,
   getMoviesLoadingErrorStatus,
 
-  getMovieById,
+  getMovieByIdFromState,
   getActiveGenre,
   getMoviesRenderLimit,
 

@@ -13,19 +13,16 @@ exports[`<FullScreenVideoPlayer /> should match snapshot 1`] = `
     autoPlay={false}
     controls={false}
     height="100%"
+    preload="metadata"
     width="100%"
   />
-  <a
-    href="/"
+  <button
+    className="player__exit"
     onClick={[Function]}
+    type="button"
   >
-    <button
-      className="player__exit"
-      type="button"
-    >
-      Exit
-    </button>
-  </a>
+    Exit
+  </button>
   <div
     className="player__controls"
   >

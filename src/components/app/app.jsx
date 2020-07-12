@@ -14,43 +14,37 @@ import withMovieId from '../../hocs/with-movie-id/with-movie-id.js';
 import Loader from '../loader/loader.jsx';
 import history from '../../history.js';
 
-import Tmp from '../tmp/tmp.jsx';
-
 const WrappedFullScreenVideoPlayer = withMovieId(FullScreenVideoPlayer);
 // const WrappedFullScreenVideoPlayer = withRouter(FullScreenVideoPlayer);
 
-const App = (props) => {
-  const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit, loadingMovies} = props;
-  if (!loadingMovies) {
+class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidCatch(err_, errInfo_) {
+    console.log(err_, errInfo_);
+  }
+
+  // const {onActiveItemChange, moviesList, titleMovie, activeGenre, activeItem: movieId, moviesRenderLimit, loadingMovies} = props;
+  render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={
-            () => (
-              <Main
-                titleMovie={titleMovie}
-                moviesList={moviesList}
-                activeGenre={activeGenre}
-                onMovieTitleClick={onActiveItemChange}
-                moviesRenderLimit={moviesRenderLimit}
-                loadingMovies={loadingMovies}
-              />
-              // <Tmp to="/player/1" />
-            )
-          } />
+          {/* <Route exact path="/player/:id" component={Tmp} /> */}
           <Route exact path="/player/:id" render={
             (withIdProps) => {
               return (
                 <WrappedFullScreenVideoPlayer loadingMovies={loadingMovies} {...withIdProps} />
-                // <Tmp to="/" />
               );
             }
           } />
+          <Route exact path="/" component={Main} />
+          {/* <Route exact path="/" component={Tmp2} /> */}
         </Switch>
       </BrowserRouter>
     );
   }
-  return <Loader />;
 
   // const _renderApp = () => {
   //   if (!loadingMovies) {
@@ -108,30 +102,31 @@ const App = (props) => {
   // );
 };
 
-App.defaultProps = {
-  activeGenre: DEFAULT_GENRE,
-};
+// App.defaultProps = {
+//   activeGenre: DEFAULT_GENRE,
+// };
 
-App.propTypes = {
-  titleMovie: movieType.isRequired,
-  moviesList: moviesListType.isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
-  activeItem: PropTypes.number,
-  moviesRenderLimit: PropTypes.number.isRequired,
-  loadingMovies: PropTypes.bool.isRequired,
-};
+// App.propTypes = {
+//   titleMovie: movieType.isRequired,
+//   moviesList: moviesListType.isRequired,
+//   activeGenre: PropTypes.string.isRequired,
+//   onActiveItemChange: PropTypes.func.isRequired,
+//   activeItem: PropTypes.number,
+//   moviesRenderLimit: PropTypes.number.isRequired,
+//   loadingMovies: PropTypes.bool.isRequired,
+// };
 
-const mapStateToProps = (state) => {
-  return {
-    activeGenre: getActiveGenre(state),
-    moviesList: getFilteredMovies(state),
-    titleMovie: getTitleMovie(state),
-    moviesRenderLimit: getMoviesRenderLimit(state),
-    loadingMovies: getMoviesLoadingStatus(state),
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     activeGenre: getActiveGenre(state),
+//     moviesList: getFilteredMovies(state),
+//     titleMovie: getTitleMovie(state),
+//     moviesRenderLimit: getMoviesRenderLimit(state),
+//     loadingMovies: getMoviesLoadingStatus(state),
+//   };
+// };
 
-export {App};
-const WrappedApp = withActiveItem(App);
-export default connect(mapStateToProps)(WrappedApp);
+// export {App};
+// const WrappedApp = withActiveItem(App);
+// export default connect(mapStateToProps)(WrappedApp);
+export default App;

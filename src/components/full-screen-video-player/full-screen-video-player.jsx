@@ -6,6 +6,7 @@ import {secondsToTime} from '../../utils/common.js';
 import history from '../../history.js';
 
 const FullScreenVideoPlayer = (props) => {
+  console.count(`App`);
   const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = props;
   let currentTogglerPosition;
   let elapsedTime;

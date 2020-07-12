@@ -14,20 +14,21 @@ const withMovie = (Component) => {
     }
     render() {
       const {loadingMovies, loadSimilarMovies} = this.props;
-      if (!loadingMovies) {
-        const {moviesList, movieId} = this.props;
-        const movie = getMovieById(moviesList, movieId);
-        const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
-        return (
-          <Component
-            movie={movie}
-            videoSrc={movie.movieVideo}
-            {...this.props}
-            similarMovies={similarMovies}
-          />
-        );
+      if (loadingMovies) {
+        return <Loader />;
       }
-      return <Loader />;
+
+      const {moviesList, movieId} = this.props;
+      const movie = getMovieById(moviesList, movieId);
+      const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
+      return (
+        <Component
+          movie={movie}
+          videoSrc={movie.movieVideo}
+          {...this.props}
+          similarMovies={similarMovies}
+        />
+      );
     }
   }
 

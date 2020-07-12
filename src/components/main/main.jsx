@@ -8,9 +8,10 @@ import TitleMovie from '../title-movie/title-movie.jsx';
 import Footer from '../footer/footer.jsx';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, onMovieTitleClick, activeGenre, moviesRenderLimit} = props;
+  const {titleMovie, moviesList, onMovieTitleClick, activeGenre, moviesRenderLimit, loadingMovies} = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
   return (
+    !loadingMovies &&
     <React.Fragment>
       <TitleMovie movie={titleMovie} />
 
@@ -29,6 +30,7 @@ const Main = (props) => {
         <Footer />
       </div>
     </React.Fragment>
+
   );
 };
 

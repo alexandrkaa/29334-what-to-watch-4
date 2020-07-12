@@ -96,7 +96,7 @@ export const withVideoPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
       video.muted = null;
-      video.poster = null;
+      video.poster = ``;
       video.src = ``;
       clearTimeout(this._timerId);
       this._timerId = null;

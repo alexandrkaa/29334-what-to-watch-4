@@ -1,7 +1,7 @@
 import React from 'react';
 import {movieType} from '../../types/types.js';
-import {BrowserRouter, Link} from 'react-router-dom';
 import Header from '../header/header.jsx';
+import history from '../../history.js';
 
 const TitleMovie = (props) => {
   const {
@@ -12,6 +12,12 @@ const TitleMovie = (props) => {
     movieBackground,
     id: movieId,
   } = props.movie;
+
+  const _handlePlayClick = (evt) => {
+    evt.preventDefault();
+    history.push(`/player/${movieId}`);
+  };
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -35,16 +41,12 @@ const TitleMovie = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <BrowserRouter>
-                <Link to={`/player/${movieId}`}>
-                  <button className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                </Link>
-              </BrowserRouter>
+              <button onClick={_handlePlayClick} className="btn btn--play movie-card__button" type="button">
+                <svg viewBox="0 0 19 19" width="19" height="19">
+                  <use xlinkHref="#play-s"></use>
+                </svg>
+                <span>Play</span>
+              </button>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>

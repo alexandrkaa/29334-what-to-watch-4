@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import {movieType} from '../../types/types.js';
 import {secondsToTime} from '../../utils/common.js';
-import {BrowserRouter, Link} from 'react-router-dom';
+import history from '../../history.js';
 
 const FullScreenVideoPlayer = (props) => {
   const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = props;
@@ -24,6 +24,12 @@ const FullScreenVideoPlayer = (props) => {
     evt.preventDefault();
     props.onPlay();
   };
+
+  const _handleExit = (evt) => {
+    evt.preventDefault();
+    history.push(`/`);
+  };
+
   let playPauseButton;
   if (!isPlaying) {
     playPauseButton = (
@@ -48,11 +54,7 @@ const FullScreenVideoPlayer = (props) => {
   return (
     <div className="player" style={{backgroundColor: `#000000`}}>
       {props.children}
-      <BrowserRouter>
-        <Link to="/">
-          <button type="button" className="player__exit">Exit</button>
-        </Link>
-      </BrowserRouter>
+      <button onClick={_handleExit} type="button" className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

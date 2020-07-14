@@ -10,46 +10,40 @@ import SignIn from '../sign-in/sign-in.jsx';
 const WithMovieFullScreenVideoPlayer = withMovie(FullScreenVideoPlayer);
 const WithMovieMovieCardFull = withMovie(MovieCardFull);
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/player/:id" render={
-            (routeProps) => {
-              return (
-                <WithMovieFullScreenVideoPlayer
-                  movieId={parseInt(routeProps.match.params.id, 10)}
-                  isMuted={false}
-                  videoWidth="100%"
-                  videoHeight="100%"
-                  {...routeProps}
-                />
-              );
-            }
-          } />
-          <Route exact path="/films/:id" render={
-            (routeProps) => {
-              return (
-                <WithMovieMovieCardFull
-                  movieId={parseInt(routeProps.match.params.id, 10)}
-                  loadSimilarMovies={true}
-                  {...routeProps}
-                  activeItem={MovieCardFullTabsIds.OVERVIEW}
-                />
-              );
-            }
-          } />
-          <Route exact path="/login" component={SignIn} />
-          <Route exact path="/" component={Main} />
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/player/:id" render={
+          (routeProps) => {
+            return (
+              <WithMovieFullScreenVideoPlayer
+                movieId={parseInt(routeProps.match.params.id, 10)}
+                isMuted={false}
+                videoWidth="100%"
+                videoHeight="100%"
+                {...routeProps}
+              />
+            );
+          }
+        } />
+        <Route exact path="/films/:id" render={
+          (routeProps) => {
+            return (
+              <WithMovieMovieCardFull
+                movieId={parseInt(routeProps.match.params.id, 10)}
+                loadSimilarMovies={true}
+                {...routeProps}
+                activeItem={MovieCardFullTabsIds.OVERVIEW}
+              />
+            );
+          }
+        } />
+        <Route exact path="/login" component={SignIn} />
+        <Route exact path="/" component={Main} />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default App;

@@ -14,7 +14,6 @@ import Error from '../error/error.jsx';
 const Main = (props) => {
   const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError} = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
-  const _handleMovieTitleClick = () => {};
   if (loadingMoviesError) {
     return <Error />;
   }
@@ -29,7 +28,6 @@ const Main = (props) => {
             <div className="catalog__movies-list">
               <MoviesList
                 moviesList={moviesList}
-                onMovieTitleClick={_handleMovieTitleClick}
               />
             </div>
             {isShowMore && <ShowMore />}

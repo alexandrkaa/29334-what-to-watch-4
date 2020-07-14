@@ -23,6 +23,8 @@ it(`<FullScreenVideoPlayer /> should match snapshot`, () => {
     isFavorite: false,
   };
 
+  const history = {};
+
   const tree = renderer
     .create(
         <FullScreenVideoPlayer
@@ -31,6 +33,7 @@ it(`<FullScreenVideoPlayer /> should match snapshot`, () => {
           videoWidth="100%"
           videoHeight="100%"
           videoSrc={movie.movieVideo}
+          history={history}
         />,
         {
           createNodeMock: () => {

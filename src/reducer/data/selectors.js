@@ -18,10 +18,19 @@ export const getMoviesLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingMovies;
 };
 
+export const getMoviesLoadingErrorStatus = (state) => {
+  return state[NAME_SPACE].loadingMoviesError;
+};
+
 export const getCommentsLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingComments;
 };
 
 export const getTitleMovieLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingTitleMovie;
+};
+
+export const getMovieByIdFromState = (state, id) => {
+  const [movie] = state[NAME_SPACE].filter((it) => it.id === id);
+  return movie;
 };

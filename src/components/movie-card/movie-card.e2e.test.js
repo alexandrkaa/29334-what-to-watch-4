@@ -53,14 +53,8 @@ it(`Should title be pressed`, () => {
   expect(onPause).toHaveBeenCalledTimes(1);
   main.update();
 
-  const movieCardTitle = main.find(`.small-movie-card__title`);
+  const movieCardTitle = main.find(`.small-movie-card__link`);
   expect(movieCardTitle).toHaveLength(1);
-  movieCardTitle.simulate(`click`, {
-    movie,
-    preventDefault: jest.fn()
-  });
-  expect(onMovieTitleClick).toHaveBeenCalledTimes(1);
-  expect(onMovieTitleClick.mock.calls[0][0]).toBe(movie.id);
 
   const movieCardImage = main.find(`.small-movie-card__image`);
   expect(movieCardImage).toHaveLength(1);

@@ -9,22 +9,22 @@ Array [
   >
     <div
       className="small-movie-card__image"
-      onClick={[Function]}
     >
       <video
         autoPlay={false}
         controls={false}
         height={175}
+        preload="metadata"
         width={280}
       />
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/4"
+        onClick={[Function]}
       >
         Dardjeeling Limited
       </a>
@@ -37,22 +37,22 @@ Array [
   >
     <div
       className="small-movie-card__image"
-      onClick={[Function]}
     >
       <video
         autoPlay={false}
         controls={false}
         height={175}
+        preload="metadata"
         width={280}
       />
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/3"
+        onClick={[Function]}
       >
         Johnny English
       </a>

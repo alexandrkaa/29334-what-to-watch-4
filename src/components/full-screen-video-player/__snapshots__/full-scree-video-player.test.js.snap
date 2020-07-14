@@ -3,15 +3,22 @@
 exports[`<FullScreenVideoPlayer /> should match snapshot 1`] = `
 <div
   className="player"
+  style={
+    Object {
+      "backgroundColor": "#000000",
+    }
+  }
 >
   <video
     autoPlay={false}
     controls={false}
     height="100%"
+    preload="metadata"
     width="100%"
   />
   <button
     className="player__exit"
+    onClick={[Function]}
     type="button"
   >
     Exit

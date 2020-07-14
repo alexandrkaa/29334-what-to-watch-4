@@ -28,8 +28,11 @@ Array [
           className="logo"
         >
           <a
-            className="logo__link"
-            href="main.html"
+            aria-current="page"
+            className="logo__link active"
+            href="/"
+            onClick={[Function]}
+            style={Object {}}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -57,7 +60,7 @@ Array [
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="/img/avatar.jpg"
               width="63"
             />
           </div>
@@ -93,6 +96,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -264,22 +268,22 @@ Array [
         >
           <div
             className="small-movie-card__image"
-            onClick={[Function]}
           >
             <video
               autoPlay={false}
               controls={false}
               height={175}
+              preload="metadata"
               width={280}
             />
           </div>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/5"
+              onClick={[Function]}
             >
               Dardjeeling Limited
             </a>
@@ -292,22 +296,22 @@ Array [
         >
           <div
             className="small-movie-card__image"
-            onClick={[Function]}
           >
             <video
               autoPlay={false}
               controls={false}
               height={175}
+              preload="metadata"
               width={280}
             />
           </div>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/6"
+              onClick={[Function]}
             >
               Dardjeeling Limited
             </a>
@@ -320,22 +324,22 @@ Array [
         >
           <div
             className="small-movie-card__image"
-            onClick={[Function]}
           >
             <video
               autoPlay={false}
               controls={false}
               height={175}
+              preload="metadata"
               width={280}
             />
           </div>
           <h3
             className="small-movie-card__title"
-            onClick={[Function]}
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/films/7"
+              onClick={[Function]}
             >
               Dardjeeling Limited
             </a>
@@ -351,7 +355,6 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
         >
           <span
             className="logo__letter logo__letter--1"

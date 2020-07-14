@@ -36,9 +36,6 @@ const Operation = {
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        throw err;
       });
   },
 
@@ -52,7 +49,6 @@ const Operation = {
       });
   },
 };
-
 
 export {
   ActionCreator,

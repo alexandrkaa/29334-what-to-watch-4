@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 import {MovieCard} from "./movie-card.jsx";
 
 const movie = {
@@ -29,15 +30,17 @@ it(`<MovieCard /> should render Big Bang Theory movie`, () => {
   const children = <></>;
   const tree = renderer
     .create(
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onPlay={onPlay}
-          onPause={onPause}
-          onMovieTitleClick={onMovieTitleClick}
-        >
-          {children}
-        </MovieCard>,
+        <BrowserRouter>
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onPlay={onPlay}
+            onPause={onPause}
+            onMovieTitleClick={onMovieTitleClick}
+          >
+            {children}
+          </MovieCard>
+        </BrowserRouter>,
         {
           createNodeMock: () => {
             return {};

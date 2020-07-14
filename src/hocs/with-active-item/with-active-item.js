@@ -29,14 +29,6 @@ const withActiveItem = (Component) => {
         />
       );
     }
-
-    // componentDidUpdate(prevProps) {
-    //   if (prevProps.activeItem !== this.props.activeItem) {
-    //     this.setState({
-    //       activeItem: this.props.activeItem,
-    //     });
-    //   }
-    // }
   }
 
   WithActiveItemHoc.defaultProps = {

@@ -27,9 +27,9 @@ export const withVideoPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const {movie: {moviePreview, image}, isMuted} = this.props;
+      const {movie: {image}, isMuted, videoSrc} = this.props;
       const video = this._videoRef.current;
-      video.src = moviePreview;
+      video.src = videoSrc;
       video.muted = isMuted;
       video.poster = image;
       video.ontimeupdate = () => this.setState({
@@ -96,7 +96,7 @@ export const withVideoPlayer = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
       video.muted = null;
-      video.poster = null;
+      video.poster = ``;
       video.src = ``;
       clearTimeout(this._timerId);
       this._timerId = null;
@@ -150,6 +150,7 @@ export const withVideoPlayer = (Component) => {
     isCanStart: PropTypes.bool.isRequired,
     videoHeight: videoDementionType.isRequired,
     videoWidth: videoDementionType.isRequired,
+    videoSrc: PropTypes.string.isRequired
   };
 
   return VideoPlayerHoc;

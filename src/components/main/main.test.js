@@ -4,6 +4,7 @@ import Main from './main.jsx';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {MOVIES_LIMIT} from '../../consts/consts.js';
+import {BrowserRouter} from 'react-router-dom';
 
 const mockStore = configureStore([]);
 
@@ -84,22 +85,29 @@ describe(`<Main /> should render main movie and movies list`, () => {
         titleMovie,
         moviesList,
         movieGenres,
+        loadingMovies: false,
+        loadingMoviesError: false,
       },
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
+      },
+      USER: {
+        authorizationStatus: `AUTH`,
       }
     });
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main
-              titleMovie={titleMovie}
-              moviesList={moviesList}
-              onMovieTitleClick={onMovieTitleClick}
-              activeGenre={`All genres`}
-              moviesRenderLimit={MOVIES_LIMIT}
-            />
+            <BrowserRouter>
+              <Main
+                titleMovie={titleMovie}
+                moviesList={moviesList}
+                onMovieTitleClick={onMovieTitleClick}
+                activeGenre={`All genres`}
+                moviesRenderLimit={MOVIES_LIMIT}
+              />
+            </BrowserRouter>
           </Provider>,
           {
             createNodeMock: () => {

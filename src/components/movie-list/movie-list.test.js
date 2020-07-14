@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 import MoviesList from './movie-list.jsx';
 
 const moviesList = [
@@ -48,11 +49,13 @@ it(`<MovieCard /> should render 2 movie cards`, () => {
   const onMovieTitleClick = jest.fn();
   const tree = renderer
     .create(
-        <MoviesList
-          moviesList={moviesList}
-          onMovieTitleClick={onMovieTitleClick}
-          onMovieCardMouseEnter={onMovieCardMouseEnter}
-        />,
+        <BrowserRouter>
+          <MoviesList
+            moviesList={moviesList}
+            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardMouseEnter={onMovieCardMouseEnter}
+          />
+        </BrowserRouter>,
         {
           createNodeMock: () => {
             return {};

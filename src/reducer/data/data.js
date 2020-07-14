@@ -4,6 +4,7 @@ import movieAdapter from '../../adapters/movie/movie-adapter.js';
 const ActionTypes = {
   FETCH_MOVIES_DATA: `FETCH_MOVIES_DATA`,
   FETCH_MOVIES_DATA_SUCCESS: `FETCH_MOVIES_DATA_SUCCESS`,
+  FETCH_MOVIES_DATA_ERROR: `FETCH_MOVIES_DATA_ERROR`,
   FETCH_TITLE_MOVIE: `FETCH_TITLE_MOVIE`,
   FETCH_TITLE_MOVIE_SUCCESS: `FETCH_TITLE_MOVIE_SUCCESS`,
   FETCH_MOVIES_COMMENTS_DATA: `FETCH_MOVIES_COMMENTS_DATA`,
@@ -12,6 +13,7 @@ const ActionTypes = {
 
 const initialState = {
   loadingMovies: false,
+  loadingMoviesError: false,
   loadingComments: false,
   loadingTitleMovie: false,
   moviesList: [],
@@ -26,6 +28,9 @@ const ActionCreator = {
   fetchMoviesDataSuccess: (moviesList) => ({
     type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
     payload: moviesList,
+  }),
+  fetchMoviesDataError: () => ({
+    type: ActionTypes.FETCH_MOVIES_DATA_ERROR,
   }),
   fetchMoviesCommentsData: () => ({
     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
@@ -48,6 +53,8 @@ const Operation = {
     return api.get(`/films`)
       .then((response) => {
         dispatch(ActionCreator.fetchMoviesDataSuccess(response.data.map((movie) => movieAdapter(movie))));
+      }).catch((response) => {
+        dispatch(ActionCreator.fetchMoviesDataError(response));
       });
   },
 };
@@ -62,6 +69,10 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         loadingMovies: false,
         moviesList: action.payload
+      });
+    case ActionTypes.FETCH_MOVIES_DATA_ERROR:
+      return extendObject(state, {
+        loadingMoviesError: true,
       });
     case ActionTypes.FETCH_MOVIES_COMMENTS_DATA:
       return extendObject(state, {

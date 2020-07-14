@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import withTimeOut from '../../hocs/with-timeout/with-timeout.js';
 import {movieType} from '../../types/types.js';
+import {Link} from 'react-router-dom';
 
 const MovieCard = (props) => {
-  const {movie, onMovieTitleClick} = props;
+  const {movie} = props;
   const {title} = movie;
   const _onMovieCardMouseEnter = () => {
     props.onPlay();
@@ -15,21 +16,16 @@ const MovieCard = (props) => {
     props.onPause();
   };
 
-  const _onMovieTitleClick = (evt) => {
-    evt.preventDefault();
-    onMovieTitleClick(movie.id);
-  };
-
   return (
     <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter} onMouseLeave={_onMovieCardMouseLeave} >
-      <div className="small-movie-card__image" onClick={_onMovieTitleClick}>
+      <div className="small-movie-card__image">
         {props.children}
       </div>
-      <h3 className="small-movie-card__title" onClick={_onMovieTitleClick}>
-        <a
+      <h3 className="small-movie-card__title">
+        <Link to={`/films/${movie.id}`}
           className="small-movie-card__link"
           href="movie-page.html"
-        >{title}</a>
+        >{title}</Link>
       </h3>
     </article>
   );
@@ -37,7 +33,6 @@ const MovieCard = (props) => {
 
 MovieCard.propTypes = {
   movie: movieType.isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
   onPlay: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired

@@ -1,5 +1,8 @@
 import React from 'react';
 import {movieType} from '../../types/types.js';
+import Header from '../header/header.jsx';
+import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 
 const TitleMovie = (props) => {
   const {
@@ -7,31 +10,22 @@ const TitleMovie = (props) => {
     movieGenre,
     movieDate,
     movieImage,
-    movieBackground
+    movieBackground,
+    id: movieId,
   } = props.movie;
+
+  const _handlePlayClick = (evt) => {
+    evt.preventDefault();
+    props.history.push(`/player/${movieId}`);
+  };
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
         <img src={movieBackground} alt="The Grand Budapest Hotel"/>
       </div>
 
-      <h1 className="visually-hidden">WTW</h1>
-
-      <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -48,7 +42,7 @@ const TitleMovie = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button onClick={_handlePlayClick} className="btn btn--play movie-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -70,6 +64,7 @@ const TitleMovie = (props) => {
 
 TitleMovie.propTypes = {
   movie: movieType.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default TitleMovie;
+export default withRouter(TitleMovie);

@@ -11,6 +11,7 @@ const VideoPlayer = React.forwardRef((props, ref) => {
       autoPlay={autoplay}
       width={videoWidth}
       height={videoHeight}
+      preload="metadata"
     />
   );
 });

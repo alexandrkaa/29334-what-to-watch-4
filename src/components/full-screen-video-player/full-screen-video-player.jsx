@@ -23,6 +23,12 @@ const FullScreenVideoPlayer = (props) => {
     evt.preventDefault();
     props.onPlay();
   };
+
+  const _handleExit = (evt) => {
+    evt.preventDefault();
+    props.history.goBack();
+  };
+
   let playPauseButton;
   if (!isPlaying) {
     playPauseButton = (
@@ -45,10 +51,9 @@ const FullScreenVideoPlayer = (props) => {
   }
 
   return (
-    <div className="player">
+    <div className="player" style={{backgroundColor: `#000000`}}>
       {props.children}
-      <button type="button" className="player__exit">Exit</button>
-
+      <button onClick={_handleExit} type="button" className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
@@ -84,7 +89,9 @@ FullScreenVideoPlayer.propTypes = {
   duration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
   isEnded: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export {FullScreenVideoPlayer};
 export default withVideoPlayer(FullScreenVideoPlayer);
+

@@ -8,15 +8,14 @@ exports[`<MovieCard /> should render Big Bang Theory movie 1`] = `
 >
   <div
     className="small-movie-card__image"
-    onClick={[Function]}
   />
   <h3
     className="small-movie-card__title"
-    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/films/4"
+      onClick={[Function]}
     >
       Dardjeeling Limited
     </a>

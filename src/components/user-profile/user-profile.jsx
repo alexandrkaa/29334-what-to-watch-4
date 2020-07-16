@@ -28,7 +28,7 @@ UserProfile.propTypes = {
     email: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   isAuthorized: PropTypes.bool.isRequired,
 };
 

@@ -10,7 +10,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   isLoading: false,
   userData: null,
-  loginStatusCode: null,
+  loginStatusCode: 0,
 };
 
 const ActionType = {

@@ -48,7 +48,7 @@ export const isValidEmail = (email) => {
 };
 
 export const isValidPassword = (password) => {
-  return password.length > 3;
+  return password.length > 2;
 };
 
 export const isValidField = (id, field) => {

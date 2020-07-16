@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputField /> should match snapshot 1`] = `
+<div
+  className="sign-in__field"
+>
+  <input
+    className="sign-in__input"
+    disabled={false}
+    id="login"
+    name="login"
+    onChange={[Function]}
+    placeholder="Type login, please"
+    type="text"
+    value=""
+  />
+  <label
+    className="sign-in__label visually-hidden"
+    htmlFor="login"
+  >
+    User login
+  </label>
+</div>
+`;

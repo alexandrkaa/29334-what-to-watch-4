@@ -91,6 +91,12 @@ describe(`<App /> should render`, () => {
       },
       USER: {
         authorizationStatus: `AUTH`,
+        userData: {
+          id: 1,
+          email: `qwe@qwe.ru`,
+          name: `qwe`,
+          avatarUrl: `/img/avatar.jpg`
+        }
       }
     });
     const tree = renderer

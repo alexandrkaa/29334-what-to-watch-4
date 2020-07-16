@@ -29,7 +29,8 @@ export const DEFAULT_GENRE = `All genres`;
 export const MOVIES_LIMIT = 8;
 export const GENRES_LIMIT = 8;
 export const START_PREVIEW_DELAY = 1000;
-export const BASE_URL = `https://htmlacademy-react-3.appspot.com/wtw`;
+export const BASE_URL = `https://htmlacademy-react-3.appspot.com`;
+export const BASE_API_URL = `${BASE_URL}/wtw`;
 export const API_REQUEST_TIMEOUT = 5000;
 
 export const EMAIL_FIELD_ID = `user-email`;
@@ -49,3 +50,14 @@ export const SignInFields = [
   },
 ];
 
+export const NetworkErrors = {
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+};
+
+export const AppRoutes = {
+  MAIN_PAGE: `/`,
+  FULL_PLAYER_PAGE: `/player/:id`,
+  FILM_PAGE: `/films/:id`,
+  LOGIN_PAGE: `/login`,
+};

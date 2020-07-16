@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
-import {MovieCardFullTabsIds} from '../../consts/consts.js';
+import {MovieCardFullTabsIds, AppRoutes} from '../../consts/consts.js';
 import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video-player.jsx';
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import SignIn from '../sign-in/sign-in.jsx';
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/player/:id" render={
+        <Route exact path={AppRoutes.FULL_PLAYER_PAGE} render={
           (routeProps) => {
             return (
               <WithMovieFullScreenVideoPlayer
@@ -27,7 +27,7 @@ const App = () => {
             );
           }
         } />
-        <Route exact path="/films/:id" render={
+        <Route exact path={AppRoutes.FILM_PAGE} render={
           (routeProps) => {
             return (
               <WithMovieMovieCardFull
@@ -39,8 +39,8 @@ const App = () => {
             );
           }
         } />
-        <Route exact path="/login" component={SignIn} />
-        <Route exact path="/" component={Main} />
+        <Route exact path={AppRoutes.LOGIN_PAGE} component={SignIn} />
+        <Route exact path={AppRoutes.MAIN_PAGE} component={Main} />
       </Switch>
     </BrowserRouter>
   );

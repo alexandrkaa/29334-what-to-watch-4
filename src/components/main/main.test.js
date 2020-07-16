@@ -94,6 +94,12 @@ describe(`<Main /> should render main movie and movies list`, () => {
       },
       USER: {
         authorizationStatus: `AUTH`,
+        userData: {
+          id: 1,
+          email: `qwe@qwe.ru`,
+          name: `qwe`,
+          avatarUrl: `/img/avatar.jpg`
+        }
       }
     });
     const tree = renderer

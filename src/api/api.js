@@ -13,13 +13,12 @@ const createAPI = (dispatch) => {
     return response;
   };
 
-  const onFail = (err_) => {
-    const {response} = err_;
+  const onFail = (err) => {
+    const {response} = err;
     if (response && response.status === NetworkErrors.UNAUTHORIZED) {
       dispatch();
-      throw err_;
     }
-    throw err_;
+    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

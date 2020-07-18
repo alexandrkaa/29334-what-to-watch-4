@@ -27,10 +27,10 @@ const ActionCreator = {
       payload: status,
     };
   },
-  setAuthorizationStatusCode: (err_) => {
+  setAuthorizationStatusCode: (err) => {
     return {
       type: ActionType.SET_AUTHORIZATION_STATUS_CODE,
-      payload: err_,
+      payload: err,
     };
   },
   setUserData: (userData) => {

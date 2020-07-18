@@ -16,7 +16,7 @@ class SignIn extends React.PureComponent {
     SignInFields.forEach((fld) => {
       initialState[fld.id] = {
         value: ``,
-        isValid: true
+        isValid: false,
       };
     });
     this.state = initialState;
@@ -65,7 +65,7 @@ class SignIn extends React.PureComponent {
             <p>We can’t recognize this email <br /> and password combination. Please try again.</p>
           </div>
           }
-          <form action="#" onSubmit={this._handleFormSubmit} className="sign-in__form">
+          <form onSubmit={this._handleFormSubmit} className="sign-in__form">
             <div className="sign-in__fields">
               {
                 SignInFields.map((fld) => {

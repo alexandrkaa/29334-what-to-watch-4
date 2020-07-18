@@ -22,10 +22,13 @@ const store = createStore(
 );
 
 store.dispatch(DataActionCreator.fetchMoviesData());
-store.dispatch(DataActionCreator.fetchMoviesCommentsData());
 store.dispatch(DataActionCreator.fetchTitleMovie());
-store.dispatch(DataOperation.fetchMoviesData());
-store.dispatch(DataActionCreator.fetchMoviesCommentsDataSuccess(moviesComments));
+
 store.dispatch(DataActionCreator.fetchTitleMovieSuccess(titleMovie));
+store.dispatch(DataOperation.fetchMoviesData());
+
+store.dispatch(DataActionCreator.fetchMoviesCommentsData());
+store.dispatch(DataActionCreator.fetchMoviesCommentsDataSuccess(moviesComments));
+
 
 export default store;

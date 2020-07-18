@@ -1,13 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {NavLink, useLocation} from 'react-router-dom';
+import {AppRoutes} from '../../consts/consts.js';
 
-const UserProfile = () => {
+const UserProfile = (props) => {
+  const {userData, isAuthorized} = props;
+  const _location = useLocation();
   return (
     <div className="user-block">
-      <div className="user-block__avatar">
-        <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-      </div>
+      {
+        (isAuthorized && userData) &&
+        <div className="user-block__avatar">
+          <img src={userData.avatarUrl} alt="User avatar" width="63" height="63"/>
+        </div>
+      }
+      {
+        (!isAuthorized && _location.pathname !== AppRoutes.LOGIN_PAGE) &&
+        <NavLink style={{textDecoration: `none`}} className="page-title" to="/login">Sign In</NavLink>
+      }
     </div>
   );
+};
+
+UserProfile.propTypes = {
+  userData: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 export default UserProfile;

@@ -1,4 +1,4 @@
-import {SECS_PER_HOUR} from '../consts/consts.js';
+import {SECS_PER_HOUR, EMAIL_FIELD_ID, PASSWORD_FIELD_ID} from '../consts/consts.js';
 
 export const generateRandomInteger = (min, max) => {
   const rand = min + Math.random() * (max + 1 - min);
@@ -40,4 +40,24 @@ export const secondsToTime = (initialSeconds) => {
   const minutes = Math.floor(_toMinutesSec / 60);
   const seconds = Math.ceil(_toMinutesSec % 60);
   return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+};
+
+export const isValidEmail = (email) => {
+  const re = /.+\@.+\..+/;
+  return re.test(String(email).toLowerCase());
+};
+
+export const isValidPassword = (password) => {
+  return password.length > 5;
+};
+
+export const isValidField = (id, field) => {
+  switch (id) {
+    case EMAIL_FIELD_ID:
+      return isValidEmail(field);
+    case PASSWORD_FIELD_ID:
+      return isValidPassword(field);
+    default:
+      throw new Error(`No corresponding func to validate`);
+  }
 };

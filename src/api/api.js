@@ -1,15 +1,11 @@
 import axios from 'axios';
-import {BASE_URL, TIMEOUT} from '../consts/consts.js';
-
-const Error = {
-  UNAUTHORIZED: 401
-};
-
+import {BASE_API_URL, API_REQUEST_TIMEOUT} from '../consts/consts.js';
+import {NetworkErrors} from '../consts/consts.js';
 
 const createAPI = (dispatch) => {
   const api = axios.create({
-    baseURL: BASE_URL,
-    timeout: TIMEOUT,
+    baseURL: BASE_API_URL,
+    timeout: API_REQUEST_TIMEOUT,
     withCredentials: true,
   });
 
@@ -19,8 +15,7 @@ const createAPI = (dispatch) => {
 
   const onFail = (err) => {
     const {response} = err;
-
-    if (response && response.status === Error.UNAUTHORIZED) {
+    if (response && response.status === NetworkErrors.UNAUTHORIZED) {
       dispatch();
     }
     throw err;

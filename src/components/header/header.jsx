@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import User from '../user-profile/user-profile.jsx';
-import {getAuthorizationStatus} from '../../reducer/selectors.js';
+import {getAuthorizationStatus, getUserData} from '../../reducer/selectors.js';
 import {AuthorizationStatus} from '../../reducer/user/user.js';
 import {NavLink} from 'react-router-dom';
 
 const Header = (props) => {
   const _isAuthorized = (AuthorizationStatus.AUTH === props.authorizationStatus);
+  const {userData} = props;
   return (
     <React.Fragment>
       {_isAuthorized && <h1 className="visually-hidden">WTW</h1>}
@@ -20,7 +21,7 @@ const Header = (props) => {
           </NavLink>
         </div>
 
-        {_isAuthorized && <User />}
+        <User userData={userData} isAuthorized={_isAuthorized} />
         {props.children}
       </header>
     </React.Fragment>
@@ -31,6 +32,12 @@ Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   headerClassName: PropTypes.string,
   children: PropTypes.element,
+  userData: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
 };
 
 Header.defaultProps = {
@@ -40,6 +47,7 @@ Header.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     authorizationStatus: getAuthorizationStatus(state),
+    userData: getUserData(state),
   };
 };
 

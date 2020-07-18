@@ -11,8 +11,18 @@ import {
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
 } from './data/selectors.js';
-import {getActiveGenre, getMoviesRenderLimit} from './movie/selectors.js';
-import {getAuthorizationStatus} from './user/selectors.js';
+
+import {
+  getActiveGenre,
+  getMoviesRenderLimit
+} from './movie/selectors.js';
+
+import {
+  getAuthorizationStatus,
+  getLoginStatusCode,
+  getUserData,
+  getIsLoading,
+} from './user/selectors.js';
 
 export const getGenres = createSelector(getMovies, (moviesList) => {
   const movieGenres = getWithLimit(getGenresFromMovies(moviesList), 0, GENRES_LIMIT);
@@ -41,4 +51,7 @@ export {
   getMoviesRenderLimit,
 
   getAuthorizationStatus,
+  getLoginStatusCode,
+  getUserData,
+  getIsLoading
 };

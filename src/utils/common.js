@@ -43,12 +43,12 @@ export const secondsToTime = (initialSeconds) => {
 };
 
 export const isValidEmail = (email) => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re = /.+\@.+\..+/;
   return re.test(String(email).toLowerCase());
 };
 
 export const isValidPassword = (password) => {
-  return password.length > 2;
+  return password.length > 5;
 };
 
 export const isValidField = (id, field) => {
@@ -58,6 +58,6 @@ export const isValidField = (id, field) => {
     case PASSWORD_FIELD_ID:
       return isValidPassword(field);
     default:
-      return true;
+      throw new Error(`No corresponding func to validate`);
   }
 };

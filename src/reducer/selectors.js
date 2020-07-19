@@ -10,7 +10,7 @@ import {
   getTitleMovieLoadingStatus,
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
-} from './data/selectors.js';
+} from './data/movies-data/selectors.js';
 
 import {
   getActiveGenre,

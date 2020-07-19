@@ -5,11 +5,12 @@ import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 import TitleMovie from '../title-movie/title-movie.jsx';
-import Footer from '../footer/footer.jsx';
 import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre, getMoviesLoadingErrorStatus} from '../../reducer/selectors.js';
 import {connect} from 'react-redux';
 import Loader from '../loader/loader.jsx';
 import Error from '../error/error.jsx';
+import Header from '../header/header.jsx';
+import Footer from '../footer/footer.jsx';
 
 const Main = (props) => {
   const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError} = props;
@@ -37,7 +38,13 @@ const Main = (props) => {
       </React.Fragment>
     );
   }
-  return <Loader />;
+  return (
+    <React.Fragment>
+      <Header />
+      <Loader />
+      <Footer />
+    </React.Fragment>
+  );
 };
 
 const mapStateToProps = (state) => {

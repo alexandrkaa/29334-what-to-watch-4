@@ -1,7 +1,7 @@
-import {reducer, ActionCreator, ActionTypes, Operation} from './data.js';
+import {reducer, ActionCreator, ActionTypes, Operation} from './movies-data.js';
 import MockAdapter from 'axios-mock-adapter';
-import createAPI from '../../api/api.js';
-import movieAdapter from '../../adapters/movie/movie-adapter.js';
+import createAPI from '../../../api/api.js';
+import movieAdapter from '../../../adapters/movie/movie-adapter.js';
 
 const api = createAPI(() => {});
 

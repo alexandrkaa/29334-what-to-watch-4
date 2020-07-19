@@ -1,5 +1,5 @@
-import {extendObject} from '../../utils/common.js';
-import movieAdapter from '../../adapters/movie/movie-adapter.js';
+import {extendObject} from '../../../utils/common.js';
+import movieAdapter from '../../../adapters/movie/movie-adapter.js';
 
 const ActionTypes = {
   FETCH_MOVIES_DATA: `FETCH_MOVIES_DATA`,

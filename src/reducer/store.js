@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../reducer/data/data.js';
+import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../reducer/data/movies-data/movies-data.js';
 import {ActionCreator as UserActionCreator, AuthorizationStatus} from '../reducer/user/user.js';
 import createAPI from '../api/api.js';
 import reducer from './reducer.js';

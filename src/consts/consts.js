@@ -57,7 +57,15 @@ export const NetworkErrors = {
 
 export const AppRoutes = {
   MAIN_PAGE: `/`,
-  FULL_PLAYER_PAGE: `/player/:id`,
-  FILM_PAGE: `/films/:id`,
+  FULL_PLAYER_PAGE: `/player`,
+  FILM_PAGE: `/films`,
   LOGIN_PAGE: `/login`,
+  REVIEW_PAGE: `/review`,
+};
+
+export const REVIEW_STARS_NUMBER = 5;
+
+export const ReviewTextLength = {
+  min: 50,
+  max: 400,
 };

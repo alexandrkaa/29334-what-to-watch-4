@@ -14,8 +14,7 @@ const createAPI = (dispatch) => {
   };
 
   const onFail = (err) => {
-    const {response} = err;
-    if (response && response.status === NetworkErrors.UNAUTHORIZED) {
+    if (err.response && err.response.status === NetworkErrors.UNAUTHORIZED) {
       dispatch();
     }
     throw err;

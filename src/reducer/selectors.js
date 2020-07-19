@@ -22,6 +22,7 @@ import {
 
 import {
   getAuthorizationStatus,
+  getAuthorizationStatusBoolean,
   getLoginStatusCode,
   getUserData,
   getIsLoading,
@@ -54,6 +55,7 @@ export {
   getMoviesRenderLimit,
 
   getAuthorizationStatus,
+  getAuthorizationStatusBoolean,
   getLoginStatusCode,
   getUserData,
   getIsLoading

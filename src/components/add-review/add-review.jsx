@@ -8,6 +8,7 @@ import AddReviewForm from '../add-review-form/add-review-form.jsx';
 const AddReview = (props) => {
   const {
     movie: {
+      id: movieId,
       title,
       movieImage,
       movieBackground,
@@ -35,7 +36,7 @@ const AddReview = (props) => {
           <img src={movieImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm />
+      <AddReviewForm movieId={movieId} />
     </section>
 
   );

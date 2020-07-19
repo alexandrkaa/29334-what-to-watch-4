@@ -32,13 +32,6 @@ const ActionCreator = {
   fetchMoviesDataError: () => ({
     type: ActionTypes.FETCH_MOVIES_DATA_ERROR,
   }),
-  // fetchMoviesCommentsData: () => ({
-  //   type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
-  // }),
-  // fetchMoviesCommentsDataSuccess: (moviesComments) => ({
-  //   type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
-  //   payload: moviesComments,
-  // }),
   fetchTitleMovie: () => ({
     type: ActionTypes.FETCH_TITLE_MOVIE,
   }),
@@ -74,15 +67,6 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         loadingMoviesError: true,
       });
-    // case ActionTypes.FETCH_MOVIES_COMMENTS_DATA:
-    //   return extendObject(state, {
-    //     loadingComments: true,
-    //   });
-    // case ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS:
-    //   return extendObject(state, {
-    //     loadingComments: false,
-    //     moviesComments: action.payload
-    //   });
     case ActionTypes.FETCH_TITLE_MOVIE:
       return extendObject(state, {
         loadingTitleMovie: true,

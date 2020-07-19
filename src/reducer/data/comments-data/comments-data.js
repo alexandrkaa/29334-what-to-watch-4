@@ -12,14 +12,17 @@ const initialState = {
 };
 
 const Operation = {
-  postCommentData: (movieId) => (dispatch, getState, api) => {
-    return api.post(`/comments/${movieId}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  postCommentData: (commentData) => (dispatch, getState, api) => {
+    return api.post(`/comments/${commentData.movieId}`, {
+      rating: commentData.rating,
+      comment: commentData.comment,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 };
 
@@ -42,7 +45,7 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS:
       return extendObject(state, {
         loadingComments: false,
-        moviesComments: action.payload
+        moviesComments: state.moviesComments.concat(action.payload)
       });
     default:
       return state;

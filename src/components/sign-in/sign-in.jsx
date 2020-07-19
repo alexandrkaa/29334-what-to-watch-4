@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import InputField from '../input-filed/input-field.jsx';
-import {SignInFields, EMAIL_FIELD_ID, PASSWORD_FIELD_ID, NetworkErrors} from '../../consts/consts.js';
-import {isValidField} from '../../utils/common.js';
+import {SignInFields, FiledsIds, NetworkErrors, AppRoutes} from '../../consts/consts.js';
+import {isValidField} from '../../utils/filters.js';
 import {connect} from 'react-redux';
-import {getAuthorizationStatus, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
+import {getAuthorizationStatusBoolean, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from '../../reducer/user/user.js';
+import {Redirect} from 'react-router-dom';
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -22,6 +23,7 @@ class SignIn extends React.PureComponent {
     this.state = initialState;
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this.props.checkAuth();
   }
 
   _handleInputChange(id, value) {
@@ -45,13 +47,18 @@ class SignIn extends React.PureComponent {
     }
     if (isFormValid) {
       login({
-        email: this.state[EMAIL_FIELD_ID].value,
-        password: this.state[PASSWORD_FIELD_ID].value,
+        email: this.state[FiledsIds.EMAIL_FIELD_ID].value,
+        password: this.state[FiledsIds.PASSWORD_FIELD_ID].value,
       });
     }
   }
 
   render() {
+    if (this.props.isAuthorized) {
+      return (
+        <Redirect to={AppRoutes.MAIN_PAGE} />
+      );
+    }
     return (
       <div className="user-page">
 
@@ -101,10 +108,12 @@ SignIn.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   loginStatusCode: PropTypes.number.isRequired,
   login: PropTypes.func.isRequired,
+  checkAuth: PropTypes.func.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuthorized: getAuthorizationStatusBoolean(state),
   loginStatusCode: getLoginStatusCode(state),
   isLoading: getIsLoading(state),
 });
@@ -114,6 +123,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(UserActionCreator.setAuthorizationProgress(true));
     dispatch(UserOperation.login(authData));
   },
+  checkAuth() {
+    dispatch(UserOperation.checkAuth());
+  }
 });
 
 export {SignIn};

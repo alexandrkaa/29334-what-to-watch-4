@@ -4,7 +4,7 @@ import {isValidField} from '../../utils/filters.js';
 import {FiledsIds, AppRoutes} from '../../consts/consts.js';
 import {Operation as CommentsOperation} from '../../reducer/data/comments-data/comments-data.js';
 import PropTypes from 'prop-types';
-import {getAuthorizationStatusBoolean} from '../../reducer/selectors.js';
+import {getAuthorizationStatusBoolean, isPostCommentHasError, isPostCommentInProgress} from '../../reducer/selectors.js';
 import {Redirect} from 'react-router-dom';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 
@@ -15,7 +15,7 @@ const withComment = (Component) => {
       this.state = {
         isFormValid: false,
         comment: ``,
-        rating: 0,
+        rating: 5,
       };
       this._handleRadioChange = this._handleRadioChange.bind(this);
       this._handleTextAreaChange = this._handleTextAreaChange.bind(this);
@@ -56,10 +56,10 @@ const withComment = (Component) => {
 
     render() {
       const {comment, rating, isFormValid} = this.state;
-      const {isAuthorized} = this.props;
+      const {isAuthorized, postCommentInProgress, postCommentError} = this.props;
       if (!isAuthorized) {
         return (
-          <Redirect to={AppRoutes.MAIN_PAGE} />
+          <Redirect to={AppRoutes.LOGIN_PAGE} />
         );
       }
       return (
@@ -68,6 +68,8 @@ const withComment = (Component) => {
           onTextAreaChange={this._handleTextAreaChange}
           onRadioChange={this._handleRadioChange}
           onFormSubmit={this._handleFormSubmit}
+          postCommentInProgress={postCommentInProgress}
+          postCommentError={postCommentError}
           comment={comment}
           rating={rating}
           isFormValid={isFormValid}
@@ -79,6 +81,8 @@ const withComment = (Component) => {
   const mapStateToProps = (state) => {
     return {
       isAuthorized: getAuthorizationStatusBoolean(state),
+      postCommentInProgress: isPostCommentInProgress(state),
+      postCommentError: isPostCommentHasError(state),
     };
   };
 
@@ -96,6 +100,8 @@ const withComment = (Component) => {
     postComment: PropTypes.func.isRequired,
     isAuthorized: PropTypes.bool.isRequired,
     checkAuth: PropTypes.func.isRequired,
+    postCommentInProgress: PropTypes.bool.isRequired,
+    postCommentError: PropTypes.bool.isRequired,
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(WithCommentHOC);

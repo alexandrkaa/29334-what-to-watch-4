@@ -81,7 +81,7 @@ describe(`<Main /> should render main movie and movies list`, () => {
     const onMovieTitleClick = jest.fn();
     const {titleMovie, moviesList, movieGenres} = mockData;
     const store = mockStore({
-      DATA: {
+      MOVIE_DATA: {
         titleMovie,
         moviesList,
         movieGenres,

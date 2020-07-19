@@ -7,13 +7,16 @@ import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-but
 
 const TitleMovie = (props) => {
   const {
-    title,
-    movieGenre,
-    movieDate,
-    movieImage,
-    movieBackground,
-    id: movieId,
-  } = props.movie;
+    movie: {
+      title,
+      movieGenre,
+      movieDate,
+      movieImage,
+      movieBackground,
+      id: movieId,
+    },
+    isAuthorized,
+  } = props;
 
   const _handlePlayClick = (evt) => {
     evt.preventDefault();
@@ -45,7 +48,7 @@ const TitleMovie = (props) => {
             <MovieCardFullButtons
               onPlay={_handlePlayClick}
               movieId={movieId}
-              isReviewVisible={false}
+              isReviewVisible={isAuthorized}
             />
 
           </div>
@@ -58,6 +61,8 @@ const TitleMovie = (props) => {
 TitleMovie.propTypes = {
   movie: movieType.isRequired,
   history: PropTypes.object.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
+export {TitleMovie};
 export default withRouter(TitleMovie);

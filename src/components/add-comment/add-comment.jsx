@@ -3,9 +3,9 @@ import Header from '../header/header.jsx';
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import {movieType} from '../../types/types.js';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs.jsx';
-import AddReviewForm from '../add-review-form/add-review-form.jsx';
+import AddCommentForm from '../add-comment-form/add-comment-form.jsx';
 
-const AddReview = (props) => {
+const AddComment = (props) => {
   const {
     movie: {
       id: movieId,
@@ -36,15 +36,15 @@ const AddReview = (props) => {
           <img src={movieImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm movieId={movieId} />
+      <AddCommentForm movieId={movieId} />
     </section>
 
   );
 };
 
-AddReview.propTypes = {
+AddComment.propTypes = {
   movie: movieType.isRequired,
 };
 
-export {AddReview};
-export default withMovie(AddReview);
+export {AddComment};
+export default withMovie(AddComment);

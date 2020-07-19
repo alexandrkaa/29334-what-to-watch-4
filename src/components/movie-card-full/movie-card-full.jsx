@@ -125,6 +125,7 @@ MovieCardFull.propTypes = {
   activeItem: PropTypes.string.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 export {MovieCardFull};

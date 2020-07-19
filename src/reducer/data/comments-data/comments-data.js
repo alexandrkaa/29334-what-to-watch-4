@@ -3,12 +3,16 @@ import {extendObject} from '../../../utils/common.js';
 const ActionTypes = {
   FETCH_MOVIES_COMMENTS_DATA: `FETCH_MOVIES_COMMENTS_DATA`,
   FETCH_MOVIES_COMMENTS_DATA_SUCCESS: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
-  POST_COMMENT_IN_PROGRESS: `POST_COMMENT_IN_PROGRESS`
+  POST_COMMENT_IN_PROGRESS: `POST_COMMENT_IN_PROGRESS`,
+  POST_COMMENT_SUCCESS: `POST_COMMENT_SUCCESS`,
+  POST_COMMENT_ERROR: `POST_COMMENT_ERROR`
 };
 
 const initialState = {
   loadingComments: false,
   moviesComments: [],
+  postCommentInProgress: false,
+  postCommentError: false,
 };
 
 const Operation = {
@@ -17,11 +21,11 @@ const Operation = {
       rating: commentData.rating,
       comment: commentData.comment,
     })
-    .then((response) => {
-      console.log(response);
+    .then(() => {
+      dispatch(ActionCreator.POST_COMMENT_SUCCESS);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
+      dispatch(ActionCreator.POST_COMMENT_ERROR);
     });
   }
 };
@@ -33,6 +37,15 @@ const ActionCreator = {
   fetchMoviesCommentsDataSuccess: (moviesComments) => ({
     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
     payload: moviesComments,
+  }),
+  postComment: () => ({
+    type: ActionTypes.POST_COMMENT_IN_PROGRESS,
+  }),
+  postCommentSuccess: () => ({
+    type: ActionTypes.POST_COMMENT_SUCCESS,
+  }),
+  postCommentError: () => ({
+    type: ActionTypes.POST_COMMENT_ERROR,
   }),
 };
 
@@ -46,6 +59,19 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         loadingComments: false,
         moviesComments: state.moviesComments.concat(action.payload)
+      });
+    case ActionTypes.POST_COMMENT_IN_PROGRESS:
+      return extendObject(state, {
+        postCommentInProgress: true,
+      });
+    case ActionTypes.POST_COMMENT_SUCCESS:
+      return extendObject(state, {
+        postCommentInProgress: false,
+      });
+    case ActionTypes.POST_COMMENT_ERROR:
+      return extendObject(state, {
+        postCommentInProgress: false,
+        postCommentError: true,
       });
     default:
       return state;

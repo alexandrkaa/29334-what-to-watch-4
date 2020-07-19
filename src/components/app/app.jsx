@@ -6,7 +6,7 @@ import {MovieCardFullTabsIds, AppRoutes} from '../../consts/consts.js';
 import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video-player.jsx';
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import SignIn from '../sign-in/sign-in.jsx';
-import AddReview from '../add-review/add-review.jsx';
+import AddComment from '../add-comment/add-comment.jsx';
 
 const WithMovieFullScreenVideoPlayer = withMovie(FullScreenVideoPlayer);
 const WithMovieMovieCardFull = withMovie(MovieCardFull);
@@ -31,7 +31,7 @@ const App = () => {
         <Route exact path={`${AppRoutes.FILM_PAGE}/:id${AppRoutes.REVIEW_PAGE}`} render={
           (routeProps) => {
             return (
-              <AddReview
+              <AddComment
                 movieId={parseInt(routeProps.match.params.id, 10)}
                 {...routeProps}
               />

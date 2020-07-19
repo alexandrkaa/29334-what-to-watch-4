@@ -12,7 +12,9 @@ import {
 } from './data/movies-data/selectors.js';
 
 import {
-  getMoviesComments
+  getMoviesComments,
+  isPostCommentInProgress,
+  isPostCommentHasError,
 } from './data/comments-data/selectors.js';
 
 import {
@@ -44,11 +46,14 @@ export const getFilteredMovies = createSelector(
 export {
   getMovies,
   getTitleMovie,
-  getMoviesComments,
   getMoviesLoadingStatus,
   getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMoviesLoadingErrorStatus,
+
+  getMoviesComments,
+  isPostCommentInProgress,
+  isPostCommentHasError,
 
   getMovieByIdFromState,
   getActiveGenre,

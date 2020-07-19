@@ -51,7 +51,7 @@ it(`<GenreFilterList /> should match snapshot`, () => {
   ];
   const activeGenre = `New genre`;
   const store = mockStore({
-    DATA: {
+    MOVIE_DATA: {
       moviesList,
       movieGenres,
       onChangeActiveGenre: jest.fn()

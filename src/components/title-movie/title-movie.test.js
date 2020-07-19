@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
+import {TitleMovie} from './title-movie.jsx';
+import {BrowserRouter} from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import App from './app';
-import {MOVIES_LIMIT} from '../../consts/consts.js';
+import {Provider} from 'react-redux';
 
 const mockStore = configureStore([]);
 
@@ -60,7 +60,7 @@ const mockData = {
       movieRatingCount: `272 ratings`,
       movieRatingLevel: `Normal`,
       movieRatingScore: `2`,
-      movieStarring: `Jude Law, Willem Dafoe, James Franco, Jason Statham, Tom Hardy, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinso`,
+      movieStarring: [`Jude Law`, `Willem Dafoe`],
       title: `Johnny English`,
       moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
       backgroundColor: `#000000`,
@@ -74,44 +74,62 @@ const mockData = {
   ]
 };
 
-describe(`<App /> should render`, () => {
-  it(`<App /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
-    const {titleMovie, moviesList, movieGenres} = mockData;
-    const store = mockStore({
-      MOVIE_DATA: {
-        titleMovie,
-        moviesList,
-        movieGenres,
-        loadingMovies: false,
-        loadingMoviesError: false,
-      },
-      MOVIE: {
-        activeGenre: `All genres`,
-        moviesRenderLimit: MOVIES_LIMIT,
-      },
-      USER: {
-        authorizationStatus: `AUTH`,
-        userData: {
-          id: 1,
-          email: `qwe@qwe.ru`,
-          name: `qwe`,
-          avatarUrl: `/img/avatar.jpg`
-        }
+it(`<TitleMovie /> should match snapshot`, () => {
+  const {titleMovie, moviesList, movieGenres} = mockData;
+  const store = mockStore({
+    MOVIE_DATA: {
+      titleMovie,
+      moviesList,
+      movieGenres,
+      loadingMovies: false,
+      loadingMoviesError: false,
+    },
+    MOVIE: {
+      activeGenre: `All genres`,
+      moviesRenderLimit: 8,
+    },
+    USER: {
+      authorizationStatus: `AUTH`,
+      userData: {
+        id: 1,
+        email: `qwe@qwe.ru`,
+        name: `qwe`,
+        avatarUrl: `/img/avatar.jpg`
       }
-    });
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <App />
-          </Provider>,
-          {
-            createNodeMock: () => {
-              return {};
-            }
-          }
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    }
   });
-
+  const mockMovie = {
+    id: 3,
+    image: `img/aviator.jpg`,
+    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
+    movieDate: `2008`,
+    movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
+    movieDirector: `Christopher Nolan`,
+    movieGenre: `Kids & Family`,
+    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
+    movieRatingCount: `272 ratings`,
+    movieRatingLevel: `Normal`,
+    movieRatingScore: `2`,
+    movieStarring: [`Jude Law`, `Willem Dafoe`],
+    title: `Johnny English`,
+    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    backgroundColor: `#000000`,
+    movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    isFavorite: false,
+  };
+  const history = {};
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <BrowserRouter>
+            <TitleMovie
+              movie={mockMovie}
+              history={history}
+              isAuthorized={true}
+            />
+          </BrowserRouter>
+        </Provider>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });

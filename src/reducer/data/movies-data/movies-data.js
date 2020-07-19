@@ -7,18 +7,14 @@ const ActionTypes = {
   FETCH_MOVIES_DATA_ERROR: `FETCH_MOVIES_DATA_ERROR`,
   FETCH_TITLE_MOVIE: `FETCH_TITLE_MOVIE`,
   FETCH_TITLE_MOVIE_SUCCESS: `FETCH_TITLE_MOVIE_SUCCESS`,
-  // FETCH_MOVIES_COMMENTS_DATA: `FETCH_MOVIES_COMMENTS_DATA`,
-  // FETCH_MOVIES_COMMENTS_DATA_SUCCESS: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
 };
 
 const initialState = {
   loadingMovies: false,
   loadingMoviesError: false,
-  // loadingComments: false,
   loadingTitleMovie: false,
   moviesList: [],
   titleMovie: {},
-  // moviesComments: [],
 };
 
 const ActionCreator = {

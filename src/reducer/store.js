@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../reducer/data/movies-data/movies-data.js';
+import {ActionCreator as MoviesDataActionCreator, Operation as MoviesDataOperation} from '../reducer/data/movies-data/movies-data.js';
+import {ActionCreator as CommentsDataActionCreator} from '../reducer/data/comments-data/comments-data.js';
 import {ActionCreator as UserActionCreator, AuthorizationStatus} from '../reducer/user/user.js';
 import createAPI from '../api/api.js';
 import reducer from './reducer.js';
@@ -21,14 +22,14 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataActionCreator.fetchMoviesData());
-store.dispatch(DataActionCreator.fetchTitleMovie());
+store.dispatch(MoviesDataActionCreator.fetchMoviesData());
+store.dispatch(MoviesDataActionCreator.fetchTitleMovie());
 
-store.dispatch(DataActionCreator.fetchTitleMovieSuccess(titleMovie));
-store.dispatch(DataOperation.fetchMoviesData());
+store.dispatch(MoviesDataActionCreator.fetchTitleMovieSuccess(titleMovie));
+store.dispatch(MoviesDataOperation.fetchMoviesData());
 
-store.dispatch(DataActionCreator.fetchMoviesCommentsData());
-store.dispatch(DataActionCreator.fetchMoviesCommentsDataSuccess(moviesComments));
+store.dispatch(CommentsDataActionCreator.fetchMoviesCommentsData());
+store.dispatch(CommentsDataActionCreator.fetchMoviesCommentsDataSuccess(moviesComments));
 
 
 export default store;

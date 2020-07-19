@@ -4,13 +4,16 @@ import {DEFAULT_GENRE, GENRES_LIMIT} from '../consts/consts.js';
 import {
   getMovies,
   getTitleMovie,
-  getMoviesComments,
   getMoviesLoadingStatus,
   getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
 } from './data/movies-data/selectors.js';
+
+import {
+  getMoviesComments
+} from './data/comments-data/selectors.js';
 
 import {
   getActiveGenre,

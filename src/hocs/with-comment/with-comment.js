@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {isValidField} from '../../utils/filters.js';
-import {FiledsIds, AppRoutes} from '../../consts/consts.js';
+import {AppRoutes} from '../../consts/consts.js';
 import {Operation as CommentsOperation} from '../../reducer/data/comments-data/comments-data.js';
 import PropTypes from 'prop-types';
 import {getAuthorizationStatusBoolean, isPostCommentHasError, isPostCommentInProgress} from '../../reducer/selectors.js';
@@ -20,19 +19,14 @@ const withComment = (Component) => {
       this._handleRadioChange = this._handleRadioChange.bind(this);
       this._handleTextAreaChange = this._handleTextAreaChange.bind(this);
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
-      this.props.checkAuth();
     }
 
     _handleRadioChange(rating) {
-      this.setState({
-        rating
-      });
+      this.setState({rating});
     }
 
     _handleTextAreaChange(comment) {
-      this.setState({
-        comment
-      });
+      this.setState({comment});
     }
 
     _handleFormSubmit(evt) {
@@ -46,12 +40,8 @@ const withComment = (Component) => {
       });
     }
 
-    componentDidUpdate(prevState) {
-      if (prevState.comment !== this.state.comment || prevState.rating !== this.state.rating) {
-        this.setState({
-          isFormValid: isValidField(FiledsIds.RATING_FIELD_ID, this.state.rating) && isValidField(FiledsIds.COMMENTS_FIELD_ID, this.state.comment),
-        });
-      }
+    componentDidMount() {
+      this.props.checkAuth();
     }
 
     render() {

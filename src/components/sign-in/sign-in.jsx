@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import InputField from '../input-filed/input-field.jsx';
-import {SignInFields, FiledsIds, NetworkErrors, AppRoutes} from '../../consts/consts.js';
+import {SignInFields, FiledsIds, NetworkErrors, AppRoutes, ComponentsKeys} from '../../consts/consts.js';
 import {isValidField} from '../../utils/filters.js';
 import {connect} from 'react-redux';
 import {getAuthorizationStatusBoolean, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from '../../reducer/user/user.js';
 import {Redirect} from 'react-router-dom';
+
+import UserProfile from '../user-profile/user-profile.jsx';
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -23,7 +25,6 @@ class SignIn extends React.PureComponent {
     this.state = initialState;
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
-    this.props.checkAuth();
   }
 
   _handleInputChange(id, value) {
@@ -53,6 +54,10 @@ class SignIn extends React.PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.props.checkAuth();
+  }
+
   render() {
     if (this.props.isAuthorized) {
       return (
@@ -63,7 +68,8 @@ class SignIn extends React.PureComponent {
       <div className="user-page">
 
         <Header headerClassName="user-page__head" >
-          {<h1 className="page-title user-page__title">Sign in</h1>}
+          <h1 className="page-title user-page__title">Sign in</h1>
+          <UserProfile key={ComponentsKeys.USERPROFILE} />
         </Header>
 
         <div className="sign-in user-page__content">

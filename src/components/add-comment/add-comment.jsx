@@ -4,16 +4,16 @@ import withMovie from '../../hocs/with-movie/with-movie.js';
 import {movieType} from '../../types/types.js';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs.jsx';
 import AddCommentForm from '../add-comment-form/add-comment-form.jsx';
+import UserProfile from '../user-profile/user-profile.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
 
 const AddComment = (props) => {
   const {
-    movie: {
-      id: movieId,
-      title,
-      movieImage,
-      movieBackground,
-    }
-  } = props;
+    id: movieId,
+    title,
+    movieImage,
+    movieBackground,
+  } = props.movie;
 
   return (
     <section className="movie-card movie-card--full">
@@ -23,14 +23,10 @@ const AddComment = (props) => {
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
-
-        <Header
-          renderBreadCrumbs={
-            () => {
-              return (<Breadcrumbs movie={props.movie} />);
-            }
-          }
-        />
+        <Header>
+          <Breadcrumbs key={ComponentsKeys.BREADCRUMBS} movie={props.movie} />
+          <UserProfile key={ComponentsKeys.USERPROFILE} />
+        </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src={movieImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />

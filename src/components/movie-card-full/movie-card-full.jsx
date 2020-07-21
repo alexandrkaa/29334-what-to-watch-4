@@ -12,6 +12,8 @@ import {moviesListType, movieType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
+import UserProfile from '../user-profile/user-profile.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
 
 const MovieCardFull = (props) => {
   const {movie, similarMovies, activeItem, onActiveItemChange, isAuthorized} = props;
@@ -65,7 +67,9 @@ const MovieCardFull = (props) => {
             <img src={movieBackground} alt={title} />
           </div>
 
-          <Header />
+          <Header>
+            <UserProfile key={ComponentsKeys.USERPROFILE} />
+          </Header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">

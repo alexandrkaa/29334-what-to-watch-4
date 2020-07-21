@@ -53,6 +53,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(userAdapter(response.data)));
+      }).catch(() => {
+
       });
   },
 

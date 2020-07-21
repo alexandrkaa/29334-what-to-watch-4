@@ -5,22 +5,6 @@ import movieAdapter from '../../../adapters/movie/movie-adapter.js';
 
 const api = createAPI(() => {});
 
-// const comments = [{
-//   author: `Alessio Parkes`,
-//   date: `11.03.2009`,
-//   id: 1000,
-//   movieId: 1,
-//   rating: 4,
-//   text: `And all the clouds that lour'd upon our house. In the deep bosom of the ocean buried. Now are our brows bound with victorious wreaths Our bruised arms hung up for monuments Our stern alarums changed to merry meetings. Our dreadful marches to delightful measures Grim-visaged war hath smooth'd his wrinkled front And now, instead of mounting barded steeds. To fright the souls of fearful adversaries He capers nimbly in a lady's chamber. To the lascivious pleasing of a lute But I, that am not shaped for sportive tricks, Nor made to court an amorous looking-glass`
-// }, {
-//   author: `Jordi Joseph`,
-//   date: `11.03.2009`,
-//   id: 1000,
-//   movieId: 2,
-//   rating: 4,
-//   text: `And all the clouds that lour'd upon our house. In the deep bosom of the ocean buried. Now are our brows bound with victorious wreaths Our bruised arms hung up for monuments Our stern alarums changed to merry meetings. Our dreadful marches to delightful measures Grim-visaged war hath smooth'd his wrinkled front And now, instead of mounting barded steeds. To fright the souls of fearful adversaries He capers nimbly in a lady's chamber. To the lascivious pleasing of a lute`
-// }];
-
 const moviesList = [
   {
     id: 4,
@@ -120,47 +104,6 @@ describe(`Reducer works correctly`, () => {
     });
   });
 
-  // it(`Should reducer fetch comments data`, () => {
-  //   expect(reducer({
-  //     loadingMovies: false,
-  //     loadingComments: false,
-  //     loadingTitleMovie: false,
-  //     moviesList: [],
-  //     titleMovie: {},
-  //     moviesComments: [],
-  //   }, {
-  //     type: `FETCH_MOVIES_COMMENTS_DATA`,
-  //   })).toEqual({
-  //     loadingMovies: false,
-  //     loadingComments: true,
-  //     loadingTitleMovie: false,
-  //     moviesList: [],
-  //     titleMovie: {},
-  //     moviesComments: [],
-  //   });
-  // });
-
-  // it(`Should reducer fetch comments data success`, () => {
-  //   expect(reducer({
-  //     loadingMovies: false,
-  //     loadingComments: true,
-  //     loadingTitleMovie: false,
-  //     moviesList: [],
-  //     titleMovie: {},
-  //     moviesComments: [],
-  //   }, {
-  //     type: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
-  //     payload: comments
-  //   })).toEqual({
-  //     loadingMovies: false,
-  //     loadingComments: false,
-  //     loadingTitleMovie: false,
-  //     moviesList: [],
-  //     titleMovie: {},
-  //     moviesComments: comments,
-  //   });
-  // });
-
   it(`Should reducer fetch title movie`, () => {
     expect(reducer({
       loadingMovies: false,
@@ -208,20 +151,6 @@ describe(`Action creators work correctly`, () => {
       payload: moviesList
     });
   });
-
-  // it(`Action creator fetch movies comments data returns correct action`, () => {
-  //   expect(ActionCreator.fetchMoviesCommentsData()).toEqual({
-  //     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
-  //   });
-  // });
-
-  // it(`Action creator fetch movies comments data success returns correct action`, () => {
-
-  //   expect(ActionCreator.fetchMoviesCommentsDataSuccess(comments)).toEqual({
-  //     type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
-  //     payload: comments
-  //   });
-  // });
 
   it(`Action creator fetch title movie returns correct action`, () => {
     expect(ActionCreator.fetchTitleMovie()).toEqual({

@@ -1,7 +1,6 @@
-const commentAdapter = (comment, movieId) => {
+const commentAdapter = (comment) => {
   return {
     id: comment.id,
-    movieId,
     author: {
       id: comment.user.id,
       name: comment.user.name

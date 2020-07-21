@@ -21,12 +21,8 @@ const Operation = {
       rating: commentData.rating,
       comment: commentData.comment,
     })
-    .then(() => {
-      dispatch(ActionCreator.POST_COMMENT_SUCCESS);
-    })
-    .catch(() => {
-      dispatch(ActionCreator.POST_COMMENT_ERROR);
-    });
+    .then(() => dispatch(ActionCreator.postCommentSuccess))
+    .catch(() => dispatch(ActionCreator.postCommentError));
   }
 };
 

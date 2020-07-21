@@ -29,7 +29,7 @@ UserProfile.propTypes = {
     name: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
   }),
-  isAuthorized: PropTypes.bool.isRequired,
+  isAuthorized: PropTypes.bool,
 };
 
 export default UserProfile;

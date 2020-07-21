@@ -4,6 +4,8 @@ import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
+import UserProfile from '../user-profile/user-profile.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
 
 const TitleMovie = (props) => {
   const {
@@ -29,7 +31,10 @@ const TitleMovie = (props) => {
         <img src={movieBackground} alt="The Grand Budapest Hotel"/>
       </div>
 
-      <Header />
+
+      <Header>
+        <UserProfile key={ComponentsKeys.USERPROFILE} />
+      </Header>
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">

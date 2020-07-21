@@ -7,7 +7,7 @@ export const getMoviesComments = (state) => {
 };
 
 export const isPostCommentInProgress = (state) => {
-  return state[NAME_SPACE].moviesComments;
+  return state[NAME_SPACE].postCommentInProgress;
 };
 
 export const isPostCommentHasError = (state) => {

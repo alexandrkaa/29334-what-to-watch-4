@@ -5,6 +5,8 @@ import InputTextarea from '../input-textarea/input-textarea.jsx';
 import {REVIEW_STARS_NUMBER} from '../../consts/consts.js';
 import withReview from '../../hocs/with-comment/with-comment.js';
 import Error from '../error/error.jsx';
+import {isValidField} from '../../utils/filters.js';
+import {FiledsIds} from '../../consts/consts.js';
 
 const AddCommentForm = (props) => {
   const {
@@ -12,7 +14,6 @@ const AddCommentForm = (props) => {
     onRadioChange,
     comment,
     rating,
-    isFormValid,
     onFormSubmit,
     postCommentInProgress,
     postCommentError,
@@ -22,6 +23,8 @@ const AddCommentForm = (props) => {
       <Error />
     );
   }
+
+  const isFormValid = isValidField(FiledsIds.RATING_FIELD_ID, rating) && isValidField(FiledsIds.COMMENTS_FIELD_ID, comment);
 
   return (
     <div className="add-review">
@@ -37,7 +40,7 @@ const AddCommentForm = (props) => {
         <div className="add-review__text">
           <InputTextarea onTextAreaChange={onTextAreaChange} isDisabled={postCommentInProgress} comment={comment} />
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit" disabled={!isFormValid && postCommentInProgress}>Post</button>
+            <button className="add-review__btn" type="submit" disabled={!isFormValid || postCommentInProgress}>Post</button>
           </div>
 
         </div>

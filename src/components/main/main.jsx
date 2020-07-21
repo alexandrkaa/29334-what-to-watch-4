@@ -19,20 +19,13 @@ import Loader from '../loader/loader.jsx';
 import Error from '../error/error.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
+import UserProfile from '../user-profile/user-profile.jsx';
 
 const Main = (props) => {
   const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError, isAuthorized} = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
-  if (loadingMoviesError) {
-    return (
-      <React.Fragment>
-        <Header />
-        <Error />
-        <Footer />
-      </React.Fragment>
-    );
-  }
-  if (!loadingMovies) {
+  if (!loadingMovies && !loadingMoviesError) {
     return (
       <React.Fragment>
         <TitleMovie isAuthorized={isAuthorized} movie={titleMovie} />
@@ -54,8 +47,11 @@ const Main = (props) => {
   }
   return (
     <React.Fragment>
-      <Header />
-      <Loader />
+      <Header>
+        <UserProfile key={ComponentsKeys.USERPROFILE} />
+      </Header>
+      {loadingMovies && <Loader />}
+      {loadingMoviesError && <Error />}
       <Footer />
     </React.Fragment>
   );

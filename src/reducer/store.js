@@ -30,8 +30,7 @@ store.dispatch(MoviesDataActionCreator.fetchTitleMovie());
 store.dispatch(MoviesDataActionCreator.fetchTitleMovieSuccess(titleMovie));
 store.dispatch(MoviesDataOperation.fetchMoviesData());
 
-store.dispatch(CommentsDataActionCreator.fetchMoviesCommentsData());
-store.dispatch(CommentsDataActionCreator.fetchMoviesCommentsDataSuccess(moviesComments));
-
+store.dispatch(CommentsDataActionCreator.fetchCommentsData());
+store.dispatch(CommentsDataActionCreator.fetchCommentsDataSuccess(moviesComments));
 
 export default store;

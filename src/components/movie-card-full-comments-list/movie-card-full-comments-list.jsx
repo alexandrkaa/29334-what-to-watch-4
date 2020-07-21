@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MovieCardFullReview from '../movie-card-full-review/movie-card-full-review.jsx';
+import MovieCardFullReview from '../movie-card-full-comment/movie-card-full-comment.jsx';
 
-const MovieCardFullReviewsList = (props) => {
+const MovieCardFullCommentsList = (props) => {
   const {comments} = props;
   return (
     <div className="movie-card__reviews-col">
@@ -11,7 +11,7 @@ const MovieCardFullReviewsList = (props) => {
   );
 };
 
-MovieCardFullReviewsList.propTypes = {
+MovieCardFullCommentsList.propTypes = {
   comments: PropTypes.arrayOf(
       PropTypes.exact({
         movieId: PropTypes.number.isRequired,
@@ -24,4 +24,4 @@ MovieCardFullReviewsList.propTypes = {
   ),
 };
 
-export default MovieCardFullReviewsList;
+export default MovieCardFullCommentsList;

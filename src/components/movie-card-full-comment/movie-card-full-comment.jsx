@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MovieCardFullReview = (props) => {
+const MovieCardFullComment = (props) => {
   const {comment} = props;
   return (
     <div key={comment.id} className="review">
@@ -19,7 +19,7 @@ const MovieCardFullReview = (props) => {
   );
 };
 
-MovieCardFullReview.propTypes = {
+MovieCardFullComment.propTypes = {
   comment: PropTypes.exact({
     id: PropTypes.number.isRequired,
     movieId: PropTypes.number.isRequired,
@@ -30,4 +30,4 @@ MovieCardFullReview.propTypes = {
   }),
 };
 
-export default MovieCardFullReview;
+export default MovieCardFullComment;

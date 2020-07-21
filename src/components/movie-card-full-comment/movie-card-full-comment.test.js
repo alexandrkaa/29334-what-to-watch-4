@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCardFullReview from './movie-card-full-review.jsx';
+import MovieCardFullComment from './movie-card-full-comment.jsx';
 
 const comment = {
   movieId: 1,
@@ -11,10 +11,10 @@ const comment = {
   rating: 3,
 };
 
-it(`<MovieCardFullReview /> should match snapshot`, () => {
+it(`<MovieCardFullComment /> should match snapshot`, () => {
   const tree = renderer
     .create(
-        <MovieCardFullReview
+        <MovieCardFullComment
           comment={comment}
         />
     )

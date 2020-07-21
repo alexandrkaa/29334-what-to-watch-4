@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCardFullReviews from './movie-card-full-reviews.jsx';
+import MovieCardFullComments from './movie-card-full-comments.jsx';
 
 const comments = [
   {
@@ -24,7 +24,7 @@ const comments = [
 it(`<MovieCardFullReviews /> should match snapshot`, () => {
   const tree = renderer
     .create(
-        <MovieCardFullReviews
+        <MovieCardFullComments
           comments={comments}
         />
     )

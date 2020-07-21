@@ -1,11 +1,12 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {AppRoutes} from '../../consts/consts.js';
+import {AppRoutes, FiledsIds} from '../../consts/consts.js';
 import {Operation as CommentsOperation} from '../../reducer/data/comments-data/comments-data.js';
 import PropTypes from 'prop-types';
 import {getAuthorizationStatusBoolean, isPostCommentHasError, isPostCommentInProgress} from '../../reducer/selectors.js';
 import {Redirect} from 'react-router-dom';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {isValidField} from '../../utils/filters.js';
 
 const withComment = (Component) => {
   class WithCommentHOC extends PureComponent {
@@ -45,8 +46,9 @@ const withComment = (Component) => {
     }
 
     render() {
-      const {comment, rating, isFormValid} = this.state;
+      const {comment, rating} = this.state;
       const {isAuthorized, postCommentInProgress, postCommentError} = this.props;
+      const isFormValid = isValidField(FiledsIds.RATING_FIELD_ID, this.state.rating) && isValidField(FiledsIds.COMMENTS_FIELD_ID, this.state.comment);
       if (!isAuthorized) {
         return (
           <Redirect to={AppRoutes.LOGIN_PAGE} />

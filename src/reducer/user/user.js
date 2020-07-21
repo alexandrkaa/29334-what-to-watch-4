@@ -54,7 +54,7 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(userAdapter(response.data)));
       }).catch(() => {
-
+        // не обрабатываем ошибку, тк в interceptors axios если пользователь не авторизован уже вызывается dispatch для установки статуса авторизации
       });
   },
 

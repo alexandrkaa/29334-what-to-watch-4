@@ -130,8 +130,10 @@ Array [
               </span>
             </button>
             <a
+              aria-current={null}
               className="btn movie-card__button"
-              href="add-review.html"
+              href="/films/4/review"
+              onClick={[Function]}
             >
               Add review
             </a>

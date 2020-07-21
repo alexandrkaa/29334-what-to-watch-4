@@ -212,6 +212,7 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
               onMovieTitleClick={onMovieTitleClick}
               tabs={mockTabs}
               history={{}}
+              isAuthorized={true}
             />
           </BrowserRouter>
         </Provider>,

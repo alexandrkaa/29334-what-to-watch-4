@@ -78,7 +78,7 @@ describe(`<App /> should render`, () => {
   it(`<App /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
     const {titleMovie, moviesList, movieGenres} = mockData;
     const store = mockStore({
-      DATA: {
+      MOVIE_DATA: {
         titleMovie,
         moviesList,
         movieGenres,

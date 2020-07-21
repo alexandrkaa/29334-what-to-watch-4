@@ -11,9 +11,12 @@ import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
+import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
+import UserProfile from '../user-profile/user-profile.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
 
 const MovieCardFull = (props) => {
-  const {movie, similarMovies, activeItem, onActiveItemChange} = props;
+  const {movie, similarMovies, activeItem, onActiveItemChange, isAuthorized} = props;
   const {
     movieImage,
     title,
@@ -64,7 +67,9 @@ const MovieCardFull = (props) => {
             <img src={movieBackground} alt={title} />
           </div>
 
-          <Header />
+          <Header>
+            <UserProfile key={ComponentsKeys.USERPROFILE} />
+          </Header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -74,21 +79,12 @@ const MovieCardFull = (props) => {
                 <span className="movie-card__year">{movieDate}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <button onClick={_handlePlayButton} className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
-              </div>
+              <MovieCardFullButtons
+                onPlay={_handlePlayButton}
+                movieId={movie.id}
+                isReviewVisible={isAuthorized}
+              />
+
             </div>
           </div>
         </div>
@@ -133,6 +129,7 @@ MovieCardFull.propTypes = {
   activeItem: PropTypes.string.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 export {MovieCardFull};

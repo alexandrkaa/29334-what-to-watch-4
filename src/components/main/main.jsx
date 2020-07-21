@@ -5,22 +5,30 @@ import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
 import TitleMovie from '../title-movie/title-movie.jsx';
-import Footer from '../footer/footer.jsx';
-import {getFilteredMovies, getTitleMovie, getMoviesLoadingStatus, getMoviesRenderLimit, getActiveGenre, getMoviesLoadingErrorStatus} from '../../reducer/selectors.js';
+import {
+  getFilteredMovies,
+  getTitleMovie,
+  getMoviesLoadingStatus,
+  getMoviesRenderLimit,
+  getActiveGenre,
+  getMoviesLoadingErrorStatus,
+  getAuthorizationStatusBoolean
+} from '../../reducer/selectors.js';
 import {connect} from 'react-redux';
 import Loader from '../loader/loader.jsx';
 import Error from '../error/error.jsx';
+import Header from '../header/header.jsx';
+import Footer from '../footer/footer.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
+import UserProfile from '../user-profile/user-profile.jsx';
 
 const Main = (props) => {
-  const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError} = props;
+  const {titleMovie, moviesList, activeGenre, moviesRenderLimit, loadingMovies, loadingMoviesError, isAuthorized} = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
-  if (loadingMoviesError) {
-    return <Error />;
-  }
-  if (!loadingMovies) {
+  if (!loadingMovies && !loadingMoviesError) {
     return (
       <React.Fragment>
-        <TitleMovie movie={titleMovie} />
+        <TitleMovie isAuthorized={isAuthorized} movie={titleMovie} />
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -37,7 +45,16 @@ const Main = (props) => {
       </React.Fragment>
     );
   }
-  return <Loader />;
+  return (
+    <React.Fragment>
+      <Header>
+        <UserProfile key={ComponentsKeys.USERPROFILE} />
+      </Header>
+      {loadingMovies && <Loader />}
+      {loadingMoviesError && <Error />}
+      <Footer />
+    </React.Fragment>
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -48,6 +65,7 @@ const mapStateToProps = (state) => {
     moviesRenderLimit: getMoviesRenderLimit(state),
     loadingMovies: getMoviesLoadingStatus(state),
     loadingMoviesError: getMoviesLoadingErrorStatus(state),
+    isAuthorized: getAuthorizationStatusBoolean(state),
   };
 };
 
@@ -58,6 +76,7 @@ Main.propTypes = {
   moviesRenderLimit: PropTypes.number.isRequired,
   loadingMovies: PropTypes.bool.isRequired,
   loadingMoviesError: PropTypes.bool.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 export {Main};

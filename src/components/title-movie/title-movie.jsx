@@ -3,16 +3,22 @@ import {movieType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
+import UserProfile from '../user-profile/user-profile.jsx';
+import {ComponentsKeys} from '../../consts/consts.js';
 
 const TitleMovie = (props) => {
   const {
-    title,
-    movieGenre,
-    movieDate,
-    movieImage,
-    movieBackground,
-    id: movieId,
-  } = props.movie;
+    movie: {
+      title,
+      movieGenre,
+      movieDate,
+      movieImage,
+      movieBackground,
+      id: movieId,
+    },
+    isAuthorized,
+  } = props;
 
   const _handlePlayClick = (evt) => {
     evt.preventDefault();
@@ -25,7 +31,10 @@ const TitleMovie = (props) => {
         <img src={movieBackground} alt="The Grand Budapest Hotel"/>
       </div>
 
-      <Header />
+
+      <Header>
+        <UserProfile key={ComponentsKeys.USERPROFILE} />
+      </Header>
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -41,20 +50,12 @@ const TitleMovie = (props) => {
               <span className="movie-card__year">{movieDate}</span>
             </p>
 
-            <div className="movie-card__buttons">
-              <button onClick={_handlePlayClick} className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-            </div>
+            <MovieCardFullButtons
+              onPlay={_handlePlayClick}
+              movieId={movieId}
+              isReviewVisible={isAuthorized}
+            />
+
           </div>
         </div>
       </div>
@@ -65,6 +66,8 @@ const TitleMovie = (props) => {
 TitleMovie.propTypes = {
   movie: movieType.isRequired,
   history: PropTypes.object.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
+export {TitleMovie};
 export default withRouter(TitleMovie);

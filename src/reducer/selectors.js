@@ -4,13 +4,18 @@ import {DEFAULT_GENRE, GENRES_LIMIT} from '../consts/consts.js';
 import {
   getMovies,
   getTitleMovie,
-  getMoviesComments,
   getMoviesLoadingStatus,
   getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
-} from './data/selectors.js';
+} from './data/movies-data/selectors.js';
+
+import {
+  getMoviesComments,
+  isPostCommentInProgress,
+  isPostCommentHasError,
+} from './data/comments-data/selectors.js';
 
 import {
   getActiveGenre,
@@ -19,6 +24,7 @@ import {
 
 import {
   getAuthorizationStatus,
+  getAuthorizationStatusBoolean,
   getLoginStatusCode,
   getUserData,
   getIsLoading,
@@ -40,17 +46,21 @@ export const getFilteredMovies = createSelector(
 export {
   getMovies,
   getTitleMovie,
-  getMoviesComments,
   getMoviesLoadingStatus,
   getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMoviesLoadingErrorStatus,
+
+  getMoviesComments,
+  isPostCommentInProgress,
+  isPostCommentHasError,
 
   getMovieByIdFromState,
   getActiveGenre,
   getMoviesRenderLimit,
 
   getAuthorizationStatus,
+  getAuthorizationStatusBoolean,
   getLoginStatusCode,
   getUserData,
   getIsLoading

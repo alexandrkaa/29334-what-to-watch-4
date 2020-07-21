@@ -1,9 +1,14 @@
-import NameSpace from "../name-space.js";
+import NameSpace from '../name-space.js';
+import {AuthorizationStatus} from '../user/user.js';
 
 const NAME_SPACE = NameSpace.USER;
 
 export const getAuthorizationStatus = (state) => {
   return state[NAME_SPACE].authorizationStatus;
+};
+
+export const getAuthorizationStatusBoolean = (state) => {
+  return AuthorizationStatus.AUTH === getAuthorizationStatus(state);
 };
 
 export const getLoginStatusCode = (state) => {

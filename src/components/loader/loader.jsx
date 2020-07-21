@@ -1,11 +1,8 @@
 import React from 'react';
-import Header from '../header/header.jsx';
-import Footer from '../footer/footer.jsx';
 
 const Loader = () => {
   return (
     <React.Fragment>
-      <Header />
       <div style={{width: `100vw`, height: `calc(100vh - 94px - 138px)`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +28,6 @@ const Loader = () => {
           </path>
         </svg>
       </div>
-      <Footer />
     </React.Fragment>
   );
 };

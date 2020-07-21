@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {getMovieById} from '../../utils/filters.js';
 import {moviesListType} from '../../types/types.js';
 import Loader from '../../components/loader/loader.jsx';
-import {getMovies, getMoviesLoadingStatus} from '../../reducer/selectors.js';
+import {getMovies, getMoviesLoadingStatus, getAuthorizationStatus} from '../../reducer/selectors.js';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
 import {getSimilarMovies} from '../../utils/filters.js';
 
 const withMovie = (Component) => {
@@ -47,6 +48,7 @@ const withMovie = (Component) => {
     return {
       moviesList: getMovies(state),
       loadingMovies: getMoviesLoadingStatus(state),
+      isAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
     };
   };
 

@@ -33,17 +33,22 @@ export const BASE_URL = `https://htmlacademy-react-3.appspot.com`;
 export const BASE_API_URL = `${BASE_URL}/wtw`;
 export const API_REQUEST_TIMEOUT = 5000;
 
-export const EMAIL_FIELD_ID = `user-email`;
-export const PASSWORD_FIELD_ID = `user-password`;
+export const FiledsIds = {
+  EMAIL_FIELD_ID: `user-email`,
+  PASSWORD_FIELD_ID: `user-password`,
+  RATING_FIELD_ID: `rating`,
+  COMMENTS_FIELD_ID: `comments`,
+};
+
 export const SignInFields = [
   {
-    id: EMAIL_FIELD_ID,
+    id: FiledsIds.EMAIL_FIELD_ID,
     label: `Email address`,
     type: `email`,
     placeholder: `Email address`,
   },
   {
-    id: PASSWORD_FIELD_ID,
+    id: FiledsIds.PASSWORD_FIELD_ID,
     label: `Password`,
     type: `password`,
     placeholder: `Password`,
@@ -57,7 +62,20 @@ export const NetworkErrors = {
 
 export const AppRoutes = {
   MAIN_PAGE: `/`,
-  FULL_PLAYER_PAGE: `/player/:id`,
-  FILM_PAGE: `/films/:id`,
+  FULL_PLAYER_PAGE: `/player`,
+  FILM_PAGE: `/films`,
   LOGIN_PAGE: `/login`,
+  REVIEW_PAGE: `/review`,
+};
+
+export const REVIEW_STARS_NUMBER = 5;
+
+export const ReviewTextLength = {
+  MIN: 1,
+  MAX: 400,
+};
+
+export const ComponentsKeys = {
+  BREADCRUMBS: `Breadcrumbs`,
+  USERPROFILE: `UserProfile`,
 };

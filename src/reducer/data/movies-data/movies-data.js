@@ -1,5 +1,5 @@
-import {extendObject} from '../../utils/common.js';
-import movieAdapter from '../../adapters/movie/movie-adapter.js';
+import {extendObject} from '../../../utils/common.js';
+import movieAdapter from '../../../adapters/movie/movie-adapter.js';
 
 const ActionTypes = {
   FETCH_MOVIES_DATA: `FETCH_MOVIES_DATA`,
@@ -7,18 +7,14 @@ const ActionTypes = {
   FETCH_MOVIES_DATA_ERROR: `FETCH_MOVIES_DATA_ERROR`,
   FETCH_TITLE_MOVIE: `FETCH_TITLE_MOVIE`,
   FETCH_TITLE_MOVIE_SUCCESS: `FETCH_TITLE_MOVIE_SUCCESS`,
-  FETCH_MOVIES_COMMENTS_DATA: `FETCH_MOVIES_COMMENTS_DATA`,
-  FETCH_MOVIES_COMMENTS_DATA_SUCCESS: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
 };
 
 const initialState = {
   loadingMovies: false,
   loadingMoviesError: false,
-  loadingComments: false,
   loadingTitleMovie: false,
   moviesList: [],
   titleMovie: {},
-  moviesComments: [],
 };
 
 const ActionCreator = {
@@ -31,13 +27,6 @@ const ActionCreator = {
   }),
   fetchMoviesDataError: () => ({
     type: ActionTypes.FETCH_MOVIES_DATA_ERROR,
-  }),
-  fetchMoviesCommentsData: () => ({
-    type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
-  }),
-  fetchMoviesCommentsDataSuccess: (moviesComments) => ({
-    type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
-    payload: moviesComments,
   }),
   fetchTitleMovie: () => ({
     type: ActionTypes.FETCH_TITLE_MOVIE,
@@ -73,15 +62,6 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.FETCH_MOVIES_DATA_ERROR:
       return extendObject(state, {
         loadingMoviesError: true,
-      });
-    case ActionTypes.FETCH_MOVIES_COMMENTS_DATA:
-      return extendObject(state, {
-        loadingComments: true,
-      });
-    case ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS:
-      return extendObject(state, {
-        loadingComments: false,
-        moviesComments: action.payload
       });
     case ActionTypes.FETCH_TITLE_MOVIE:
       return extendObject(state, {

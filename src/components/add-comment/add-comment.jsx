@@ -5,7 +5,6 @@ import {movieType} from '../../types/types.js';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs.jsx';
 import AddCommentForm from '../add-comment-form/add-comment-form.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
-import {ComponentsKeys} from '../../consts/consts.js';
 
 const AddComment = (props) => {
   const {
@@ -24,8 +23,8 @@ const AddComment = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
         <Header>
-          <Breadcrumbs key={ComponentsKeys.BREADCRUMBS} movie={props.movie} />
-          <UserProfile key={ComponentsKeys.USERPROFILE} />
+          <Breadcrumbs movie={props.movie} />
+          <UserProfile />
         </Header>
 
         <div className="movie-card__poster movie-card__poster--small">

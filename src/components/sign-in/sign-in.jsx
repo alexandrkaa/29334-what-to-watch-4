@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import InputField from '../input-filed/input-field.jsx';
-import {SignInFields, FiledsIds, NetworkErrors, AppRoutes, ComponentsKeys} from '../../consts/consts.js';
+import {SignInFields, FiledsIds, NetworkErrors, AppRoutes} from '../../consts/consts.js';
 import {isValidField} from '../../utils/filters.js';
 import {connect} from 'react-redux';
 import {getAuthorizationStatusBoolean, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
@@ -69,7 +69,7 @@ class SignIn extends React.PureComponent {
 
         <Header headerClassName="user-page__head" >
           <h1 className="page-title user-page__title">Sign in</h1>
-          <UserProfile key={ComponentsKeys.USERPROFILE} />
+          <UserProfile />
         </Header>
 
         <div className="sign-in user-page__content">

@@ -19,7 +19,6 @@ import Loader from '../loader/loader.jsx';
 import Error from '../error/error.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
-import {ComponentsKeys} from '../../consts/consts.js';
 import UserProfile from '../user-profile/user-profile.jsx';
 
 const Main = (props) => {
@@ -48,7 +47,7 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <Header>
-        <UserProfile key={ComponentsKeys.USERPROFILE} />
+        <UserProfile />
       </Header>
       {loadingMovies && <Loader />}
       {loadingMoviesError && <Error />}

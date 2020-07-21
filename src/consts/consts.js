@@ -74,8 +74,3 @@ export const ReviewTextLength = {
   MIN: 1,
   MAX: 400,
 };
-
-export const ComponentsKeys = {
-  BREADCRUMBS: `Breadcrumbs`,
-  USERPROFILE: `UserProfile`,
-};

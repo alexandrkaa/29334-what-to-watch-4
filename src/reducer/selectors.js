@@ -13,8 +13,9 @@ import {
 
 import {
   getMoviesComments,
-  isPostCommentInProgress,
-  isPostCommentHasError,
+  getIsPostCommentInProgress,
+  getIsPostCommentHasError,
+  getIsPostCommentSuccess,
 } from './data/comments-data/selectors.js';
 
 import {
@@ -52,8 +53,9 @@ export {
   getMoviesLoadingErrorStatus,
 
   getMoviesComments,
-  isPostCommentInProgress,
-  isPostCommentHasError,
+  getIsPostCommentInProgress,
+  getIsPostCommentHasError,
+  getIsPostCommentSuccess,
 
   getMovieByIdFromState,
   getActiveGenre,

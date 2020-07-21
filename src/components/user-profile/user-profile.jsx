@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import {NavLink, useLocation} from 'react-router-dom';
 import {AppRoutes} from '../../consts/consts.js';
 
+import {connect} from 'react-redux';
+import {getAuthorizationStatusBoolean, getUserData} from '../../reducer/selectors.js';
+
 const UserProfile = (props) => {
   const {userData, isAuthorized} = props;
   const _location = useLocation();
@@ -32,4 +35,12 @@ UserProfile.propTypes = {
   isAuthorized: PropTypes.bool,
 };
 
-export default UserProfile;
+const mapStateToProps = (state) => {
+  return {
+    isAuthorized: getAuthorizationStatusBoolean(state),
+    userData: getUserData(state),
+  };
+};
+
+export {UserProfile};
+export default connect(mapStateToProps)(UserProfile);

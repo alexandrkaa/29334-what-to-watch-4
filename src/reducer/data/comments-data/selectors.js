@@ -6,10 +6,14 @@ export const getMoviesComments = (state) => {
   return state[NAME_SPACE].moviesComments;
 };
 
-export const isPostCommentInProgress = (state) => {
+export const getIsPostCommentInProgress = (state) => {
   return state[NAME_SPACE].postCommentInProgress;
 };
 
-export const isPostCommentHasError = (state) => {
+export const getIsPostCommentHasError = (state) => {
   return state[NAME_SPACE].postCommentError;
+};
+
+export const getIsPostCommentSuccess = (state) => {
+  return state[NAME_SPACE].postCommentSuccess;
 };

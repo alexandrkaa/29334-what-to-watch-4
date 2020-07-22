@@ -10,10 +10,6 @@ export const getTitleMovie = (state) => {
   return state[NAME_SPACE].titleMovie;
 };
 
-// export const getMoviesComments = (state) => {
-//   return state[NAME_SPACE].moviesComments;
-// };
-
 export const getMoviesLoadingStatus = (state) => {
   return state[NAME_SPACE].loadingMovies;
 };

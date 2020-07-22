@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getMoviesComments} from '../../reducer/selectors.js';
+import {getMoviesComments, getCommentsLoadingStatus, getCommentsErrorStatus} from '../../reducer/selectors.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsDataActionCreator} from '../../reducer/data/comments-data/comments-data.js';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
 import {MovieCardFullTabsIds, MovieCardFullTabs} from '../../consts/consts.js';
 import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-overview.jsx';
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullComments from '../movie-card-full-comments/movie-card-full-comments.jsx';
-// import {randomComments} from '../../mocks/film.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MoviesList from '../movie-list/movie-list.jsx';
 import {moviesListType, movieType} from '../../types/types.js';
@@ -45,7 +44,7 @@ class MovieCardFull extends PureComponent {
   }
 
   _renderTabsContent() {
-    const comments = this.props.comments || [];
+    const {comments, isLoadingComments, isLoadingCommentsError} = this.props;
     switch (this.props.activeItem) {
       case MovieCardFullTabsIds.OVERVIEW:
         return (<MovieCardFullOverView movie={this.props.movie} />);
@@ -54,7 +53,14 @@ class MovieCardFull extends PureComponent {
         return (<MovieCardFullDetails movie={this.props.movie} />);
 
       case MovieCardFullTabsIds.REVIEWS:
-        return (<MovieCardFullComments movie={this.props.movie} comments={comments} />);
+        return (
+          <MovieCardFullComments
+            movie={this.props.movie}
+            comments={comments}
+            isLoadingComments={isLoadingComments}
+            isLoadingCommentsError={isLoadingCommentsError}
+          />
+        );
     }
     return (<MovieCardFullOverView movie={this.props.movie} />);
   }
@@ -146,11 +152,15 @@ MovieCardFull.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   fetchComments: PropTypes.func.isRequired,
   comments: PropTypes.array.isRequired,
+  isLoadingComments: PropTypes.bool.isRequired,
+  isLoadingCommentsError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
     comments: getMoviesComments(state, ownProps.movie.id),
+    isLoadingComments: getCommentsLoadingStatus(state),
+    isLoadingCommentsError: getCommentsErrorStatus(state),
   };
 };
 

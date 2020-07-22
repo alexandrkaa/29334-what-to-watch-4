@@ -6,6 +6,14 @@ export const getMoviesComments = (state, movieId) => {
   return state[NAME_SPACE].moviesComments[movieId];
 };
 
+export const getCommentsLoadingStatus = (state) => {
+  return state[NAME_SPACE].loadingComments;
+};
+
+export const getCommentsErrorStatus = (state) => {
+  return state[NAME_SPACE].loadingCommentsError;
+};
+
 export const getIsPostCommentInProgress = (state) => {
   return state[NAME_SPACE].postCommentInProgress;
 };

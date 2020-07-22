@@ -33,14 +33,13 @@ const Operation = {
   getCommentsData: (movieId) => (dispatch, getState, api) => {
     return api.get(`/comments/${movieId}`)
     .then((response) => {
-      // console.log(response);
       dispatch(ActionCreator.fetchCommentsDataSuccess({
         movieId,
         comments: response.data
       }));
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
+      dispatch(ActionCreator.fetchCommentsDataError());
     });
   }
 };
@@ -75,11 +74,11 @@ const reducer = (state = initialState, action) => {
         loadingCommentsError: false,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_SUCCESS:
-      const _curMoviesComments = state.moviesComments;
-      _curMoviesComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
+      const _curComments = state.moviesComments;
+      _curComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
       return extendObject(state, {
         loadingComments: false,
-        moviesComments: _curMoviesComments,
+        moviesComments: _curComments,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_ERROR:
       return extendObject(state, {

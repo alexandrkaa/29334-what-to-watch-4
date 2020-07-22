@@ -5,7 +5,6 @@ import {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
@@ -13,6 +12,8 @@ import {
 
 import {
   getMoviesComments,
+  getCommentsLoadingStatus,
+  getCommentsErrorStatus,
   getIsPostCommentInProgress,
   getIsPostCommentHasError,
   getIsPostCommentSuccess,
@@ -48,11 +49,12 @@ export {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMoviesLoadingErrorStatus,
 
   getMoviesComments,
+  getCommentsLoadingStatus,
+  getCommentsErrorStatus,
   getIsPostCommentInProgress,
   getIsPostCommentHasError,
   getIsPostCommentSuccess,

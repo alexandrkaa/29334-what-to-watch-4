@@ -1,4 +1,5 @@
 import {extendObject} from '../../../utils/common.js';
+import commentAdapter from '../../../adapters/comments/comments-adapter.js';
 
 const ActionTypes = {
   FETCH_COMMENTS_DATA: `FETCH_COMMENTS_DATA`,
@@ -12,7 +13,7 @@ const ActionTypes = {
 const initialState = {
   loadingComments: false,
   loadingCommentsError: false,
-  moviesComments: [],
+  moviesComments: {},
   postCommentInProgress: false,
   postCommentError: false,
   postCommentSuccess: false,
@@ -29,14 +30,18 @@ const Operation = {
     })
     .catch(() => dispatch(ActionCreator.postCommentError()));
   },
-  getCommentData: (movieId) => (dispatch, getState, api) => {
+  getCommentsData: (movieId) => (dispatch, getState, api) => {
     return api.get(`/comments/${movieId}`)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
+      dispatch(ActionCreator.fetchCommentsDataSuccess({
+        movieId,
+        comments: response.data
+      }));
     })
     .catch((err) => {
       console.log(err);
-    })
+    });
   }
 };
 
@@ -60,8 +65,6 @@ const ActionCreator = {
   postCommentError: () => ({
     type: ActionTypes.POST_COMMENT_ERROR,
   }),
-
-
 };
 
 const reducer = (state = initialState, action) => {
@@ -72,9 +75,11 @@ const reducer = (state = initialState, action) => {
         loadingCommentsError: false,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_SUCCESS:
+      const _curMoviesComments = state.moviesComments;
+      _curMoviesComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
       return extendObject(state, {
         loadingComments: false,
-        moviesComments: action.payload,
+        moviesComments: _curMoviesComments,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_ERROR:
       return extendObject(state, {

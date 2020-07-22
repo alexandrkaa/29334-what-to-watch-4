@@ -18,14 +18,13 @@ const MovieCardFullComments = (props) => {
       <MovieCardFullCommentsList comments={commentsEven} />
     </div>
   );
-};
+}
 
 MovieCardFullComments.propTypes = {
   comments: PropTypes.arrayOf(
       PropTypes.exact({
-        movieId: PropTypes.number.isRequired,
         id: PropTypes.number.isRequired,
-        author: PropTypes.string.isRequired,
+        author: PropTypes.object.isRequired,
         text: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
@@ -34,3 +33,4 @@ MovieCardFullComments.propTypes = {
 };
 
 export default MovieCardFullComments;
+

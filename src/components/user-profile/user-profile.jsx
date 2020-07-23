@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {NavLink, useLocation} from 'react-router-dom';
+import {NavLink, useLocation, Link} from 'react-router-dom';
 import {AppRoutes} from '../../consts/consts.js';
 import {connect} from 'react-redux';
 import {getAuthorizationStatusBoolean, getUserData} from '../../reducer/selectors.js';
@@ -13,7 +13,9 @@ const UserProfile = (props) => {
       {
         (isAuthorized && userData) &&
         <div className="user-block__avatar">
-          <img src={userData.avatarUrl} alt="User avatar" width="63" height="63"/>
+          <Link to={AppRoutes.MYLIST_PAGE}>
+            <img src={userData.avatarUrl} alt="User avatar" width="63" height="63"/>
+          </Link>
         </div>
       }
       {

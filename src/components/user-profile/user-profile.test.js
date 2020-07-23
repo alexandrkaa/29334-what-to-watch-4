@@ -7,7 +7,7 @@ import UserProfile from './user-profile.jsx';
 
 const mockStore = configureStore([]);
 
-it(`<Loader /> should match snapshot`, () => {
+it(`<UserProfile /> should match snapshot`, () => {
   const store = mockStore({
     USER: {
       authorizationStatus: `AUTH`,

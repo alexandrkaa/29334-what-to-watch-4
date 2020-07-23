@@ -87,6 +87,7 @@ it(`<TitleMovie /> should match snapshot`, () => {
     MOVIE: {
       activeGenre: `All genres`,
       moviesRenderLimit: 8,
+      myList: []
     },
     USER: {
       authorizationStatus: `AUTH`,
@@ -118,6 +119,8 @@ it(`<TitleMovie /> should match snapshot`, () => {
     isFavorite: false,
   };
   const history = {};
+  const addToMyList = jest.fn();
+  const removeFromMyList = jest.fn();
   const tree = renderer
     .create(
         <Provider store={store}>
@@ -126,6 +129,9 @@ it(`<TitleMovie /> should match snapshot`, () => {
               movie={mockMovie}
               history={history}
               isAuthorized={true}
+              addToMyList={addToMyList}
+              removeFromMyList={removeFromMyList}
+              myList={[]}
             />
           </BrowserRouter>
         </Provider>

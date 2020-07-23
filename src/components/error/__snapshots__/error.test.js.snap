@@ -7,9 +7,9 @@ exports[`<Error /> should match snapshot 1`] = `
       "alignItems": "center",
       "display": "flex",
       "flexDirection": "column",
-      "height": "calc(100vh - 94px - 138px)",
+      "height": "100%",
       "justifyContent": "center",
-      "width": "100vw",
+      "width": "100%",
     }
   }
 >

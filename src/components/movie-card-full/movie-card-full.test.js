@@ -1,9 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+// import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import MovieCardFull from './movie-card-full.jsx';
+
+import ShallowRenderer from 'react-test-renderer/shallow';
+const renderer = new ShallowRenderer();
 
 const mockStore = configureStore([]);
 
@@ -179,12 +182,31 @@ const mockTabs = [
 it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
   const {titleMovie, moviesList, movieGenres} = mockData;
   const store = mockStore({
-    DATA: {
+    MOVIE_DATA: {
       titleMovie,
       moviesList,
       movieGenres,
       loadingMovies: false,
       loadingMoviesError: false,
+    },
+    COMMENTS_DATA: {
+      loadingComments: false,
+      loadingCommentsError: false,
+      moviesComments: {3: [
+        {
+          id: 1,
+          user: {
+            id: 17,
+            name: `Emely`
+          },
+          rating: 2.9,
+          comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
+          date: `2020-07-15T12:25:15.535Z`
+        }
+      ]},
+      postCommentInProgress: false,
+      postCommentError: false,
+      postCommentSuccess: false,
     },
     MOVIE: {
       activeGenre: `All genres`,
@@ -201,8 +223,30 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
     }
   });
   const onMovieTitleClick = jest.fn();
-  const tree = renderer
-    .create(
+  // const tree = renderer
+  //   .create(
+  //       <Provider store={store}>
+  //         <BrowserRouter>
+  //           <MovieCardFull
+  //             movie={movie}
+  //             similarMovies={similarMovies}
+  //             activeItem={`TAB1`}
+  //             onMovieTitleClick={onMovieTitleClick}
+  //             tabs={mockTabs}
+  //             history={{}}
+  //             isAuthorized={true}
+  //           />
+  //         </BrowserRouter>
+  //       </Provider>,
+  //       {
+  //         createNodeMock: () => {
+  //           return {};
+  //         }
+  //       }
+  //   )
+  //   .toJSON();
+  renderer
+    .render(
         <Provider store={store}>
           <BrowserRouter>
             <MovieCardFull
@@ -221,7 +265,7 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
             return {};
           }
         }
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+    );
+  const result = renderer.getRenderOutput();
+  expect(result).toMatchSnapshot();
 });

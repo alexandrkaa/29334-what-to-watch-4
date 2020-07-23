@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieCardFullComments /> should match snapshot 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        />
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Emely
+          </cite>
+          <time
+            className="review__date"
+            dateTime="2020-07-15T12:25:15.535Z"
+          >
+            2020-07-15T12:25:15.535Z
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        2.9
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        />
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Emely2
+          </cite>
+          <time
+            className="review__date"
+            dateTime="2020-01-15T12:25:15.535Z"
+          >
+            2020-01-15T12:25:15.535Z
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        2.9
+      </div>
+    </div>
+  </div>
+</div>
+`;

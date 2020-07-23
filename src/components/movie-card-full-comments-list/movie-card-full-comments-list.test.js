@@ -1,31 +1,36 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCardFullReviewsList from './movie-card-full-reviews-list.jsx';
+import MovieCardFullReviewsList from './movie-card-full-comments-list.jsx';
 
-const comments = [
-  {
-    movieId: 1,
-    id: 1000,
-    author: `John Doe`,
-    text: `Those an equal point no years do. Depend warmth fat but her but played. Shy and subjects wondered trifling pleasant. Prudent cordial comfort do no on colonel as assured chicken. Smart mrs day which begin. Snug do sold mr it if such. Terminated uncommonly at at estimating. Man behaviour met moonlight extremity acuteness direction.`,
-    date: `01.01.2000`,
-    rating: 3,
-  },
-  {
-    movieId: 1,
-    id: 1001,
-    author: `Doe John`,
-    text: `Talking chamber as shewing an it minutes. Trees fully of blind do. Exquisite favourite at do extensive listening. Improve up musical welcome he. Gay attended vicinity prepared now diverted. Esteems it ye sending reached as. Longer lively her design settle tastes advice mrs off who. `,
-    date: `31.12.2020`,
-    rating: 9,
-  }
-];
+const comments = {
+  3: [
+    {
+      id: 1,
+      author: {
+        id: 4,
+        name: `Kate Muir`
+      },
+      rating: 8.9,
+      text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+      date: `2019-05-08T14:13:56.569Z`
+    }, {
+      id: 2,
+      author: {
+        id: 4,
+        name: `Kate Muir`
+      },
+      rating: 8.9,
+      text: `Comment text`,
+      date: `2019-05-12T14:13:56.569Z`
+    }
+  ],
+};
 
 it(`<MovieCardFullReviewsList /> should match snapshot`, () => {
   const tree = renderer
     .create(
         <MovieCardFullReviewsList
-          comments={comments}
+          comments={comments[3]}
         />
     )
     .toJSON();

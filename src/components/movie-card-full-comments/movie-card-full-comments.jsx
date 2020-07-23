@@ -24,7 +24,7 @@ const MovieCardFullComments = (props) => {
       <MovieCardFullCommentsList comments={commentsEven} />
     </div>
   );
-}
+};
 
 MovieCardFullComments.propTypes = {
   comments: PropTypes.arrayOf(

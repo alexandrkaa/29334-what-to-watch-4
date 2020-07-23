@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddComment /> should match snapshot without error 1`] = `
+<section
+  className="movie-card movie-card--full"
+>
+  <div
+    className="movie-card__header"
+  >
+    <div
+      className="movie-card__bg"
+    >
+      <img
+        alt="Dardjeeling Limited"
+        src="img/bg-the-grand-budapest-hotel.jpg"
+      />
+    </div>
+    <h1
+      className="visually-hidden"
+    >
+      WTW
+    </h1>
+    <Header
+      headerClassName="movie-card__head"
+    >
+      <Breadcrumbs
+        movie={
+          Object {
+            "backgroundColor": "#000000",
+            "id": 4,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2000",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
+          }
+        }
+      />
+      <Memo(Connect(UserProfile)) />
+    </Header>
+    <div
+      className="movie-card__poster movie-card__poster--small"
+    >
+      <img
+        alt="The Grand Budapest Hotel poster"
+        height="327"
+        src="img/the-grand-budapest-hotel-poster.jpg"
+        width="218"
+      />
+    </div>
+  </div>
+  <Memo(Connect(WithCommentHOC))
+    movieId={4}
+  />
+</section>
+`;

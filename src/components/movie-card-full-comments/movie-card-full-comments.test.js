@@ -4,24 +4,28 @@ import MovieCardFullComments from './movie-card-full-comments.jsx';
 
 const comments = [
   {
-    movieId: 1,
-    id: 1000,
-    author: `John Doe`,
-    text: `Those an equal point no years do. Depend warmth fat but her but played. Shy and subjects wondered trifling pleasant. Prudent cordial comfort do no on colonel as assured chicken. Smart mrs day which begin. Snug do sold mr it if such. Terminated uncommonly at at estimating. Man behaviour met moonlight extremity acuteness direction.`,
-    date: `01.01.2000`,
-    rating: 3,
+    id: 1,
+    author: {
+      id: 17,
+      name: `Emely`
+    },
+    rating: 2.9,
+    comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
+    date: `2020-07-15T12:25:15.535Z`
   },
   {
-    movieId: 1,
-    id: 1001,
-    author: `Doe John`,
-    text: `Talking chamber as shewing an it minutes. Trees fully of blind do. Exquisite favourite at do extensive listening. Improve up musical welcome he. Gay attended vicinity prepared now diverted. Esteems it ye sending reached as. Longer lively her design settle tastes advice mrs off who. `,
-    date: `31.12.2020`,
-    rating: 9,
+    id: 2,
+    author: {
+      id: 18,
+      name: `Emely2`
+    },
+    rating: 2.9,
+    comment: `comment text`,
+    date: `2020-01-15T12:25:15.535Z`
   }
 ];
 
-it(`<MovieCardFullReviews /> should match snapshot`, () => {
+it(`<MovieCardFullComments /> should match snapshot`, () => {
   const tree = renderer
     .create(
         <MovieCardFullComments

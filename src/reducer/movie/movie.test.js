@@ -6,6 +6,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(void 0, {})).toEqual({
       activeGenre: DEFAULT_GENRE,
       moviesRenderLimit: MOVIES_LIMIT,
+      myList: [],
     });
   });
 
@@ -41,6 +42,28 @@ describe(`Reducer works correctly`, () => {
       moviesRenderLimit: MOVIES_LIMIT,
     });
   });
+
+  it(`Should reducer add movie to mylist`, () => {
+    expect(reducer({
+      myList: [],
+    }, {
+      type: `ADD_TO_MYLIST`,
+      payload: 1,
+    })).toEqual({
+      myList: [1],
+    });
+  });
+
+  it(`Should reducer remove movie from mylist`, () => {
+    expect(reducer({
+      myList: [1, 3, 5],
+    }, {
+      type: `REMOVE_FROM_MYLIST`,
+      payload: 3,
+    })).toEqual({
+      myList: [1, 5],
+    });
+  });
 });
 
 describe(`Action creators work correctly`, () => {
@@ -63,5 +86,18 @@ describe(`Action creators work correctly`, () => {
       type: ActionTypes.RESET_MOVIES_LIMIT,
     });
   });
-});
 
+  it(`Action creator for add to mylist`, () => {
+    expect(ActionCreator.addToMyList(2)).toEqual({
+      type: ActionTypes.ADD_TO_MYLIST,
+      payload: 2,
+    });
+  });
+
+  it(`Action creator for remove from mylist`, () => {
+    expect(ActionCreator.removeFromMyList(2)).toEqual({
+      type: ActionTypes.REMOVE_FROM_MYLIST,
+      payload: 2,
+    });
+  });
+});

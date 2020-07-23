@@ -7,6 +7,7 @@ import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddComment from '../add-comment/add-comment.jsx';
+import MyLIst from '../my-list/my-list.jsx';
 
 const WithMovieFullScreenVideoPlayer = withMovie(FullScreenVideoPlayer);
 const WithMovieMovieCardFull = withMovie(MovieCardFull);
@@ -47,6 +48,13 @@ const App = () => {
                 {...routeProps}
                 activeItem={MovieCardFullTabsIds.OVERVIEW}
               />
+            );
+          }
+        } />
+        <Route exact path={AppRoutes.MYLIST_PAGE} render={
+          (routeProps) => {
+            return (
+              <MyLIst {...routeProps} />
             );
           }
         } />

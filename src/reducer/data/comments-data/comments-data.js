@@ -74,7 +74,7 @@ const reducer = (state = initialState, action) => {
         loadingCommentsError: false,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_SUCCESS:
-      const _curComments = state.moviesComments;
+      const _curComments = JSON.parse(JSON.stringify(state.moviesComments));
       _curComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
       return extendObject(state, {
         loadingComments: false,

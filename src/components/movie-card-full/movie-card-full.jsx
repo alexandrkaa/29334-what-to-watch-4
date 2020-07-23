@@ -1,8 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getMoviesComments, getCommentsLoadingStatus, getCommentsErrorStatus} from '../../reducer/selectors.js';
+import {
+  getMoviesComments,
+  getCommentsLoadingStatus,
+  getCommentsErrorStatus,
+  getMyList,
+} from '../../reducer/selectors.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsDataActionCreator} from '../../reducer/data/comments-data/comments-data.js';
+import {ActionCreator as MovieActionCreator} from '../../reducer/movie/movie.js';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
 import {MovieCardFullTabsIds, MovieCardFullTabs} from '../../consts/consts.js';
 import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-overview.jsx';
@@ -10,7 +16,7 @@ import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-det
 import MovieCardFullComments from '../movie-card-full-comments/movie-card-full-comments.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MoviesList from '../movie-list/movie-list.jsx';
-import {moviesListType, movieType} from '../../types/types.js';
+import {moviesListType, movieType, myListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
@@ -66,7 +72,14 @@ class MovieCardFull extends PureComponent {
   }
 
   render() {
-    const {movie, similarMovies, isAuthorized} = this.props;
+    const {
+      movie,
+      similarMovies,
+      isAuthorized,
+      myList,
+      addToMyList,
+      removeFromMyList,
+    } = this.props;
     const {
       movieImage,
       title,
@@ -100,7 +113,10 @@ class MovieCardFull extends PureComponent {
                 <MovieCardFullButtons
                   onPlay={this._handlePlayButton}
                   movieId={movie.id}
-                  isReviewVisible={isAuthorized}
+                  isAuthorized={isAuthorized}
+                  myList={myList}
+                  addToMyList={addToMyList}
+                  removeFromMyList={removeFromMyList}
                 />
 
               </div>
@@ -154,6 +170,9 @@ MovieCardFull.propTypes = {
   comments: PropTypes.array.isRequired,
   isLoadingComments: PropTypes.bool.isRequired,
   isLoadingCommentsError: PropTypes.bool.isRequired,
+  myList: myListType.isRequired,
+  addToMyList: PropTypes.func.isRequired,
+  removeFromMyList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -161,6 +180,7 @@ const mapStateToProps = (state, ownProps) => {
     comments: getMoviesComments(state, ownProps.movie.id),
     isLoadingComments: getCommentsLoadingStatus(state),
     isLoadingCommentsError: getCommentsErrorStatus(state),
+    myList: getMyList(state),
   };
 };
 
@@ -168,6 +188,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchComments(movieId) {
     dispatch(CommentsDataActionCreator.fetchCommentsData());
     dispatch(CommentsOperation.getCommentsData(movieId));
+  },
+  addToMyList(movieId) {
+    dispatch(MovieActionCreator.addToMyList(movieId));
+  },
+  removeFromMyList(movieId) {
+    dispatch(MovieActionCreator.removeFromMyList(movieId));
   },
 });
 

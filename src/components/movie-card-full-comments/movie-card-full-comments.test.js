@@ -10,7 +10,7 @@ const comments = [
       name: `Emely`
     },
     rating: 2.9,
-    comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
+    text: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
     date: `2020-07-15T12:25:15.535Z`
   },
   {
@@ -20,7 +20,7 @@ const comments = [
       name: `Emely2`
     },
     rating: 2.9,
-    comment: `comment text`,
+    text: `comment text`,
     date: `2020-01-15T12:25:15.535Z`
   }
 ];
@@ -29,6 +29,8 @@ it(`<MovieCardFullComments /> should match snapshot`, () => {
   const tree = renderer
     .create(
         <MovieCardFullComments
+          isLoadingComments={false}
+          isLoadingCommentsError={false}
           comments={comments}
         />
     )

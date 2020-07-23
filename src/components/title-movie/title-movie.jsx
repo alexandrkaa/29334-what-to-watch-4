@@ -1,5 +1,5 @@
 import React from 'react';
-import {movieType} from '../../types/types.js';
+import {movieType, myListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
@@ -17,6 +17,9 @@ const TitleMovie = (props) => {
       id: movieId,
     },
     isAuthorized,
+    myList,
+    addToMyList,
+    removeFromMyList,
   } = props;
 
   const _handlePlayClick = (evt) => {
@@ -52,7 +55,10 @@ const TitleMovie = (props) => {
             <MovieCardFullButtons
               onPlay={_handlePlayClick}
               movieId={movieId}
-              isReviewVisible={isAuthorized}
+              isAuthorized={isAuthorized}
+              myList={myList}
+              addToMyList={addToMyList}
+              removeFromMyList={removeFromMyList}
             />
 
           </div>
@@ -66,6 +72,9 @@ TitleMovie.propTypes = {
   movie: movieType.isRequired,
   history: PropTypes.object.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
+  myList: myListType,
+  addToMyList: PropTypes.func.isRequired,
+  removeFromMyList: PropTypes.func.isRequired,
 };
 
 export {TitleMovie};

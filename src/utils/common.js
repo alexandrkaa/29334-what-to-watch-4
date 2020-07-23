@@ -41,3 +41,16 @@ export const secondsToTime = (initialSeconds) => {
   const seconds = Math.ceil(_toMinutesSec % 60);
   return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
+
+export const removeElementFromArray = (elem, arr) => {
+  const _idx = arr.findIndex((it) => (it === elem));
+  const _before = arr.slice(0, _idx);
+  const _after = arr.slice((_idx + 1), arr.length);
+  return _before.concat(_after);
+};
+
+export const addElementToArray = (elem, arr) => {
+  const _copy = arr.slice();
+  _copy.push(elem);
+  return _copy;
+};

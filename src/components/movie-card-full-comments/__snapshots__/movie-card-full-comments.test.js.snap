@@ -15,7 +15,9 @@ exports[`<MovieCardFullComments /> should match snapshot 1`] = `
       >
         <p
           className="review__text"
-        />
+        >
+          Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.
+        </p>
         <footer
           className="review__details"
         >
@@ -50,7 +52,9 @@ exports[`<MovieCardFullComments /> should match snapshot 1`] = `
       >
         <p
           className="review__text"
-        />
+        >
+          comment text
+        </p>
         <footer
           className="review__details"
         >

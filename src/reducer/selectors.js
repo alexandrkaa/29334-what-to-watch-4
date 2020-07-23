@@ -21,7 +21,8 @@ import {
 
 import {
   getActiveGenre,
-  getMoviesRenderLimit
+  getMoviesRenderLimit,
+  getMyList,
 } from './movie/selectors.js';
 
 import {
@@ -45,11 +46,19 @@ export const getFilteredMovies = createSelector(
     }
 );
 
+export const getMoviesDataFromMyList = createSelector(
+    [getMovies, getMyList],
+    (moviesList, myList) => {
+      return moviesList.filter((movie) => myList.includes(movie.id));
+    }
+);
+
 export {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
   getTitleMovieLoadingStatus,
+  getMovieByIdFromState,
   getMoviesLoadingErrorStatus,
 
   getMoviesComments,
@@ -59,9 +68,9 @@ export {
   getIsPostCommentHasError,
   getIsPostCommentSuccess,
 
-  getMovieByIdFromState,
   getActiveGenre,
   getMoviesRenderLimit,
+  getMyList,
 
   getAuthorizationStatus,
   getAuthorizationStatusBoolean,

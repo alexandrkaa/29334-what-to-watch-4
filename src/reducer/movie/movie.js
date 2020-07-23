@@ -1,15 +1,18 @@
 import {DEFAULT_GENRE, MOVIES_LIMIT} from '../../consts/consts.js';
-import {extendObject} from '../../utils/common.js';
+import {extendObject, removeElementFromArray, addElementToArray} from '../../utils/common.js';
 
 const initialState = {
   activeGenre: DEFAULT_GENRE,
   moviesRenderLimit: MOVIES_LIMIT,
+  myList: [],
 };
 
 const ActionTypes = {
   CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
   UPDATE_MOVIES_LIMIT: `UPDATE_MOVIES_LIMIT`,
   RESET_MOVIES_LIMIT: `RESET_MOVIES_LIMIT`,
+  ADD_TO_MYLIST: `ADD_TO_MYLIST`,
+  REMOVE_FROM_MYLIST: `REMOVE_FROM_MYLIST`,
 };
 
 const ActionCreator = {
@@ -23,6 +26,14 @@ const ActionCreator = {
   }),
   resetMoviesLimit: () => ({
     type: ActionTypes.RESET_MOVIES_LIMIT,
+  }),
+  addToMyList: (movieId) => ({
+    type: ActionTypes.ADD_TO_MYLIST,
+    payload: movieId,
+  }),
+  removeFromMyList: (movieId) => ({
+    type: ActionTypes.REMOVE_FROM_MYLIST,
+    payload: movieId,
   }),
 };
 
@@ -39,6 +50,14 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.RESET_MOVIES_LIMIT:
       return extendObject(state, {
         moviesRenderLimit: MOVIES_LIMIT,
+      });
+    case ActionTypes.ADD_TO_MYLIST:
+      return extendObject(state, {
+        myList: addElementToArray(action.payload, state.myList),
+      });
+    case ActionTypes.REMOVE_FROM_MYLIST:
+      return extendObject(state, {
+        myList: removeElementFromArray(action.payload, state.myList),
       });
     default:
       return state;

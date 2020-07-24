@@ -75,3 +75,26 @@ export const ReviewTextLength = {
   MIN: 50,
   MAX: 400,
 };
+
+export const RatingScores = {
+  AWESOME: {
+    score: 10,
+    name: `Awesome`,
+  },
+  VERYGOOD: {
+    score: 8,
+    name: `Very good`,
+  },
+  GOOD: {
+    score: 5,
+    name: `Good`,
+  },
+  NORMAL: {
+    score: 3,
+    name: `Normal`,
+  },
+  BAD: {
+    score: 0,
+    name: `Bad`,
+  },
+};

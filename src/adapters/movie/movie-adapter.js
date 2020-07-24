@@ -1,3 +1,4 @@
+import {convertMovieRateToText} from '../../utils/common.js';
 const movieAdapter = (movie) => {
   return {
     id: movie.id,
@@ -10,7 +11,7 @@ const movieAdapter = (movie) => {
     movieImage: movie.poster_image,
     movieRatingScore: movie.rating,
     // TODO: convert rating score to text rating
-    movieRatingLevel: movie.rating,
+    movieRatingLevel: convertMovieRateToText(movie.rating),
     movieRatingCount: `${movie.scores_count} ratings`,
     movieDirector: movie.director,
     movieStarring: movie.starring,

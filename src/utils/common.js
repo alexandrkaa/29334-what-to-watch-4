@@ -1,4 +1,4 @@
-import {SECS_PER_HOUR} from '../consts/consts.js';
+import {SECS_PER_HOUR, RatingScores} from '../consts/consts.js';
 
 export const generateRandomInteger = (min, max) => {
   const rand = min + Math.random() * (max + 1 - min);
@@ -53,4 +53,24 @@ export const addElementToArray = (elem, arr) => {
   const copy = arr.slice();
   copy.push(elem);
   return copy;
+};
+
+export const convertMovieRateToText = (rating) => {
+  const rate = parseFloat(rating) || 0;
+  if (rate === RatingScores.AWESOME.score) {
+    return RatingScores.AWESOME.name;
+  } else
+  if (rate > RatingScores.VERYGOOD.score) {
+    return RatingScores.VERYGOOD.name;
+  } else
+  if (rate > RatingScores.GOOD.score) {
+    return RatingScores.GOOD.name;
+  } else
+  if (rate > RatingScores.NORMAL.score) {
+    return RatingScores.NORMAL.name;
+  } else
+  if (rate > RatingScores.BAD.score) {
+    return RatingScores.BAD.name;
+  }
+  return RatingScores.BAD.name;
 };

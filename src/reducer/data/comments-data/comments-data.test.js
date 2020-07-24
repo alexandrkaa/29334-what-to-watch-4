@@ -23,7 +23,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     });
   });
 
@@ -34,7 +33,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `FETCH_COMMENTS_DATA`,
     })).toEqual({
@@ -43,7 +41,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     });
   });
 
@@ -54,7 +51,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `FETCH_COMMENTS_DATA_SUCCESS`,
       payload: {
@@ -87,7 +83,6 @@ describe(`Reducer works correctly`, () => {
       },
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     });
   });
 
@@ -98,7 +93,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `FETCH_COMMENTS_DATA_ERROR`,
       payload: comments
@@ -108,7 +102,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     });
   });
 
@@ -119,7 +112,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `POST_COMMENT_IN_PROGRESS`,
     })).toEqual({
@@ -128,7 +120,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
-      postCommentSuccess: false,
     });
   });
 
@@ -139,7 +130,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `POST_COMMENT_ERROR`,
     })).toEqual({
@@ -148,7 +138,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: true,
-      postCommentSuccess: false,
     });
   });
 
@@ -159,7 +148,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
-      postCommentSuccess: false,
     }, {
       type: `POST_COMMENT_SUCCESS`,
     })).toEqual({
@@ -168,7 +156,6 @@ describe(`Reducer works correctly`, () => {
       moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
-      postCommentSuccess: true,
     });
   });
 });

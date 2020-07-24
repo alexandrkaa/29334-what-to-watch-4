@@ -16,7 +16,6 @@ const initialState = {
   moviesComments: {},
   postCommentInProgress: false,
   postCommentError: false,
-  postCommentSuccess: false,
 };
 
 const Operation = {
@@ -88,12 +87,11 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.POST_COMMENT_IN_PROGRESS:
       return extendObject(state, {
         postCommentInProgress: true,
-        postCommentSuccess: false,
+        postCommentError: false,
       });
     case ActionTypes.POST_COMMENT_SUCCESS:
       return extendObject(state, {
         postCommentInProgress: false,
-        postCommentSuccess: true,
       });
     case ActionTypes.POST_COMMENT_ERROR:
       return extendObject(state, {

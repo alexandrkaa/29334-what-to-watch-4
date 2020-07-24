@@ -1,5 +1,5 @@
 import React from 'react';
-import {MyList} from './user-favorite-list.jsx';
+import {UserFavoriteList} from './user-favorite-list.jsx';
 import ShallowRenderer from 'react-test-renderer/shallow';
 const renderer = new ShallowRenderer();
 
@@ -46,10 +46,9 @@ const mockData = {
   ],
 };
 
-it(`<MyList /> should match snapshot without error`, () => {
+it(`<UserFavoriteList /> should match snapshot without error`, () => {
   const checkAuth = jest.fn();
-  renderer.render(<MyList moviesList={mockData.moviesList} isAuthorized={true} checkAuth={checkAuth} />);
+  renderer.render(<UserFavoriteList moviesList={mockData.moviesList} isAuthorized={true} checkAuth={checkAuth} />);
   const result = renderer.getRenderOutput();
-  expect(result.type).toBe(`div`);
   expect(result).toMatchSnapshot();
 });

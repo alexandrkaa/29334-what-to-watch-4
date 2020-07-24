@@ -16,7 +16,6 @@ import {
   getCommentsErrorStatus,
   getIsPostCommentInProgress,
   getIsPostCommentHasError,
-  getIsPostCommentSuccess,
 } from './data/comments-data/selectors.js';
 
 import {
@@ -66,7 +65,6 @@ export {
   getCommentsErrorStatus,
   getIsPostCommentInProgress,
   getIsPostCommentHasError,
-  getIsPostCommentSuccess,
 
   getActiveGenre,
   getMoviesRenderLimit,

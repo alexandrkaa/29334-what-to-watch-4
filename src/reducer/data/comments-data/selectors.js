@@ -21,7 +21,3 @@ export const getIsPostCommentInProgress = (state) => {
 export const getIsPostCommentHasError = (state) => {
   return state[NAME_SPACE].postCommentError;
 };
-
-export const getIsPostCommentSuccess = (state) => {
-  return state[NAME_SPACE].postCommentSuccess;
-};

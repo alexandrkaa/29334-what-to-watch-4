@@ -64,7 +64,7 @@ const Main = (props) => {
   }
   return (
     <React.Fragment>
-      <Header headerClassName={`user-page__head`}>
+      <Header headerClassName="user-page__head">
         <UserProfile />
       </Header>
       {loadingMovies && <Loader />}

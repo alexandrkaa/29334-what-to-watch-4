@@ -34,12 +34,6 @@ class MovieCardFull extends PureComponent {
     this.props.fetchComments(this.props.movie.id);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.fetchComments(this.props.movie.id);
-    }
-  }
-
   _handlePlayButton(evt) {
     evt.preventDefault();
     this.props.history.push(`/player/${this.props.movie.id}`);

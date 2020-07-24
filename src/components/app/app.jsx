@@ -43,6 +43,7 @@ const App = () => {
           (routeProps) => {
             return (
               <WithMovieMovieCardFull
+                key={parseInt(routeProps.match.params.id, 10)}
                 movieId={parseInt(routeProps.match.params.id, 10)}
                 loadSimilarMovies={true}
                 {...routeProps}

@@ -6,10 +6,10 @@ import {isMovieInUserFavoriteList} from '../../utils/filters.js';
 
 const MovieCardFullButtons = (props) => {
   const {onPlay, movieId, isAuthorized, userFavoriteList, addToUserFavoriteList, removeFromUserFavoriteList} = props;
-  const _isInUserFavoriteList = isMovieInUserFavoriteList(userFavoriteList, movieId);
+  const isInUserFavoriteList = isMovieInUserFavoriteList(userFavoriteList, movieId);
   const _onUserFavoriteListClick = (evt) => {
     evt.preventDefault();
-    if (_isInUserFavoriteList) {
+    if (isInUserFavoriteList) {
       removeFromUserFavoriteList(movieId);
     } else {
       addToUserFavoriteList(movieId);
@@ -26,7 +26,7 @@ const MovieCardFullButtons = (props) => {
       </button>
       <button onClick={_onUserFavoriteListClick} className="btn btn--list movie-card__button" type="button">
         <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref={_isInUserFavoriteList ? `#in-list` : `#add`}></use>
+          <use xlinkHref={isInUserFavoriteList ? `#in-list` : `#add`}></use>
         </svg>
         <span>My list</span>
       </button>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {AppRoutes, FiledsIds} from '../../consts/consts.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsActionCreator} from '../../reducer/data/comments-data/comments-data.js';
 import PropTypes from 'prop-types';
-import {getAuthorizationStatusBoolean, getIsPostCommentHasError, getIsPostCommentInProgress, getIsPostCommentSuccess} from '../../reducer/selectors.js';
+import {getAuthorizationStatusBoolean, getIsPostCommentHasError, getIsPostCommentInProgress} from '../../reducer/selectors.js';
 import {Redirect} from 'react-router-dom';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {isValidField} from '../../utils/filters.js';
@@ -15,11 +15,11 @@ const withComment = (Component) => {
       this.state = {
         comment: ``,
         rating: 5,
+        isNeedRedirect: false,
       };
       this._handleRadioChange = this._handleRadioChange.bind(this);
       this._handleTextAreaChange = this._handleTextAreaChange.bind(this);
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
-      this.isNeedRedirect = false;
     }
 
     _handleRadioChange(rating) {
@@ -46,19 +46,18 @@ const withComment = (Component) => {
     }
 
     componentDidUpdate(prevProps) {
-      if (prevProps.postCommentInProgress !== this.props.postCommentInProgress) {
-        if (this.props.isPostCommentSuccess) {
-          this.isNeedRedirect = true;
-          this.forceUpdate();
-        }
+      if (prevProps.postCommentInProgress !== this.props.postCommentInProgress && !this.props.postCommentError) {
+        this.setState({
+          isNeedRedirect: true,
+        });
       }
     }
 
     componentWillUnmount() {
-      this.isNeedRedirect = false;
       this.setState({
         comment: ``,
         rating: 5,
+        isNeedRedirect: false,
       });
     }
 
@@ -71,7 +70,7 @@ const withComment = (Component) => {
           <Redirect to={AppRoutes.LOGIN_PAGE} />
         );
       }
-      if (this.isNeedRedirect) {
+      if (this.state.isNeedRedirect) {
         return (
           <Redirect to={`${AppRoutes.FILM_PAGE}/${this.props.movieId}`} />
         );
@@ -97,7 +96,6 @@ const withComment = (Component) => {
       isAuthorized: getAuthorizationStatusBoolean(state),
       postCommentInProgress: getIsPostCommentInProgress(state),
       postCommentError: getIsPostCommentHasError(state),
-      isPostCommentSuccess: getIsPostCommentSuccess(state),
     };
   };
 

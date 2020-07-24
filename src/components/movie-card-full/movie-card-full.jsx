@@ -1,12 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {
-  getMoviesComments,
-  getCommentsLoadingStatus,
-  getCommentsErrorStatus,
-  getUserFavoriteList,
-} from '../../reducer/selectors.js';
+import {getMoviesComments, getCommentsLoadingStatus, getCommentsErrorStatus, getUserFavoriteList} from '../../reducer/selectors.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsDataActionCreator} from '../../reducer/data/comments-data/comments-data.js';
 import {ActionCreator as MovieActionCreator} from '../../reducer/movie/movie.js';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
@@ -15,12 +10,14 @@ import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-o
 import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-details.jsx';
 import MovieCardFullComments from '../movie-card-full-comments/movie-card-full-comments.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
-import MoviesList from '../movie-list/movie-list.jsx';
+import MovieCardTitle from '../movie-card-title/movie-card-title.jsx';
 import {moviesListType, movieType, userFavoriteListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
+import SimilarMovies from '../similar-movies/similar-movies.jsx';
+import MovieCardBackground from '../movie-card-background/movie-card-background.jsx';
 
 class MovieCardFull extends PureComponent {
   constructor(props) {
@@ -53,14 +50,7 @@ class MovieCardFull extends PureComponent {
         return (<MovieCardFullDetails movie={this.props.movie} />);
 
       case MovieCardFullTabsIds.REVIEWS:
-        return (
-          <MovieCardFullComments
-            movie={this.props.movie}
-            comments={comments}
-            isLoadingComments={isLoadingComments}
-            isLoadingCommentsError={isLoadingCommentsError}
-          />
-        );
+        return (<MovieCardFullComments movie={this.props.movie} comments={comments} isLoadingComments={isLoadingComments} isLoadingCommentsError={isLoadingCommentsError} />);
     }
     return (<MovieCardFullOverView movie={this.props.movie} />);
   }
@@ -88,22 +78,14 @@ class MovieCardFull extends PureComponent {
       <React.Fragment>
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
-            <div className="movie-card__bg">
-              <img src={movieBackground} alt={title} />
-            </div>
-
+            <MovieCardBackground movieBackground={movieBackground} title={title} />
             <Header>
               <UserProfile />
             </Header>
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{title}</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">{movieGenre}</span>
-                  <span className="movie-card__year">{movieDate}</span>
-                </p>
-
+                <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
                 <MovieCardFullButtons
                   onPlay={this._handlePlayButton}
                   movieId={movie.id}
@@ -112,7 +94,6 @@ class MovieCardFull extends PureComponent {
                   addToUserFavoriteList={addToUserFavoriteList}
                   removeFromUserFavoriteList={removeFromUserFavoriteList}
                 />
-
               </div>
             </div>
           </div>
@@ -122,7 +103,6 @@ class MovieCardFull extends PureComponent {
               <div className="movie-card__poster movie-card__poster--big">
                 <img src={movieImage} alt={title} width="218" height="327" />
               </div>
-
               <div className="movie-card__desc">
                 <MovieCardFullMenu tabs={movieCardFullTabs} onClickMovieCardFullMenuTab={this._handleMenuTabChange} />
                 {this._renderTabsContent()}
@@ -132,15 +112,7 @@ class MovieCardFull extends PureComponent {
         </section>
 
         <div className="page-content">
-          {similarMovies.length > 0 &&
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
-
-            <div className="catalog__movies-list">
-              <MoviesList moviesList={similarMovies} />
-            </div>
-          </section>
-          }
+          {similarMovies.length > 0 && <SimilarMovies moviesList={similarMovies} />}
           <Footer />
         </div>
       </React.Fragment>
@@ -150,7 +122,7 @@ class MovieCardFull extends PureComponent {
 
 MovieCardFull.defaultProps = {
   activeItem: MovieCardFullTabsIds.OVERVIEW,
-  comments: []
+  comments: [],
 };
 
 MovieCardFull.propTypes = {

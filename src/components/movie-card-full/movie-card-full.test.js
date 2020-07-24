@@ -1,5 +1,4 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -192,18 +191,20 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
     COMMENTS_DATA: {
       loadingComments: false,
       loadingCommentsError: false,
-      moviesComments: {3: [
-        {
-          id: 1,
-          user: {
-            id: 17,
-            name: `Emely`
-          },
-          rating: 2.9,
-          comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
-          date: `2020-07-15T12:25:15.535Z`
-        }
-      ]},
+      moviesComments: {
+        3: [
+          {
+            id: 1,
+            user: {
+              id: 17,
+              name: `Emely`
+            },
+            rating: 2.9,
+            comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
+            date: `2020-07-15T12:25:15.535Z`
+          }
+        ]
+      },
       postCommentInProgress: false,
       postCommentError: false,
       postCommentSuccess: false,
@@ -223,28 +224,6 @@ it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
     }
   });
   const onMovieTitleClick = jest.fn();
-  // const tree = renderer
-  //   .create(
-  //       <Provider store={store}>
-  //         <BrowserRouter>
-  //           <MovieCardFull
-  //             movie={movie}
-  //             similarMovies={similarMovies}
-  //             activeItem={`TAB1`}
-  //             onMovieTitleClick={onMovieTitleClick}
-  //             tabs={mockTabs}
-  //             history={{}}
-  //             isAuthorized={true}
-  //           />
-  //         </BrowserRouter>
-  //       </Provider>,
-  //       {
-  //         createNodeMock: () => {
-  //           return {};
-  //         }
-  //       }
-  //   )
-  //   .toJSON();
   renderer
     .render(
         <Provider store={store}>

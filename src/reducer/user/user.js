@@ -53,8 +53,11 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(userAdapter(response.data)));
-      }).catch(() => {
-        // не обрабатываем ошибку, тк в interceptors axios если пользователь не авторизован уже вызывается dispatch для установки статуса авторизации
+      }).catch((err) => {
+        // не обрабатываем ошибку 401, тк в interceptors axios если пользователь не авторизован уже вызывается dispatch для установки статуса авторизации
+        if (err.response.status !== 401) {
+          dispatch(ActionCreator.setAuthorizationStatusCode(err.response.status));
+        }
       });
   },
 

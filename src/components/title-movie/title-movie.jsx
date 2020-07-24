@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
+import MovieCardTitle from '../movie-card-title/movie-card-title.jsx';
+import MovieCardBackground from '../movie-card-background/movie-card-background.jsx';
 
 const TitleMovie = (props) => {
   const {
@@ -29,11 +31,7 @@ const TitleMovie = (props) => {
 
   return (
     <section className="movie-card">
-      <div className="movie-card__bg">
-        <img src={movieBackground} alt="The Grand Budapest Hotel"/>
-      </div>
-
-
+      <MovieCardBackground movieBackground={movieBackground} title={title} />
       <Header>
         <UserProfile />
       </Header>
@@ -46,12 +44,7 @@ const TitleMovie = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{title}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{movieGenre}</span>
-              <span className="movie-card__year">{movieDate}</span>
-            </p>
-
+            <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
             <MovieCardFullButtons
               onPlay={_handlePlayClick}
               movieId={movieId}

@@ -15,9 +15,6 @@ import MoviesList from '../movie-list/movie-list.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
 
 class UserFavoriteList extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.checkAuth();

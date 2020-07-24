@@ -72,6 +72,6 @@ export const AppRoutes = {
 export const REVIEW_STARS_NUMBER = 5;
 
 export const ReviewTextLength = {
-  MIN: 1,
+  MIN: 50,
   MAX: 400,
 };

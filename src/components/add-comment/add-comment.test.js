@@ -26,6 +26,5 @@ const mockMovie = {
 it(`<AddComment /> should match snapshot without error`, () => {
   renderer.render(<AddComment movie={mockMovie} />);
   const result = renderer.getRenderOutput();
-  expect(result.type).toBe(`section`);
   expect(result).toMatchSnapshot();
 });

@@ -34,23 +34,23 @@ export const secondsToTime = (initialSeconds) => {
   if (!initialSeconds) {
     return `00:00:00`;
   }
-  const _initialSeconds = Math.round(initialSeconds);
-  const hours = Math.floor(_initialSeconds / (60 * 60));
-  const _toMinutesSec = _initialSeconds % (60 * 60);
-  const minutes = Math.floor(_toMinutesSec / 60);
-  const seconds = Math.ceil(_toMinutesSec % 60);
+  const roundedSeconds = Math.round(initialSeconds);
+  const hours = Math.floor(roundedSeconds / (60 * 60));
+  const toMinutesSec = roundedSeconds % (60 * 60);
+  const minutes = Math.floor(toMinutesSec / 60);
+  const seconds = Math.ceil(toMinutesSec % 60);
   return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
 export const removeElementFromArray = (elem, arr) => {
-  const _idx = arr.findIndex((it) => (it === elem));
-  const _before = arr.slice(0, _idx);
-  const _after = arr.slice((_idx + 1), arr.length);
-  return _before.concat(_after);
+  const idx = arr.findIndex((it) => (it === elem));
+  const before = arr.slice(0, idx);
+  const after = arr.slice((idx + 1), arr.length);
+  return before.concat(after);
 };
 
 export const addElementToArray = (elem, arr) => {
-  const _copy = arr.slice();
-  _copy.push(elem);
-  return _copy;
+  const copy = arr.slice();
+  copy.push(elem);
+  return copy;
 };

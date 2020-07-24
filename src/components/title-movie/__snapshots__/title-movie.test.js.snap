@@ -8,7 +8,7 @@ exports[`<TitleMovie /> should match snapshot 1`] = `
     className="movie-card__bg"
   >
     <img
-      alt="The Grand Budapest Hotel"
+      alt="Johnny English"
       src="img/bg-the-grand-budapest-hotel.jpg"
     />
   </div>

@@ -5,7 +5,7 @@ const movieAdapter = (movie) => {
     title: movie.name,
     backgroundColor: movie.background_color,
     image: movie.preview_image,
-    movieDate: movie.released,
+    movieDate: parseInt(movie.released, 10),
     movieGenre: movie.genre,
     movieBackground: movie.background_image,
     movieImage: movie.poster_image,

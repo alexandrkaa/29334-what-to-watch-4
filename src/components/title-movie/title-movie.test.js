@@ -103,7 +103,7 @@ it(`<TitleMovie /> should match snapshot`, () => {
     id: 3,
     image: `img/aviator.jpg`,
     movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2008`,
+    movieDate: 2008,
     movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
     movieDirector: `Christopher Nolan`,
     movieGenre: `Kids & Family`,

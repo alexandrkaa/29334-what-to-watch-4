@@ -1,7 +1,15 @@
-import {convertSecondsToHoursMins, extendObject, removeSpaces, secondsToTime, convertMovieRateToText} from './common.js';
+import {convertSecondsToHoursMins, extendObject, removeSpaces, secondsToTime, convertMovieRateToText, convertMinutesToHoursMins} from './common.js';
 describe(`Common utils works correctly`, () => {
   it(`convertSecondsToHoursMins func  works correctly`, () => {
     expect(convertSecondsToHoursMins(4200)).toMatch(`1h 10m`);
+  });
+
+  it(`convertMinutesToHoursMins func works correctly`, () => {
+    expect(convertMinutesToHoursMins(999)).toMatch(`16h 39m`);
+  });
+
+  it(`convertMinutesToHoursMins func returns default 0`, () => {
+    expect(convertMinutesToHoursMins()).toMatch(`0h 0m`);
   });
 
   it(`extendObject func works correctly`, () => {

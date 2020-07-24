@@ -22,6 +22,13 @@ export const convertSecondsToHoursMins = (sec) => {
   return `${hours}h ${mins}m`;
 };
 
+export const convertMinutesToHoursMins = (mins) => {
+  if (mins < 60) {
+    return `${mins}m`;
+  }
+  return `${Math.floor(mins / 60) || 0}h ${(mins % 60) || 0}m`;
+};
+
 export const extendObject = (a, b) => {
   return Object.assign({}, a, b);
 };

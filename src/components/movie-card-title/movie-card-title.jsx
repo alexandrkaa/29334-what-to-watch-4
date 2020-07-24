@@ -17,7 +17,7 @@ const MovieCardTitle = (props) => {
 MovieCardTitle.propTypes = {
   title: PropTypes.string.isRequired,
   movieGenre: PropTypes.string.isRequired,
-  movieDate: PropTypes.string.isRequired,
+  movieDate: PropTypes.number.isRequired,
 };
 
 export default MovieCardTitle;

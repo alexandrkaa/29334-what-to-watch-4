@@ -10,7 +10,6 @@ const movieAdapter = (movie) => {
     movieBackground: movie.background_image,
     movieImage: movie.poster_image,
     movieRatingScore: movie.rating,
-    // TODO: convert rating score to text rating
     movieRatingLevel: convertMovieRateToText(movie.rating),
     movieRatingCount: `${movie.scores_count} ratings`,
     movieDirector: movie.director,

@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 
 const MovieCardFullComment = (props) => {
@@ -10,7 +11,7 @@ const MovieCardFullComment = (props) => {
 
         <footer className="review__details">
           <cite className="review__author">{comment.author.name}</cite>
-          <time className="review__date" dateTime={comment.date}>{comment.date}</time>
+          <time className="review__date" dateTime={comment.date}>{dayjs(comment.date).format(`MMMM DD, YYYY`)}</time>
         </footer>
       </blockquote>
 

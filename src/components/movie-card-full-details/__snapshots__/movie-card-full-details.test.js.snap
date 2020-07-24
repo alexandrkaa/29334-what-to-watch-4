@@ -51,7 +51,7 @@ exports[`<MovieCardFullDetails /> should match snapshot 1`] = `
       <span
         className="movie-card__details-value"
       >
-        2h 45m
+        165h 0m
       </span>
     </p>
     <p

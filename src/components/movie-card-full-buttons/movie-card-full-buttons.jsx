@@ -7,7 +7,7 @@ import {isMovieInUserFavoriteList} from '../../utils/filters.js';
 const MovieCardFullButtons = (props) => {
   const {onPlay, movieId, isAuthorized, userFavoriteList, addToUserFavoriteList, removeFromUserFavoriteList} = props;
   const isInUserFavoriteList = isMovieInUserFavoriteList(userFavoriteList, movieId);
-  const _onUserFavoriteListClick = (evt) => {
+  const onUserFavoriteListClick = (evt) => {
     evt.preventDefault();
     if (isInUserFavoriteList) {
       removeFromUserFavoriteList(movieId);
@@ -24,12 +24,15 @@ const MovieCardFullButtons = (props) => {
         </svg>
         <span>Play</span>
       </button>
-      <button onClick={_onUserFavoriteListClick} className="btn btn--list movie-card__button" type="button">
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref={isInUserFavoriteList ? `#in-list` : `#add`}></use>
-        </svg>
-        <span>My list</span>
-      </button>
+      {
+        isAuthorized &&
+        <button onClick={onUserFavoriteListClick} className="btn btn--list movie-card__button" type="button">
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use xlinkHref={isInUserFavoriteList ? `#in-list` : `#add`}></use>
+          </svg>
+          <span>My list</span>
+        </button>
+      }
       {
         isAuthorized &&
         <NavLink to={`/films/${movieId}/review`} className="btn movie-card__button">Add review</NavLink>

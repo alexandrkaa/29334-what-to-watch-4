@@ -163,7 +163,7 @@ const generateRandomMovie = (id) => {
     id,
     title: TITLES[generateRandomInteger(0, TITLES.length - 1)],
     image: IMAGES[generateRandomInteger(0, IMAGES.length - 1)],
-    movieDate: `${generateRandomInteger(YearLimits.min, YearLimits.max)}`,
+    movieDate: parseInt(`${generateRandomInteger(YearLimits.min, YearLimits.max)}`, 10),
     movieGenre: GENRES[generateRandomInteger(0, GENRES.length - 1)],
     movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
     movieImage: `img/the-grand-budapest-hotel-poster.jpg`,

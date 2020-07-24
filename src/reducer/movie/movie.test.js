@@ -13,10 +13,7 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer change active genre`, () => {
     expect(reducer({
       activeGenre: DEFAULT_GENRE,
-    }, {
-      type: `CHANGE_ACTIVE_GENRE`,
-      payload: `Horror`,
-    })).toEqual({
+    }, ActionCreator.changeActiveGenre(`Horror`))).toEqual({
       activeGenre: `Horror`,
     });
   });
@@ -24,10 +21,7 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer update movies limit`, () => {
     expect(reducer({
       moviesRenderLimit: MOVIES_LIMIT,
-    }, {
-      type: `UPDATE_MOVIES_LIMIT`,
-      payload: 8,
-    })).toEqual({
+    }, ActionCreator.updateMoviesLimit(8))).toEqual({
       moviesRenderLimit: 16,
     });
   });
@@ -35,10 +29,7 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer reset to default movies limit`, () => {
     expect(reducer({
       moviesRenderLimit: 24,
-    }, {
-      type: `RESET_MOVIES_LIMIT`,
-      payload: 8,
-    })).toEqual({
+    }, ActionCreator.resetMoviesLimit())).toEqual({
       moviesRenderLimit: MOVIES_LIMIT,
     });
   });
@@ -46,10 +37,7 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer add movie to userFavoriteList`, () => {
     expect(reducer({
       userFavoriteList: [],
-    }, {
-      type: `ADD_TO_USER_FAVORITE_LIST`,
-      payload: 1,
-    })).toEqual({
+    }, ActionCreator.addToUserFavoriteList(1))).toEqual({
       userFavoriteList: [1],
     });
   });
@@ -57,10 +45,7 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer remove movie from userFavoriteList`, () => {
     expect(reducer({
       userFavoriteList: [1, 3, 5],
-    }, {
-      type: `REMOVE_FROM_USER_FAVORITE_LIST`,
-      payload: 3,
-    })).toEqual({
+    }, ActionCreator.removeFromUserFavoriteList(3))).toEqual({
       userFavoriteList: [1, 5],
     });
   });

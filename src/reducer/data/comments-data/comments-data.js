@@ -1,5 +1,6 @@
 import {extendObject} from '../../../utils/common.js';
 import commentAdapter from '../../../adapters/comments/comments-adapter.js';
+import cloneDeep from 'lodash.clonedeep';
 
 const ActionTypes = {
   FETCH_COMMENTS_DATA: `FETCH_COMMENTS_DATA`,
@@ -73,7 +74,7 @@ const reducer = (state = initialState, action) => {
         loadingCommentsError: false,
       });
     case ActionTypes.FETCH_COMMENTS_DATA_SUCCESS:
-      const _curComments = JSON.parse(JSON.stringify(state.moviesComments));
+      const _curComments = cloneDeep(state.moviesComments);
       _curComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
       return extendObject(state, {
         loadingComments: false,

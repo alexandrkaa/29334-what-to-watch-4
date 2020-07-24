@@ -7,7 +7,7 @@ import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddComment from '../add-comment/add-comment.jsx';
-import MyLIst from '../my-list/my-list.jsx';
+import UserFavoriteList from '../user-favorite-list/user-favorite-list.jsx';
 
 const WithMovieFullScreenVideoPlayer = withMovie(FullScreenVideoPlayer);
 const WithMovieMovieCardFull = withMovie(MovieCardFull);
@@ -51,10 +51,10 @@ const App = () => {
             );
           }
         } />
-        <Route exact path={AppRoutes.MYLIST_PAGE} render={
+        <Route exact path={AppRoutes.USERFAVORITE_PAGE} render={
           (routeProps) => {
             return (
-              <MyLIst {...routeProps} />
+              <UserFavoriteList {...routeProps} />
             );
           }
         } />

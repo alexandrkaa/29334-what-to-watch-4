@@ -10,6 +10,6 @@ export const getMoviesRenderLimit = (state) => {
   return state[NAME_SPACE].moviesRenderLimit;
 };
 
-export const getMyList = (state) => {
-  return state[NAME_SPACE].myList;
+export const getUserFavoriteList = (state) => {
+  return state[NAME_SPACE].userFavoriteList;
 };

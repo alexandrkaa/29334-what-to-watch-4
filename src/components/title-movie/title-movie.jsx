@@ -1,5 +1,5 @@
 import React from 'react';
-import {movieType, myListType} from '../../types/types.js';
+import {movieType, userFavoriteListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
@@ -17,9 +17,9 @@ const TitleMovie = (props) => {
       id: movieId,
     },
     isAuthorized,
-    myList,
-    addToMyList,
-    removeFromMyList,
+    userFavoriteList,
+    addToUserFavoriteList,
+    removeFromUserFavoriteList,
   } = props;
 
   const _handlePlayClick = (evt) => {
@@ -56,9 +56,9 @@ const TitleMovie = (props) => {
               onPlay={_handlePlayClick}
               movieId={movieId}
               isAuthorized={isAuthorized}
-              myList={myList}
-              addToMyList={addToMyList}
-              removeFromMyList={removeFromMyList}
+              userFavoriteList={userFavoriteList}
+              addToUserFavoriteList={addToUserFavoriteList}
+              removeFromUserFavoriteList={removeFromUserFavoriteList}
             />
 
           </div>
@@ -72,9 +72,9 @@ TitleMovie.propTypes = {
   movie: movieType.isRequired,
   history: PropTypes.object.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
-  myList: myListType,
-  addToMyList: PropTypes.func.isRequired,
-  removeFromMyList: PropTypes.func.isRequired,
+  userFavoriteList: userFavoriteListType,
+  addToUserFavoriteList: PropTypes.func.isRequired,
+  removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
 
 export {TitleMovie};

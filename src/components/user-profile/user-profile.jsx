@@ -13,7 +13,7 @@ const UserProfile = (props) => {
       {
         (isAuthorized && userData) &&
         <div className="user-block__avatar">
-          <Link to={AppRoutes.MYLIST_PAGE}>
+          <Link to={AppRoutes.USERFAVORITE_PAGE}>
             <img src={userData.avatarUrl} alt="User avatar" width="63" height="63"/>
           </Link>
         </div>

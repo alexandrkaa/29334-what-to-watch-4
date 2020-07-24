@@ -88,7 +88,7 @@ describe(`<App /> should render`, () => {
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
-        myList: []
+        userFavoriteList: []
       },
       USER: {
         authorizationStatus: `AUTH`,

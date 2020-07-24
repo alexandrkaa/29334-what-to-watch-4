@@ -91,7 +91,7 @@ describe(`<Main /> should render main movie and movies list`, () => {
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
-        myList: []
+        userFavoriteList: []
       },
       USER: {
         authorizationStatus: `AUTH`,

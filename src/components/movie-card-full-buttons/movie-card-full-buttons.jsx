@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {myListType} from '../../types/types.js';
+import {userFavoriteListType} from '../../types/types.js';
 import {NavLink} from 'react-router-dom';
-import {isMovieInMyList} from '../../utils/filters.js';
+import {isMovieInUserFavoriteList} from '../../utils/filters.js';
 
 const MovieCardFullButtons = (props) => {
-  const {onPlay, movieId, isAuthorized, myList, addToMyList, removeFromMyList} = props;
-  const _isInMyList = isMovieInMyList(myList, movieId);
-  const _onMyListClick = (evt) => {
+  const {onPlay, movieId, isAuthorized, userFavoriteList, addToUserFavoriteList, removeFromUserFavoriteList} = props;
+  const _isInUserFavoriteList = isMovieInUserFavoriteList(userFavoriteList, movieId);
+  const _onUserFavoriteListClick = (evt) => {
     evt.preventDefault();
-    if (_isInMyList) {
-      removeFromMyList(movieId);
+    if (_isInUserFavoriteList) {
+      removeFromUserFavoriteList(movieId);
     } else {
-      addToMyList(movieId);
+      addToUserFavoriteList(movieId);
     }
   };
 
@@ -24,9 +24,9 @@ const MovieCardFullButtons = (props) => {
         </svg>
         <span>Play</span>
       </button>
-      <button onClick={_onMyListClick} className="btn btn--list movie-card__button" type="button">
+      <button onClick={_onUserFavoriteListClick} className="btn btn--list movie-card__button" type="button">
         <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref={_isInMyList ? `#in-list` : `#add`}></use>
+          <use xlinkHref={_isInUserFavoriteList ? `#in-list` : `#add`}></use>
         </svg>
         <span>My list</span>
       </button>
@@ -46,9 +46,9 @@ MovieCardFullButtons.propTypes = {
   onPlay: PropTypes.func.isRequired,
   movieId: PropTypes.number.isRequired,
   isAuthorized: PropTypes.bool,
-  myList: myListType,
-  addToMyList: PropTypes.func.isRequired,
-  removeFromMyList: PropTypes.func.isRequired,
+  userFavoriteList: userFavoriteListType,
+  addToUserFavoriteList: PropTypes.func.isRequired,
+  removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
 
 export default MovieCardFullButtons;

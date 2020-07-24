@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {AppRoutes} from '../../consts/consts.js';
 import {Redirect} from 'react-router-dom';
 import {
-  getMoviesDataFromMyList,
+  getMoviesDataFromUserFavoriteList,
   getAuthorizationStatusBoolean
 } from '../../reducer/selectors.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
@@ -14,7 +14,7 @@ import Footer from '../footer/footer.jsx';
 import MoviesList from '../movie-list/movie-list.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
 
-class MyList extends PureComponent {
+class UserFavoriteList extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -51,7 +51,7 @@ class MyList extends PureComponent {
   }
 }
 
-MyList.propTypes = {
+UserFavoriteList.propTypes = {
   moviesList: moviesListType,
   isAuthorized: PropTypes.bool.isRequired,
   checkAuth: PropTypes.func.isRequired,
@@ -59,7 +59,7 @@ MyList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    moviesList: getMoviesDataFromMyList(state),
+    moviesList: getMoviesDataFromUserFavoriteList(state),
     isAuthorized: getAuthorizationStatusBoolean(state),
   };
 };
@@ -70,5 +70,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {MyList};
-export default connect(mapStateToProps, mapDispatchToProps)(MyList);
+export {UserFavoriteList};
+export default connect(mapStateToProps, mapDispatchToProps)(UserFavoriteList);

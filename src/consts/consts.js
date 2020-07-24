@@ -66,7 +66,7 @@ export const AppRoutes = {
   FILM_PAGE: `/films`,
   LOGIN_PAGE: `/login`,
   REVIEW_PAGE: `/review`,
-  MYLIST_PAGE: `/mylist`,
+  USERFAVORITE_PAGE: `/mylist`,
 };
 
 export const REVIEW_STARS_NUMBER = 5;

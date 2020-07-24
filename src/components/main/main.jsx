@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MoviesList from '../movie-list/movie-list.jsx';
 import GenreFilterList from '../genre-filter-list/genre-filter-list.jsx';
 import ShowMore from '../show-more/show-more.jsx';
-import {moviesListType, movieType, myListType} from '../../types/types.js';
+import {moviesListType, movieType, userFavoriteListType} from '../../types/types.js';
 import TitleMovie from '../title-movie/title-movie.jsx';
 import {
   getFilteredMovies,
@@ -13,7 +13,7 @@ import {
   getActiveGenre,
   getMoviesLoadingErrorStatus,
   getAuthorizationStatusBoolean,
-  getMyList,
+  getUserFavoriteList,
 } from '../../reducer/selectors.js';
 import {ActionCreator as MovieActionCreator} from '../../reducer/movie/movie.js';
 import {connect} from 'react-redux';
@@ -32,15 +32,20 @@ const Main = (props) => {
     loadingMovies,
     loadingMoviesError,
     isAuthorized,
-    myList,
-    addToMyList,
-    removeFromMyList,
+    userFavoriteList,
+    addToUserFavoriteList,
+    removeFromUserFavoriteList,
   } = props;
   const isShowMore = !(moviesRenderLimit > moviesList.length);
   if (!loadingMovies && !loadingMoviesError) {
     return (
       <React.Fragment>
-        <TitleMovie isAuthorized={isAuthorized} movie={titleMovie} myList={myList} addToMyList={addToMyList} removeFromMyList={removeFromMyList} />
+        <TitleMovie isAuthorized={isAuthorized}
+          movie={titleMovie}
+          userFavoriteList={userFavoriteList}
+          addToUserFavoriteList={addToUserFavoriteList}
+          removeFromUserFavoriteList={removeFromUserFavoriteList}
+        />
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -78,16 +83,16 @@ const mapStateToProps = (state) => {
     loadingMovies: getMoviesLoadingStatus(state),
     loadingMoviesError: getMoviesLoadingErrorStatus(state),
     isAuthorized: getAuthorizationStatusBoolean(state),
-    myList: getMyList(state),
+    userFavoriteList: getUserFavoriteList(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addToMyList(movieId) {
-    dispatch(MovieActionCreator.addToMyList(movieId));
+  addToUserFavoriteList(movieId) {
+    dispatch(MovieActionCreator.addToUserFavoriteList(movieId));
   },
-  removeFromMyList(movieId) {
-    dispatch(MovieActionCreator.removeFromMyList(movieId));
+  removeFromUserFavoriteList(movieId) {
+    dispatch(MovieActionCreator.removeFromUserFavoriteList(movieId));
   },
 });
 
@@ -99,9 +104,9 @@ Main.propTypes = {
   loadingMovies: PropTypes.bool.isRequired,
   loadingMoviesError: PropTypes.bool.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
-  myList: myListType.isRequired,
-  addToMyList: PropTypes.func.isRequired,
-  removeFromMyList: PropTypes.func.isRequired,
+  userFavoriteList: userFavoriteListType.isRequired,
+  addToUserFavoriteList: PropTypes.func.isRequired,
+  removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
 
 export {Main};

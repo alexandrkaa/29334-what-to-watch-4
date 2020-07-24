@@ -1,5 +1,5 @@
 import React from 'react';
-import {MyList} from './my-list.jsx';
+import {MyList} from './user-favorite-list.jsx';
 import ShallowRenderer from 'react-test-renderer/shallow';
 const renderer = new ShallowRenderer();
 

@@ -5,7 +5,7 @@ import {
   getMoviesComments,
   getCommentsLoadingStatus,
   getCommentsErrorStatus,
-  getMyList,
+  getUserFavoriteList,
 } from '../../reducer/selectors.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsDataActionCreator} from '../../reducer/data/comments-data/comments-data.js';
 import {ActionCreator as MovieActionCreator} from '../../reducer/movie/movie.js';
@@ -16,7 +16,7 @@ import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-det
 import MovieCardFullComments from '../movie-card-full-comments/movie-card-full-comments.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MoviesList from '../movie-list/movie-list.jsx';
-import {moviesListType, movieType, myListType} from '../../types/types.js';
+import {moviesListType, movieType, userFavoriteListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
@@ -76,9 +76,9 @@ class MovieCardFull extends PureComponent {
       movie,
       similarMovies,
       isAuthorized,
-      myList,
-      addToMyList,
-      removeFromMyList,
+      userFavoriteList,
+      addToUserFavoriteList,
+      removeFromUserFavoriteList,
     } = this.props;
     const {
       movieImage,
@@ -114,9 +114,9 @@ class MovieCardFull extends PureComponent {
                   onPlay={this._handlePlayButton}
                   movieId={movie.id}
                   isAuthorized={isAuthorized}
-                  myList={myList}
-                  addToMyList={addToMyList}
-                  removeFromMyList={removeFromMyList}
+                  userFavoriteList={userFavoriteList}
+                  addToUserFavoriteList={addToUserFavoriteList}
+                  removeFromUserFavoriteList={removeFromUserFavoriteList}
                 />
 
               </div>
@@ -170,9 +170,9 @@ MovieCardFull.propTypes = {
   comments: PropTypes.array.isRequired,
   isLoadingComments: PropTypes.bool.isRequired,
   isLoadingCommentsError: PropTypes.bool.isRequired,
-  myList: myListType.isRequired,
-  addToMyList: PropTypes.func.isRequired,
-  removeFromMyList: PropTypes.func.isRequired,
+  userFavoriteList: userFavoriteListType.isRequired,
+  addToUserFavoriteList: PropTypes.func.isRequired,
+  removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -180,7 +180,7 @@ const mapStateToProps = (state, ownProps) => {
     comments: getMoviesComments(state, ownProps.movie.id),
     isLoadingComments: getCommentsLoadingStatus(state),
     isLoadingCommentsError: getCommentsErrorStatus(state),
-    myList: getMyList(state),
+    userFavoriteList: getUserFavoriteList(state),
   };
 };
 
@@ -189,11 +189,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CommentsDataActionCreator.fetchCommentsData());
     dispatch(CommentsOperation.getCommentsData(movieId));
   },
-  addToMyList(movieId) {
-    dispatch(MovieActionCreator.addToMyList(movieId));
+  addToUserFavoriteList(movieId) {
+    dispatch(MovieActionCreator.addToUserFavoriteList(movieId));
   },
-  removeFromMyList(movieId) {
-    dispatch(MovieActionCreator.removeFromMyList(movieId));
+  removeFromUserFavoriteList(movieId) {
+    dispatch(MovieActionCreator.removeFromUserFavoriteList(movieId));
   },
 });
 

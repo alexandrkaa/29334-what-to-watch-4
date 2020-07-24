@@ -22,7 +22,7 @@ import {
 import {
   getActiveGenre,
   getMoviesRenderLimit,
-  getMyList,
+  getUserFavoriteList,
 } from './movie/selectors.js';
 
 import {
@@ -46,10 +46,10 @@ export const getFilteredMovies = createSelector(
     }
 );
 
-export const getMoviesDataFromMyList = createSelector(
-    [getMovies, getMyList],
-    (moviesList, myList) => {
-      return moviesList.filter((movie) => myList.includes(movie.id));
+export const getMoviesDataFromUserFavoriteList = createSelector(
+    [getMovies, getUserFavoriteList],
+    (moviesList, userFavoriteList) => {
+      return moviesList.filter((movie) => userFavoriteList.includes(movie.id));
     }
 );
 
@@ -70,7 +70,7 @@ export {
 
   getActiveGenre,
   getMoviesRenderLimit,
-  getMyList,
+  getUserFavoriteList,
 
   getAuthorizationStatus,
   getAuthorizationStatusBoolean,

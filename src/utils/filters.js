@@ -61,6 +61,6 @@ export const isValidField = (id, field) => {
   }
 };
 
-export const isMovieInMyList = (myList, movieId) => {
-  return myList.includes(movieId);
+export const isMovieInUserFavoriteList = (userFavoriteList, movieId) => {
+  return userFavoriteList.includes(movieId);
 };

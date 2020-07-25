@@ -24,9 +24,14 @@ const store = createStore(
 store.dispatch(UserOperation.checkAuth());
 
 store.dispatch(MoviesDataActionCreator.fetchMoviesData());
-store.dispatch(MoviesDataActionCreator.fetchTitleMovie());
-
-store.dispatch(MoviesDataActionCreator.fetchTitleMovieSuccess(titleMovie));
 store.dispatch(MoviesDataOperation.fetchMoviesData());
+setTimeout(() => {
+  store.dispatch(MoviesDataOperation.postToUserFavoriteList());
+  store.dispatch(MoviesDataActionCreator.fetchUserFavoriteList());
+  store.dispatch(MoviesDataOperation.getUserFavoriteListData());
+}, 2000);
+
+store.dispatch(MoviesDataActionCreator.fetchTitleMovie());
+store.dispatch(MoviesDataActionCreator.fetchTitleMovieSuccess(titleMovie));
 
 export default store;

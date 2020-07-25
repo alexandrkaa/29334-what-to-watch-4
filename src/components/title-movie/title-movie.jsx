@@ -1,11 +1,12 @@
 import React from 'react';
-import {movieType} from '../../types/types.js';
+import {movieType, userFavoriteListType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
-import {ComponentsKeys} from '../../consts/consts.js';
+import MovieCardTitle from '../movie-card-title/movie-card-title.jsx';
+import MovieCardBackground from '../movie-card-background/movie-card-background.jsx';
 
 const TitleMovie = (props) => {
   const {
@@ -18,6 +19,9 @@ const TitleMovie = (props) => {
       id: movieId,
     },
     isAuthorized,
+    userFavoriteList,
+    addToUserFavoriteList,
+    removeFromUserFavoriteList,
   } = props;
 
   const _handlePlayClick = (evt) => {
@@ -27,13 +31,9 @@ const TitleMovie = (props) => {
 
   return (
     <section className="movie-card">
-      <div className="movie-card__bg">
-        <img src={movieBackground} alt="The Grand Budapest Hotel"/>
-      </div>
-
-
+      <MovieCardBackground movieBackground={movieBackground} title={title} />
       <Header>
-        <UserProfile key={ComponentsKeys.USERPROFILE} />
+        <UserProfile />
       </Header>
 
       <div className="movie-card__wrap">
@@ -44,16 +44,14 @@ const TitleMovie = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{title}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{movieGenre}</span>
-              <span className="movie-card__year">{movieDate}</span>
-            </p>
-
+            <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
             <MovieCardFullButtons
               onPlay={_handlePlayClick}
               movieId={movieId}
-              isReviewVisible={isAuthorized}
+              isAuthorized={isAuthorized}
+              userFavoriteList={userFavoriteList}
+              addToUserFavoriteList={addToUserFavoriteList}
+              removeFromUserFavoriteList={removeFromUserFavoriteList}
             />
 
           </div>
@@ -67,6 +65,9 @@ TitleMovie.propTypes = {
   movie: movieType.isRequired,
   history: PropTypes.object.isRequired,
   isAuthorized: PropTypes.bool.isRequired,
+  userFavoriteList: userFavoriteListType,
+  addToUserFavoriteList: PropTypes.func.isRequired,
+  removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
 
 export {TitleMovie};

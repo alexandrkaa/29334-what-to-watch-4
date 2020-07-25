@@ -87,6 +87,7 @@ it(`<TitleMovie /> should match snapshot`, () => {
     MOVIE: {
       activeGenre: `All genres`,
       moviesRenderLimit: 8,
+      userFavoriteList: []
     },
     USER: {
       authorizationStatus: `AUTH`,
@@ -102,7 +103,7 @@ it(`<TitleMovie /> should match snapshot`, () => {
     id: 3,
     image: `img/aviator.jpg`,
     movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2008`,
+    movieDate: 2008,
     movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
     movieDirector: `Christopher Nolan`,
     movieGenre: `Kids & Family`,
@@ -118,6 +119,8 @@ it(`<TitleMovie /> should match snapshot`, () => {
     isFavorite: false,
   };
   const history = {};
+  const addToUserFavoriteList = jest.fn();
+  const removeFromUserFavoriteList = jest.fn();
   const tree = renderer
     .create(
         <Provider store={store}>
@@ -126,6 +129,9 @@ it(`<TitleMovie /> should match snapshot`, () => {
               movie={mockMovie}
               history={history}
               isAuthorized={true}
+              addToUserFavoriteList={addToUserFavoriteList}
+              removeFromUserFavoriteList={removeFromUserFavoriteList}
+              userFavoriteList={[]}
             />
           </BrowserRouter>
         </Provider>

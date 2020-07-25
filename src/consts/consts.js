@@ -66,16 +66,35 @@ export const AppRoutes = {
   FILM_PAGE: `/films`,
   LOGIN_PAGE: `/login`,
   REVIEW_PAGE: `/review`,
+  USERFAVORITE_PAGE: `/mylist`,
 };
 
 export const REVIEW_STARS_NUMBER = 5;
 
 export const ReviewTextLength = {
-  MIN: 1,
+  MIN: 50,
   MAX: 400,
 };
 
-export const ComponentsKeys = {
-  BREADCRUMBS: `Breadcrumbs`,
-  USERPROFILE: `UserProfile`,
+export const RatingScores = {
+  AWESOME: {
+    score: 10,
+    name: `Awesome`,
+  },
+  VERYGOOD: {
+    score: 8,
+    name: `Very good`,
+  },
+  GOOD: {
+    score: 5,
+    name: `Good`,
+  },
+  NORMAL: {
+    score: 3,
+    name: `Normal`,
+  },
+  BAD: {
+    score: 0,
+    name: `Bad`,
+  },
 };

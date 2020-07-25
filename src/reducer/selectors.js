@@ -5,7 +5,6 @@ import {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
   getMovieByIdFromState,
   getMoviesLoadingErrorStatus
@@ -13,13 +12,16 @@ import {
 
 import {
   getMoviesComments,
-  isPostCommentInProgress,
-  isPostCommentHasError,
+  getCommentsLoadingStatus,
+  getCommentsErrorStatus,
+  getIsPostCommentInProgress,
+  getIsPostCommentHasError,
 } from './data/comments-data/selectors.js';
 
 import {
   getActiveGenre,
-  getMoviesRenderLimit
+  getMoviesRenderLimit,
+  getUserFavoriteList,
 } from './movie/selectors.js';
 
 import {
@@ -43,21 +45,30 @@ export const getFilteredMovies = createSelector(
     }
 );
 
+export const getMoviesDataFromUserFavoriteList = createSelector(
+    [getMovies, getUserFavoriteList],
+    (moviesList, userFavoriteList) => {
+      return moviesList.filter((movie) => userFavoriteList.includes(movie.id));
+    }
+);
+
 export {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getCommentsLoadingStatus,
   getTitleMovieLoadingStatus,
+  getMovieByIdFromState,
   getMoviesLoadingErrorStatus,
 
   getMoviesComments,
-  isPostCommentInProgress,
-  isPostCommentHasError,
+  getCommentsLoadingStatus,
+  getCommentsErrorStatus,
+  getIsPostCommentInProgress,
+  getIsPostCommentHasError,
 
-  getMovieByIdFromState,
   getActiveGenre,
   getMoviesRenderLimit,
+  getUserFavoriteList,
 
   getAuthorizationStatus,
   getAuthorizationStatusBoolean,

@@ -13,7 +13,7 @@ const mockData = {
     id: 4,
     image: `img/we-need-to-talk-about-kevin.jpg`,
     movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2000`,
+    movieDate: 2000,
     movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
     movieDirector: `Wes Anderson`,
     movieGenre: `Thriller`,
@@ -34,7 +34,7 @@ const mockData = {
       id: 4,
       image: `img/we-need-to-talk-about-kevin.jpg`,
       movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-      movieDate: `2000`,
+      movieDate: 2000,
       movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
       movieDirector: `Wes Anderson`,
       movieGenre: `Thriller`,
@@ -53,7 +53,7 @@ const mockData = {
       id: 3,
       image: `img/aviator.jpg`,
       movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-      movieDate: `2008`,
+      movieDate: 2008,
       movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
       movieDirector: `Christopher Nolan`,
       movieGenre: `Kids & Family`,
@@ -91,6 +91,7 @@ describe(`<Main /> should render main movie and movies list`, () => {
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
+        userFavoriteList: []
       },
       USER: {
         authorizationStatus: `AUTH`,

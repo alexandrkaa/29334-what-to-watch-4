@@ -60,3 +60,7 @@ export const isValidField = (id, field) => {
       throw new Error(`No corresponding func to validate`);
   }
 };
+
+export const isMovieInUserFavoriteList = (userFavoriteList, movieId) => {
+  return userFavoriteList.includes(movieId);
+};

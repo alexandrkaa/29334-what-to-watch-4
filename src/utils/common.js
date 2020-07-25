@@ -1,4 +1,4 @@
-import {SECS_PER_HOUR} from '../consts/consts.js';
+import {SECS_PER_HOUR, RatingScores} from '../consts/consts.js';
 
 export const generateRandomInteger = (min, max) => {
   const rand = min + Math.random() * (max + 1 - min);
@@ -22,6 +22,13 @@ export const convertSecondsToHoursMins = (sec) => {
   return `${hours}h ${mins}m`;
 };
 
+export const convertMinutesToHoursMins = (mins) => {
+  if (mins < 60) {
+    return `${mins}m`;
+  }
+  return `${Math.floor(mins / 60) || 0}h ${(mins % 60) || 0}m`;
+};
+
 export const extendObject = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -34,10 +41,43 @@ export const secondsToTime = (initialSeconds) => {
   if (!initialSeconds) {
     return `00:00:00`;
   }
-  const _initialSeconds = Math.round(initialSeconds);
-  const hours = Math.floor(_initialSeconds / (60 * 60));
-  const _toMinutesSec = _initialSeconds % (60 * 60);
-  const minutes = Math.floor(_toMinutesSec / 60);
-  const seconds = Math.ceil(_toMinutesSec % 60);
+  const roundedSeconds = Math.round(initialSeconds);
+  const hours = Math.floor(roundedSeconds / (60 * 60));
+  const toMinutesSec = roundedSeconds % (60 * 60);
+  const minutes = Math.floor(toMinutesSec / 60);
+  const seconds = Math.ceil(toMinutesSec % 60);
   return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+};
+
+export const removeElementFromArray = (elem, arr) => {
+  const idx = arr.findIndex((it) => (it === elem));
+  const before = arr.slice(0, idx);
+  const after = arr.slice((idx + 1), arr.length);
+  return before.concat(after);
+};
+
+export const addElementToArray = (elem, arr) => {
+  const copy = arr.slice();
+  copy.push(elem);
+  return copy;
+};
+
+export const convertMovieRateToText = (rating) => {
+  const rate = parseFloat(rating) || 0;
+  if (rate === RatingScores.AWESOME.score) {
+    return RatingScores.AWESOME.name;
+  } else
+  if (rate > RatingScores.VERYGOOD.score) {
+    return RatingScores.VERYGOOD.name;
+  } else
+  if (rate > RatingScores.GOOD.score) {
+    return RatingScores.GOOD.name;
+  } else
+  if (rate > RatingScores.NORMAL.score) {
+    return RatingScores.NORMAL.name;
+  } else
+  if (rate > RatingScores.BAD.score) {
+    return RatingScores.BAD.name;
+  }
+  return RatingScores.BAD.name;
 };

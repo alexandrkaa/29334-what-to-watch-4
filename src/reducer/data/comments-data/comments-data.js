@@ -1,16 +1,20 @@
 import {extendObject} from '../../../utils/common.js';
+import commentAdapter from '../../../adapters/comments/comments-adapter.js';
+import cloneDeep from 'lodash.clonedeep';
 
 const ActionTypes = {
-  FETCH_MOVIES_COMMENTS_DATA: `FETCH_MOVIES_COMMENTS_DATA`,
-  FETCH_MOVIES_COMMENTS_DATA_SUCCESS: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
+  FETCH_COMMENTS_DATA: `FETCH_COMMENTS_DATA`,
+  FETCH_COMMENTS_DATA_SUCCESS: `FETCH_COMMENTS_DATA_SUCCESS`,
+  FETCH_COMMENTS_DATA_ERROR: `FETCH_COMMENTS_DATA_ERROR`,
   POST_COMMENT_IN_PROGRESS: `POST_COMMENT_IN_PROGRESS`,
   POST_COMMENT_SUCCESS: `POST_COMMENT_SUCCESS`,
-  POST_COMMENT_ERROR: `POST_COMMENT_ERROR`
+  POST_COMMENT_ERROR: `POST_COMMENT_ERROR`,
 };
 
 const initialState = {
   loadingComments: false,
-  moviesComments: [],
+  loadingCommentsError: false,
+  moviesComments: {},
   postCommentInProgress: false,
   postCommentError: false,
 };
@@ -21,18 +25,35 @@ const Operation = {
       rating: commentData.rating,
       comment: commentData.comment,
     })
-    .then(() => dispatch(ActionCreator.postCommentSuccess))
-    .catch(() => dispatch(ActionCreator.postCommentError));
+    .then(() => {
+      dispatch(ActionCreator.postCommentSuccess());
+    })
+    .catch(() => dispatch(ActionCreator.postCommentError()));
+  },
+  getCommentsData: (movieId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${movieId}`)
+    .then((response) => {
+      dispatch(ActionCreator.fetchCommentsDataSuccess({
+        movieId,
+        comments: response.data
+      }));
+    })
+    .catch(() => {
+      dispatch(ActionCreator.fetchCommentsDataError());
+    });
   }
 };
 
 const ActionCreator = {
-  fetchMoviesCommentsData: () => ({
-    type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
+  fetchCommentsData: () => ({
+    type: ActionTypes.FETCH_COMMENTS_DATA,
   }),
-  fetchMoviesCommentsDataSuccess: (moviesComments) => ({
-    type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
+  fetchCommentsDataSuccess: (moviesComments) => ({
+    type: ActionTypes.FETCH_COMMENTS_DATA_SUCCESS,
     payload: moviesComments,
+  }),
+  fetchCommentsDataError: () => ({
+    type: ActionTypes.FETCH_COMMENTS_DATA_ERROR,
   }),
   postComment: () => ({
     type: ActionTypes.POST_COMMENT_IN_PROGRESS,
@@ -47,18 +68,27 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.FETCH_MOVIES_COMMENTS_DATA:
+    case ActionTypes.FETCH_COMMENTS_DATA:
       return extendObject(state, {
         loadingComments: true,
+        loadingCommentsError: false,
       });
-    case ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS:
+    case ActionTypes.FETCH_COMMENTS_DATA_SUCCESS:
+      const _curComments = cloneDeep(state.moviesComments);
+      _curComments[action.payload.movieId] = action.payload.comments.map((comment) => commentAdapter(comment)) || [];
       return extendObject(state, {
         loadingComments: false,
-        moviesComments: state.moviesComments.concat(action.payload)
+        moviesComments: _curComments,
+      });
+    case ActionTypes.FETCH_COMMENTS_DATA_ERROR:
+      return extendObject(state, {
+        loadingComments: false,
+        loadingCommentsError: true,
       });
     case ActionTypes.POST_COMMENT_IN_PROGRESS:
       return extendObject(state, {
         postCommentInProgress: true,
+        postCommentError: false,
       });
     case ActionTypes.POST_COMMENT_SUCCESS:
       return extendObject(state, {

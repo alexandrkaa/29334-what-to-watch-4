@@ -3,7 +3,7 @@ import React from 'react';
 const Loader = () => {
   return (
     <React.Fragment>
-      <div style={{width: `100vw`, height: `calc(100vh - 94px - 138px)`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
+      <div style={{width: `100%`, height: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           style={{margin: `auto`}}

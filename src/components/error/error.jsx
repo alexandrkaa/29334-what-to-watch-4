@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Loader = () => {
+const Error = () => {
   return (
-    <div style={{width: `100vw`, height: `calc(100vh - 94px - 138px)`, display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`}}>
+    <div style={{width: `100%`, height: `100%`, display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`}}>
       <h2>Sorry, error is occuried while loading content. Please try sometime later</h2>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,4 +20,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Error;

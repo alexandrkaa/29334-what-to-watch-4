@@ -8,7 +8,7 @@ exports[`<TitleMovie /> should match snapshot 1`] = `
     className="movie-card__bg"
   >
     <img
-      alt="The Grand Budapest Hotel"
+      alt="Johnny English"
       src="img/bg-the-grand-budapest-hotel.jpg"
     />
   </div>
@@ -53,12 +53,17 @@ exports[`<TitleMovie /> should match snapshot 1`] = `
       <div
         className="user-block__avatar"
       >
-        <img
-          alt="User avatar"
-          height="63"
-          src="/img/avatar.jpg"
-          width="63"
-        />
+        <a
+          href="/mylist"
+          onClick={[Function]}
+        >
+          <img
+            alt="User avatar"
+            height="63"
+            src="/img/avatar.jpg"
+            width="63"
+          />
+        </a>
       </div>
     </div>
   </header>
@@ -123,6 +128,7 @@ exports[`<TitleMovie /> should match snapshot 1`] = `
           </button>
           <button
             className="btn btn--list movie-card__button"
+            onClick={[Function]}
             type="button"
           >
             <svg

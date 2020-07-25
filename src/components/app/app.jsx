@@ -7,6 +7,7 @@ import FullScreenVideoPlayer from '../full-screen-video-player/full-screen-video
 import withMovie from '../../hocs/with-movie/with-movie.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddComment from '../add-comment/add-comment.jsx';
+import UserFavoriteList from '../user-favorite-list/user-favorite-list.jsx';
 
 const WithMovieFullScreenVideoPlayer = withMovie(FullScreenVideoPlayer);
 const WithMovieMovieCardFull = withMovie(MovieCardFull);
@@ -42,11 +43,19 @@ const App = () => {
           (routeProps) => {
             return (
               <WithMovieMovieCardFull
+                key={parseInt(routeProps.match.params.id, 10)}
                 movieId={parseInt(routeProps.match.params.id, 10)}
                 loadSimilarMovies={true}
                 {...routeProps}
                 activeItem={MovieCardFullTabsIds.OVERVIEW}
               />
+            );
+          }
+        } />
+        <Route exact path={AppRoutes.USERFAVORITE_PAGE} render={
+          (routeProps) => {
+            return (
+              <UserFavoriteList {...routeProps} />
             );
           }
         } />

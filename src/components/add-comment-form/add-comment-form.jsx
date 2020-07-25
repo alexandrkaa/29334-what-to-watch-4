@@ -5,8 +5,6 @@ import InputTextarea from '../input-textarea/input-textarea.jsx';
 import {REVIEW_STARS_NUMBER} from '../../consts/consts.js';
 import withReview from '../../hocs/with-comment/with-comment.js';
 import Error from '../error/error.jsx';
-import {isValidField} from '../../utils/filters.js';
-import {FiledsIds} from '../../consts/consts.js';
 
 const AddCommentForm = (props) => {
   const {
@@ -17,6 +15,7 @@ const AddCommentForm = (props) => {
     onFormSubmit,
     postCommentInProgress,
     postCommentError,
+    isFormValid,
   } = props;
   if (postCommentError) {
     return (
@@ -24,7 +23,6 @@ const AddCommentForm = (props) => {
     );
   }
 
-  const isFormValid = isValidField(FiledsIds.RATING_FIELD_ID, rating) && isValidField(FiledsIds.COMMENTS_FIELD_ID, comment);
 
   return (
     <div className="add-review">

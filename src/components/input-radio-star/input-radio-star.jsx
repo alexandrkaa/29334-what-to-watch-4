@@ -22,4 +22,4 @@ InputRadioStar.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
 };
 
-export default InputRadioStar;
+export default React.memo(InputRadioStar);

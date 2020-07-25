@@ -1,7 +1,8 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 
-const MovieCardFullReview = (props) => {
+const MovieCardFullComment = (props) => {
   const {comment} = props;
   return (
     <div key={comment.id} className="review">
@@ -9,8 +10,8 @@ const MovieCardFullReview = (props) => {
         <p className="review__text">{comment.text}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{comment.author}</cite>
-          <time className="review__date" dateTime={comment.date}>{comment.date}</time>
+          <cite className="review__author">{comment.author.name}</cite>
+          <time className="review__date" dateTime={comment.date}>{dayjs(comment.date).format(`MMMM DD, YYYY`)}</time>
         </footer>
       </blockquote>
 
@@ -19,15 +20,14 @@ const MovieCardFullReview = (props) => {
   );
 };
 
-MovieCardFullReview.propTypes = {
+MovieCardFullComment.propTypes = {
   comment: PropTypes.exact({
     id: PropTypes.number.isRequired,
-    movieId: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.object.isRequired,
     date: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }),
 };
 
-export default MovieCardFullReview;
+export default MovieCardFullComment;

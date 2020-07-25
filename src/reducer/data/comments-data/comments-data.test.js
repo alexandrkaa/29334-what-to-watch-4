@@ -1,26 +1,26 @@
 import {reducer, ActionCreator, ActionTypes} from './comments-data.js';
 
-const comments = [{
-  author: `Alessio Parkes`,
-  date: `11.03.2009`,
-  id: 1000,
-  movieId: 1,
-  rating: 4,
-  text: `And all the clouds that lour'd upon our house. In the deep bosom of the ocean buried. Now are our brows bound with victorious wreaths Our bruised arms hung up for monuments Our stern alarums changed to merry meetings. Our dreadful marches to delightful measures Grim-visaged war hath smooth'd his wrinkled front And now, instead of mounting barded steeds. To fright the souls of fearful adversaries He capers nimbly in a lady's chamber. To the lascivious pleasing of a lute But I, that am not shaped for sportive tricks, Nor made to court an amorous looking-glass`
-}, {
-  author: `Jordi Joseph`,
-  date: `11.03.2009`,
-  id: 1000,
-  movieId: 2,
-  rating: 4,
-  text: `And all the clouds that lour'd upon our house. In the deep bosom of the ocean buried. Now are our brows bound with victorious wreaths Our bruised arms hung up for monuments Our stern alarums changed to merry meetings. Our dreadful marches to delightful measures Grim-visaged war hath smooth'd his wrinkled front And now, instead of mounting barded steeds. To fright the souls of fearful adversaries He capers nimbly in a lady's chamber. To the lascivious pleasing of a lute`
-}];
+const comments = {
+  3: [
+    {
+      id: 1,
+      author: {
+        id: 4,
+        name: `Kate Muir`
+      },
+      rating: 8.9,
+      text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+      date: `2019-05-08T14:13:56.569Z`
+    }
+  ],
+};
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     });
@@ -29,14 +29,16 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer fetch comments data`, () => {
     expect(reducer({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     }, {
-      type: `FETCH_MOVIES_COMMENTS_DATA`,
+      type: `FETCH_COMMENTS_DATA`,
     })).toEqual({
       loadingComments: true,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     });
@@ -45,15 +47,59 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer fetch comments data success`, () => {
     expect(reducer({
       loadingComments: true,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     }, {
-      type: `FETCH_MOVIES_COMMENTS_DATA_SUCCESS`,
+      type: `FETCH_COMMENTS_DATA_SUCCESS`,
+      payload: {
+        movieId: 3,
+        comments: [{
+          id: 2,
+          user: {
+            id: 4,
+            name: `Kate Muir`
+          },
+          rating: 9,
+          comment: `Comment text`,
+          date: `2019-01-08T14:13:56.569Z`
+        }]
+      }
+    })).toEqual({
+      loadingComments: false,
+      loadingCommentsError: false,
+      moviesComments: {
+        3: [{
+          id: 2,
+          author: {
+            id: 4,
+            name: `Kate Muir`
+          },
+          rating: 9,
+          text: `Comment text`,
+          date: `2019-01-08T14:13:56.569Z`
+        }]
+      },
+      postCommentInProgress: false,
+      postCommentError: false,
+    });
+  });
+
+  it(`Should reducer fetch comments data error`, () => {
+    expect(reducer({
+      loadingComments: true,
+      loadingCommentsError: false,
+      moviesComments: {},
+      postCommentInProgress: false,
+      postCommentError: false,
+    }, {
+      type: `FETCH_COMMENTS_DATA_ERROR`,
       payload: comments
     })).toEqual({
       loadingComments: false,
-      moviesComments: comments,
+      loadingCommentsError: true,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     });
@@ -62,14 +108,16 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer update comment post progress`, () => {
     expect(reducer({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     }, {
       type: `POST_COMMENT_IN_PROGRESS`,
     })).toEqual({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
     });
@@ -78,14 +126,16 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer update comment post error`, () => {
     expect(reducer({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
     }, {
       type: `POST_COMMENT_ERROR`,
     })).toEqual({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: true,
     });
@@ -94,14 +144,16 @@ describe(`Reducer works correctly`, () => {
   it(`Should reducer update comment post success`, () => {
     expect(reducer({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
     }, {
       type: `POST_COMMENT_SUCCESS`,
     })).toEqual({
       loadingComments: false,
-      moviesComments: [],
+      loadingCommentsError: false,
+      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     });
@@ -110,16 +162,22 @@ describe(`Reducer works correctly`, () => {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator fetch movies comments data returns correct action`, () => {
-    expect(ActionCreator.fetchMoviesCommentsData()).toEqual({
-      type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA,
+    expect(ActionCreator.fetchCommentsData()).toEqual({
+      type: ActionTypes.FETCH_COMMENTS_DATA,
     });
   });
 
   it(`Action creator fetch movies comments data success returns correct action`, () => {
 
-    expect(ActionCreator.fetchMoviesCommentsDataSuccess(comments)).toEqual({
-      type: ActionTypes.FETCH_MOVIES_COMMENTS_DATA_SUCCESS,
+    expect(ActionCreator.fetchCommentsDataSuccess(comments)).toEqual({
+      type: ActionTypes.FETCH_COMMENTS_DATA_SUCCESS,
       payload: comments
+    });
+  });
+
+  it(`Action creator fetch movies comments data returns correct action`, () => {
+    expect(ActionCreator.fetchCommentsDataError()).toEqual({
+      type: ActionTypes.FETCH_COMMENTS_DATA_ERROR,
     });
   });
 });

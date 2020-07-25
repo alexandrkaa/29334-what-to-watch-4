@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
+exports[`<MovieCardFullComments /> should match snapshot 1`] = `
 <div
   className="movie-card__reviews movie-card__row"
 >
@@ -16,7 +16,7 @@ exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
         <p
           className="review__text"
         >
-          Talking chamber as shewing an it minutes. Trees fully of blind do. Exquisite favourite at do extensive listening. Improve up musical welcome he. Gay attended vicinity prepared now diverted. Esteems it ye sending reached as. Longer lively her design settle tastes advice mrs off who. 
+          Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.
         </p>
         <footer
           className="review__details"
@@ -24,20 +24,20 @@ exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
           <cite
             className="review__author"
           >
-            Doe John
+            Emely
           </cite>
           <time
             className="review__date"
-            dateTime="31.12.2020"
+            dateTime="2020-07-15T12:25:15.535Z"
           >
-            31.12.2020
+            July 15, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        9
+        2.9
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
         <p
           className="review__text"
         >
-          Those an equal point no years do. Depend warmth fat but her but played. Shy and subjects wondered trifling pleasant. Prudent cordial comfort do no on colonel as assured chicken. Smart mrs day which begin. Snug do sold mr it if such. Terminated uncommonly at at estimating. Man behaviour met moonlight extremity acuteness direction.
+          comment text
         </p>
         <footer
           className="review__details"
@@ -61,20 +61,20 @@ exports[`<MovieCardFullReviews /> should match snapshot 1`] = `
           <cite
             className="review__author"
           >
-            John Doe
+            Emely2
           </cite>
           <time
             className="review__date"
-            dateTime="01.01.2000"
+            dateTime="2020-01-15T12:25:15.535Z"
           >
-            01.01.2000
+            January 15, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        3
+        2.9
       </div>
     </div>
   </div>

@@ -41,3 +41,5 @@ export const videoDementionType = PropTypes.oneOfType([
   PropTypes.number.isRequired,
   PropTypes.string.isRequired,
 ]);
+
+export const userFavoriteListType = PropTypes.arrayOf(PropTypes.number);

@@ -5,6 +5,7 @@ const initialState = {
   activeGenre: DEFAULT_GENRE,
   moviesRenderLimit: MOVIES_LIMIT,
   userFavoriteList: [],
+  loadingUserFavoriteList: false,
 };
 
 const ActionTypes = {
@@ -14,6 +15,7 @@ const ActionTypes = {
   ADD_TO_USER_FAVORITE_LIST: `ADD_TO_USER_FAVORITE_LIST`,
   REMOVE_FROM_USER_FAVORITE_LIST: `REMOVE_FROM_USER_FAVORITE_LIST`,
 };
+
 
 const ActionCreator = {
   changeActiveGenre: (movieGenre) => ({

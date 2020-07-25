@@ -18,7 +18,7 @@ const movieAdapter = (movie) => {
     moviePreview: movie.preview_video_link,
     movieVideo: movie.video_link,
     movieRunTime: movie.run_time,
-    isFavorite: movie.isFavorite
+    isFavorite: movie.is_favorite,
   };
 };
 

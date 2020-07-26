@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import PrivateRoute from '../private-route/private-route.jsx';
 import Main from '../main/main.jsx';
 import MovieCardFull from '../movie-card-full/movie-card-full.jsx';
 import {MovieCardFullTabsIds, AppRoutes} from '../../consts/consts.js';
@@ -29,7 +30,7 @@ const App = () => {
             );
           }
         } />
-        <Route exact path={`${AppRoutes.FILM_PAGE}/:id${AppRoutes.REVIEW_PAGE}`} render={
+        <PrivateRoute exact path={`${AppRoutes.FILM_PAGE}/:id${AppRoutes.REVIEW_PAGE}`} render={
           (routeProps) => {
             return (
               <AddComment
@@ -52,7 +53,7 @@ const App = () => {
             );
           }
         } />
-        <Route exact path={AppRoutes.USERFAVORITE_PAGE} render={
+        <PrivateRoute exact path={AppRoutes.USERFAVORITE_PAGE} render={
           (routeProps) => {
             return (
               <UserFavoriteList {...routeProps} />

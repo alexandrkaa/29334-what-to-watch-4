@@ -7,6 +7,7 @@ import Loader from '../../components/loader/loader.jsx';
 import {getMovies, getMoviesLoadingStatus, getAuthorizationStatus} from '../../reducer/selectors.js';
 import {AuthorizationStatus} from '../../reducer/user/user.js';
 import {getSimilarMovies} from '../../utils/filters.js';
+import cloneDeep from 'lodash.clonedeep';
 
 const withMovie = (Component) => {
   class WithMovieHOC extends PureComponent {
@@ -19,6 +20,8 @@ const withMovie = (Component) => {
         return <Loader />;
       }
 
+      const childProps = cloneDeep(this.props);
+      delete childProps.loadSimilarMovies;
       const {moviesList, movieId} = this.props;
       const movie = getMovieById(moviesList, movieId);
       const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
@@ -26,7 +29,7 @@ const withMovie = (Component) => {
         <Component
           movie={movie}
           videoSrc={movie.movieVideo}
-          {...this.props}
+          {...childProps}
           similarMovies={similarMovies}
         />
       );

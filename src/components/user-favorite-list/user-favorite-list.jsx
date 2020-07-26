@@ -4,21 +4,13 @@ import {moviesListType} from '../../types/types.js';
 import {connect} from 'react-redux';
 import {AppRoutes} from '../../consts/consts.js';
 import {Redirect} from 'react-router-dom';
-import {
-  getMoviesDataFromUserFavoriteList,
-  getAuthorizationStatusBoolean
-} from '../../reducer/selectors.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {getMoviesDataFromUserFavoriteList, getAuthorizationStatusBoolean} from '../../reducer/selectors.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MoviesList from '../movie-list/movie-list.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
 
 class UserFavoriteList extends PureComponent {
-
-  componentDidMount() {
-    this.props.checkAuth();
-  }
 
   render() {
     const {moviesList, isAuthorized} = this.props;
@@ -51,7 +43,6 @@ class UserFavoriteList extends PureComponent {
 UserFavoriteList.propTypes = {
   moviesList: moviesListType,
   isAuthorized: PropTypes.bool.isRequired,
-  checkAuth: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -61,11 +52,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  checkAuth() {
-    dispatch(UserOperation.checkAuth());
-  }
-});
-
 export {UserFavoriteList};
-export default connect(mapStateToProps, mapDispatchToProps)(UserFavoriteList);
+export default connect(mapStateToProps)(UserFavoriteList);

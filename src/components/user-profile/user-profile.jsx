@@ -7,7 +7,7 @@ import {getAuthorizationStatusBoolean, getUserData} from '../../reducer/selector
 
 const UserProfile = (props) => {
   const {userData, isAuthorized} = props;
-  const _location = useLocation();
+  const location = useLocation();
   return (
     <div className="user-block">
       {
@@ -19,7 +19,7 @@ const UserProfile = (props) => {
         </div>
       }
       {
-        (!isAuthorized && _location.pathname !== AppRoutes.LOGIN_PAGE) &&
+        (!isAuthorized && location.pathname !== AppRoutes.LOGIN_PAGE) &&
         <NavLink style={{textDecoration: `none`}} className="page-title" to="/login">Sign In</NavLink>
       }
     </div>

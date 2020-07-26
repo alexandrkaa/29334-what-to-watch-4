@@ -5,9 +5,11 @@ import {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
+  getMoviesLoadingErrorStatus,
   getTitleMovieLoadingStatus,
+  getTitleMovieLoadingErrorStatus,
   getMovieByIdFromState,
-  getMoviesLoadingErrorStatus
+  getUserFavoriteList,
 } from './data/movies-data/selectors.js';
 
 import {
@@ -21,7 +23,6 @@ import {
 import {
   getActiveGenre,
   getMoviesRenderLimit,
-  getUserFavoriteList,
 } from './movie/selectors.js';
 
 import {
@@ -46,9 +47,9 @@ export const getFilteredMovies = createSelector(
 );
 
 export const getMoviesDataFromUserFavoriteList = createSelector(
-    [getMovies, getUserFavoriteList],
-    (moviesList, userFavoriteList) => {
-      return moviesList.filter((movie) => userFavoriteList.includes(movie.id));
+    [getMovies],
+    (moviesList) => {
+      return moviesList.filter((movie) => movie.isFavorite === true);
     }
 );
 
@@ -56,9 +57,10 @@ export {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getTitleMovieLoadingStatus,
-  getMovieByIdFromState,
   getMoviesLoadingErrorStatus,
+  getTitleMovieLoadingStatus,
+  getTitleMovieLoadingErrorStatus,
+  getMovieByIdFromState,
 
   getMoviesComments,
   getCommentsLoadingStatus,

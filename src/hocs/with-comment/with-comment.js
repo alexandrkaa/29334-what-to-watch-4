@@ -5,7 +5,6 @@ import {Operation as CommentsOperation, ActionCreator as CommentsActionCreator} 
 import PropTypes from 'prop-types';
 import {getAuthorizationStatusBoolean, getIsPostCommentHasError, getIsPostCommentInProgress} from '../../reducer/selectors.js';
 import {Redirect} from 'react-router-dom';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {isValidField} from '../../utils/filters.js';
 
 const withComment = (Component) => {
@@ -39,10 +38,6 @@ const withComment = (Component) => {
         rating,
         comment,
       });
-    }
-
-    componentDidMount() {
-      this.props.checkAuth();
     }
 
     componentDidUpdate(prevProps) {
@@ -104,19 +99,14 @@ const withComment = (Component) => {
       dispatch(CommentsActionCreator.postComment());
       dispatch(CommentsOperation.postCommentData(commentData));
     },
-    checkAuth() {
-      dispatch(UserOperation.checkAuth());
-    }
   });
 
   WithCommentHOC.propTypes = {
     movieId: PropTypes.number.isRequired,
     postComment: PropTypes.func.isRequired,
     isAuthorized: PropTypes.bool.isRequired,
-    checkAuth: PropTypes.func.isRequired,
     postCommentInProgress: PropTypes.bool.isRequired,
     postCommentError: PropTypes.bool.isRequired,
-    isPostCommentSuccess: PropTypes.bool.isRequired,
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(WithCommentHOC);

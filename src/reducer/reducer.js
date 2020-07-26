@@ -6,8 +6,8 @@ import {reducer as user} from './user/user.js';
 import NameSpace from './name-space.js';
 
 export default combineReducers({
-  [NameSpace.MOVIE_DATA]: moviesData,
-  [NameSpace.MOVIE]: movie,
   [NameSpace.USER]: user,
+  [NameSpace.MOVIE_DATA]: moviesData,
   [NameSpace.COMMENTS_DATA]: commentsData,
+  [NameSpace.MOVIE]: movie,
 });

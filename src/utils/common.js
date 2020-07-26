@@ -49,19 +49,6 @@ export const secondsToTime = (initialSeconds) => {
   return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
-export const removeElementFromArray = (elem, arr) => {
-  const idx = arr.findIndex((it) => (it === elem));
-  const before = arr.slice(0, idx);
-  const after = arr.slice((idx + 1), arr.length);
-  return before.concat(after);
-};
-
-export const addElementToArray = (elem, arr) => {
-  const copy = arr.slice();
-  copy.push(elem);
-  return copy;
-};
-
 export const convertMovieRateToText = (rating) => {
   const rate = parseFloat(rating) || 0;
   if (rate === RatingScores.AWESOME.score) {
@@ -80,4 +67,14 @@ export const convertMovieRateToText = (rating) => {
     return RatingScores.BAD.name;
   }
   return RatingScores.BAD.name;
+};
+
+export const updateMovieIsFavorite = (allMovies, newMovies) => {
+  const newFavoriteIds = newMovies.map((movie) => (movie.id));
+  return allMovies.map((movie) => {
+    if (newFavoriteIds.includes(movie.id)) {
+      return newMovies.find((it) => (it.id === movie.id));
+    }
+    return movie;
+  });
 };

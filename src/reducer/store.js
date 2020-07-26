@@ -5,8 +5,6 @@ import {ActionCreator as UserActionCreator, AuthorizationStatus, Operation as Us
 import createAPI from '../api/api.js';
 import reducer from './reducer.js';
 
-import {titleMovie} from '../mocks/film.js';
-
 const api = createAPI(
     () => {
       store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -25,13 +23,8 @@ store.dispatch(UserOperation.checkAuth());
 
 store.dispatch(MoviesDataActionCreator.fetchMoviesData());
 store.dispatch(MoviesDataOperation.fetchMoviesData());
-setTimeout(() => {
-  store.dispatch(MoviesDataOperation.postToUserFavoriteList());
-  store.dispatch(MoviesDataActionCreator.fetchUserFavoriteList());
-  store.dispatch(MoviesDataOperation.getUserFavoriteListData());
-}, 2000);
 
 store.dispatch(MoviesDataActionCreator.fetchTitleMovie());
-store.dispatch(MoviesDataActionCreator.fetchTitleMovieSuccess(titleMovie));
+store.dispatch(MoviesDataOperation.fetchTitleMovie());
 
 export default store;

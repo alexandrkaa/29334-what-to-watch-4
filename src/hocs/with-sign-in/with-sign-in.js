@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {getAuthorizationStatusBoolean, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from '../../reducer/user/user.js';
+import {Operation as MovieDataOperation, ActionCreator as MovieDataActionCreator} from '../../reducer/data/movies-data/movies-data.js';
 import {SignInFields, FiledsIds, AppRoutes} from '../../consts/consts.js';
 import {isValidField} from '../../utils/filters.js';
 import {Redirect} from 'react-router-dom';
@@ -50,12 +51,9 @@ const withSignIn = (Component) => {
       }
     }
 
-    componentDidMount() {
-      this.props.checkAuth();
-    }
-
     render() {
       if (this.props.isAuthorized) {
+        this.props.getUserFavoriteList();
         return (
           <Redirect to={AppRoutes.MAIN_PAGE} />
         );
@@ -77,8 +75,8 @@ const withSignIn = (Component) => {
     isLoading: PropTypes.bool.isRequired,
     loginStatusCode: PropTypes.number.isRequired,
     login: PropTypes.func.isRequired,
-    checkAuth: PropTypes.func.isRequired,
     isAuthorized: PropTypes.bool.isRequired,
+    getUserFavoriteList: PropTypes.func.isRequired,
   };
 
   const mapStateToProps = (state) => ({
@@ -92,8 +90,9 @@ const withSignIn = (Component) => {
       dispatch(UserActionCreator.setAuthorizationProgress(true));
       dispatch(UserOperation.login(authData));
     },
-    checkAuth() {
-      dispatch(UserOperation.checkAuth());
+    getUserFavoriteList() {
+      dispatch(MovieDataActionCreator.fetchUserFavoriteList());
+      dispatch(MovieDataOperation.fetchUserFavoriteListData());
     }
   });
 

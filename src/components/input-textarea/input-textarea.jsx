@@ -17,4 +17,5 @@ InputTextarea.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
 };
 
-export default InputTextarea;
+export {InputTextarea};
+export default React.memo(InputTextarea);

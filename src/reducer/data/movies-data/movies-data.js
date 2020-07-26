@@ -1,4 +1,4 @@
-import {extendObject} from '../../../utils/common.js';
+import {extendObject, updateMovieIsFavorite} from '../../../utils/common.js';
 import movieAdapter from '../../../adapters/movie/movie-adapter.js';
 import cloneDeep from 'lodash.clonedeep';
 
@@ -6,19 +6,24 @@ const ActionTypes = {
   FETCH_MOVIES_DATA: `FETCH_MOVIES_DATA`,
   FETCH_MOVIES_DATA_SUCCESS: `FETCH_MOVIES_DATA_SUCCESS`,
   FETCH_MOVIES_DATA_ERROR: `FETCH_MOVIES_DATA_ERROR`,
+
   FETCH_TITLE_MOVIE: `FETCH_TITLE_MOVIE`,
   FETCH_TITLE_MOVIE_SUCCESS: `FETCH_TITLE_MOVIE_SUCCESS`,
+  FETCH_TITLE_MOVIE_ERROR: `FETCH_TITLE_MOVIE_ERROR`,
+
   FETCH_USER_FAVORITE_LIST: `FETCH_USER_FAVORITE_LIST`,
-  FETCH_USER_FAVORITE_LIST_SUCCESS: `FETCH_USER_FAVORITE_LIST_SUCCESS`,
-  FETCH_USER_FAVORITE_LIST_ERROR: `FETCH_USER_FAVORITE_LIST_ERROR`,
+  UPDATE_USER_FAVORITE_LIST_SUCCESS: `UPDATE_USER_FAVORITE_LIST_SUCCESS`,
+  UPDATE_USER_FAVORITE_LIST_ERROR: `UPDATE_USER_FAVORITE_LIST_ERROR`,
 };
 
 const initialState = {
   loadingMovies: false,
   loadingMoviesError: false,
-  loadingTitleMovie: false,
   moviesList: [],
+  loadingTitleMovie: false,
+  loadingTitleMovieError: false,
   titleMovie: {},
+  updateUserFavoriteListError: false,
 };
 
 const ActionCreator = {
@@ -32,6 +37,7 @@ const ActionCreator = {
   fetchMoviesDataError: () => ({
     type: ActionTypes.FETCH_MOVIES_DATA_ERROR,
   }),
+
   fetchTitleMovie: () => ({
     type: ActionTypes.FETCH_TITLE_MOVIE,
   }),
@@ -39,14 +45,22 @@ const ActionCreator = {
     type: ActionTypes.FETCH_TITLE_MOVIE_SUCCESS,
     payload: titleMovie,
   }),
+  fetchTitleMovieError: () => ({
+    type: ActionTypes.FETCH_TITLE_MOVIE_ERROR,
+  }),
 
   fetchUserFavoriteList: () => ({
     type: ActionTypes.FETCH_USER_FAVORITE_LIST,
   }),
-  fetchUserFavoriteListSuccess: (userFavoriteList) => ({
-    type: ActionTypes.FETCH_USER_FAVORITE_LIST_SUCCESS,
+  updateUserFavoriteListSuccess: (userFavoriteList) => ({
+    type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
     payload: userFavoriteList,
   }),
+  updateUserFavoriteListError: (userFavoriteList) => ({
+    type: ActionTypes.UPDATE_USER_FAVORITE_LIST_ERROR,
+    payload: userFavoriteList,
+  }),
+
 };
 
 const Operation = {
@@ -58,25 +72,43 @@ const Operation = {
         dispatch(ActionCreator.fetchMoviesDataError(response));
       });
   },
-  getUserFavoriteListData: () => (dispatch, getState, api) => {
+
+  fetchTitleMovie: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        dispatch(ActionCreator.fetchTitleMovieSuccess(movieAdapter(response.data)));
+      }).catch((response) => {
+        dispatch(ActionCreator.fetchTitleMovieError(response));
+      });
+  },
+
+  fetchUserFavoriteListData: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
     .then((response) => {
-      dispatch(ActionCreator.fetchUserFavoriteListSuccess(response.data.map((movie) => movieAdapter(movie))));
+      dispatch(ActionCreator.updateUserFavoriteListSuccess(response.data.map((movie) => movieAdapter(movie))));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(ActionCreator.updateUserFavoriteListError(err));
     });
   },
-  postToUserFavoriteList: () => (dispatch, getState, api) => {
-    return api.post(`/favorite/2/1`)
+  postToUserFavoriteList: (movieId) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${movieId}/1`)
     .then((response) => {
-      // console.log(response.data);
-      // dispatch(ActionCreator.fetchUserFavoriteListSuccess(response.data));
+      dispatch(ActionCreator.updateUserFavoriteListSuccess([movieAdapter(response.data)]));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(ActionCreator.updateUserFavoriteListError(err));
     });
-  }
+  },
+  removeFromUserFavoriteList: (movieId) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${movieId}/0`)
+    .then((response) => {
+      dispatch(ActionCreator.updateUserFavoriteListSuccess([movieAdapter(response.data)]));
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.updateUserFavoriteListError(err));
+    });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -94,30 +126,32 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         loadingMoviesError: true,
       });
+
     case ActionTypes.FETCH_TITLE_MOVIE:
       return extendObject(state, {
         loadingTitleMovie: true,
+        loadingTitleMovieError: false,
       });
     case ActionTypes.FETCH_TITLE_MOVIE_SUCCESS:
       return extendObject(state, {
         loadingTitleMovie: false,
         titleMovie: action.payload
       });
+    case ActionTypes.FETCH_TITLE_MOVIE_ERROR:
+      return extendObject(state, {
+        loadingTitleMovie: false,
+        loadingTitleMovieError: true,
+      });
 
     case ActionTypes.FETCH_USER_FAVORITE_LIST:
       return extendObject(state, {
         loadingUserFavoriteList: true,
+        updateUserFavoriteListError: false,
       });
-    case ActionTypes.FETCH_USER_FAVORITE_LIST_SUCCESS:
-      const userFavoriteIds = action.payload.map((movie) => (movie.id));
+    case ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS:
       return extendObject(state, {
         loadingUserFavoriteList: false,
-        moviesList: state.moviesList.map((movie) => {
-          if (userFavoriteIds.includes(movie.id)) {
-            return action.payload.find((it) => (it.id === movie.id));
-          }
-          return movie;
-        }),
+        moviesList: updateMovieIsFavorite(cloneDeep(state.moviesList), action.payload)
       });
     default:
       return state;

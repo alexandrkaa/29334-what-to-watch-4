@@ -1,23 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {movieType} from '../../types/types.js';
+import {Link, withRouter} from 'react-router-dom';
+import {AppRoutes} from '../../consts/consts.js';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import withTimeOut from '../../hocs/with-timeout/with-timeout.js';
-import {movieType} from '../../types/types.js';
-import {Link} from 'react-router-dom';
 
 const MovieCard = (props) => {
-  const {movie} = props;
+  const {movie, history} = props;
   const {title} = movie;
-  const _onMovieCardMouseEnter = () => {
+  const onMovieCardMouseEnter = () => {
     props.onPlay();
   };
 
-  const _onMovieCardMouseLeave = () => {
+  const onMovieCardMouseLeave = () => {
     props.onPause();
   };
 
+  const onMovieCardClick = () => {
+    history.push(`${AppRoutes.FILM_PAGE}/${movie.id}`);
+  };
+
   return (
-    <article className="small-movie-card catalog__movies-card" onMouseEnter={_onMovieCardMouseEnter} onMouseLeave={_onMovieCardMouseLeave} >
+    <article className="small-movie-card catalog__movies-card" onMouseEnter={onMovieCardMouseEnter} onMouseLeave={onMovieCardMouseLeave} onClick={onMovieCardClick}>
       <div className="small-movie-card__image">
         {props.children}
       </div>
@@ -35,7 +40,8 @@ MovieCard.propTypes = {
   movie: movieType.isRequired,
   onPlay: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  history: PropTypes.object.isRequired,
 };
 export {MovieCard};
-export default withTimeOut(withVideoPlayer(MovieCard));
+export default withRouter(withTimeOut(withVideoPlayer(MovieCard)));

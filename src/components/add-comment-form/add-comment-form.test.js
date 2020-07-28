@@ -20,6 +20,9 @@ describe(`<AddCommentForm /> should match snapshot`, () => {
             onFormSubmit={onFormSubmit}
             postCommentInProgress={false}
             postCommentError={false}
+            history={{}}
+            movieId={1}
+            postComment={() => {}}
           />
       )
       .toJSON();
@@ -38,6 +41,9 @@ describe(`<AddCommentForm /> should match snapshot`, () => {
             onFormSubmit={onFormSubmit}
             postCommentInProgress={false}
             postCommentError={true}
+            history={{}}
+            movieId={1}
+            postComment={() => {}}
           />
       )
       .toJSON();

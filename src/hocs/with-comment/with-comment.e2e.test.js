@@ -1,20 +1,15 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withComment from './with-comment.js';
 import PropTypes from 'prop-types';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-// import {BrowserRouter} from 'react-router-dom';
-
-const mockStore = configureStore([]);
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
 const MockComponent = (props) => {
-  const {onRadioChange, onFormSubmit, onTextAreaChange, isFormValid} = props;
+  const {onRadioChange, onFormSubmit, onTextAreaChange, isFormValid, comment} = props;
   const onFirstRadioChange = () => {
     onRadioChange(1);
   };
@@ -35,7 +30,7 @@ const MockComponent = (props) => {
       </div>
 
       <div className="add-review__text">
-        <textarea onChange={onTextAreaChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+        <textarea onChange={onTextAreaChange} className="add-review__textarea" name="review-text" id="review-text" value={comment} placeholder="Review text"></textarea>
         <div className="add-review__submit">
           <button disabled={isFormValid} className="add-review__btn" type="submit">Post</button>
         </div>
@@ -58,45 +53,28 @@ MockComponent.propTypes = {
 const MockComponentWrapped = withComment(MockComponent);
 
 it(`Should withComment state will be changed`, () => {
-  const store = mockStore({
-    USER: {
-      authorizationStatus: `AUTH`,
-      userData: {
-        id: 1,
-        email: `qwe@qwe.ru`,
-        name: `qwe`,
-        avatarUrl: `/img/avatar.jpg`
-      }
-    },
-    COMMENTS_DATA: {
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
-    }
-  });
-  const main = shallow(
-      <Provider store={store}>
-        <MockComponentWrapped movieId={1} />
-      </Provider>
+  const main = mount(
+      <MockComponentWrapped
+        movieId={1}
+        isAuthorized={true}
+        onFormSubmit={() => {}}
+        postCommentInProgress={false}
+        postCommentError={false}
+      />
   );
 
-  const firstCheckBox = main.dive().dive().find(`.rating__input`).at(1);
+  const firstCheckBox = main.find(`.rating__input`).at(0);
   expect(firstCheckBox).toHaveLength(1);
-  // console.dir(main.dive().state());
-  // expect(main.dive().state(`comment`)).toBe(``);
-  // component.setState({comment: `qwe`});
+  firstCheckBox.simulate(`change`);
+  expect(main.state(`rating`)).toBe(1);
 
-  // expect(main.state(`activeItem`)).toBe(`OVERVIEW`);
-  // const secondTab = main.find(`.movie-nav__link`).at(1);
-  // expect(secondTab.length).toBe(1);
-  // secondTab.simulate(`click`);
-  // expect(main.state(`activeItem`)).toBe(`DETAILS`);
-
-  // const thirdTab = main.find(`.movie-nav__link`).at(2);
-  // expect(thirdTab.length).toBe(1);
-  // thirdTab.simulate(`click`);
-  // expect(main.state(`activeItem`)).toBe(`REVIEWS`);
-
+  const textArea = main.find(`.add-review__textarea`);
+  expect(textArea).toHaveLength(1);
+  // const evt = {
+  //   target: {
+  //     value: `text`
+  //   },
+  //   preventDefault: () => {},
+  // };
+  // textArea.simulate(`change`, evt);
 });

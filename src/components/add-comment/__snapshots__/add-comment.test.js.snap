@@ -60,7 +60,7 @@ exports[`<AddComment /> should match snapshot without error 1`] = `
       />
     </div>
   </div>
-  <Memo(Connect(WithCommentHOC))
+  <Memo(Connect(withRouter(WithCommentHOC)))
     movieId={4}
   />
 </section>

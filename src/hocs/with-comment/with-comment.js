@@ -10,7 +10,6 @@ const withComment = (Component) => {
       this.state = {
         comment: ``,
         rating: 5,
-        isNeedRedirect: false,
       };
       this._handleRadioChange = this._handleRadioChange.bind(this);
       this._handleTextAreaChange = this._handleTextAreaChange.bind(this);
@@ -28,7 +27,6 @@ const withComment = (Component) => {
       this.setState({
         comment: ``,
         rating: 5,
-        isNeedRedirect: false,
       });
     }
 
@@ -51,7 +49,6 @@ const withComment = (Component) => {
 
   WithCommentHOC.propTypes = {
     movieId: PropTypes.number.isRequired,
-    postComment: PropTypes.func.isRequired,
     isAuthorized: PropTypes.bool.isRequired,
   };
 

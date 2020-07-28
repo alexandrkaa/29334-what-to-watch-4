@@ -41,7 +41,7 @@ exports[`<AddCommentForm /> should match snapshot <AddCommentForm /> should matc
 >
   <form
     className="add-review__form"
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
   >
     <div
       className="rating"

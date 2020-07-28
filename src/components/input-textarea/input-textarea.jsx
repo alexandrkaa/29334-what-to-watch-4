@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 const InputTextarea = (props) => {
   const {comment, isDisabled} = props;
   const onTextAreaChange = (evt) => {
-    props.onTextAreaChange(evt.target.value);
+    const curComment = evt.target.value;
+    props.onTextAreaChange(curComment);
   };
   return (
     <textarea disabled={isDisabled} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={comment} onChange={onTextAreaChange}></textarea>

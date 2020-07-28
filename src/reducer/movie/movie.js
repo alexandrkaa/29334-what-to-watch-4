@@ -4,15 +4,12 @@ import {extendObject} from '../../utils/common.js';
 const initialState = {
   activeGenre: DEFAULT_GENRE,
   moviesRenderLimit: MOVIES_LIMIT,
-  loadingUserFavoriteList: false,
 };
 
 const ActionTypes = {
   CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
   UPDATE_MOVIES_LIMIT: `UPDATE_MOVIES_LIMIT`,
   RESET_MOVIES_LIMIT: `RESET_MOVIES_LIMIT`,
-  ADD_TO_USER_FAVORITE_LIST: `ADD_TO_USER_FAVORITE_LIST`,
-  REMOVE_FROM_USER_FAVORITE_LIST: `REMOVE_FROM_USER_FAVORITE_LIST`,
 };
 
 
@@ -27,14 +24,6 @@ const ActionCreator = {
   }),
   resetMoviesLimit: () => ({
     type: ActionTypes.RESET_MOVIES_LIMIT,
-  }),
-  addToUserFavoriteList: (movieId) => ({
-    type: ActionTypes.ADD_TO_USER_FAVORITE_LIST,
-    payload: movieId,
-  }),
-  removeFromUserFavoriteList: (movieId) => ({
-    type: ActionTypes.REMOVE_FROM_USER_FAVORITE_LIST,
-    payload: movieId,
   }),
 };
 

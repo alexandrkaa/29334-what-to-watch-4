@@ -60,134 +60,210 @@ const titleMovie = {
   backgroundColor: `#000000`,
 };
 
-describe(`Reducer works correctly`, () => {
+describe(`MoviesData reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       loadingMovies: false,
       loadingMoviesError: false,
-      loadingTitleMovie: false,
       moviesList: [],
+      loadingTitleMovie: false,
+      loadingTitleMovieError: false,
       titleMovie: {},
+      loadingUserFavoriteList: false,
+      updateUserFavoriteListError: false,
     });
   });
 
-  it(`Should reducer fetch movies data`, () => {
+  it(`Should MoviesData reducer fetch movies data`, () => {
     expect(reducer({
       loadingMovies: false,
-      loadingTitleMovie: false,
-      moviesList: [],
-      titleMovie: {},
     }, {
       type: `FETCH_MOVIES_DATA`,
     })).toEqual({
       loadingMovies: true,
-      loadingTitleMovie: false,
-      moviesList: [],
-      titleMovie: {},
     });
   });
 
-  it(`Should reducer fetch movies data success`, () => {
+  it(`Should MoviesData reducer fetch movies data success`, () => {
     expect(reducer({
       loadingMovies: true,
-      loadingTitleMovie: false,
       moviesList: [],
-      titleMovie: {},
     }, {
       type: `FETCH_MOVIES_DATA_SUCCESS`,
       payload: moviesList
     })).toEqual({
       loadingMovies: false,
-      loadingTitleMovie: false,
       moviesList,
-      titleMovie: {},
     });
   });
 
-  it(`Should reducer fetch title movie`, () => {
+  it(`Should MoviesData reducer fetch movies data error`, () => {
     expect(reducer({
+      loadingMovies: true,
+      loadingMoviesError: false,
+    }, {
+      type: `FETCH_MOVIES_DATA_ERROR`,
+    })).toEqual({
       loadingMovies: false,
+      loadingMoviesError: true,
+    });
+  });
+
+  it(`Should MoviesData reducer fetch title movie`, () => {
+    expect(reducer({
       loadingTitleMovie: false,
-      moviesList: [],
-      titleMovie: {},
+      loadingTitleMovieError: false,
     }, {
       type: `FETCH_TITLE_MOVIE`,
     })).toEqual({
-      loadingMovies: false,
       loadingTitleMovie: true,
-      moviesList: [],
-      titleMovie: {},
+      loadingTitleMovieError: false,
     });
   });
 
-  it(`Should reducer fetch title movie success`, () => {
+  it(`Should MoviesData reducer fetch title movie success`, () => {
     expect(reducer({
-      loadingMovies: false,
       loadingTitleMovie: true,
-      moviesList: [],
       titleMovie: {},
     }, {
       type: `FETCH_TITLE_MOVIE_SUCCESS`,
       payload: titleMovie,
     })).toEqual({
-      loadingMovies: false,
       loadingTitleMovie: false,
-      moviesList: [],
       titleMovie,
+    });
+  });
+
+  it(`Should MoviesData reducer fetch title movie error`, () => {
+    expect(reducer({
+      loadingTitleMovie: true,
+      loadingTitleMovieError: false,
+    }, {
+      type: `FETCH_TITLE_MOVIE_ERROR`,
+    })).toEqual({
+      loadingTitleMovie: false,
+      loadingTitleMovieError: true,
+    });
+  });
+
+  it(`Should MoviesData reducer fetch user favorite list`, () => {
+    expect(reducer({
+      loadingUserFavoriteList: false,
+      updateUserFavoriteListError: false,
+    }, {
+      type: `FETCH_USER_FAVORITE_LIST`,
+    })).toEqual({
+      loadingUserFavoriteList: true,
+      updateUserFavoriteListError: false,
+    });
+  });
+
+  it(`Should MoviesData reducer update user favorite list success`, () => {
+    expect(reducer({
+      loadingUserFavoriteList: false,
+      moviesList
+    }, {
+      type: `UPDATE_USER_FAVORITE_LIST_SUCCESS`,
+      payload: [moviesList[0]]
+    })).toEqual({
+      loadingUserFavoriteList: false,
+      moviesList
+    });
+  });
+
+  it(`Should MoviesData reducer update user favorite list error`, () => {
+    expect(reducer({
+      updateUserFavoriteListError: false,
+      loadingUserFavoriteList: true,
+    }, {
+      type: `UPDATE_USER_FAVORITE_LIST_ERROR`,
+    })).toEqual({
+      updateUserFavoriteListError: true,
+      loadingUserFavoriteList: false,
     });
   });
 });
 
-describe(`Action creators work correctly`, () => {
+describe(`MoviesData action creators work correctly`, () => {
   it(`Action creator fetch movies data returns correct action`, () => {
     expect(ActionCreator.fetchMoviesData()).toEqual({
       type: ActionTypes.FETCH_MOVIES_DATA,
     });
   });
 
-  it(`Action creator fetch movies data success returns correct action`, () => {
+  it(`MoviesData action creator fetch movies data success returns correct action`, () => {
     expect(ActionCreator.fetchMoviesDataSuccess(moviesList)).toEqual({
       type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
       payload: moviesList
     });
   });
 
-  it(`Action creator fetch title movie returns correct action`, () => {
+  it(`MoviesData action creator fetch movies data error returns correct action`, () => {
+    expect(ActionCreator.fetchMoviesDataError()).toEqual({
+      type: ActionTypes.FETCH_MOVIES_DATA_ERROR,
+    });
+  });
+
+  it(`MoviesData action creator fetch title movie returns correct action`, () => {
     expect(ActionCreator.fetchTitleMovie()).toEqual({
       type: ActionTypes.FETCH_TITLE_MOVIE,
     });
   });
 
-  it(`Action creator fetch title movie success returns correct action`, () => {
-
+  it(`MoviesData action creator fetch title movie success returns correct action`, () => {
     expect(ActionCreator.fetchTitleMovieSuccess(titleMovie)).toEqual({
       type: ActionTypes.FETCH_TITLE_MOVIE_SUCCESS,
       payload: titleMovie
     });
   });
+
+  it(`MoviesData action creator fetch title movie error returns correct action`, () => {
+    expect(ActionCreator.fetchTitleMovieError()).toEqual({
+      type: ActionTypes.FETCH_TITLE_MOVIE_ERROR,
+    });
+  });
+
+  it(`MoviesData action creator fetch user favorite list returns correct action`, () => {
+    expect(ActionCreator.fetchUserFavoriteList()).toEqual({
+      type: ActionTypes.FETCH_USER_FAVORITE_LIST,
+    });
+  });
+
+  it(`MoviesData action creator update user favorite list success returns correct action`, () => {
+    expect(ActionCreator.updateUserFavoriteListSuccess({id: 1, title: `Some movie title`})).toEqual({
+      type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
+      payload: {id: 1, title: `Some movie title`}
+    });
+  });
+
+  it(`MoviesData action creator fetch user favorite list error returns correct action`, () => {
+    expect(ActionCreator.updateUserFavoriteListError()).toEqual({
+      type: ActionTypes.UPDATE_USER_FAVORITE_LIST_ERROR,
+    });
+  });
 });
 
-describe(`Operation works correctly`, () => {
+describe(`MoviesData Operation works correctly`, () => {
+  const movies = [{
+    [`id`]: 1,
+    [`name`]: `The Grand Budapest Hotel`,
+    [`poster_image`]: `img/the-grand-budapest-hotel-poster.jpg`,
+    [`preview_image`]: `img/the-grand-budapest-hotel.jpg`,
+    [`background_image`]: `img/the-grand-budapest-hotel-bg.jpg`,
+    [`background_color`]: `#ffffff`,
+    [`video_link`]: `https://some-link`,
+    [`preview_video_link`]: `https://some-link`,
+    [`description`]: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    [`rating`]: 8.9,
+    [`scores_count`]: 240,
+    [`director`]: `Wes Andreson`,
+    [`starring`]: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    [`run_time`]: 99,
+    [`genre`]: `Comedy`,
+    [`released`]: 2014,
+    [`is_favorite`]: false
+  }];
   it(`Operation fetch movies data works correctly`, () => {
-    const movies = [{
-      [`id`]: 1,
-      [`name`]: `The Grand Budapest Hotel`,
-      [`poster_image`]: `img/the-grand-budapest-hotel-poster.jpg`,
-      [`preview_image`]: `img/the-grand-budapest-hotel.jpg`,
-      [`background_image`]: `img/the-grand-budapest-hotel-bg.jpg`,
-      [`background_color`]: `#ffffff`,
-      [`video_link`]: `https://some-link`,
-      [`preview_video_link`]: `https://some-link`,
-      [`description`]: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-      [`rating`]: 8.9,
-      [`scores_count`]: 240,
-      [`director`]: `Wes Andreson`,
-      [`starring`]: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
-      [`run_time`]: 99,
-      [`genre`]: `Comedy`,
-      [`released`]: 2014,
-      [`is_favorite`]: false
-    }];
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const moviesLoader = Operation.fetchMoviesData();
@@ -201,6 +277,83 @@ describe(`Operation works correctly`, () => {
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionTypes.FETCH_MOVIES_DATA_SUCCESS,
         payload: [movieAdapter(movies[0])],
+      });
+    });
+  });
+
+  it(`Operation fetch title movie data works correctly`, () => {
+    const movie = movies[0];
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.fetchTitleMovie();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, movie);
+
+    return moviesLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.FETCH_TITLE_MOVIE_SUCCESS,
+        payload: movieAdapter(movie),
+      });
+    });
+  });
+
+  it(`Operation fetch user favorite list data works correctly`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.fetchUserFavoriteListData();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, movies);
+
+    return moviesLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
+        payload: [movieAdapter(movies[0])],
+      });
+    });
+  });
+
+  it(`Operation post to user favorite data works correctly`, () => {
+    const movie = movies[0];
+    const movieId = 1;
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.postToUserFavoriteList(movieId);
+
+    apiMock
+      .onPost(`/favorite/${movieId}/1`)
+      .reply(200, movie);
+
+    return moviesLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
+        payload: [movieAdapter(movies[0])],
+      });
+    });
+  });
+
+  it(`Operation remove from user favorite data works correctly`, () => {
+    const movie = movies[0];
+    const movieId = 1;
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.removeFromUserFavoriteList(movieId);
+
+    apiMock
+      .onPost(`/favorite/${movieId}/0`)
+      .reply(200, movie);
+
+    return moviesLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
+        payload: [movieAdapter(movie)],
       });
     });
   });

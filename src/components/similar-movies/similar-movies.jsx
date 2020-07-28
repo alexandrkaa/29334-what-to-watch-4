@@ -19,4 +19,4 @@ SimilarMovies.propTypes = {
   moviesList: moviesListType
 };
 
-export default SimilarMovies;
+export default React.memo(SimilarMovies);

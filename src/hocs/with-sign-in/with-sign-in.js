@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {getAuthorizationStatusBoolean, getLoginStatusCode, getIsLoading} from '../../reducer/selectors.js';
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from '../../reducer/user/user.js';
 import {Operation as MovieDataOperation, ActionCreator as MovieDataActionCreator} from '../../reducer/data/movies-data/movies-data.js';
-import {SignInFields, FiledsIds, AppRoutes} from '../../consts/consts.js';
+import {SignInFields, FieldsIds, AppRoutes} from '../../consts/consts.js';
 import {isValidField} from '../../utils/filters.js';
 import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -45,8 +45,8 @@ const withSignIn = (Component) => {
       }
       if (isFormValid) {
         login({
-          email: this.state[FiledsIds.EMAIL_FIELD_ID].value,
-          password: this.state[FiledsIds.PASSWORD_FIELD_ID].value,
+          email: this.state[FieldsIds.EMAIL_FIELD_ID].value,
+          password: this.state[FieldsIds.PASSWORD_FIELD_ID].value,
         });
       }
     }

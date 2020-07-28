@@ -7,7 +7,6 @@ import {moviesListType, movieType} from '../../types/types.js';
 import TitleMovie from '../title-movie/title-movie.jsx';
 import {
   getFilteredMovies,
-  getTitleMovie,
   getMoviesLoadingStatus,
   getMoviesLoadingErrorStatus,
   getMoviesRenderLimit,
@@ -16,6 +15,7 @@ import {
   getUserFavoriteList,
   getTitleMovieLoadingStatus,
   getTitleMovieLoadingErrorStatus,
+  getTitleMovieMemo,
 } from '../../reducer/selectors.js';
 import {ActionCreator as MoviesDataActionCreator, Operation as MoviesDataOperation} from '../../reducer/data/movies-data/movies-data.js';
 import {connect} from 'react-redux';
@@ -24,7 +24,6 @@ import Error from '../error/error.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import UserProfile from '../user-profile/user-profile.jsx';
-import {getMovieById} from '../../utils/filters.js';
 
 const Main = (props) => {
   const {
@@ -45,7 +44,7 @@ const Main = (props) => {
     return (
       <React.Fragment>
         <TitleMovie isAuthorized={isAuthorized}
-          movie={getMovieById(moviesList, titleMovie.id)}
+          movie={titleMovie}
           addToUserFavoriteList={addToUserFavoriteList}
           removeFromUserFavoriteList={removeFromUserFavoriteList}
         />
@@ -83,7 +82,7 @@ const mapStateToProps = (state) => {
     loadingMovies: getMoviesLoadingStatus(state),
     loadingMoviesError: getMoviesLoadingErrorStatus(state),
 
-    titleMovie: getTitleMovie(state),
+    titleMovie: getTitleMovieMemo(state),
     loadingTitleMovie: getTitleMovieLoadingStatus(state),
     loadingTitleMovieError: getTitleMovieLoadingErrorStatus(state),
 

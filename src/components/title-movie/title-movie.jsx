@@ -25,7 +25,7 @@ const TitleMovie = (props) => {
     removeFromUserFavoriteList,
   } = props;
 
-  const _handlePlayClick = (evt) => {
+  const handlePlayClick = (evt) => {
     evt.preventDefault();
     props.history.push(`${AppRoutes.FULL_PLAYER_PAGE}/${movieId}`);
   };
@@ -47,7 +47,7 @@ const TitleMovie = (props) => {
           <div className="movie-card__desc">
             <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
             <MovieCardFullButtons
-              onPlay={_handlePlayClick}
+              onPlay={handlePlayClick}
               movieId={movieId}
               isAuthorized={isAuthorized}
               isInUserFavoriteList={isFavorite}

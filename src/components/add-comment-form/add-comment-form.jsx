@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InputRadioStar from '../input-radio-star/input-radio-star.jsx';
 import InputTextarea from '../input-textarea/input-textarea.jsx';
 import {REVIEW_STARS_NUMBER} from '../../consts/consts.js';
-import withReview from '../../hocs/with-comment/with-comment.js';
+import withComment from '../../hocs/with-comment/with-comment.js';
 import Error from '../error/error.jsx';
 
 const AddCommentForm = (props) => {
@@ -59,4 +59,4 @@ AddCommentForm.propTypes = {
 };
 
 export {AddCommentForm};
-export default withReview(AddCommentForm);
+export default withComment(AddCommentForm);

@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {mount} from "enzyme";
+import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withComment from './with-comment.js';
 import PropTypes from 'prop-types';
@@ -46,15 +46,18 @@ const MockComponent = (props) => {
 
 MockComponent.propTypes = {
   onRadioChange: PropTypes.func.isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
-  isFormValid: PropTypes.func.isRequired,
   onTextAreaChange: PropTypes.func.isRequired,
+  comment: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  isFormValid: PropTypes.bool.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+  postCommentInProgress: PropTypes.bool.isRequired,
+  postCommentError: PropTypes.bool.isRequired,
 };
 
 const MockComponentWrapped = withComment(MockComponent);
 
-
-it.skip(`Should withComment state will be changed`, () => {
+it(`Should withComment state will be changed`, () => {
   const store = mockStore({
     USER: {
       authorizationStatus: `AUTH`,
@@ -73,13 +76,17 @@ it.skip(`Should withComment state will be changed`, () => {
       postCommentError: false,
     }
   });
-  const main = mount(
+  const main = shallow(
       <Provider store={store}>
         <MockComponentWrapped movieId={1} />
       </Provider>
   );
 
-  expect(main.state(`comment`)).toBe(``);
+  const firstCheckBox = main.dive().dive().find(`.rating__input`).at(1);
+  expect(firstCheckBox).toHaveLength(1);
+  // console.dir(main.dive().state());
+  // expect(main.dive().state(`comment`)).toBe(``);
+  // component.setState({comment: `qwe`});
 
   // expect(main.state(`activeItem`)).toBe(`OVERVIEW`);
   // const secondTab = main.find(`.movie-nav__link`).at(1);

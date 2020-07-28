@@ -6,7 +6,6 @@ describe(`MovieReducer works correctly`, () => {
     expect(reducer(void 0, {})).toEqual({
       activeGenre: DEFAULT_GENRE,
       moviesRenderLimit: MOVIES_LIMIT,
-      userFavoriteList: [],
     });
   });
 
@@ -36,7 +35,7 @@ describe(`MovieReducer works correctly`, () => {
 });
 
 describe(`Movie action creators work correctly`, () => {
-  it(`Action creator for change active genre returns correct action`, () => {
+  it(`Movie action creator for change active genre returns correct action`, () => {
     expect(ActionCreator.changeActiveGenre(`Horror`)).toEqual({
       type: ActionTypes.CHANGE_ACTIVE_GENRE,
       payload: `Horror`,
@@ -44,13 +43,13 @@ describe(`Movie action creators work correctly`, () => {
   });
 
   it(`Movie action creator for update movies limit returns correct action`, () => {
-    expect(ActionCreator.updateMoviesLimit(2)).toEqual({
+    expect(ActionCreator.updateMoviesLimit(8)).toEqual({
       type: ActionTypes.UPDATE_MOVIES_LIMIT,
-      payload: 2,
+      payload: 8,
     });
   });
 
-  it(`Movie action creator for update movies limit returns correct action`, () => {
+  it(`Movie action creator for reset movies limit returns correct action`, () => {
     expect(ActionCreator.resetMoviesLimit()).toEqual({
       type: ActionTypes.RESET_MOVIES_LIMIT,
     });

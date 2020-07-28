@@ -15,16 +15,16 @@ const FullScreenVideoPlayer = (props) => {
     currentTogglerPosition = (currentTime / duration) * 100 || 0;
     elapsedTime = duration - currentTime;
   }
-  const _onPause = (evt) => {
+  const onPause = (evt) => {
     evt.preventDefault();
     props.onPause();
   };
-  const _onPlay = (evt) => {
+  const onPlay = (evt) => {
     evt.preventDefault();
     props.onPlay();
   };
 
-  const _handleExit = (evt) => {
+  const handleExit = (evt) => {
     evt.preventDefault();
     props.history.goBack();
   };
@@ -32,7 +32,7 @@ const FullScreenVideoPlayer = (props) => {
   let playPauseButton;
   if (!isPlaying) {
     playPauseButton = (
-      <button type="button" onClick={_onPlay} className="player__play">
+      <button type="button" onClick={onPlay} className="player__play">
         <svg viewBox="0 0 19 19" width="19" height="19">
           <use xlinkHref="#play-s"></use>
         </svg>
@@ -41,7 +41,7 @@ const FullScreenVideoPlayer = (props) => {
     );
   } else {
     playPauseButton = (
-      <button type="button" onClick={_onPause} className="player__play">
+      <button type="button" onClick={onPause} className="player__play">
         <svg viewBox="0 0 14 21" width="14" height="21">
           <use xlinkHref="#pause"></use>
         </svg>
@@ -53,7 +53,7 @@ const FullScreenVideoPlayer = (props) => {
   return (
     <div className="player" style={{backgroundColor: `#000000`}}>
       {props.children}
-      <button onClick={_handleExit} type="button" className="player__exit">Exit</button>
+      <button onClick={handleExit} type="button" className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

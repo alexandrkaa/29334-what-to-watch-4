@@ -23,6 +23,7 @@ const initialState = {
   loadingTitleMovie: false,
   loadingTitleMovieError: false,
   titleMovie: {},
+  loadingUserFavoriteList: false,
   updateUserFavoriteListError: false,
 };
 
@@ -56,9 +57,8 @@ const ActionCreator = {
     type: ActionTypes.UPDATE_USER_FAVORITE_LIST_SUCCESS,
     payload: userFavoriteList,
   }),
-  updateUserFavoriteListError: (userFavoriteList) => ({
+  updateUserFavoriteListError: () => ({
     type: ActionTypes.UPDATE_USER_FAVORITE_LIST_ERROR,
-    payload: userFavoriteList,
   }),
 
 };
@@ -124,6 +124,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionTypes.FETCH_MOVIES_DATA_ERROR:
       return extendObject(state, {
+        loadingMovies: false,
         loadingMoviesError: true,
       });
 
@@ -152,6 +153,11 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {
         loadingUserFavoriteList: false,
         moviesList: updateMovieIsFavorite(cloneDeep(state.moviesList), action.payload)
+      });
+    case ActionTypes.UPDATE_USER_FAVORITE_LIST_ERROR:
+      return extendObject(state, {
+        updateUserFavoriteListError: true,
+        loadingUserFavoriteList: false,
       });
     default:
       return state;

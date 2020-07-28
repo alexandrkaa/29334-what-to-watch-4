@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputRadioStar /> should match snapshot <InputRadioStar /> should match snapshot (disabled) 1`] = `
+Array [
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={true}
+    id="star-2"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={2}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-2"
+  >
+    Rating 2
+  </label>,
+]
+`;
+
+exports[`<InputRadioStar /> should match snapshot <InputRadioStar /> should match snapshot (enabled) 1`] = `
+Array [
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={false}
+    id="star-2"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={2}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-2"
+  >
+    Rating 2
+  </label>,
+]
+`;

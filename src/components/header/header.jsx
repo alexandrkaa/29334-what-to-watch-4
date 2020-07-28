@@ -29,4 +29,4 @@ Header.defaultProps = {
   headerClassName: `movie-card__head`,
 };
 
-export default Header;
+export default React.memo(Header);

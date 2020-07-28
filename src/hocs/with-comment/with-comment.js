@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {AppRoutes, FiledsIds} from '../../consts/consts.js';
+import {AppRoutes, FieldsIds} from '../../consts/consts.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsActionCreator} from '../../reducer/data/comments-data/comments-data.js';
 import PropTypes from 'prop-types';
 import {getAuthorizationStatusBoolean, getIsPostCommentHasError, getIsPostCommentInProgress} from '../../reducer/selectors.js';
@@ -59,7 +59,7 @@ const withComment = (Component) => {
     render() {
       const {comment, rating} = this.state;
       const {isAuthorized, postCommentInProgress, postCommentError} = this.props;
-      const isFormValid = isValidField(FiledsIds.RATING_FIELD_ID, this.state.rating) && isValidField(FiledsIds.COMMENTS_FIELD_ID, this.state.comment);
+      const isFormValid = isValidField(FieldsIds.RATING_FIELD_ID, this.state.rating) && isValidField(FieldsIds.COMMENTS_FIELD_ID, this.state.comment);
       if (!isAuthorized) {
         return (
           <Redirect to={AppRoutes.LOGIN_PAGE} />

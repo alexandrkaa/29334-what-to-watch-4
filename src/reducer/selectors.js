@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {getGenresFromMovies, getWithLimit, getMoviesByGenre} from '../utils/filters.js';
+import {getGenresFromMovies, getWithLimit, getMoviesByGenre, getMovieByIdFilter} from '../utils/filters.js';
 import {DEFAULT_GENRE, GENRES_LIMIT} from '../consts/consts.js';
 import {
   getMovies,
@@ -8,7 +8,7 @@ import {
   getMoviesLoadingErrorStatus,
   getTitleMovieLoadingStatus,
   getTitleMovieLoadingErrorStatus,
-  getMovieByIdFromState,
+  getMovieById,
   getUserFavoriteList,
 } from './data/movies-data/selectors.js';
 
@@ -53,6 +53,14 @@ export const getMoviesDataFromUserFavoriteList = createSelector(
     }
 );
 
+export const getTitleMovieMemo = createSelector(
+    [getMovies, getTitleMovie],
+    (moviesList, titleMovie) => {
+      return getMovieByIdFilter(moviesList, titleMovie.id) || {};
+    }
+);
+
+
 export {
   getMovies,
   getTitleMovie,
@@ -60,7 +68,7 @@ export {
   getMoviesLoadingErrorStatus,
   getTitleMovieLoadingStatus,
   getTitleMovieLoadingErrorStatus,
-  getMovieByIdFromState,
+  getMovieById,
 
   getMoviesComments,
   getCommentsLoadingStatus,

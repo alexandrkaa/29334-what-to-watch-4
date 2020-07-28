@@ -15,4 +15,4 @@ MovieCardBackground.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default MovieCardBackground;
+export default React.memo(MovieCardBackground);

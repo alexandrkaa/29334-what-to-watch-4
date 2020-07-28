@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getMovieById} from '../../utils/filters.js';
+import {getMovieByIdFilter} from '../../utils/filters.js';
 import {moviesListType} from '../../types/types.js';
 import Loader from '../../components/loader/loader.jsx';
 import {getMovies, getMoviesLoadingStatus, getAuthorizationStatus} from '../../reducer/selectors.js';
@@ -23,7 +23,7 @@ const withMovie = (Component) => {
       const childProps = cloneDeep(this.props);
       delete childProps.loadSimilarMovies;
       const {moviesList, movieId} = this.props;
-      const movie = getMovieById(moviesList, movieId);
+      const movie = getMovieByIdFilter(moviesList, movieId);
       const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
       return (
         <Component

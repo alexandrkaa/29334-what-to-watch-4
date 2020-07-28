@@ -4,7 +4,7 @@ exports[`<UserFavoriteList /> should match snapshot without error 1`] = `
 <div
   className="user-page"
 >
-  <Header
+  <Memo(Header)
     headerClassName="user-page__head"
   >
     <h1
@@ -13,7 +13,7 @@ exports[`<UserFavoriteList /> should match snapshot without error 1`] = `
       My list
     </h1>
     <Memo(Connect(UserProfile)) />
-  </Header>
+  </Memo(Header)>
   <section
     className="catalog"
   >
@@ -77,6 +77,6 @@ exports[`<UserFavoriteList /> should match snapshot without error 1`] = `
       />
     </div>
   </section>
-  <Footer />
+  <Memo(Footer) />
 </div>
 `;

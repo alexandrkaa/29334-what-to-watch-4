@@ -1,4 +1,8 @@
-import {reducer, ActionCreator, ActionTypes} from './comments-data.js';
+import {reducer, ActionCreator, ActionTypes, Operation} from './comments-data.js';
+import MockAdapter from 'axios-mock-adapter';
+import createAPI from '../../../api/api.js';
+
+const api = createAPI(() => {});
 
 const comments = {
   3: [
@@ -30,27 +34,18 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       loadingComments: false,
       loadingCommentsError: false,
-      moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
     }, {
       type: `FETCH_COMMENTS_DATA`,
     })).toEqual({
       loadingComments: true,
       loadingCommentsError: false,
-      moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
     });
   });
 
   it(`Should reducer fetch comments data success`, () => {
     expect(reducer({
       loadingComments: true,
-      loadingCommentsError: false,
       moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
     }, {
       type: `FETCH_COMMENTS_DATA_SUCCESS`,
       payload: {
@@ -68,7 +63,6 @@ describe(`Reducer works correctly`, () => {
       }
     })).toEqual({
       loadingComments: false,
-      loadingCommentsError: false,
       moviesComments: {
         3: [{
           id: 2,
@@ -81,8 +75,6 @@ describe(`Reducer works correctly`, () => {
           date: `2019-01-08T14:13:56.569Z`
         }]
       },
-      postCommentInProgress: false,
-      postCommentError: false,
     });
   });
 
@@ -90,34 +82,22 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       loadingComments: true,
       loadingCommentsError: false,
-      moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
     }, {
       type: `FETCH_COMMENTS_DATA_ERROR`,
       payload: comments
     })).toEqual({
       loadingComments: false,
       loadingCommentsError: true,
-      moviesComments: {},
-      postCommentInProgress: false,
-      postCommentError: false,
     });
   });
 
   it(`Should reducer update comment post progress`, () => {
     expect(reducer({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: false,
     }, {
       type: `POST_COMMENT_IN_PROGRESS`,
     })).toEqual({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
     });
@@ -125,17 +105,11 @@ describe(`Reducer works correctly`, () => {
 
   it(`Should reducer update comment post error`, () => {
     expect(reducer({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: true,
       postCommentError: false,
     }, {
       type: `POST_COMMENT_ERROR`,
     })).toEqual({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: false,
       postCommentError: true,
     });
@@ -143,19 +117,11 @@ describe(`Reducer works correctly`, () => {
 
   it(`Should reducer update comment post success`, () => {
     expect(reducer({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: true,
-      postCommentError: false,
     }, {
       type: `POST_COMMENT_SUCCESS`,
     })).toEqual({
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {},
       postCommentInProgress: false,
-      postCommentError: false,
     });
   });
 });
@@ -178,6 +144,49 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator fetch movies comments data returns correct action`, () => {
     expect(ActionCreator.fetchCommentsDataError()).toEqual({
       type: ActionTypes.FETCH_COMMENTS_DATA_ERROR,
+    });
+  });
+});
+
+describe(`CommentsData Operation works correctly`, () => {
+  it(`Operation get comments data works correctly`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const movieId = 3;
+    const commentsLoader = Operation.getCommentsData(movieId);
+
+    apiMock
+      .onGet(`/comments/${movieId}`)
+      .reply(200, comments[3]);
+
+    return commentsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionTypes.FETCH_COMMENTS_DATA_SUCCESS,
+        payload: {
+          movieId,
+          comments: comments[3]
+        },
+      });
+    });
+  });
+
+  it(`Operation post comments data works correctly`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const movieId = 3;
+    const commentsLoader = Operation.postCommentData({
+      movieId,
+      rating: 5,
+      comment: `Some comment text`,
+    });
+
+    apiMock
+      .onPost(`/comments/${movieId}`)
+      .reply(200, comments[3]);
+
+    return commentsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -33,7 +33,7 @@ export const BASE_URL = `https://htmlacademy-react-3.appspot.com`;
 export const BASE_API_URL = `${BASE_URL}/wtw`;
 export const API_REQUEST_TIMEOUT = 5000;
 
-export const FiledsIds = {
+export const FieldsIds = {
   EMAIL_FIELD_ID: `user-email`,
   PASSWORD_FIELD_ID: `user-password`,
   RATING_FIELD_ID: `rating`,
@@ -42,13 +42,13 @@ export const FiledsIds = {
 
 export const SignInFields = [
   {
-    id: FiledsIds.EMAIL_FIELD_ID,
+    id: FieldsIds.EMAIL_FIELD_ID,
     label: `Email address`,
     type: `email`,
     placeholder: `Email address`,
   },
   {
-    id: FiledsIds.PASSWORD_FIELD_ID,
+    id: FieldsIds.PASSWORD_FIELD_ID,
     label: `Password`,
     type: `password`,
     placeholder: `Password`,

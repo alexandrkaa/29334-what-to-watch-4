@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignIn /> should match snapshot 1`] = `
+<div
+  className="user-page"
+>
+  <Memo(Header)
+    headerClassName="user-page__head"
+  >
+    <h1
+      className="page-title user-page__title"
+    >
+      Sign in
+    </h1>
+    <Memo(Connect(UserProfile)) />
+  </Memo(Header)>
+  <div
+    className="sign-in user-page__content"
+  >
+    <form
+      className="sign-in__form"
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="sign-in__fields"
+      >
+        <InputField
+          id="user-email"
+          isDisabled={false}
+          label="Email address"
+          onChange={[MockFunction]}
+          placeholder="Email address"
+          type="email"
+          value="qq@qq.ru"
+        />
+        <InputField
+          id="user-password"
+          isDisabled={false}
+          label="Password"
+          onChange={[MockFunction]}
+          placeholder="Password"
+          type="password"
+          value="123456"
+        />
+      </div>
+      <div
+        className="sign-in__submit"
+      >
+        <button
+          className="sign-in__btn"
+          disabled={false}
+          type="submit"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <Memo(Footer) />
+</div>
+`;

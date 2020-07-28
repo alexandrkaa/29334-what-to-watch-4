@@ -39,6 +39,7 @@ it(`Should title be pressed`, () => {
         onPlay={onPlay}
         onPause={onPause}
         onMovieTitleClick={onMovieTitleClick}
+        history={{}}
       >
         {children}
       </MovieCard>

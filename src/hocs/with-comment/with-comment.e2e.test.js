@@ -70,6 +70,7 @@ it(`Should withComment state will be changed`, () => {
 
   const textArea = main.find(`.add-review__textarea`);
   expect(textArea).toHaveLength(1);
+  // TODO: Почему в обработчик приходит весь event в тесте?
   // const evt = {
   //   target: {
   //     value: `text`

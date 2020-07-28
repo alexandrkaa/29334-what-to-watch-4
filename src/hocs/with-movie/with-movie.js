@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import {getMovieByIdFilter} from '../../utils/filters.js';
 import {moviesListType} from '../../types/types.js';
 import Loader from '../../components/loader/loader.jsx';
-import {getMovies, getMoviesLoadingStatus, getAuthorizationStatus} from '../../reducer/selectors.js';
-import {AuthorizationStatus} from '../../reducer/user/user.js';
+import {getMovies, getMoviesLoadingStatus, getAuthorizationStatusBoolean} from '../../reducer/selectors.js';
 import {getSimilarMovies} from '../../utils/filters.js';
 import cloneDeep from 'lodash.clonedeep';
 
@@ -51,7 +50,7 @@ const withMovie = (Component) => {
     return {
       moviesList: getMovies(state),
       loadingMovies: getMoviesLoadingStatus(state),
-      isAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+      isAuthorized: getAuthorizationStatusBoolean(state),
     };
   };
 

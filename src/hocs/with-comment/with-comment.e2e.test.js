@@ -1,6 +1,6 @@
-import React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import React from 'react';
+import Enzyme, {mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import withComment from './with-comment.js';
 import PropTypes from 'prop-types';
 
@@ -70,7 +70,7 @@ it(`Should withComment state will be changed`, () => {
 
   const textArea = main.find(`.add-review__textarea`);
   expect(textArea).toHaveLength(1);
-  // TODO: Почему в обработчик приходит весь event в тесте?
+  // * Почему в обработчик приходит весь event в тесте?
   // const evt = {
   //   target: {
   //     value: `text`

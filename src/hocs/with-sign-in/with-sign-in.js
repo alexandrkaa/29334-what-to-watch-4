@@ -25,6 +25,7 @@ const withSignIn = (Component) => {
     }
 
     _handleInputChange(id, value) {
+      console.log(id, value);
       this.setState({
         [id]: {
           value,

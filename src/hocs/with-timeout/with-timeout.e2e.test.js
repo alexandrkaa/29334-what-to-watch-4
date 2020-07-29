@@ -1,6 +1,6 @@
-import React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import React from 'react';
+import Enzyme, {mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import withTimeOut from './with-timeout.js';
 import PropTypes from 'prop-types';
 

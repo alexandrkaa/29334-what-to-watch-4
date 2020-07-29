@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SignIn /> should match snapshot 1`] = `
+exports[`<SignIn /> should match snapshot <SignIn /> should match snapshot when auth 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`<SignIn /> should match snapshot <SignIn /> should match snapshot when no auth 1`] = `
 <div
   className="user-page"
 >
@@ -19,7 +25,7 @@ exports[`<SignIn /> should match snapshot 1`] = `
   >
     <form
       className="sign-in__form"
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <div
         className="sign-in__fields"

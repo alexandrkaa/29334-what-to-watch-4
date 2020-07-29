@@ -40,7 +40,6 @@ const withSignIn = (Component) => {
         <Component
           {...this.props}
           {...this.state}
-          onFormSubmit={this._handleFormSubmit}
           onInputChange={this._handleInputChange}
           signInFields={SignInFields}
           isFormValid={isFormValid}

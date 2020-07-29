@@ -1,69 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCardFull /> should movie full card page to match snapshot 1`] = `
-<Context.Provider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "clearActions": [Function],
-          "dispatch": [Function],
-          "getActions": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
-      },
-    }
-  }
->
-  <BrowserRouter>
-    <Memo(Connect(WithActiveItemHoc))
-      activeItem="TAB1"
-      history={Object {}}
-      isAuthorized={true}
-      movie={
-        Object {
-          "backgroundColor": "#000000",
-          "id": 4,
-          "image": "img/we-need-to-talk-about-kevin.jpg",
-          "isFavorite": false,
-          "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
-          "movieDate": "2000",
-          "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
-          "movieDirector": "Wes Anderson",
-          "movieGenre": "Thriller",
-          "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
-          "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
-          "movieRatingCount": "349 ratings",
-          "movieRatingLevel": "Bad",
-          "movieRatingScore": "3",
-          "movieRunTime": 9900,
-          "movieStarring": Array [
-            "Jude Law",
-            "Willem Dafoe",
-          ],
-          "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
-          "title": "Dardjeeling Limited",
-        }
-      }
-      onMovieTitleClick={[MockFunction]}
-      similarMovies={
+exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieCardFull /> should movie full card page to match snapshot with tab 1 1`] = `
+<React.Fragment>
+  <section
+    className="movie-card movie-card--full"
+  >
+    <div
+      className="movie-card__hero"
+    >
+      <Memo(MovieCardBackground)
+        movieBackground="img/bg-the-grand-budapest-hotel.jpg"
+        title="Dardjeeling Limited"
+      />
+      <Memo(Header)>
+        <Memo(Connect(UserProfile)) />
+      </Memo(Header)>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__desc"
+        >
+          <Memo(MovieCardTitle)
+            movieDate="2000"
+            movieGenre="Thriller"
+            title="Dardjeeling Limited"
+          />
+          <Memo(MovieCardFullButtons)
+            addToUserFavoriteList={[Function]}
+            history={Object {}}
+            isAuthorized={true}
+            isInUserFavoriteList={false}
+            movieId={4}
+            onPlay={[Function]}
+            removeFromUserFavoriteList={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="movie-card__wrap movie-card__translate-top"
+    >
+      <div
+        className="movie-card__info"
+      >
+        <div
+          className="movie-card__poster movie-card__poster--big"
+        >
+          <img
+            alt="Dardjeeling Limited"
+            height="327"
+            src="img/the-grand-budapest-hotel-poster.jpg"
+            width="218"
+          />
+        </div>
+        <div
+          className="movie-card__desc"
+        >
+          <MovieCardFullMenu
+            onClickMovieCardFullMenuTab={[Function]}
+            tabs={
+              Array [
+                Object {
+                  "id": "OVERVIEW",
+                  "isActive": true,
+                  "name": "Overview",
+                },
+                Object {
+                  "id": "DETAILS",
+                  "isActive": false,
+                  "name": "Details",
+                },
+                Object {
+                  "id": "REVIEWS",
+                  "isActive": false,
+                  "name": "Reviews",
+                },
+              ]
+            }
+          />
+          <MovieCardFullOverView
+            movie={
+              Object {
+                "backgroundColor": "#000000",
+                "id": 4,
+                "image": "img/we-need-to-talk-about-kevin.jpg",
+                "isFavorite": false,
+                "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+                "movieDate": "2000",
+                "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+                "movieDirector": "Wes Anderson",
+                "movieGenre": "Thriller",
+                "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+                "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "movieRatingCount": "349 ratings",
+                "movieRatingLevel": "Bad",
+                "movieRatingScore": "3",
+                "movieRunTime": 9900,
+                "movieStarring": Array [
+                  "Jude Law",
+                  "Willem Dafoe",
+                ],
+                "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "title": "Dardjeeling Limited",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    className="page-content"
+  >
+    <Memo(SimilarMovies)
+      moviesList={
         Array [
           Object {
             "backgroundColor": "#000000",
@@ -136,26 +187,410 @@ exports[`<MovieCardFull /> should movie full card page to match snapshot 1`] = `
           },
         ]
       }
-      tabs={
+    />
+    <Memo(Footer) />
+  </div>
+</React.Fragment>
+`;
+
+exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieCardFull /> should movie full card page to match snapshot with tab 2 1`] = `
+<React.Fragment>
+  <section
+    className="movie-card movie-card--full"
+  >
+    <div
+      className="movie-card__hero"
+    >
+      <Memo(MovieCardBackground)
+        movieBackground="img/bg-the-grand-budapest-hotel.jpg"
+        title="Dardjeeling Limited"
+      />
+      <Memo(Header)>
+        <Memo(Connect(UserProfile)) />
+      </Memo(Header)>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__desc"
+        >
+          <Memo(MovieCardTitle)
+            movieDate="2000"
+            movieGenre="Thriller"
+            title="Dardjeeling Limited"
+          />
+          <Memo(MovieCardFullButtons)
+            addToUserFavoriteList={[Function]}
+            history={Object {}}
+            isAuthorized={true}
+            isInUserFavoriteList={false}
+            movieId={4}
+            onPlay={[Function]}
+            removeFromUserFavoriteList={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="movie-card__wrap movie-card__translate-top"
+    >
+      <div
+        className="movie-card__info"
+      >
+        <div
+          className="movie-card__poster movie-card__poster--big"
+        >
+          <img
+            alt="Dardjeeling Limited"
+            height="327"
+            src="img/the-grand-budapest-hotel-poster.jpg"
+            width="218"
+          />
+        </div>
+        <div
+          className="movie-card__desc"
+        >
+          <MovieCardFullMenu
+            onClickMovieCardFullMenuTab={[Function]}
+            tabs={
+              Array [
+                Object {
+                  "id": "OVERVIEW",
+                  "isActive": false,
+                  "name": "Overview",
+                },
+                Object {
+                  "id": "DETAILS",
+                  "isActive": true,
+                  "name": "Details",
+                },
+                Object {
+                  "id": "REVIEWS",
+                  "isActive": false,
+                  "name": "Reviews",
+                },
+              ]
+            }
+          />
+          <MovieCardFullDetails
+            movie={
+              Object {
+                "backgroundColor": "#000000",
+                "id": 4,
+                "image": "img/we-need-to-talk-about-kevin.jpg",
+                "isFavorite": false,
+                "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+                "movieDate": "2000",
+                "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+                "movieDirector": "Wes Anderson",
+                "movieGenre": "Thriller",
+                "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+                "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "movieRatingCount": "349 ratings",
+                "movieRatingLevel": "Bad",
+                "movieRatingScore": "3",
+                "movieRunTime": 9900,
+                "movieStarring": Array [
+                  "Jude Law",
+                  "Willem Dafoe",
+                ],
+                "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "title": "Dardjeeling Limited",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    className="page-content"
+  >
+    <Memo(SimilarMovies)
+      moviesList={
         Array [
           Object {
-            "id": "TAB1",
-            "isActive": true,
-            "name": "Tab1",
+            "backgroundColor": "#000000",
+            "id": 5,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2300",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
           },
           Object {
-            "id": "TAB2",
-            "isActive": false,
-            "name": "Tab2",
+            "backgroundColor": "#000000",
+            "id": 6,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2200",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
           },
           Object {
-            "id": "TAB3",
-            "isActive": false,
-            "name": "Tab3",
+            "backgroundColor": "#000000",
+            "id": 7,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2100",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
           },
         ]
       }
     />
-  </BrowserRouter>
-</Context.Provider>
+    <Memo(Footer) />
+  </div>
+</React.Fragment>
+`;
+
+exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieCardFull /> should movie full card page to match snapshot with tab 3 1`] = `
+<React.Fragment>
+  <section
+    className="movie-card movie-card--full"
+  >
+    <div
+      className="movie-card__hero"
+    >
+      <Memo(MovieCardBackground)
+        movieBackground="img/bg-the-grand-budapest-hotel.jpg"
+        title="Dardjeeling Limited"
+      />
+      <Memo(Header)>
+        <Memo(Connect(UserProfile)) />
+      </Memo(Header)>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__desc"
+        >
+          <Memo(MovieCardTitle)
+            movieDate="2000"
+            movieGenre="Thriller"
+            title="Dardjeeling Limited"
+          />
+          <Memo(MovieCardFullButtons)
+            addToUserFavoriteList={[Function]}
+            history={Object {}}
+            isAuthorized={true}
+            isInUserFavoriteList={false}
+            movieId={4}
+            onPlay={[Function]}
+            removeFromUserFavoriteList={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="movie-card__wrap movie-card__translate-top"
+    >
+      <div
+        className="movie-card__info"
+      >
+        <div
+          className="movie-card__poster movie-card__poster--big"
+        >
+          <img
+            alt="Dardjeeling Limited"
+            height="327"
+            src="img/the-grand-budapest-hotel-poster.jpg"
+            width="218"
+          />
+        </div>
+        <div
+          className="movie-card__desc"
+        >
+          <MovieCardFullMenu
+            onClickMovieCardFullMenuTab={[Function]}
+            tabs={
+              Array [
+                Object {
+                  "id": "OVERVIEW",
+                  "isActive": false,
+                  "name": "Overview",
+                },
+                Object {
+                  "id": "DETAILS",
+                  "isActive": false,
+                  "name": "Details",
+                },
+                Object {
+                  "id": "REVIEWS",
+                  "isActive": true,
+                  "name": "Reviews",
+                },
+              ]
+            }
+          />
+          <MovieCardFullComments
+            comments={
+              Array [
+                Object {
+                  "author": Object {
+                    "id": 17,
+                    "name": "Emely",
+                  },
+                  "date": "2020-07-15T12:25:15.535Z",
+                  "id": 1,
+                  "rating": 2.9,
+                  "text": "Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.",
+                },
+              ]
+            }
+            isLoadingComments={false}
+            isLoadingCommentsError={false}
+            movie={
+              Object {
+                "backgroundColor": "#000000",
+                "id": 4,
+                "image": "img/we-need-to-talk-about-kevin.jpg",
+                "isFavorite": false,
+                "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+                "movieDate": "2000",
+                "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+                "movieDirector": "Wes Anderson",
+                "movieGenre": "Thriller",
+                "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+                "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "movieRatingCount": "349 ratings",
+                "movieRatingLevel": "Bad",
+                "movieRatingScore": "3",
+                "movieRunTime": 9900,
+                "movieStarring": Array [
+                  "Jude Law",
+                  "Willem Dafoe",
+                ],
+                "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+                "title": "Dardjeeling Limited",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    className="page-content"
+  >
+    <Memo(SimilarMovies)
+      moviesList={
+        Array [
+          Object {
+            "backgroundColor": "#000000",
+            "id": 5,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2300",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
+          },
+          Object {
+            "backgroundColor": "#000000",
+            "id": 6,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2200",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
+          },
+          Object {
+            "backgroundColor": "#000000",
+            "id": 7,
+            "image": "img/we-need-to-talk-about-kevin.jpg",
+            "isFavorite": false,
+            "movieBackground": "img/bg-the-grand-budapest-hotel.jpg",
+            "movieDate": "2100",
+            "movieDescription": "In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.",
+            "movieDirector": "Wes Anderson",
+            "movieGenre": "Thriller",
+            "movieImage": "img/the-grand-budapest-hotel-poster.jpg",
+            "moviePreview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "movieRatingCount": "349 ratings",
+            "movieRatingLevel": "Bad",
+            "movieRatingScore": "3",
+            "movieRunTime": 9900,
+            "movieStarring": Array [
+              "Jude Law",
+              "Willem Dafoe",
+            ],
+            "movieVideo": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "title": "Dardjeeling Limited",
+          },
+        ]
+      }
+    />
+    <Memo(Footer) />
+  </div>
+</React.Fragment>
 `;

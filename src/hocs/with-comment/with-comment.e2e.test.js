@@ -9,13 +9,17 @@ Enzyme.configure({
 });
 
 const MockComponent = (props) => {
-  const {onRadioChange, onFormSubmit, onTextAreaChange, isFormValid, comment} = props;
+  const {onRadioChange, onFormSubmit, isFormValid, comment} = props;
   const onFirstRadioChange = () => {
     onRadioChange(1);
   };
 
   const onSecondRadioChange = () => {
     onRadioChange(2);
+  };
+
+  const onTextAreaChange = (evt) => {
+    props.onTextAreaChange(evt.target.value);
   };
 
   return (
@@ -70,12 +74,12 @@ it(`Should withComment state will be changed`, () => {
 
   const textArea = main.find(`.add-review__textarea`);
   expect(textArea).toHaveLength(1);
-  // * Почему в обработчик приходит весь event в тесте?
-  // const evt = {
-  //   target: {
-  //     value: `text`
-  //   },
-  //   preventDefault: () => {},
-  // };
-  // textArea.simulate(`change`, evt);
+  const evt = {
+    target: {
+      value: `text`
+    },
+    preventDefault: jest.fn(),
+  };
+  textArea.simulate(`change`, evt);
+  expect(main.state(`comment`)).toBe(`text`);
 });

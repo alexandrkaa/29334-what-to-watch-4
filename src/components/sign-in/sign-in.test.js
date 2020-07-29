@@ -1,36 +1,84 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import {SignInFields} from '../../consts/consts.js';
 import {SignIn} from './sign-in.jsx';
+
 const renderer = new ShallowRenderer();
 
-it(`<SignIn /> should match snapshot`, () => {
-  const userEmail = {
-    value: `qq@qq.ru`,
-    isValid: true,
-  };
+const FieldsIds = {
+  EMAIL_FIELD_ID: `user-email`,
+  PASSWORD_FIELD_ID: `user-password`,
+};
 
-  const userPassword = {
-    value: `123456`,
-    isValid: true,
-  };
+const SignInFields = [
+  {
+    id: FieldsIds.EMAIL_FIELD_ID,
+    label: `Email address`,
+    type: `email`,
+    placeholder: `Email address`,
+  },
+  {
+    id: FieldsIds.PASSWORD_FIELD_ID,
+    label: `Password`,
+    type: `password`,
+    placeholder: `Password`,
+  },
+];
 
-  const onInputChange = jest.fn();
-  const onFormSubmit = jest.fn();
+const userEmail = {
+  value: `qq@qq.ru`,
+  isValid: true,
+};
 
-  const loginStatusCode = 200;
-  renderer.render(
-      <SignIn
-        loginStatusCode={loginStatusCode}
-        signInFields={SignInFields}
-        user-email={userEmail}
-        user-password={userPassword}
-        isLoading={false}
-        isAuthorized={false}
-        onInputChange={onInputChange}
-        onFormSubmit={onFormSubmit}
-      />
-  );
-  const result = renderer.getRenderOutput();
-  expect(result).toMatchSnapshot();
+const userPassword = {
+  value: `123456`,
+  isValid: true,
+};
+
+const onInputChange = jest.fn();
+const onFormSubmit = jest.fn();
+
+const loginStatusCode = 200;
+
+describe(`<SignIn /> should match snapshot`, () => {
+  it(`<SignIn /> should match snapshot when no auth`, () => {
+
+    renderer.render(
+        <SignIn
+          loginStatusCode={loginStatusCode}
+          signInFields={SignInFields}
+          user-email={userEmail}
+          user-password={userPassword}
+          isLoading={false}
+          isAuthorized={false}
+          onInputChange={onInputChange}
+          onFormSubmit={onFormSubmit}
+          login={() => {}}
+          getUserFavoriteList={() => {}}
+          isFormValid={true}
+        />
+    );
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
+
+  it(`<SignIn /> should match snapshot when auth`, () => {
+
+    renderer.render(
+        <SignIn
+          loginStatusCode={loginStatusCode}
+          signInFields={SignInFields}
+          user-email={userEmail}
+          user-password={userPassword}
+          isLoading={false}
+          isAuthorized={true}
+          onInputChange={onInputChange}
+          onFormSubmit={onFormSubmit}
+          login={() => {}}
+          getUserFavoriteList={() => {}}
+          isFormValid={true}
+        />
+    );
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
 });

@@ -15,8 +15,8 @@ const MoviesList = (props) => {
               key={movie.id}
               movie={movie}
               isMuted={true}
-              videoHeight={PreviewVideoSize.height}
-              videoWidth={PreviewVideoSize.width}
+              videoHeight={PreviewVideoSize.HEIGHT}
+              videoWidth={PreviewVideoSize.WIDTH}
               timeOutDelay={START_PREVIEW_DELAY}
               videoSrc={movie.moviePreview}
             />

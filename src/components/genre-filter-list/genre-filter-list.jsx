@@ -10,10 +10,10 @@ import {isSameText} from '../../utils/filters.js';
 class GenreFilterList extends PureComponent {
   constructor(props) {
     super(props);
-    this._onActiveItemChange = this._onActiveItemChange.bind(this);
+    this._handleActiveItemChange = this._handleActiveItemChange.bind(this);
   }
 
-  _onActiveItemChange(movieGenre) {
+  _handleActiveItemChange(movieGenre) {
     this.props.onActiveItemChange(movieGenre);
   }
 
@@ -27,7 +27,7 @@ class GenreFilterList extends PureComponent {
               key={removeSpaces(genre).toLowerCase()}
               movieGenre={genre}
               isActive={isSameText(genre, activeItem)}
-              onActiveItemChange={this._onActiveItemChange}
+              onActiveItemChange={this._handleActiveItemChange}
             />
           );
         })}

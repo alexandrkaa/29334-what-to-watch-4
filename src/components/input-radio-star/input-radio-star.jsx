@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 class InputRadioStar extends PureComponent {
   constructor(props) {
     super(props);
-    this._onRadioChange = this._onRadioChange.bind(this);
+    this._handleRadioChange = this._handleRadioChange.bind(this);
   }
 
-  _onRadioChange() {
+  _handleRadioChange() {
     this.props.onRadioChange(this.props.id);
   }
 
@@ -16,7 +16,7 @@ class InputRadioStar extends PureComponent {
 
     return (
       <React.Fragment>
-        <input className="rating__input" disabled={isDisabled} id={`star-${id}`} type="radio" name="rating" value={id} onChange={this._onRadioChange} checked={isChecked} />
+        <input className="rating__input" disabled={isDisabled} id={`star-${id}`} type="radio" name="rating" value={id} onChange={this._handleRadioChange} checked={isChecked} />
         <label className="rating__label" htmlFor={`star-${id}`}>{`Rating ${id}`}</label>
       </React.Fragment>
     );

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 class GenreFilterItem extends PureComponent {
   constructor(props) {
     super(props);
-    this._onActiveItemChange = this._onActiveItemChange.bind(this);
+    this._handleActiveItemChange = this._handleActiveItemChange.bind(this);
   }
 
-  _onActiveItemChange(evt) {
+  _handleActiveItemChange(evt) {
     const {movieGenre} = this.props;
     evt.preventDefault();
     this.props.onActiveItemChange(movieGenre);
@@ -18,7 +18,7 @@ class GenreFilterItem extends PureComponent {
 
     return (
       <li className={`catalog__genres-item ${isActive ? `catalog__genres-item--active` : ``}`}>
-        <a href="#" onClick={this._onActiveItemChange} className="catalog__genres-link">{movieGenre}</a>
+        <a href="#" onClick={this._handleActiveItemChange} className="catalog__genres-link">{movieGenre}</a>
       </li>
     );
   }

@@ -9,13 +9,12 @@ Enzyme.configure({
 
 it(`<GenreFilterItem /> actions should works correctly`, () => {
   const mockGenre = `Thriller`;
-  const activeGenre = `Thriller`;
   const onActiveItemChange = jest.fn();
 
   const main = shallow(
       <GenreFilterItem
         movieGenre={mockGenre}
-        activeItem={activeGenre}
+        isActive={true}
         onActiveItemChange={onActiveItemChange}
       />
   );

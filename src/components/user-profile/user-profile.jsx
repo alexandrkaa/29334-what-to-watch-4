@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {NavLink, useLocation, Link} from 'react-router-dom';
 import {AppRoutes} from '../../consts/consts.js';
 import {connect} from 'react-redux';
-import {getAuthorizationStatusBoolean, getUserData} from '../../reducer/selectors.js';
+import {hasUserLogined, getUserData} from '../../reducer/selectors.js';
 
 const UserProfile = (props) => {
   const {userData, isAuthorized} = props;
@@ -38,7 +38,7 @@ UserProfile.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthorized: getAuthorizationStatusBoolean(state),
+    isAuthorized: hasUserLogined(state),
     userData: getUserData(state),
   };
 };

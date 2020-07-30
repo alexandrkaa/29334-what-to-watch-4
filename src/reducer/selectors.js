@@ -27,7 +27,7 @@ import {
 
 import {
   getAuthorizationStatus,
-  getAuthorizationStatusBoolean,
+  hasUserLogined,
   getLoginStatusCode,
   getUserData,
   getIsLoading,
@@ -81,7 +81,7 @@ export {
   getUserFavoriteList,
 
   getAuthorizationStatus,
-  getAuthorizationStatusBoolean,
+  hasUserLogined,
   getLoginStatusCode,
   getUserData,
   getIsLoading

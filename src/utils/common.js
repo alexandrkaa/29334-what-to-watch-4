@@ -70,10 +70,10 @@ export const convertMovieRateToText = (rating) => {
 };
 
 export const updateMovieIsFavorite = (allMovies, newMovies) => {
-  const newFavoriteIds = newMovies.map((movie) => (movie.id));
+  const newFavoriteIds = newMovies.map((movie) => movie.id);
   return allMovies.map((movie) => {
     if (newFavoriteIds.includes(movie.id)) {
-      return newMovies.find((it) => (it.id === movie.id));
+      return newMovies.find((it) => it.id === movie.id);
     }
     return movie;
   });

@@ -14,7 +14,6 @@ Enzyme.configure({
 });
 
 const MockComponent = () => {
-  // const {movie, videoSrc, similarMovies} = props;
   return (
     <h1>Text</h1>
   );

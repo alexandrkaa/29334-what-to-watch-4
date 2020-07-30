@@ -3,21 +3,21 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {Operation as CommentsOperation, ActionCreator as CommentsActionCreator} from '../../reducer/data/comments-data/comments-data.js';
-import {getAuthorizationStatusBoolean, getIsPostCommentHasError, getIsPostCommentInProgress} from '../../reducer/selectors.js';
-import InputRadioStar from '../input-radio-star/input-radio-star.jsx';
+import {hasUserLogined, getIsPostCommentHasError, getIsPostCommentInProgress} from '../../reducer/selectors.js';
 import InputTextarea from '../input-textarea/input-textarea.jsx';
 import {REVIEW_STARS_NUMBER} from '../../consts/consts.js';
 import withComment from '../../hocs/with-comment/with-comment.js';
 import Error from '../error/error.jsx';
 import {AppRoutes} from '../../consts/consts.js';
+import AddCommentStars from '../add-comment-stars/add-comment-stars.jsx';
 
 class AddCommentForm extends PureComponent {
   constructor(props) {
     super(props);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
-  handleFormSubmit(evt) {
+  _handleFormSubmit(evt) {
     evt.preventDefault();
     const {postComment, movieId, rating, comment} = this.props;
     postComment({
@@ -50,12 +50,15 @@ class AddCommentForm extends PureComponent {
     }
     return (
       <div className="add-review">
-        <form onSubmit={this.handleFormSubmit} className="add-review__form">
+        <form onSubmit={this._handleFormSubmit} className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
-              {
-                new Array(REVIEW_STARS_NUMBER).fill(``).map((it, idx) => <InputRadioStar isDisabled={postCommentInProgress} key={idx} id={idx + 1} isChecked={rating === (idx + 1)} onRadioChange={onRadioChange} />)
-              }
+              <AddCommentStars
+                starsNumber={REVIEW_STARS_NUMBER}
+                rating={rating}
+                isDisabled={postCommentInProgress}
+                onRadioChange={onRadioChange}
+              />
             </div>
           </div>
 
@@ -87,7 +90,7 @@ AddCommentForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthorized: getAuthorizationStatusBoolean(state),
+    isAuthorized: hasUserLogined(state),
     postCommentInProgress: getIsPostCommentInProgress(state),
     postCommentError: getIsPostCommentHasError(state),
   };

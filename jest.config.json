@@ -3,6 +3,7 @@
     "**/*.{js,jsx}",
     "!**/node_modules/**",
     "!**/webpack*",
-    "!**/coverage/**"
+    "!**/coverage/**",
+    "!**/public/**"
   ]
 }

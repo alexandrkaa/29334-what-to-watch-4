@@ -26,4 +26,4 @@ InputField.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
 };
 
-export default InputField;
+export default React.memo(InputField);

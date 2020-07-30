@@ -31,7 +31,7 @@ export const getTitleMovieLoadingErrorStatus = (state) => {
 };
 
 export const getMovieById = (state, id) => {
-  const [movie] = getMovies(state).filter((it) => it.id === id);
+  const [movie] = getMovies(state).find((it) => it.id === id);
   return movie;
 };
 

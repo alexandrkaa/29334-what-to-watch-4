@@ -17,7 +17,6 @@ const MockComponent = (props) => {
             const onChange = (evt) => {
               props.onInputChange(fld.id, evt.target.value);
             };
-
             return (
               <div key={fld.id} className="sign-in__field">
                 <input
@@ -54,6 +53,7 @@ MockComponent.propTypes = {
         label: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         placeholder: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
       }).isRequired
   ),
   login: PropTypes.func.isRequired,

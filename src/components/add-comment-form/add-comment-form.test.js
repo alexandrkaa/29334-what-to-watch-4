@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 import {AddCommentForm} from './add-comment-form.jsx';
 
 describe(`<AddCommentForm /> should match snapshot`, () => {
-  const onRadioChange = jest.fn();
-  const onTextAreaChange = jest.fn();
-  const onFormSubmit = jest.fn();
+  const onRadioChange = () => {};
+  const onTextAreaChange = () => {};
+  const onFormSubmit = () => {};
   const comment = `Test comment`;
   const rating = 5;
   it(`<AddCommentForm /> should match snapshot without error`, () => {

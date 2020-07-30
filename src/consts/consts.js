@@ -46,12 +46,14 @@ export const SignInFields = [
     label: `Email address`,
     type: `email`,
     placeholder: `Email address`,
+    value: ``,
   },
   {
     id: FieldsIds.PASSWORD_FIELD_ID,
     label: `Password`,
     type: `password`,
     placeholder: `Password`,
+    value: ``,
   },
 ];
 

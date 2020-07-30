@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCardFullButtons from './movie-card-full-buttons.jsx';
 
@@ -17,7 +17,7 @@ it(`Should MovieCardFullButtons handle actions correctly`, () => {
   const removeFromUserFavoriteList = jest.fn();
   const isMainPage = true;
   const history = {};
-  const main = shallow(
+  const main = mount(
       <MovieCardFullButtons
         onPlay={onPlay}
         movieId={movieId}
@@ -31,10 +31,19 @@ it(`Should MovieCardFullButtons handle actions correctly`, () => {
   );
 
   const playBtn = main.find(`.btn--play`);
-  expect(playBtn).toHaveLength(1);
   playBtn.simulate(`click`);
   expect(onPlay).toHaveBeenCalledTimes(1);
 
   const addFavoriteBtn = main.find(`.btn--list`);
-  expect(addFavoriteBtn).toHaveLength(1);
+  addFavoriteBtn.simulate(`click`, {
+    preventDefault: () => {}
+  });
+  expect(removeFromUserFavoriteList).toHaveBeenCalledTimes(1);
+
+  main.setProps({isInUserFavoriteList: false});
+  main.update();
+  addFavoriteBtn.simulate(`click`, {
+    preventDefault: () => {}
+  });
+  expect(addToUserFavoriteList).toHaveBeenCalledTimes(1);
 });

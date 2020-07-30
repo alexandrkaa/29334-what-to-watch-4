@@ -11,7 +11,7 @@ import {
   getMoviesLoadingErrorStatus,
   getMoviesRenderLimit,
   getActiveGenre,
-  getAuthorizationStatusBoolean,
+  hasUserLogined,
   getUserFavoriteList,
   getTitleMovieLoadingStatus,
   getTitleMovieLoadingErrorStatus,
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
 
     activeGenre: getActiveGenre(state),
     moviesRenderLimit: getMoviesRenderLimit(state),
-    isAuthorized: getAuthorizationStatusBoolean(state),
+    isAuthorized: hasUserLogined(state),
 
     userFavoriteList: getUserFavoriteList(state),
   };

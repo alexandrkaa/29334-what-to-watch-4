@@ -22,8 +22,7 @@ it(`<GenreFilterItem /> actions should works correctly`, () => {
   const genreLink = main.find(`.catalog__genres-link`);
   expect(genreLink).toHaveLength(1);
   genreLink.simulate(`click`, {
-    preventDefault: () => {
-    }
+    preventDefault: () => {}
   });
   expect(onActiveItemChange).toHaveBeenCalledTimes(1);
 });

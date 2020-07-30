@@ -31,5 +31,4 @@ MoviesList.propTypes = {
   moviesList: moviesListType.isRequired,
 };
 
-export {MoviesList};
 export default React.memo(MoviesList);

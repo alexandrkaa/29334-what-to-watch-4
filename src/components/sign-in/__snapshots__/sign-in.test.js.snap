@@ -27,28 +27,28 @@ exports[`<SignIn /> should match snapshot <SignIn /> should match snapshot when 
       className="sign-in__form"
       onSubmit={[Function]}
     >
-      <div
-        className="sign-in__fields"
-      >
-        <InputField
-          id="user-email"
-          isDisabled={false}
-          label="Email address"
-          onChange={[MockFunction]}
-          placeholder="Email address"
-          type="email"
-          value="qq@qq.ru"
-        />
-        <InputField
-          id="user-password"
-          isDisabled={false}
-          label="Password"
-          onChange={[MockFunction]}
-          placeholder="Password"
-          type="password"
-          value="123456"
-        />
-      </div>
+      <SignInFields
+        isLoading={false}
+        onInputChange={[MockFunction]}
+        signInFields={
+          Array [
+            Object {
+              "id": "user-email",
+              "label": "Email address",
+              "placeholder": "Email address",
+              "type": "email",
+              "value": "qq@qq.ru",
+            },
+            Object {
+              "id": "user-password",
+              "label": "Password",
+              "placeholder": "Password",
+              "type": "password",
+              "value": "123456",
+            },
+          ]
+        }
+      />
       <div
         className="sign-in__submit"
       >

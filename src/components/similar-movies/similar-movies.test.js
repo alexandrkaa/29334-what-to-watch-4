@@ -44,7 +44,7 @@ it(`<SimilarMovies /> should match snapshot`, () => {
       isFavorite: false,
     }
   ];
-  const movie = moviesList[0];
+  const [movie] = moviesList;
 
   const tree = renderer
     .create(

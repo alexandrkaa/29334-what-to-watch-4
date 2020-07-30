@@ -51,7 +51,7 @@ it(`<FullScreenVideoPlayer /> actions should works correctly`, () => {
         currentTime={currentTime}
         isEnded={isEnded}
       >
-        <video></video>
+        <video />
       </FullScreenVideoPlayer>,
       {
         createNodeMock: () => {
@@ -59,10 +59,8 @@ it(`<FullScreenVideoPlayer /> actions should works correctly`, () => {
         }
       }
   );
-  const exitButton = main.find(`.player__exit`);
-  expect(exitButton).toHaveLength(1);
+
   const playBtn = main.find(`.player__play`);
-  expect(playBtn).toHaveLength(1);
   playBtn.simulate(`click`, {
     preventDefault: () => {
     }

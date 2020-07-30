@@ -282,7 +282,7 @@ describe(`MoviesData Operation works correctly`, () => {
   });
 
   it(`Operation fetch title movie data works correctly`, () => {
-    const movie = movies[0];
+    const [movie] = movies;
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const moviesLoader = Operation.fetchTitleMovie();

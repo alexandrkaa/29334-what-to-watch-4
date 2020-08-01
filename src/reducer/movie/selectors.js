@@ -9,7 +9,3 @@ export const getActiveGenre = (state) => {
 export const getMoviesRenderLimit = (state) => {
   return state[NAME_SPACE].moviesRenderLimit;
 };
-
-export const getUserFavoriteList = (state) => {
-  return state[NAME_SPACE].userFavoriteList;
-};

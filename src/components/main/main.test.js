@@ -75,34 +75,33 @@ const mockData = {
   ]
 };
 
-describe(`<Main /> should render main movie and movies list`, () => {
-
-  it(`<Main /> should render The Grand Budapest Hotel title film and 2 films from movieList`, () => {
-    const onMovieTitleClick = jest.fn();
-    const {titleMovie, moviesList, movieGenres} = mockData;
-    const store = mockStore({
-      MOVIE_DATA: {
-        titleMovie,
-        moviesList,
-        movieGenres,
-        loadingMovies: false,
-        loadingMoviesError: false,
-      },
-      MOVIE: {
-        activeGenre: `All genres`,
-        moviesRenderLimit: MOVIES_LIMIT,
-        userFavoriteList: []
-      },
-      USER: {
-        authorizationStatus: `AUTH`,
-        userData: {
-          id: 1,
-          email: `qwe@qwe.ru`,
-          name: `qwe`,
-          avatarUrl: `/img/avatar.jpg`
-        }
+describe(`<Main /> should match snapshot`, () => {
+  const {titleMovie, moviesList, movieGenres} = mockData;
+  const store = mockStore({
+    MOVIE_DATA: {
+      titleMovie,
+      moviesList,
+      movieGenres,
+      loadingMovies: false,
+      loadingMoviesError: false,
+      loadingTitleMovie: false,
+      loadingTitleMovieError: false,
+    },
+    MOVIE: {
+      activeGenre: `All genres`,
+      moviesRenderLimit: MOVIES_LIMIT,
+    },
+    USER: {
+      authorizationStatus: `AUTH`,
+      userData: {
+        id: 1,
+        email: `qwe@qwe.ru`,
+        name: `qwe`,
+        avatarUrl: `/img/avatar.jpg`
       }
-    });
+    }
+  });
+  it(`<Main /> with content should match snapshot`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -110,9 +109,60 @@ describe(`<Main /> should render main movie and movies list`, () => {
               <Main
                 titleMovie={titleMovie}
                 moviesList={moviesList}
-                onMovieTitleClick={onMovieTitleClick}
                 activeGenre={`All genres`}
                 moviesRenderLimit={MOVIES_LIMIT}
+                loadingMovies={false}
+                loadingMoviesError={false}
+              />
+            </BrowserRouter>
+          </Provider>,
+          {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`<Main /> with loading should match snapshot`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <BrowserRouter>
+              <Main
+                titleMovie={titleMovie}
+                moviesList={moviesList}
+                activeGenre={`All genres`}
+                moviesRenderLimit={MOVIES_LIMIT}
+                loadingMovies={true}
+                loadingMoviesError={false}
+              />
+            </BrowserRouter>
+          </Provider>,
+          {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`<Main /> with error should match snapshot`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <BrowserRouter>
+              <Main
+                titleMovie={titleMovie}
+                moviesList={moviesList}
+                activeGenre={`All genres`}
+                moviesRenderLimit={MOVIES_LIMIT}
+                loadingMovies={false}
+                loadingMoviesError={true}
               />
             </BrowserRouter>
           </Provider>,

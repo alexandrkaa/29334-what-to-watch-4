@@ -1,83 +1,92 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 import {movieType} from '../../types/types.js';
 import {secondsToTime} from '../../utils/common.js';
 
-const FullScreenVideoPlayer = (props) => {
-  const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = props;
-  let currentTogglerPosition;
-  let elapsedTime;
-  if (isEnded) {
-    currentTogglerPosition = 100;
-    elapsedTime = duration;
-  } else {
-    currentTogglerPosition = (currentTime / duration) * 100 || 0;
-    elapsedTime = duration - currentTime;
-  }
-  const _onPause = (evt) => {
-    evt.preventDefault();
-    props.onPause();
-  };
-  const _onPlay = (evt) => {
-    evt.preventDefault();
-    props.onPlay();
-  };
-
-  const _handleExit = (evt) => {
-    evt.preventDefault();
-    props.history.goBack();
-  };
-
-  let playPauseButton;
-  if (!isPlaying) {
-    playPauseButton = (
-      <button type="button" onClick={_onPlay} className="player__play">
-        <svg viewBox="0 0 19 19" width="19" height="19">
-          <use xlinkHref="#play-s"></use>
-        </svg>
-        <span>Play</span>
-      </button>
-    );
-  } else {
-    playPauseButton = (
-      <button type="button" onClick={_onPause} className="player__play">
-        <svg viewBox="0 0 14 21" width="14" height="21">
-          <use xlinkHref="#pause"></use>
-        </svg>
-        <span>Pause</span>
-      </button>
-    );
+class FullScreenVideoPlayer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onPause = this.onPause.bind(this);
+    this.onPlay = this.onPlay.bind(this);
+    this._handleExit = this._handleExit.bind(this);
   }
 
-  return (
-    <div className="player" style={{backgroundColor: `#000000`}}>
-      {props.children}
-      <button onClick={_handleExit} type="button" className="player__exit">Exit</button>
-      <div className="player__controls">
-        <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value={currentTogglerPosition} max="100"></progress>
-            <div className="player__toggler" style={{left: `${currentTogglerPosition}%`}}>Toggler</div>
+  onPause(evt) {
+    evt.preventDefault();
+    this.props.onPause();
+  }
+
+  onPlay(evt) {
+    evt.preventDefault();
+    this.props.onPlay();
+  }
+
+  _handleExit(evt) {
+    evt.preventDefault();
+    this.props.history.goBack();
+  }
+
+  render() {
+    const {isPlaying, movie, onFullscreenToggle, duration, currentTime, isEnded} = this.props;
+    let currentTogglerPosition;
+    let elapsedTime;
+    if (isEnded) {
+      currentTogglerPosition = 100;
+      elapsedTime = duration;
+    } else {
+      currentTogglerPosition = (currentTime / duration) * 100 || 0;
+      elapsedTime = duration - currentTime;
+    }
+    let playPauseButton;
+    if (!isPlaying) {
+      playPauseButton = (
+        <button type="button" onClick={this.onPlay} className="player__play">
+          <svg viewBox="0 0 19 19" width="19" height="19">
+            <use xlinkHref="#play-s"></use>
+          </svg>
+          <span>Play</span>
+        </button>
+      );
+    } else {
+      playPauseButton = (
+        <button type="button" onClick={this.onPause} className="player__play">
+          <svg viewBox="0 0 14 21" width="14" height="21">
+            <use xlinkHref="#pause"></use>
+          </svg>
+          <span>Pause</span>
+        </button>
+      );
+    }
+    return (
+      <div className="player" style={{backgroundColor: `#000000`}}>
+        {this.props.children}
+        <button onClick={this._handleExit} type="button" className="player__exit">Exit</button>
+        <div className="player__controls">
+          <div className="player__controls-row">
+            <div className="player__time">
+              <progress className="player__progress" value={currentTogglerPosition} max="100"></progress>
+              <div className="player__toggler" style={{left: `${currentTogglerPosition}%`}}>Toggler</div>
+            </div>
+            <div className="player__time-value">{secondsToTime(elapsedTime)}</div>
           </div>
-          <div className="player__time-value">{secondsToTime(elapsedTime)}</div>
-        </div>
 
-        <div className="player__controls-row">
-          {playPauseButton}
-          <div className="player__name">{movie.title}</div>
+          <div className="player__controls-row">
+            {playPauseButton}
+            <div className="player__name">{movie.title}</div>
 
-          <button type="button" onClick={onFullscreenToggle} className="player__full-screen">
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
-            </svg>
-            <span>Full screen</span>
-          </button>
+            <button type="button" onClick={onFullscreenToggle} className="player__full-screen">
+              <svg viewBox="0 0 27 27" width="27" height="27">
+                <use xlinkHref="#full-screen"></use>
+              </svg>
+              <span>Full screen</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 FullScreenVideoPlayer.propTypes = {
   movie: movieType.isRequired,

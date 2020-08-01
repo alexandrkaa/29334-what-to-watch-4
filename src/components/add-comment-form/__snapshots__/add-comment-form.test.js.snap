@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AddCommentForm /> should match snapshot with error 1`] = `
+exports[`<AddCommentForm /> should match snapshot <AddCommentForm /> should match snapshot with error 1`] = `
 <div
   style={
     Object {
@@ -35,13 +35,13 @@ exports[`<AddCommentForm /> should match snapshot with error 1`] = `
 </div>
 `;
 
-exports[`<AddCommentForm /> should match snapshot without error 1`] = `
+exports[`<AddCommentForm /> should match snapshot <AddCommentForm /> should match snapshot without error 1`] = `
 <div
   className="add-review"
 >
   <form
     className="add-review__form"
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
   >
     <div
       className="rating"

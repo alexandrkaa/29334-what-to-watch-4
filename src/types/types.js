@@ -1,37 +1,37 @@
 import PropTypes from 'prop-types';
 
 export const movieType = PropTypes.exact({
-  movieDescription: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  movieDirector: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  movieDescription: PropTypes.string,
+  image: PropTypes.string,
+  movieDirector: PropTypes.string,
   movieStarring: PropTypes.oneOfType([
     PropTypes.arrayOf(
         PropTypes.string.isRequired
-    ).isRequired,
-    PropTypes.string.isRequired
+    ),
+    PropTypes.string
   ]),
-  movieImage: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
+  movieImage: PropTypes.string,
+  title: PropTypes.string,
+  movieGenre: PropTypes.string,
   movieDate: PropTypes.oneOfType([
     PropTypes.number.isRequired,
     PropTypes.string.isRequired,
-  ]).isRequired,
-  movieBackground: PropTypes.string.isRequired,
+  ]),
+  movieBackground: PropTypes.string,
   movieRatingScore: PropTypes.oneOfType([
     PropTypes.number.isRequired,
     PropTypes.string.isRequired,
-  ]).isRequired,
+  ]),
   movieRatingLevel: PropTypes.oneOfType([
     PropTypes.number.isRequired,
     PropTypes.string.isRequired,
-  ]).isRequired,
-  movieRatingCount: PropTypes.string.isRequired,
+  ]),
+  movieRatingCount: PropTypes.string,
   movieRunTime: PropTypes.number,
-  moviePreview: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
-  movieVideo: PropTypes.string.isRequired,
+  moviePreview: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  movieVideo: PropTypes.string,
   isFavorite: PropTypes.bool,
 });
 
@@ -41,5 +41,3 @@ export const videoDementionType = PropTypes.oneOfType([
   PropTypes.number.isRequired,
   PropTypes.string.isRequired,
 ]);
-
-export const userFavoriteListType = PropTypes.arrayOf(PropTypes.number);

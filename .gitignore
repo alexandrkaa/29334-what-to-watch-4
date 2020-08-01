@@ -16,3 +16,7 @@ public/bundle.js.map
 
 coverage
 .snipsnapigmore.json
+
+.firebaserc
+firebase.json
+public/404.html

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getMoviesComments, getCommentsLoadingStatus, getCommentsErrorStatus, getUserFavoriteList} from '../../reducer/selectors.js';
 import {Operation as CommentsOperation, ActionCreator as CommentsDataActionCreator} from '../../reducer/data/comments-data/comments-data.js';
-import {ActionCreator as MovieActionCreator} from '../../reducer/movie/movie.js';
+import {ActionCreator as MoviesDataActionCreator, Operation as MoviesDataOperation} from '../../reducer/data/movies-data/movies-data.js';
 import MovieCardFullMenu from '../movie-card-full-menu/movie-card-full-menu.jsx';
 import {MovieCardFullTabsIds, MovieCardFullTabs} from '../../consts/consts.js';
 import MovieCardFullOverView from '../movie-card-full-overview/movie-card-full-overview.jsx';
@@ -11,7 +11,7 @@ import MovieCardFullDetails from '../movie-card-full-details/movie-card-full-det
 import MovieCardFullComments from '../movie-card-full-comments/movie-card-full-comments.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import MovieCardTitle from '../movie-card-title/movie-card-title.jsx';
-import {moviesListType, movieType, userFavoriteListType} from '../../types/types.js';
+import {moviesListType, movieType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieCardFullButtons from '../movie-card-full-buttons/movie-card-full-buttons.jsx';
@@ -60,9 +60,9 @@ class MovieCardFull extends PureComponent {
       movie,
       similarMovies,
       isAuthorized,
-      userFavoriteList,
       addToUserFavoriteList,
       removeFromUserFavoriteList,
+      history
     } = this.props;
     const {
       movieImage,
@@ -70,6 +70,7 @@ class MovieCardFull extends PureComponent {
       movieGenre,
       movieDate,
       movieBackground,
+      isFavorite
     } = movie;
     const movieCardFullTabs = MovieCardFullTabs.map((tab) => {
       return Object.assign({}, tab, {isActive: tab.id === this.props.activeItem});
@@ -90,9 +91,10 @@ class MovieCardFull extends PureComponent {
                   onPlay={this._handlePlayButton}
                   movieId={movie.id}
                   isAuthorized={isAuthorized}
-                  userFavoriteList={userFavoriteList}
                   addToUserFavoriteList={addToUserFavoriteList}
                   removeFromUserFavoriteList={removeFromUserFavoriteList}
+                  history={history}
+                  isInUserFavoriteList={isFavorite}
                 />
               </div>
             </div>
@@ -136,7 +138,6 @@ MovieCardFull.propTypes = {
   comments: PropTypes.array.isRequired,
   isLoadingComments: PropTypes.bool.isRequired,
   isLoadingCommentsError: PropTypes.bool.isRequired,
-  userFavoriteList: userFavoriteListType.isRequired,
   addToUserFavoriteList: PropTypes.func.isRequired,
   removeFromUserFavoriteList: PropTypes.func.isRequired,
 };
@@ -156,10 +157,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(CommentsOperation.getCommentsData(movieId));
   },
   addToUserFavoriteList(movieId) {
-    dispatch(MovieActionCreator.addToUserFavoriteList(movieId));
+    dispatch(MoviesDataActionCreator.fetchUserFavoriteList());
+    dispatch(MoviesDataOperation.postToUserFavoriteList(movieId));
   },
   removeFromUserFavoriteList(movieId) {
-    dispatch(MovieActionCreator.removeFromUserFavoriteList(movieId));
+    dispatch(MoviesDataActionCreator.fetchUserFavoriteList());
+    dispatch(MoviesDataOperation.removeFromUserFavoriteList(movieId));
   },
 });
 

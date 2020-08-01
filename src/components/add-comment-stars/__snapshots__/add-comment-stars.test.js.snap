@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddCommentStars /> should match snapshot <AddCommentForm /> should match snapshot not disabled 1`] = `
+Array [
+  <input
+    checked={true}
+    className="rating__input"
+    disabled={false}
+    id="star-1"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={1}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-1"
+  >
+    Rating 1
+  </label>,
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={false}
+    id="star-2"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={2}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-2"
+  >
+    Rating 2
+  </label>,
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={false}
+    id="star-3"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={3}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-3"
+  >
+    Rating 3
+  </label>,
+]
+`;
+
+exports[`<AddCommentStars /> should match snapshot <AddCommentStars /> should match snapshot disabled 1`] = `
+Array [
+  <input
+    checked={true}
+    className="rating__input"
+    disabled={true}
+    id="star-1"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={1}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-1"
+  >
+    Rating 1
+  </label>,
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={true}
+    id="star-2"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={2}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-2"
+  >
+    Rating 2
+  </label>,
+  <input
+    checked={false}
+    className="rating__input"
+    disabled={true}
+    id="star-3"
+    name="rating"
+    onChange={[Function]}
+    type="radio"
+    value={3}
+  />,
+  <label
+    className="rating__label"
+    htmlFor="star-3"
+  >
+    Rating 3
+  </label>,
+]
+`;

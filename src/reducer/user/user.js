@@ -13,7 +13,7 @@ const initialState = {
   loginStatusCode: 0,
 };
 
-const ActionType = {
+const ActionTypes = {
   AUTHORIZATION_IN_PROGRESS: `AUTHORIZATION_IN_PROGRESS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_AUTHORIZATION_STATUS_CODE: `SET_AUTHORIZATION_STATUS_CODE`,
@@ -23,25 +23,25 @@ const ActionType = {
 const ActionCreator = {
   requireAuthorization: (status) => {
     return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+      type: ActionTypes.REQUIRED_AUTHORIZATION,
       payload: status,
     };
   },
   setAuthorizationStatusCode: (err) => {
     return {
-      type: ActionType.SET_AUTHORIZATION_STATUS_CODE,
+      type: ActionTypes.SET_AUTHORIZATION_STATUS_CODE,
       payload: err,
     };
   },
   setUserData: (userData) => {
     return {
-      type: ActionType.SET_USER_DATA,
+      type: ActionTypes.SET_USER_DATA,
       payload: userData,
     };
   },
   setAuthorizationProgress: (isInProgress) => {
     return {
-      type: ActionType.AUTHORIZATION_IN_PROGRESS,
+      type: ActionTypes.AUTHORIZATION_IN_PROGRESS,
       payload: isInProgress
     };
   }
@@ -82,19 +82,19 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionTypes.REQUIRED_AUTHORIZATION:
       return extendObject(state, {
         authorizationStatus: action.payload,
       });
-    case ActionType.SET_AUTHORIZATION_STATUS_CODE:
+    case ActionTypes.SET_AUTHORIZATION_STATUS_CODE:
       return extendObject(state, {
         loginStatusCode: action.payload,
       });
-    case ActionType.SET_USER_DATA:
+    case ActionTypes.SET_USER_DATA:
       return extendObject(state, {
         userData: action.payload,
       });
-    case ActionType.AUTHORIZATION_IN_PROGRESS:
+    case ActionTypes.AUTHORIZATION_IN_PROGRESS:
       return extendObject(state, {
         isLoading: action.payload,
       });
@@ -105,7 +105,7 @@ const reducer = (state = initialState, action) => {
 
 export {
   ActionCreator,
-  ActionType,
+  ActionTypes,
   AuthorizationStatus,
   Operation,
   reducer,

@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignIn /> should match snapshot <SignIn /> should match snapshot when auth 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`<SignIn /> should match snapshot <SignIn /> should match snapshot when no auth 1`] = `
+<div
+  className="user-page"
+>
+  <Memo(Header)
+    headerClassName="user-page__head"
+  >
+    <h1
+      className="page-title user-page__title"
+    >
+      Sign in
+    </h1>
+    <Memo(Connect(UserProfile)) />
+  </Memo(Header)>
+  <div
+    className="sign-in user-page__content"
+  >
+    <form
+      className="sign-in__form"
+      onSubmit={[Function]}
+    >
+      <SignInFields
+        isLoading={false}
+        onInputChange={[MockFunction]}
+        signInFields={
+          Array [
+            Object {
+              "id": "user-email",
+              "label": "Email address",
+              "placeholder": "Email address",
+              "type": "email",
+              "value": "qq@qq.ru",
+            },
+            Object {
+              "id": "user-password",
+              "label": "Password",
+              "placeholder": "Password",
+              "type": "password",
+              "value": "123456",
+            },
+          ]
+        }
+      />
+      <div
+        className="sign-in__submit"
+      >
+        <button
+          className="sign-in__btn"
+          disabled={false}
+          type="submit"
+        >
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <Memo(Footer) />
+</div>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputTextarea /> should match snapshot <InputTextarea /> should match snapshot (disabled) 1`] = `
+<textarea
+  className="add-review__textarea"
+  disabled={true}
+  id="review-text"
+  name="review-text"
+  onChange={[Function]}
+  placeholder="Review text"
+  value="Some text"
+/>
+`;
+
+exports[`<InputTextarea /> should match snapshot <InputTextarea /> should match snapshot (enabled) 1`] = `
+<textarea
+  className="add-review__textarea"
+  disabled={false}
+  id="review-text"
+  name="review-text"
+  onChange={[Function]}
+  placeholder="Review text"
+  value="Some text"
+/>
+`;

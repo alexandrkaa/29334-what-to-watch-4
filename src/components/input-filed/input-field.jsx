@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputField = (props) => {
-  const {id, label, type, placeholder, value, onChange, isDisabled} = props;
-  const _onChange = (evt) => {
+  const {id, label, type, placeholder, value, isDisabled} = props;
+  const onChange = (evt) => {
     evt.preventDefault();
-    onChange(id, evt.target.value);
+    props.onChange(id, evt.target.value);
   };
 
   return (
     <div className="sign-in__field">
-      <input disabled={isDisabled} className="sign-in__input" type={type} placeholder={placeholder} name={id} id={id} value={value} onChange={_onChange} />
+      <input disabled={isDisabled} className="sign-in__input" type={type} placeholder={placeholder} name={id} id={id} value={value} onChange={onChange} />
       <label className="sign-in__label visually-hidden" htmlFor={id}>{label}</label>
     </div>
   );
@@ -26,4 +26,4 @@ InputField.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
 };
 
-export default InputField;
+export default React.memo(InputField);

@@ -1,13 +1,15 @@
 import {createSelector} from 'reselect';
-import {getGenresFromMovies, getWithLimit, getMoviesByGenre} from '../utils/filters.js';
+import {getGenresFromMovies, getWithLimit, getMoviesByGenre, getMovieByIdFilter} from '../utils/filters.js';
 import {DEFAULT_GENRE, GENRES_LIMIT} from '../consts/consts.js';
 import {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
+  getMoviesLoadingErrorStatus,
   getTitleMovieLoadingStatus,
-  getMovieByIdFromState,
-  getMoviesLoadingErrorStatus
+  getTitleMovieLoadingErrorStatus,
+  getMovieById,
+  getUserFavoriteList,
 } from './data/movies-data/selectors.js';
 
 import {
@@ -21,12 +23,11 @@ import {
 import {
   getActiveGenre,
   getMoviesRenderLimit,
-  getUserFavoriteList,
 } from './movie/selectors.js';
 
 import {
   getAuthorizationStatus,
-  getAuthorizationStatusBoolean,
+  hasUserLogined,
   getLoginStatusCode,
   getUserData,
   getIsLoading,
@@ -46,19 +47,28 @@ export const getFilteredMovies = createSelector(
 );
 
 export const getMoviesDataFromUserFavoriteList = createSelector(
-    [getMovies, getUserFavoriteList],
-    (moviesList, userFavoriteList) => {
-      return moviesList.filter((movie) => userFavoriteList.includes(movie.id));
+    [getMovies],
+    (moviesList) => {
+      return moviesList.filter((movie) => movie.isFavorite === true);
     }
 );
+
+export const getTitleMovieMemo = createSelector(
+    [getMovies, getTitleMovie],
+    (moviesList, titleMovie) => {
+      return getMovieByIdFilter(moviesList, titleMovie.id) || {};
+    }
+);
+
 
 export {
   getMovies,
   getTitleMovie,
   getMoviesLoadingStatus,
-  getTitleMovieLoadingStatus,
-  getMovieByIdFromState,
   getMoviesLoadingErrorStatus,
+  getTitleMovieLoadingStatus,
+  getTitleMovieLoadingErrorStatus,
+  getMovieById,
 
   getMoviesComments,
   getCommentsLoadingStatus,
@@ -71,7 +81,7 @@ export {
   getUserFavoriteList,
 
   getAuthorizationStatus,
-  getAuthorizationStatusBoolean,
+  hasUserLogined,
   getLoginStatusCode,
   getUserData,
   getIsLoading

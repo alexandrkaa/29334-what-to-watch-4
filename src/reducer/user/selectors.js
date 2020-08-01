@@ -7,7 +7,7 @@ export const getAuthorizationStatus = (state) => {
   return state[NAME_SPACE].authorizationStatus;
 };
 
-export const getAuthorizationStatusBoolean = (state) => {
+export const hasUserLogined = (state) => {
   return AuthorizationStatus.AUTH === getAuthorizationStatus(state);
 };
 

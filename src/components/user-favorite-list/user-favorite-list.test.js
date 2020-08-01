@@ -47,8 +47,7 @@ const mockData = {
 };
 
 it(`<UserFavoriteList /> should match snapshot without error`, () => {
-  const checkAuth = jest.fn();
-  renderer.render(<UserFavoriteList moviesList={mockData.moviesList} isAuthorized={true} checkAuth={checkAuth} />);
+  renderer.render(<UserFavoriteList moviesList={mockData.moviesList} isAuthorized={true} />);
   const result = renderer.getRenderOutput();
   expect(result).toMatchSnapshot();
 });

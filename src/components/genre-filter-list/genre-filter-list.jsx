@@ -7,9 +7,9 @@ import {ActionCreator} from '../../reducer/movie/movie.js';
 import {getGenres, getActiveGenre} from '../../reducer/selectors.js';
 
 const GenreFilterList = (props) => {
-  const {movieGenres, onActiveItemChange, activeItem} = props;
-  const _onActiveItemChange = (movieGenre) => {
-    onActiveItemChange(movieGenre);
+  const {movieGenres, activeItem} = props;
+  const onActiveItemChange = (movieGenre) => {
+    props.onActiveItemChange(movieGenre);
   };
 
   return (
@@ -20,7 +20,7 @@ const GenreFilterList = (props) => {
             key={removeSpaces(genre).toLowerCase()}
             movieGenre={genre}
             activeItem={activeItem}
-            onActiveItemChange={_onActiveItemChange}
+            onActiveItemChange={onActiveItemChange}
           />
         );
       })}

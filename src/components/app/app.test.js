@@ -84,11 +84,12 @@ describe(`<App /> should render`, () => {
         movieGenres,
         loadingMovies: false,
         loadingMoviesError: false,
+        loadingTitleMovie: false,
+        loadingTitleMovieError: false,
       },
       MOVIE: {
         activeGenre: `All genres`,
         moviesRenderLimit: MOVIES_LIMIT,
-        userFavoriteList: []
       },
       USER: {
         authorizationStatus: `AUTH`,

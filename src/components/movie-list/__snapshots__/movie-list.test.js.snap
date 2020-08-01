@@ -4,6 +4,7 @@ exports[`<MovieCard /> should render 2 movie cards 1`] = `
 Array [
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -32,6 +33,7 @@ Array [
   </article>,
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >

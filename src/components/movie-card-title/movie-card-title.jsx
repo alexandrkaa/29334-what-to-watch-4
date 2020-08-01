@@ -20,4 +20,4 @@ MovieCardTitle.propTypes = {
   movieDate: PropTypes.number.isRequired,
 };
 
-export default MovieCardTitle;
+export default React.memo(MovieCardTitle);

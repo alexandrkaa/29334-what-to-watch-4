@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieCardBackground /> should match snapshot 1`] = `
+<div
+  className="movie-card__bg"
+>
+  <img
+    alt="Movie title"
+    src="img/image1.jpg"
+  />
+</div>
+`;

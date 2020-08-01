@@ -20,9 +20,7 @@ exports[`<AddComment /> should match snapshot without error 1`] = `
     >
       WTW
     </h1>
-    <Header
-      headerClassName="movie-card__head"
-    >
+    <Memo(Header)>
       <Breadcrumbs
         movie={
           Object {
@@ -50,7 +48,7 @@ exports[`<AddComment /> should match snapshot without error 1`] = `
         }
       />
       <Memo(Connect(UserProfile)) />
-    </Header>
+    </Memo(Header)>
     <div
       className="movie-card__poster movie-card__poster--small"
     >
@@ -62,7 +60,7 @@ exports[`<AddComment /> should match snapshot without error 1`] = `
       />
     </div>
   </div>
-  <Memo(Connect(WithCommentHOC))
+  <Memo(Connect(withRouter(WithCommentHOC)))
     movieId={4}
   />
 </section>

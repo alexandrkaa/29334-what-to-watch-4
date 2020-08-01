@@ -144,14 +144,6 @@ exports[`<TitleMovie /> should match snapshot 1`] = `
               My list
             </span>
           </button>
-          <a
-            aria-current={null}
-            className="btn movie-card__button"
-            href="/films/3/review"
-            onClick={[Function]}
-          >
-            Add review
-          </a>
         </div>
       </div>
     </div>

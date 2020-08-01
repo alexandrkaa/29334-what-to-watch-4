@@ -1,80 +1,8 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import MovieCardFull from './movie-card-full.jsx';
+import {MovieCardFull} from './movie-card-full.jsx';
 
 import ShallowRenderer from 'react-test-renderer/shallow';
 const renderer = new ShallowRenderer();
-
-const mockStore = configureStore([]);
-
-const mockData = {
-  titleMovie: {
-    id: 4,
-    image: `img/we-need-to-talk-about-kevin.jpg`,
-    movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-    movieDate: `2000`,
-    movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
-    movieDirector: `Wes Anderson`,
-    movieGenre: `Thriller`,
-    movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    movieRatingCount: `349 ratings`,
-    movieRatingLevel: `Bad`,
-    movieRatingScore: `3`,
-    movieStarring: [`Jude Law`, `Willem Dafoe`],
-    title: `Dardjeeling Limited`,
-    moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    backgroundColor: `#000000`,
-    movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    isFavorite: false,
-  },
-
-  moviesList: [
-    {
-      id: 4,
-      image: `img/we-need-to-talk-about-kevin.jpg`,
-      movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-      movieDate: `2000`,
-      movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
-      movieDirector: `Wes Anderson`,
-      movieGenre: `Thriller`,
-      movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-      movieRatingCount: `349 ratings`,
-      movieRatingLevel: `Bad`,
-      movieRatingScore: `3`,
-      movieStarring: [`Jude Law`, `Willem Dafoe`],
-      title: `Dardjeeling Limited`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-      backgroundColor: `#000000`,
-      movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-      isFavorite: false,
-    },
-    {
-      id: 3,
-      image: `img/aviator.jpg`,
-      movieBackground: `img/bg-the-grand-budapest-hotel.jpg`,
-      movieDate: `2008`,
-      movieDescription: `In the 1930s, the Grand Budapest Hotel is a popula…y boy, becomes Gustave&apos;s friend and protege.`,
-      movieDirector: `Christopher Nolan`,
-      movieGenre: `Kids & Family`,
-      movieImage: `img/the-grand-budapest-hotel-poster.jpg`,
-      movieRatingCount: `272 ratings`,
-      movieRatingLevel: `Normal`,
-      movieRatingScore: `2`,
-      movieStarring: [`Jude Law`, `Willem Dafoe`],
-      title: `Johnny English`,
-      moviePreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-      backgroundColor: `#000000`,
-      movieVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-      isFavorite: false,
-    }
-  ],
-  movieGenres: [
-    `Thriller`,
-    `Kids & Family`
-  ]
-};
 
 const movie = {
   id: 4,
@@ -162,89 +90,126 @@ const similarMovies = [
 
 const mockTabs = [
   {
-    id: `TAB1`,
+    id: `OVERVIEW`,
     name: `Tab1`,
     isActive: true,
   },
   {
-    id: `TAB2`,
+    id: `DETAILS`,
     name: `Tab2`,
     isActive: false,
   },
   {
-    id: `TAB3`,
+    id: `REVIEWS`,
     name: `Tab3`,
     isActive: false,
   },
 ];
 
-it(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
-  const {titleMovie, moviesList, movieGenres} = mockData;
-  const store = mockStore({
-    MOVIE_DATA: {
-      titleMovie,
-      moviesList,
-      movieGenres,
-      loadingMovies: false,
-      loadingMoviesError: false,
+const onMovieTitleClick = jest.fn();
+const onActiveItemChange = () => {};
+const fetchComments = () => {};
+const addToUserFavoriteList = () => {};
+const removeFromUserFavoriteList = () => {};
+const comments = [
+  {
+    id: 1,
+    author: {
+      id: 17,
+      name: `Emely`
     },
-    COMMENTS_DATA: {
-      loadingComments: false,
-      loadingCommentsError: false,
-      moviesComments: {
-        3: [
+    rating: 2.9,
+    text: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
+    date: `2020-07-15T12:25:15.535Z`
+  }
+];
+
+describe(`<MovieCardFull /> should movie full card page to match snapshot`, () => {
+  it(`<MovieCardFull /> should movie full card page to match snapshot with tab 1`, () => {
+    renderer
+      .render(
+          <MovieCardFull
+            movie={movie}
+            similarMovies={similarMovies}
+            activeItem={`OVERVIEW`}
+            onMovieTitleClick={onMovieTitleClick}
+            tabs={mockTabs}
+            history={{}}
+            isAuthorized={true}
+            onActiveItemChange={onActiveItemChange}
+            fetchComments={fetchComments}
+            isLoadingComments={false}
+            isLoadingCommentsError={false}
+            addToUserFavoriteList={addToUserFavoriteList}
+            removeFromUserFavoriteList={removeFromUserFavoriteList}
+            comments={comments}
+          />,
+
           {
-            id: 1,
-            user: {
-              id: 17,
-              name: `Emely`
-            },
-            rating: 2.9,
-            comment: `Poised to be an instant classic, almost everything about this film is phenomenal - the acting, the cinematography, the discography, etc.`,
-            date: `2020-07-15T12:25:15.535Z`
+            createNodeMock: () => {
+              return {};
+            }
           }
-        ]
-      },
-      postCommentInProgress: false,
-      postCommentError: false,
-      postCommentSuccess: false,
-    },
-    MOVIE: {
-      activeGenre: `All genres`,
-      moviesRenderLimit: 8,
-    },
-    USER: {
-      authorizationStatus: `AUTH`,
-      userData: {
-        id: 1,
-        email: `qwe@qwe.ru`,
-        name: `qwe`,
-        avatarUrl: `/img/avatar.jpg`
-      }
-    }
+      );
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
   });
-  const onMovieTitleClick = jest.fn();
-  renderer
-    .render(
-        <Provider store={store}>
-          <BrowserRouter>
-            <MovieCardFull
-              movie={movie}
-              similarMovies={similarMovies}
-              activeItem={`TAB1`}
-              onMovieTitleClick={onMovieTitleClick}
-              tabs={mockTabs}
-              history={{}}
-              isAuthorized={true}
-            />
-          </BrowserRouter>
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return {};
+
+  it(`<MovieCardFull /> should movie full card page to match snapshot with tab 2`, () => {
+    renderer
+      .render(
+          <MovieCardFull
+            movie={movie}
+            similarMovies={similarMovies}
+            activeItem={`DETAILS`}
+            onMovieTitleClick={onMovieTitleClick}
+            tabs={mockTabs}
+            history={{}}
+            isAuthorized={true}
+            onActiveItemChange={onActiveItemChange}
+            fetchComments={fetchComments}
+            isLoadingComments={false}
+            isLoadingCommentsError={false}
+            addToUserFavoriteList={addToUserFavoriteList}
+            removeFromUserFavoriteList={removeFromUserFavoriteList}
+            comments={comments}
+          />,
+          {
+            createNodeMock: () => {
+              return {};
+            }
           }
-        }
-    );
-  const result = renderer.getRenderOutput();
-  expect(result).toMatchSnapshot();
+      );
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
+
+  it(`<MovieCardFull /> should movie full card page to match snapshot with tab 3`, () => {
+    renderer
+      .render(
+          <MovieCardFull
+            movie={movie}
+            similarMovies={similarMovies}
+            activeItem={`REVIEWS`}
+            onMovieTitleClick={onMovieTitleClick}
+            tabs={mockTabs}
+            history={{}}
+            isAuthorized={true}
+            onActiveItemChange={onActiveItemChange}
+            fetchComments={fetchComments}
+            isLoadingComments={false}
+            isLoadingCommentsError={false}
+            addToUserFavoriteList={addToUserFavoriteList}
+            removeFromUserFavoriteList={removeFromUserFavoriteList}
+            comments={comments}
+          />,
+          {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      );
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
 });

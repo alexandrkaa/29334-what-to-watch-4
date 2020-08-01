@@ -37,6 +37,7 @@ it(`<MovieCard /> should render Big Bang Theory movie`, () => {
             onPlay={onPlay}
             onPause={onPause}
             onMovieTitleClick={onMovieTitleClick}
+            history={{}}
           >
             {children}
           </MovieCard>

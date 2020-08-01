@@ -26,11 +26,12 @@ exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieC
             movieGenre="Thriller"
             title="Dardjeeling Limited"
           />
-          <Memo(MovieCardFullButtons)
+          <MovieCardFullButtons
             addToUserFavoriteList={[Function]}
             history={Object {}}
             isAuthorized={true}
             isInUserFavoriteList={false}
+            isMainPage={false}
             movieId={4}
             onPlay={[Function]}
             removeFromUserFavoriteList={[Function]}
@@ -219,11 +220,12 @@ exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieC
             movieGenre="Thriller"
             title="Dardjeeling Limited"
           />
-          <Memo(MovieCardFullButtons)
+          <MovieCardFullButtons
             addToUserFavoriteList={[Function]}
             history={Object {}}
             isAuthorized={true}
             isInUserFavoriteList={false}
+            isMainPage={false}
             movieId={4}
             onPlay={[Function]}
             removeFromUserFavoriteList={[Function]}
@@ -412,11 +414,12 @@ exports[`<MovieCardFull /> should movie full card page to match snapshot <MovieC
             movieGenre="Thriller"
             title="Dardjeeling Limited"
           />
-          <Memo(MovieCardFullButtons)
+          <MovieCardFullButtons
             addToUserFavoriteList={[Function]}
             history={Object {}}
             isAuthorized={true}
             isInUserFavoriteList={false}
+            isMainPage={false}
             movieId={4}
             onPlay={[Function]}
             removeFromUserFavoriteList={[Function]}

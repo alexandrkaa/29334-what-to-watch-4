@@ -18,5 +18,6 @@ coverage
 .snipsnapigmore.json
 
 .firebaserc
+.firebase/*
 firebase.json
 public/404.html

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {MovieCardFullButtons} from './movie-card-full-buttons.jsx';
 import {BrowserRouter} from 'react-router-dom';
+import MovieCardFullButtons from './movie-card-full-buttons.jsx';
 
 const onPlay = jest.fn();
 const movieId = 10;

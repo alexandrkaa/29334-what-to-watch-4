@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {movieType} from '../../types/types.js';
 import Header from '../header/header.jsx';
 import PropTypes from 'prop-types';
@@ -9,60 +9,69 @@ import MovieCardTitle from '../movie-card-title/movie-card-title.jsx';
 import MovieCardBackground from '../movie-card-background/movie-card-background.jsx';
 import {AppRoutes} from '../../consts/consts.js';
 
-const TitleMovie = (props) => {
-  const {
-    movie: {
-      title,
-      movieGenre,
-      movieDate,
-      movieImage,
-      movieBackground,
-      id: movieId,
-      isFavorite,
-    },
-    isAuthorized,
-    addToUserFavoriteList,
-    removeFromUserFavoriteList,
-  } = props;
+class TitleMovie extends PureComponent {
+  constructor(props) {
+    super(props);
+    this._handlePlayClick = this._handlePlayClick.bind(this);
+  }
 
-  const handlePlayClick = (evt) => {
+  _handlePlayClick(evt) {
+    const {movie: {id: movieId}} = this.props;
     evt.preventDefault();
-    props.history.push(`${AppRoutes.FULL_PLAYER_PAGE}/${movieId}`);
-  };
+    this.props.history.push(`${AppRoutes.FULL_PLAYER_PAGE}/${movieId}`);
+  }
 
-  return (
-    <section className="movie-card">
-      <MovieCardBackground movieBackground={movieBackground} title={title} />
-      <Header>
-        <UserProfile />
-      </Header>
+  render() {
+    const {
+      movie: {
+        title,
+        movieGenre,
+        movieDate,
+        movieImage,
+        movieBackground,
+        id: movieId,
+        isFavorite,
+      },
+      isAuthorized,
+      addToUserFavoriteList,
+      removeFromUserFavoriteList,
+    } = this.props;
 
-      <div className="movie-card__wrap">
-        <div className="movie-card__info">
-          <div className="movie-card__poster">
-            <img src={movieImage} alt="The Grand Budapest Hotel poster"
-              width="218" height="327"/>
-          </div>
+    return (
+      <section className="movie-card">
+        <MovieCardBackground movieBackground={movieBackground} title={title} />
+        <Header>
+          <UserProfile />
+        </Header>
 
-          <div className="movie-card__desc">
-            <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
-            <MovieCardFullButtons
-              onPlay={handlePlayClick}
-              movieId={movieId}
-              isAuthorized={isAuthorized}
-              isInUserFavoriteList={isFavorite}
-              addToUserFavoriteList={addToUserFavoriteList}
-              removeFromUserFavoriteList={removeFromUserFavoriteList}
-              isMainPage={true}
-              history={props.history}
-            />
+        <div className="movie-card__wrap">
+          <div className="movie-card__info">
+            <div className="movie-card__poster">
+              <img src={movieImage} alt="The Grand Budapest Hotel poster"
+                width="218" height="327"/>
+            </div>
 
+            <div className="movie-card__desc">
+              <MovieCardTitle title={title} movieGenre={movieGenre} movieDate={movieDate} />
+              <MovieCardFullButtons
+                onPlay={this._handlePlayClick}
+                movieId={movieId}
+                isAuthorized={isAuthorized}
+                isInUserFavoriteList={isFavorite}
+                addToUserFavoriteList={addToUserFavoriteList}
+                removeFromUserFavoriteList={removeFromUserFavoriteList}
+                isMainPage={true}
+                history={this.props.history}
+              />
+
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  }
+}
+
 
 TitleMovie.propTypes = {
   movie: movieType.isRequired,

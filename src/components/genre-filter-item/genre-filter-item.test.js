@@ -4,13 +4,12 @@ import GenreFilterItem from './genre-filter-item.jsx';
 
 it(`<GenreFilterItem /> should match snapshot`, () => {
   const mockGenre = `Thriller`;
-  const activeGenre = `Thriller`;
   const onActiveItemChange = jest.fn();
   const tree = renderer
     .create(
         <GenreFilterItem
           movieGenre={mockGenre}
-          activeItem={activeGenre}
+          isActive={true}
           onActiveItemChange={onActiveItemChange}
         />
     )

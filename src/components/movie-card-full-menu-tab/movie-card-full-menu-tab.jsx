@@ -1,19 +1,27 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-const MovieCardFullMenuTab = (props) => {
-  const {tab: {name, id, isActive}} = props;
-  const onClickMovieCardFullMenuTab = (evt) => {
-    evt.preventDefault();
-    props.onClickMovieCardFullMenuTab(id);
-  };
+class MovieCardFullMenuTab extends PureComponent {
+  constructor(props) {
+    super(props);
+    this._handleMovieCardFullMenuTabClick = this._handleMovieCardFullMenuTabClick.bind(this);
+  }
 
-  return (
-    <li className={`movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`}>
-      <a href="#" onClick={onClickMovieCardFullMenuTab} className="movie-nav__link">{name}</a>
-    </li>
-  );
-};
+  _handleMovieCardFullMenuTabClick(evt) {
+    const {tab: {id}} = this.props;
+    evt.preventDefault();
+    this.props.onClickMovieCardFullMenuTab(id);
+  }
+
+  render() {
+    const {tab: {name, isActive}} = this.props;
+    return (
+      <li className={`movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`}>
+        <a href="#" onClick={this._handleMovieCardFullMenuTabClick} className="movie-nav__link">{name}</a>
+      </li>
+    );
+  }
+}
 
 MovieCardFullMenuTab.propTypes = {
   tab: PropTypes.exact({

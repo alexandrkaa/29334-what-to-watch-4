@@ -4,8 +4,8 @@ export const MovieCardFullTabsIds = {
   REVIEWS: `REVIEWS`,
 };
 export const PreviewVideoSize = {
-  width: 280,
-  height: 175
+  WIDTH: 280,
+  HEIGHT: 175
 };
 
 export const MovieCardFullTabs = [

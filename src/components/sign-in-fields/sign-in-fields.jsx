@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputField from '../input-filed/input-field.jsx';
+import InputField from '../input-field/input-field.jsx';
 
 const SignInFields = (props) => {
   const {signInFields} = props;

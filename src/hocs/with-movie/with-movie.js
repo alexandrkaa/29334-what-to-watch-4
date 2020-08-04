@@ -7,6 +7,8 @@ import Loader from '../../components/loader/loader.jsx';
 import {getMovies, getMoviesLoadingStatus, hasUserLogined} from '../../reducer/selectors.js';
 import {getSimilarMovies} from '../../utils/filters.js';
 import cloneDeep from 'lodash.clonedeep';
+import {Redirect} from 'react-router-dom';
+import {AppRoutes} from '../../consts/consts.js';
 
 const withMovie = (Component) => {
   class WithMovieHOC extends PureComponent {
@@ -23,6 +25,11 @@ const withMovie = (Component) => {
       delete childProps.loadSimilarMovies;
       const {moviesList, movieId} = this.props;
       const movie = getMovieByIdFilter(moviesList, movieId);
+      if (!movie) {
+        return (
+          <Redirect to={AppRoutes.MAIN_PAGE} />
+        );
+      }
       const similarMovies = loadSimilarMovies ? getSimilarMovies(moviesList, movie) : null;
       return (
         <Component
